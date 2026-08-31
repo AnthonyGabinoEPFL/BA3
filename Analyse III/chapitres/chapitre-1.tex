@@ -1,0 +1,96 @@
+\chapter{Measure theory}
+\lecture{July 27th}
+\section{Motivation}
+Studying integration in several variables, the general question we wish to answer is this : 
+\begin{quote}
+	\centering
+	\itshape
+	Given some subset $\Omega \in \Rn$, and some real-valued function $f : \Omega \to \R$, is it possible to integrate $f$ on $\Omega$ and therefore define $\int_\Omega f$?
+\end{quote}
+
+In the case $n = 1$, we have already developed the notion of \emph{Riemann integral}, which answers the above question when $\Omega$ is an interval $\Omega = [a,b] \subset \R$, and $f$ is Riemann integrable. However, the class of Riemann integral functions is rather unsatisfactorily small and the extension of this notion to higher dimensions is possible but requires quite a bit of effort. For such reasons, we must look beyond the Riemann integral and introduce the notion of the \emph{Lebesgue integral}.
+
+Before we turn to the details, we begin with an informal discussion. In order to understand how to compute an integral $\int_\Omega f$, we must first understand a more basic and fundamental question : 
+\begin{quote}
+	\centering
+	\itshape
+	How does one compute the length, area or volume of a subset $E \subset \Rn$?
+\end{quote}
+
+\noindent This question is connected to that integration, because if one integrates the function $1$ on the set $E$, then one should obtain, the length, the area or the volume of $E$ depending on the dimension. To avoid splitting into cases depending on the dimension, we shall refer to the \textbf{measure} of $E$ as either.
+
+Ideally, to every subset $E \subset \Rn$ we would like to associate a non-negative number $m(E)$, which will be the measure of $E$ such that,
+
+\begin{enumerate}[leftmargin=1.8\leftmargini]
+	\item $m(\emptyset) = 0$.
+	\item $m(E) \in [0,\infty]$.
+	\item $m(E) \leqslant m(F)$ whenever $E \subseteq F$.
+	\item $m(E\cup F) = m(E) + m(F)$ if $E$ and $F$ are disjoint.
+	\item $m(x + E) = m(E)$ for any $x \in \Rn$
+\end{enumerate}
+
+Remarkably, it turns our that such a measure does not exist; one cannot assign a non-negative number to every subset of $\Rn$ which has the above properties. However, we can rescue the situation by only measuring a certain class of sets in $\Rn$, that we will define \textbf{measurable set}.
+
+\section{Outer-measure}
+Before we construct Lebesgue measure, we first discuss a somewhat naive approach to finding the measure of a set - namely, we try to cover the set by boxes, and then add up the volume of each box. We begin by starting with the notion of an open box.
+
+\begin{definition}[Open box] \label{def: Open box}
+	An \textbf{open box} $B$ in $\Rn$ is any set of the form
+	\[
+	B = \prod_{i=1}^n ]a_i, b_i[
+	\]
+	where $b_i \geqslant a_i$ are real numbers. We define the \textbf{volume} $\Vol(B)$ of this box to be the number
+	\[
+	\Vol(B) := \prod_{i=1}^n (b_i - a_i)
+	\]
+\end{definition}
+
+\begin{definition}[Outer measure] \label{def: Outer measure}
+	If $E \subseteq \Rn$ is a set, we define the \textbf{outer measure} $\om E$ of $E$ to be the quantity
+	\[
+	\om E := \inf \left \{ \sum_{j \in J} \Vol(B_j) \mid (B_j)_{j \in J} \text{ covers } E; J \text{ countable} \right \}
+	\]
+	where $(B_j)_{j \in J}$ is a collection of \hyperref[def: Open box]{boxes}.
+\end{definition}
+
+\begin{lemme}[Properties of outer measure] \label{lem: Properties of outer measure}
+	The outer measure has the following properties:
+	\begin{enumerate}
+		\item The empty set $\emptyset$ has outer measure $\om \emptyset = 0$.
+		\item For every set $E$ we have $\om E \in [0, \infty]$.
+		\item If $A \subseteq B \subseteq \Rn$, then $\om A \leqslant \om B$.
+		\item If $E$ is a subset of $\Rn$, and $x \in \Rn$, then $\om{x + E} = \om E$.
+		\item If $(A_j)_{j \in J}$ are countable collection of subsets of $\Rn$, then
+		\[
+		\om{\bigcup_{j \in J} A_j} \leqslant \sum_{j \in J} \om{A_j}.
+		\]
+	\end{enumerate}		
+\end{lemme}
+
+\prf{
+	\begin{enumerate}
+		\item We can cover $\emptyset$ with $]0, \varepsilon [^n$ for any $\varepsilon > 0$. It means
+		\[
+		\om \emptyset \leqslant \Vol(]0, \varepsilon[^n) = \varepsilon^n
+		\]
+		We can conclude the $\om \emptyset = 0$ by the fact that $\varepsilon$ is arbitrary.
+		\item Since $\sum_{j \in J} \Vol (B_j)$ is non-negative, we know that $\om E \geqslant 0$. However, it quite possible that $\om E$ could equal $\infty$.
+		\item Follow from the fact that any cover of $B$ is a cover of $A$.
+		\item Similarly, $(B_j)_{j \in J}$ is a cover of $E$ if and only if $(x + B_j)_{j \in J}$ is a cover of $x + E$. Moreover, $\Vol(x + B_j) = \Vol(B_j)$. We then deduce the claim, because
+		\begin{align*}
+			\om E 	&= \inf \left \{ \sum_{j \in J} \Vol(B_j) \mid (B_j)_{j \in J} \text{ covers } E \right \} \\
+					&= \inf \left \{ \sum_{j \in J} \Vol(x + B_j) \mid (B_j)_{j \in J} \text{ covers } E \right \} \\
+					&= \inf \left \{ \sum_{j \in J} \Vol(B'_j) \mid (B'_j)_{j \in J} \text{ covers } x + E \right \} \\
+					&= \om{x + E}
+		\end{align*}
+		\item For any $j \in J$, by definition of the outer measure as an infimum, it exists $(B_i^j)_{i \in I_j}$ a countable cover of $A_j$ by boxes such that
+		\[
+		\sum_{i \in I_j} \Vol(B_i^j) \leqslant \om{A_j} + \frac{\varepsilon}{2^j}
+		\]
+		Taking $(B_i^j)_{i \in I_j, j \in J}$ as a cover of $\bigcup_{j \in J} A_j$, it follows
+		\[
+		\om{\bigcup_{j \in J}} \leqslant \sum_{j \in J} \sum_{i \in I_j} \Vol(B_i^j) \leqslant \sum_{j \in J} \left( \om{A_j} + \frac{\varepsilon}{2^j}\right) = \varepsilon + \sum_{j \in J} \om{A_j}
+		\]
+	\end{enumerate}
+}
+	

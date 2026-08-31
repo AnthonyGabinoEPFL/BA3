@@ -1,0 +1,177 @@
+\chapter{Espaces métriques}
+
+\section{Rappel analyse et algèbre linéaire}
+\subsection{Distance, norme, produit scalaire}
+\lecture{24 juin}
+\begin{definition}[Distance euclidienne] \label{def: Distance euclidienne}
+	On définit la \textbf{distance euclidienne} sur $\Rn$ comme
+	\[
+	\begin{array}{cccc}
+		d_{euc} : & \Rn \times \Rn & \to & \R \\
+					& (v, w) & \mapsto & \left( \sum_{i=1}^n (v_i - w_i)^2 \right)^\frac12
+	\end{array}
+	\]
+	ayant les propriétés importantes suivantes :
+	\begin{enumerate}
+		\item $\forall u,v,w \in \Rn$, $d_{euc}(u,w) \leqslant d_{euc}(u,v) + d_{euc}(v,w)$
+		
+		\item $d_{eud}(u,v) = 0 \iff v = u$
+		
+		\item $\forall u,v \in \Rn, \quad d_{euc}(u,v) = d_{euc}(v,u)$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Produit scalaire et norme euclidienne] \label{def: Produit scalaire et norme euclidienne}
+	On définit le \textbf{produit scalaire euclidien} comme
+	\[
+	\begin{array}{cccc}
+		\langle \cdot, \cdot \rangle_{euc} : & \Rn \times \Rn& \to & \R \\
+												& (u,v) & \mapsto & \sum_{i=1}^n u_i v_i 
+	\end{array}
+	\]
+	dont la \textbf{norme euclidienne} induite est
+	\[
+	\begin{array}{cccc}
+		\norme{\cdot}_{euc} : & \Rn & \to & \Rn \\
+								& v & \mapsto & \langle v,v \rangle^\frac12 = \left(\sum_{i=1}^n v_i^2 \right)^\frac12
+	\end{array}
+	\]
+	On remarque alors que $d_{euv}(u,v) = \norme{u -v}$.
+\end{definition}
+
+\subsection{Continuité}
+\begin{definition}[Continuité] \label{def: Continuité}
+	Soit $f : \Rn \to \Rm$ une application. Soit $v \in \Rn$, on dit que $f$ est \textbf{continue} en $v$ si et seulement si
+	\[
+	\forall \varepsilon >0, ~\exists \delta > 0, ~\forall w \in \Rn, \quad d_{euc}(v,w) < \delta \implies d_{euc}(f(v), f(w)) <  \varepsilon
+	\]
+	Par extension, on dira que $f$ est continue si elle est continue en tout $v \in \Rn$.
+\end{definition}
+
+\begin{definition}[Boule ouverte euclidienne] \label{def: Boule ouverte euclidienne}
+	Soit $v \in \Rn$ et $r > 0$, on définit la \textbf{boule ouverte euclidienne} autour de $v$, de rayon $r$ comme,
+	\[
+	B_{euc}(v,r) = \{w \in \Rn \mid d_{euc}(v,w) < r \} \subset \Rn
+	\]
+\end{definition}
+
+\begin{proposition}[Caractérisation de la continuité] \label{prop: Caractérisation de la continuité}
+	Soit $f : \Rn \to \Rn$ une application, alors $f$ est continue si et seulement si,
+	\[
+	\forall w \in \Rn, ~\forall r > 0, ~\forall v \in f^{-1}(B_{euc}(w,r)), ~\exists s > 0, \quad B_{euc}(v, s) \subset f^{-1}(B_{euc}(w,r))
+	\]
+	Autrement dit, $f$ est continue si et seulement si toute pré-image d'un ouvert par $f$ est un ouvert.
+\end{proposition}
+
+\prf{En premier lieu on remarque que pour $v \in \Rn$
+	\[
+	d_{euc}(f(v), f(w)) < \varepsilon \iff f(w) \in B_{euc}(f(v), \varepsilon) \et d_{euc}(v,w) < \delta \iff w \in B_{euc}(v, \delta)
+	\]
+	Ainsi on veut trouver $\delta > 0$ tel que $w \in B_{euc}(v, \delta) \implies f(w) \in B_{euc}(f(v), \varepsilon)$. Or
+	\[
+	f(w) \in B_{euc}(f(v), \varepsilon) \iff w \in f^{-1}(B_{euc}(f(v), \varepsilon))
+	\]
+	Or, par hypothèse, $\forall u \in f^{-1}(B_{euc}(f(v), \varepsilon))$ il existe $s > 0$ tel que
+	\[
+	B_{euc}(u,s) \subset f^{-1}(B_{euc}(f(v), \varepsilon))
+	\]
+	Et donc il suffit de prendre $\delta = s$, ce qui montre bien la continuité de $f$ en $v$.
+	
+	Réciproquement, soient $w \in \Rm, r > 0$ et $v \in f^{-1}(B_{euc}(w,r))$. Donc par définition de la pré-image, $f(v) \in B_{euc}(w,r)$, d'où $d_{euc}(w, f(v)) < r$. On pose $\varepsilon = r - d_{euc}(w, f(v)) > 0$, donc par continuité de $f$, il existe $\delta > 0$ tel que
+	\[
+	u \in B_{euc}(v, \delta) \implies f(u) \in B_{euc} (f(v),\varepsilon)
+	\]	
+	or
+	\[
+	d_{euc}(w, f(u)) \leqslant d_{euc}(w, f(v)) + d_{euc}(f(v), f(u)) < d_{euc}(w,f(v)) + \varepsilon = r
+	\]
+	donc $u \in f^{-1}(B_{euc}(w,r))$. Et donc $B_{euc}(v, \delta) \subset f^{-1}(B_{euc}(w,r))$ et donc
+	\[
+	u \in f^{-1} (B_{euc}(w,r)) \iff f(u) \in B_{euc}(w,r)
+	\]
+	ce qui montre bien la première implication.
+}
+
+\section{Définition, propriétés et exemples}
+\begin{definition}[Espace métrique] \label{def: Espace métrique}
+	Soit $X$ un ensemble, une \textbf{métrique} sur $X$ est une application $d : X \times X \to \R$ telle que
+	\begin{enumerate}
+		\item $d(x,x) = 0 \iff x = x'$
+		\item $\forall x,x' \in X, \quad d(x,x') = d(x', x)$
+		\item $\forall x,x',x'' \in X, \quad d(x,x'') \leqslant d(x,x') + d(x',x'')$
+	\end{enumerate}
+	Ainsi on définit un \textbf{espace métrique} comme le couple $(X,d)$
+\end{definition}
+
+\begin{lemme}[Positivité] \label{Positivité}
+	Soit $(X,d)$ un espace métrique. Alors 
+	\[
+	\forall x,x' \in X, d(x,x') \geqslant 0
+	\]
+\end{lemme}
+\prf{On a simplement,
+\[
+\forall x, x' \in X, \quad 0 = d(x,x) \leqslant d(x,x') + d(x,x') = 2d(x,x') \implies d(x,x') \geqslant 0
+\]}
+\begin{definition}[Espace métrique borné] \label{def: Espace métrique borné}
+	Un espace métrique $(X,d)$ est \textbf{borné} s'il existe $M > 0$ tel que
+	\[
+	\forall x, x' \in X, \quad d(x,x') \leqslant M
+	\]
+\end{definition}
+
+\begin{exemple}[Espace métrique sur un espace vectoriel munit d'un produit scalaire] \label{ex: Espace métrique sur un espace vectoriel}
+	Soit $V$ un $\R$-espace vectoriel munit d'un produit scalaire $\langle \cdot, \cdot \rangle : V \times V \to \R$, alors on peut définir une métrique
+	\[
+	\begin{array}{cccc}
+		d_{\langle \cdot, \cdot \rangle} : & V \times V & \to & \R \\
+											& (u,v) & \mapsto & \langle v-w, v-w \rangle^\frac12
+	\end{array}
+	\]
+	Dans ce cas là, l'espace métrique $(V, d_{\langle \cdot, \cdot \rangle})$ n'est pas bornée.
+\end{exemple}
+
+\begin{exemple}[Espace métrique sur un graphe connecté] \label{Espace métrique sur un graphe}
+	Soit $G= (V,E)$ un graphe connecté, on peut poser
+	\[
+	\begin{array}{cccc}
+		d_G : & V \times V & \to & \R \\
+				& (v,w) & \mapsto& \begin{cases}
+					\inf \{ n \mid \exists \text{ un chemin de longueur } n \text{ de $v$ à $w$} \} & v \neq w\\
+					0 & v = w
+				\end{cases}
+	\end{array}
+	\]
+\end{exemple}
+
+\begin{exemple}[Métrique de Hamming] \label{ex: Métrique de Hamming}
+	Soit $A$ un ensemble, un "alphabet" et $n \in \N$, alors pose 
+	\[
+	W_n(A) = \{a_1 a_2 \ldots a_n \mid a_i \in A\}
+	\]
+	l'ensemble des mots de longueurs $n$ dans l'alphabet $A$. On peut alors poser la \textbf{métrique de Hamming} sur $W_n(A)$
+	\[
+	\begin{array}{cccc}
+		d_H : & W_n(A) \times W_n(A) & \to & \R \\
+			& (\underline a, \underline b) & \mapsto & \{i \mid a_i \neq b_i\}
+	\end{array}
+	\]
+\end{exemple}
+
+\begin{exemple}[Distance uniforme] \label{ex: Distance uniforme}
+	Soit $(X,d)$ un espace métrique et $W$ un ensemble. On considère
+	\[
+	\mathcal F(W,X) = \{ f: W \to X \mid f \text{ une application}\}
+	\]
+	On peut alors définit la \textbf{distance uniforme} sur $\mathcal F(W,X)$ induite par $d$ comme
+	\[
+	\begin{array}{cccc}
+		d_{unif} : & \mathcal F(W,X) \times \mathcal F(W,X) & \to & \R \\
+					& (f,g) & \mapsto & \sup_{w \in W} d(f(w), g(w))
+	\end{array}
+	\]
+\end{exemple}
+
+\begin{remarque}
+	Si $A$ est fini alors \hyperref[ex: Métrique de Hamming]{$W_n(A)$} est fini et si $X, W$ sont finis alors \hyperref[ex: Distance uniforme]{$\mathcal F(W,X)$} l'est aussi.
+\end{remarque}
