@@ -1,7 +1,0 @@
-\babel@toc {french}{}\relax 
-\contentsline {chapter}{Cours}{5}{chapter*.2}%
-\contentsline {chapter}{\numberline {1}Espaces métriques}{7}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Rappel analyse et algèbre linéaire}{7}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Distance, norme, produit scalaire}{7}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Continuité}{7}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Définition, propriétés et exemples}{8}{section.1.2}%
