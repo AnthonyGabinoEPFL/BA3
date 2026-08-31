@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.6.24)  31 AUG 2026 03:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.6.24)  31 AUG 2026 03:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"./Topologie I.tex"
-(Topologie I.tex
+**"./Géométrie différentielle I - courbes et surfaces.tex"
+(Géométrie différentielle I - courbes et surfaces.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-05-26>
 (C:\Users\gabin\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
@@ -897,11 +897,11 @@ Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
 )
 Package french3.ldf Info: Setting StandardItemizeEnv=true for
 (french3.ldf)             compatibility with enumitem package,
-(french3.ldf)             reported on input line 12.
+(french3.ldf)             reported on input line 14.
 Package french3.ldf Info: Setting StandardEnumerateEnv=true for
 (french3.ldf)             compatibility with enumitem package,
-(french3.ldf)             reported on input line 12.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 12
+(french3.ldf)             reported on input line 14.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 14
 .
 
 (C:\Users\gabin\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
@@ -911,32 +911,32 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 tex.def
 File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count360
-) (Topologie I.aux
+) (Géométrie différentielle I - courbes et surfaces.aux
 Package babel Info: 'french' activates 'french' shorthands.
 (babel)             Reported on input line 11.
- (chapitres/chapitre-1.aux) (chapitres/chapitre-2.aux) (chapitres/chapitre-3.au
-x))
-\openout1 = `"Topologie I.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Info: Redefining \degres on input line 12.
+(chapitres/chapitre-1.aux))
+\openout1 = `"Géométrie différentielle I - courbes et surfaces.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Info: Redefining \degres on input line 14.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -972,10 +972,11 @@ LaTeX Info: Redefining \degres on input line 12.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 12.
-(Topologie I.out) (Topologie I.out)
+Package hyperref Info: Link coloring ON on input line 14.
+(Géométrie différentielle I - courbes et surfaces.out)
+(Géométrie différentielle I - courbes et surfaces.out)
 \@outlinefile=\write4
-\openout4 = `"Topologie I.out"'.
+\openout4 = `"Géométrie différentielle I - courbes et surfaces.out"'.
 
 
 (C:\Users\gabin\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
@@ -1003,7 +1004,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 )) (../shared/titlepage.tex
-<../shared/images/logo-epfl.png, id=30, 1927.2pt x 1084.05pt>
+<../shared/images/logo-epfl.png, id=10, 1927.2pt x 1084.05pt>
 File: ../shared/images/logo-epfl.png Graphic file (type png)
 <use ../shared/images/logo-epfl.png>
 Package pdftex.def Info: ../shared/images/logo-epfl.png  used on input line 7.
@@ -1062,84 +1063,52 @@ n/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <../shared/images
 /logo-epfl.png>]) [2
 
 
-] (Topologie I.toc)
+]
+(Géométrie différentielle I - courbes et surfaces.toc)
 \tf@toc=\write5
-\openout5 = `"Topologie I.toc"'.
+\openout5 = `"Géométrie différentielle I - courbes et surfaces.toc"'.
 
  [3] [4
 
-] (Topologie I.tdo
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-.
-
-(C:\Users\gabin\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-\tf@tdo=\write6
-\openout6 = `"Topologie I.tdo"'.
-
- [5{C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}
 ]
+(Géométrie différentielle I - courbes et surfaces.tdo)
+\tf@tdo=\write6
+\openout6 = `"Géométrie différentielle I - courbes et surfaces.tdo"'.
+
+ [5]
 \openout2 = `chapitres/chapitre-1.aux'.
 
 
-(chapitres/chapitre-1.tex [6
-
-
-]
-Chapitre 1.
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 5.
-[7{C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
-c}{C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C
-:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C
-:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-[8]) [9]
-\openout2 = `chapitres/chapitre-2.aux'.
-
-
-No file chapitres/chapitre-2.tex.
-\openout2 = `chapitres/chapitre-3.aux'.
-
-No file chapitres/chapitre-3.tex.
-(Topologie I.aux (chapitres/chapitre-1.aux) (chapitres/chapitre-2.aux)
-(chapitres/chapitre-3.aux))
+No file chapitres/chapitre-1.tex.
+(Géométrie différentielle I - courbes et surfaces.aux
+(chapitres/chapitre-1.aux))
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-05-26>
  ***********
-Package rerunfilecheck Info: File `"Topologie I".out' has not changed.
-(rerunfilecheck)             Checksum: 509AF8016A3842887725A12FC5DCD910;1036.
+Package rerunfilecheck Info: File `"Géométrie différentielle I - courbes et 
+surfaces".out' has not changed.
+(rerunfilecheck)             Checksum: EBEFC2D8D0309EB78030E9570C987F1D;69.
  ) 
 Here is how much of TeX's memory you used:
- 28894 strings out of 467509
- 571144 string characters out of 5408780
- 998151 words of memory out of 5000000
- 57565 multiletter control sequences out of 15000+600000
- 691917 words of font info for 86 fonts, out of 8000000 for 9000
+ 28617 strings out of 467509
+ 565654 string characters out of 5408780
+ 985528 words of memory out of 5000000
+ 57342 multiletter control sequences out of 15000+600000
+ 678155 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,17n,111p,552b,1022s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 104i,12n,111p,592b,528s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pf
 b><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
 b><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.p
-fb><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.p
-fb><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.p
-fb><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pf
-b><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb
-><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
-<C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr5.pfb><C
-:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/
-Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Us
-ers/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Us
-ers/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri9.pfb><C:/Use
-rs/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Use
-rs/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/User
-s/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam1
-0.pfb><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/symbols/msbm10.pfb>
-Output written on "Topologie I.pdf" (9 pages, 333170 bytes).
+fb><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pf
+b><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb
+><C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><
+C:/Users/gabin/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri9.pfb>
+Output written on "Géométrie différentielle I - courbes et surfaces.pdf" (5 
+pages, 181895 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 37 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 8 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
