@@ -6,14 +6,14 @@ Dépôt Git Bachelor EPFL par Anthony Gabino
 
 
 
-Notes prises en LaTeX lors des différentes années de Bachelor de mathématiques
+Notes prises en LaTeX lors que BA3 en bachélore de mathématique à l'EPFL
 
 
 
 \## Matières
 
 
-Il y a un dossier par semestre contenant un dossier de chaque matière vu lors de ce semestre. Chaque branche possède son propre dossier dans lequel se trouve le PDF des notes de cours ainsi que les différents fichiers LaTeX nécessaires si vous voulez compiler les fichiers de votre côté.
+Il y a un dossier pour chaque matière vu lors de ce semestre. Chaque matière possède son propre dossier dans lequel se trouve le PDF des notes de cours ainsi que les différents fichiers LaTeX nécessaires si vous voulez compiler les fichiers de votre côté.
 
 
 
@@ -23,40 +23,38 @@ Il y a un dossier par semestre contenant un dossier de chaque matière vu lors d
 
 ```
 
-├── BA1/
+├── BA3/
 
-│    ├── Algèbre linéaire avancée I/
+│    ├── Analyse III - Lebesgue/
 
-│   	 ├── algèbre linéaire I.tex
+│   	 ├── Analyse III - Lesbesgue.tex
 
-│        ├── algèbre linéaire I.pdf    
-
-│   	 └── chapitres/
-
-│    ├── Analyse avancée I/
-
-│ 	 ├── Analyse avancée I.tex
-
-│        ├── Analyse avancée I.pdf    
+│        ├── Analyse III - Lesbesgue.pdf   
 
 │   	 └── chapitres/
 
-│    ├── ...
+│    ├── Algèbre II - groupes/
 
-├── BA2/ …
+│ 	 ├── Algèbre II - groupes.tex
 
-├── BA3/ …
+│        ├── Algèbre II - groupes.pdf    
+
+│   	 └── chapitres/
 
 
-├── shared/
+│    ├── shared/
 
-│   ├── preamble.tex       # Importation des packages
+│    │   ├── preamble.tex       # Importation des packages
 
-│   ├── commands.tex    # Commandes communes (ℝ, ℕ, …)
+│    │   ├── commands.tex    # Commandes communes (ℝ, ℕ, …)
 
-│   └── titlepage.tex    # Template de page de titre
+│    │   └── titlepage.tex    # Template de page de titre
 
-└── README.md
+│    ├── .gitignore #fichier git permettant de supprimer du dépôt les fichiers de compilation LaTeX
+
+│    └── README.md
+
+
 
 ```
 
@@ -71,9 +69,9 @@ Chaque cours se compile indépendamment depuis son dossier (cependant il est imp
 
 ```bash
 
-cd "BA1/algèbre linéaire avancée I"
+cd "Analyse III - Lebesgue"
 
-latexmk -pdf "Algèbre linéaire avancée I.tex"
+latexmk -pdf "Analyse III - Lebesgue.tex"
 
 ```
 
