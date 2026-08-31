@@ -16,6 +16,8 @@ Notes prises en LaTeX lors que BA3 en bachélore de mathématique à l'EPFL
 Il y a un dossier pour chaque matière vu lors de ce semestre. Chaque matière possède son propre dossier dans lequel se trouve le PDF des notes de cours ainsi que les différents fichiers LaTeX nécessaires si vous voulez compiler les fichiers de votre côté.
 
 De plus les pdf ont été conçut en \documentclass[book] ainsi il est préférable sur consulter les fichiers .pdf avec l'affichage livre car la mise en page a été pensé en conséquence. 
+
+
 \## Structure
 
 

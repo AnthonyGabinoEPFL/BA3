@@ -14,7 +14,7 @@
 % --- Mise en page ---
 \usepackage[margin=1in]{geometry} %marge
 \usepackage{lmodern} %police d'écriture vectoriel
-\usepackage[colorlinks=true, linkcolor=DAcolor, urlcolor=DAcolor]{hyperref} %référence
+\usepackage[colorlinks=true, linkcolor=AntiDAcolor, urlcolor=AntiDAcolor]{hyperref} %référence
 \usepackage{graphicx} %images
 \usepackage{todonotes} %lecture note
 \usepackage{fancyhdr} %en-tête
@@ -25,11 +25,13 @@
 
 \usepackage{xcolor} %couleur perso
 \usepackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
+\usepackage{mdframed}
+\tcbuselibrary{skins, breakable,theorems}
 
-%Définition de la couleur de la DA générale
-\definecolor{DAcolor}{RGB}{50,0,100}    % théorème
-\definecolor{DAcolordarker}{RGB}{25,0,50}
+%Définition des couleurs
+\definecolor{DAcolor}{RGB}{31, 78, 95}
+\definecolor{AntiDAcolor}{RGB}{232, 89, 12}
+
 
 %===================================
 %	Implémentation des lectures
@@ -67,7 +69,8 @@
           % Format du titre
 
 \newtheoremstyle{coloredtitlenoint}
-{}{}                          % espace avant/après
+{}
+{}                          % espace avant/après
 {}                    % corps pas en italique (definition)
 {}                            % pas d'indentation
 {\bfseries}                   % titre en gras (comme plain)
@@ -75,22 +78,42 @@
 { }                           % espace après
 {\textcolor{DAcolor}{\bfseries\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
 
-\theoremstyle{coloredtitle}
-\newtheorem{theorem}{Théorème}[chapter]
 
-\theoremstyle{plain}
+\theoremstyle{coloredtitle}
+%\newtheorem{theorem}{Théorème}[chapter]
+\newmdtheoremenv[
+backgroundcolor=DAcolor!15,
+fontcolor=black,
+linecolor=DAcolor,
+linewidth=0.5pt
+]{theorem}{Théorème}[chapter]
+
 \newtheorem{lemme}{Lemme}[chapter]
 \newtheorem{proposition}{Proposition}[chapter]
 
 \theoremstyle{coloredtitlenoint}
 \newtheorem{definition}{Définition}[chapter]
-
-\theoremstyle{definition}
 \newtheorem{exemple}{Exemple}[chapter]
 \newtheorem{remarque}{Remarque}[chapter]
 
 \setcounter{secnumdepth}{3}
 
+\tcolorboxenvironment{definition}{
+	blanker, breakable,
+	left=4mm,
+	borderline west={2pt}{0pt}{DAcolor} 
+}
+
+\tcolorboxenvironment{theorem}{
+	blanker, breakable,
+	left=0.6mm,
+	borderline west={4pt}{0pt}{DAcolor} 
+}
+\tcolorboxenvironment{proposition}{
+	blanker, breakable,
+	left=4mm,
+	borderline west={2pt}{0pt}{DAcolor} 
+}
 
 %redéfinition de l'environnement "proof"
 \renewenvironment{proof}
@@ -98,7 +121,7 @@
 {\qed}
 
 
-%=====================================
+%==================
 %	Mise en page et structure
 %=====================================
 \pagestyle{fancy}
@@ -109,7 +132,8 @@
 \fancyfoot[RO]{\thepage}  % Right Odd  → page de droite
 
 % Optionnel — nom du cours en coin intérieur haut
-\fancyhead[RE, LO]{\small\textit{\matiere}}
+%\fancyhead[RE, LO]{\small\textit{\matiere}}
+\fancyhead[RO, LE]{\leftmark}
 \renewcommand{\headrulewidth}{0pt}
 
 %inter-ligne
@@ -125,14 +149,14 @@
 
 %configuration des sections et sous-sections
 \titleformat{\section}[block]   % format "block"
-{\centering\large\bfseries\color{DAcolordarker}}     % centrage + taille + gras
+{\centering\large\bfseries\color{DAcolor}}     % centrage + taille + gras
 {\thesection}                 % numéro de la sous-section
 {1em}                            % espace entre numéro et texte
 {}  
 
 \titleformat{\chapter}    % section = "Chapitre"
 [block]                 % format en bloc
-{\centering\large\color{DAcolordarker}}      % style : centré, grand (pas en gras)
+{\centering\large\color{DAcolor}}      % style : centré, grand (pas en gras)
 {\MakeUppercase{Chapitre \thechapter}} % numéro en majuscules
 {0pt}                   % pas d’espace entre numéro et texte
 {\vspace{0.5ex}\\\bfseries\huge}  % saut de ligne + texte en énorme
@@ -140,7 +164,7 @@
 
 
 \titleformat{\subsection}[block]
-{\large\bfseries\color{DAcolordarker}}
+{\large\bfseries\color{DAcolor}}
 {\thesubsection}
 {1em}
 {}
