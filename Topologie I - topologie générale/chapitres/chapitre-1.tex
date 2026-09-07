@@ -85,22 +85,22 @@
 	\[
 	d_{euc}(w, f(u)) \leqslant d_{euc}(w, f(v)) + d_{euc}(f(v), f(u)) < d_{euc}(w,f(v)) + \varepsilon = r
 	\]
-	donc $u \in f^{-1}(B_{euc}(w,r))$. Et donc $B_{euc}(v, \delta) \subset f^{-1}(B_{euc}(w,r))$ et donc
-	\[
-	u \in f^{-1} (B_{euc}(w,r)) \iff f(u) \in B_{euc}(w,r)
-	\]
-	ce qui montre bien la première implication.
+	donc $u \in f^{-1}(B_{euc}(w,r))$. Et donc $B_{euc}(v, \delta) \subset f^{-1}(B_{euc}(w,r))$ ainsi la première implication est bien vérifiée pour $s = \delta$.
 }
 
-\section{Définition, propriétés et exemples}
+\section{Généralisation de la métrique}
 \begin{definition}[Espace métrique] \label{def: Espace métrique}
 	Soit $X$ un ensemble, une \textbf{métrique} sur $X$ est une application $d : X \times X \to \R$ telle que
 	\begin{enumerate}
-		\item $d(x,x) = 0 \iff x = x'$
+		\item $d(x,x') = 0 \iff x = x'$
 		\item $\forall x,x' \in X, \quad d(x,x') = d(x', x)$
 		\item $\forall x,x',x'' \in X, \quad d(x,x'') \leqslant d(x,x') + d(x',x'')$
 	\end{enumerate}
-	Ainsi on définit un \textbf{espace métrique} comme le couple $(X,d)$
+	Ainsi on définit un \textbf{espace métrique} comme le couple $(X,d)$. De plus si $X$ est fini, on parlera d'espace métrique \textbf{fini}. Et fininalement s'il existe $M \in \R$ tel que 
+	\[
+	\forall x, x' \in \R, \quad d(x,x') \leqslant M
+	\]
+	alors on dira que $(X,d)$ est un espace métrique \textbf{borné}.
 \end{definition}
 
 \begin{lemme}[Positivité] \label{Positivité}
@@ -112,66 +112,24 @@
 \prf{On a simplement,
 \[
 \forall x, x' \in X, \quad 0 = d(x,x) \leqslant d(x,x') + d(x,x') = 2d(x,x') \implies d(x,x') \geqslant 0
-\]}
-\begin{definition}[Espace métrique borné] \label{def: Espace métrique borné}
-	Un espace métrique $(X,d)$ est \textbf{borné} s'il existe $M > 0$ tel que
-	\[
-	\forall x, x' \in X, \quad d(x,x') \leqslant M
-	\]
-\end{definition}
+\]
+}
 
-\begin{exemple}[Espace métrique sur un espace vectoriel munit d'un produit scalaire] \label{ex: Espace métrique sur un espace vectoriel}
-	Soit $V$ un $\R$-espace vectoriel munit d'un produit scalaire $\langle \cdot, \cdot \rangle : V \times V \to \R$, alors on peut définir une métrique
-	\[
-	\begin{array}{cccc}
-		d_{\langle \cdot, \cdot \rangle} : & V \times V & \to & \R \\
-											& (u,v) & \mapsto & \langle v-w, v-w \rangle^\frac12
-	\end{array}
-	\]
-	Dans ce cas là, l'espace métrique $(V, d_{\langle \cdot, \cdot \rangle})$ n'est pas bornée.
+\begin{exemple}[Espace métrique usuel]
+		Soit $V$ un $\R$-espace vectoriel muni d'un produit scalaire $\langle \cdot,\cdot \rangle$, alors 
+		\[
+		\begin{array}{cccc}
+		d_{\langle \cdot, \cdot \rangle} :& V \times V &\longrightarrow &\R \\ &(v,w) &\longmapsto &\norme{v - w} = \langle v -w, v-w \rangle^\frac12
+		\end{array}
+		\]
+		est une métrique sur $V$.
+
 \end{exemple}
 
-\begin{exemple}[Espace métrique sur un graphe connecté] \label{Espace métrique sur un graphe}
-	Soit $G= (V,E)$ un graphe connecté, on peut poser
+\begin{exemple}[Métrique de chemin]
+	Soit $G= (E,V)$ un graphe simple, alors on peut définir la \textbf{métrique de chemin} sur $V$ déterminée $G$ pour tout $v,w \in V$ par
 	\[
-	\begin{array}{cccc}
-		d_G : & V \times V & \to & \R \\
-				& (v,w) & \mapsto& \begin{cases}
-					\inf \{ n \mid \exists \text{ un chemin de longueur } n \text{ de $v$ à $w$} \} & v \neq w\\
-					0 & v = w
-				\end{cases}
-	\end{array}
+	d_G(v,w) = \min \{ n \mid \text{il existe un chemin $(v_0, \ldots, v_n)$ de $v$ à $w$}\}
 	\]
+	où un \textbf{chemin} de $v$ à $w$ consiste en une suite $(v_0, \ldots, v_n)$ de sommets telle que $v_0 = v$ et $v_n = w$, et $\{v_i, v_{i+1}\} \in E$ pour tout $i \in \llbracket 0, n-1 \rrbracket$.	
 \end{exemple}
-
-\begin{exemple}[Métrique de Hamming] \label{ex: Métrique de Hamming}
-	Soit $A$ un ensemble, un "alphabet" et $n \in \N$, alors pose 
-	\[
-	W_n(A) = \{a_1 a_2 \ldots a_n \mid a_i \in A\}
-	\]
-	l'ensemble des mots de longueurs $n$ dans l'alphabet $A$. On peut alors poser la \textbf{métrique de Hamming} sur $W_n(A)$
-	\[
-	\begin{array}{cccc}
-		d_H : & W_n(A) \times W_n(A) & \to & \R \\
-			& (\underline a, \underline b) & \mapsto & \{i \mid a_i \neq b_i\}
-	\end{array}
-	\]
-\end{exemple}
-
-\begin{exemple}[Distance uniforme] \label{ex: Distance uniforme}
-	Soit $(X,d)$ un espace métrique et $W$ un ensemble. On considère
-	\[
-	\mathcal F(W,X) = \{ f: W \to X \mid f \text{ une application}\}
-	\]
-	On peut alors définit la \textbf{distance uniforme} sur $\mathcal F(W,X)$ induite par $d$ comme
-	\[
-	\begin{array}{cccc}
-		d_{unif} : & \mathcal F(W,X) \times \mathcal F(W,X) & \to & \R \\
-					& (f,g) & \mapsto & \sup_{w \in W} d(f(w), g(w))
-	\end{array}
-	\]
-\end{exemple}
-
-\begin{remarque}
-	Si $A$ est fini alors \hyperref[ex: Métrique de Hamming]{$W_n(A)$} est fini et si $X, W$ sont finis alors \hyperref[ex: Distance uniforme]{$\mathcal F(W,X)$} l'est aussi.
-\end{remarque}
