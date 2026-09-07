@@ -1,5 +1,5 @@
 \chapter{Champs vectoriels}
-
+\lecture{9 septembre}
 \section{Définition de base}
 
 \begin{definition}[Domaine] \label{def: Domaine}
@@ -61,3 +61,60 @@
 	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\varphi(\tilde s)}^{\varphi(\tilde t)} f(\gamma(x)) \cdot \norme{\gamma'(x)} \, \mathrm dx = \int_s^t f(\gamma(x)) \cdot \norme{\gamma'(x)}\, \mathrm dx = \int_\gamma f \, \mathrm ds	
 	\]
 }
+
+\begin{definition}[Circulation] \label{def: Circulation}
+	 Soit $U \subset \Rn$ un domaine et $\bm f \in C^0(\Rn)$ un champ vectoriel et, soit $\gamma : I \to U$ un chemin, alors on définit la \textbf{circulation} du champ vectoriel le long de $\gamma$ par
+	\[
+	\int_{\gamma} \bm f \cdot \, \mathrm d \bm s = \int_I \bm f(\gamma(t)) \cdot \bm \gamma'(t) \, \mathrm dt
+	\]
+	où $\cdot$ désigne le produit scalaire euclidien.
+\end{definition}
+
+\begin{remarque} L'intégrale est invariante par reparamétrisation. Mais si on change le sens de parcours, alors le signe change. Par exemple, soit $\gamma : [0,1] \to U$ un chemin et $\varphi : [0,1] \to [0,1], ~\varphi(t) = 1-t$ alors on trouve bien
+	\[
+	 \int_{\gamma \circ \varphi} \bm f \cdot \, \mathrm \bm s = - \int_{\gamma} \bm f \cdot \, \mathrm d \bm s
+	\]
+	alors on peut noter plus simplement $\gamma \circ \varphi = - \gamma$.
+\end{remarque}
+
+\begin{definition}[Concaténation de chemin] \label{def: Concaténation de chemin}
+	Soit $\gamma : [a,b] \to U$ et $\tilde \gamma : [b, c] \to U$ des chemines, alors on définit la \textbf{concaténation} $\gamma\oplus \tilde \gamma$ par 
+	\[
+	\begin{array}{cccc}
+		\gamma \oplus \tilde \gamma : & [a,c] & \to & U \\
+										& t & \mapsto & \gamma \oplus \tilde \gamma (t) = \left \{ \begin{array}{cl} \gamma & t \in [a,b] \\ \tilde \gamma & t \in [b,c] \end{array} \right.	
+	\end{array}
+	\]
+\end{definition}
+
+\begin{definition}[Gradient] \label{def: Gradient}
+	Soit $U \subset \Rn$ un domaine, $g \in C^k(U), ~k \geqslant 1$ un champ scalaire, alors on peut introduire le \textbf{gradient} de $g$ comme le champ vectoriel définit par
+	\[
+	\bm f = \nabla g
+	\]
+\end{definition}
+
+\begin{definition}
+	On dit qu'un chemin $\gamma : [s,t] \to U$ est \textbf{lacet} si $\gamma(t) =\gamma(s)$.
+\end{definition}
+
+\begin{lemme}
+	Soit $U \subset \Rn$ un domaine, $\bm f \in C^k(U)$ un champ vectoriel. Alors $\bm f$ à la propriétés que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités des chemins si et seulement si $\gamma_\gamma \bm f \cdot \, \mathrm d \bm s  = 0$ pour chaque lacet $\gamma : I \to U$.
+\end{lemme}
+
+\prf{Si $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités alors si $\gamma$ est un lacet on a 
+	
+	Et inversement, alors si $\int_\gamma \bm f \cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma : I  \to U$m  et si $\gamma_1, \gamma_2$ lient $\bm p$ et $\bm q$, alors on peut introduire le lacet qzu la concaténation de $\gamma_1$ et $-\gamma_2$ et donc
+	\[
+	\int_{\gamma_1} \bm f \cdot \, \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \, \mathrm d \bm s = \int_{\gamma_1 \oplus - \gamma_2} \bm f \cdot \, \mathrm d \bm s = 0
+	\]
+	et donc on a bien la propriété voulue.
+}
+
+\begin{proposition}
+	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ admet un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
+\end{proposition}
+\prf{...}
+
+
+\
