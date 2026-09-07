@@ -1,18 +1,22 @@
-\chapter{Champs vectoriels}
+\chapter{Analyse vectorielle dans $\Rn$}
 \lecture{9 septembre}
-\section{Définition de base}
-
-\begin{definition}[Domaine] \label{def: Domaine}
-	Soit $U \subset \Rn$ un sous-ensemble, alors on dit que $U$ est \textbf{domaine} s'il est ouvert et connexe.
+\begin{definition}[Définition de base]
+	Soit $U \subset \Rn$ un \textbf{domaine} \label{def: Domaine}, c'est-à-dire un sous-ensemble \emph{ouvert} et \emph{connexe}, on appelle
+	\begin{enumerate}
+		\item $f \in C^k(U, \R), ~k \geqslant 0$ un \textbf{champ scalaire}. \label{def: Champ scalaire}
+		\item $\bm f \in C^k(U, \Rn)$ un \textbf{champ vectoriel}. \label{def: Champ vectoriel}
+	\end{enumerate}
 \end{definition}
 
-\begin{definition}[Champ scalaire]  \label{def: Champ scalaire}
-	Un \textbf{champ scalaire} est une fonction $f : U \to  \R$ de régularité $C^k$ sur $U$.
+\begin{definition}[Gradient] \label{def: Gradient}
+	Soit $g \in C^1(U, \R)$ un champ scalaire. Alors on apelle
+	\[
+	\bm f = \nabla g
+	\]
+	le \textbf{gradient} de $g$. Dans ce cas, on dit que $\bm f$ dérive d'un champ scalaire $\bm f$.
 \end{definition}
 
-\begin{definition}[Champ vectoriel]  \label{def: Champ vectoriel}
-	Un \textbf{champ vectoriel} est une fonction $\bm f : U \to  \Rn$ de régularité $C^k$ sur $U$.
-\end{definition}
+ \section{Notions d'intégration}
  
  \begin{definition}[chemin] \label{def: Chemin}
  	Un \textbf{chemin} est une application continue 
@@ -23,20 +27,17 @@
  	\[
  	\gamma_{\mid I_j} \in C^1(I_j, U)
  	\]
- 	autrement dit $\gamma$ est \textbf{continue par morceaux}.
+ 	autrement dit $\gamma$ est \emph{continue par morceaux}. De plus on dira que $\gamma$ est un \textbf{lacet} ou \textbf{chemin fermé} si $\gamma(s) = \gamma(t)$.
  \end{definition}
  
- \section{Intégrale le long d'un chemin}
- 
+ \subsection{Intégrale curviligne}
+
  \begin{definition}[Intégrale curviligne] \label{def: Intégrale curviligne}
  	Soit $f \in C^0(U, \R)$ un champ scalaire, et soit $\gamma : I \to U$ un chemin, alors on définit l'\textbf{intégrale curviligne} de $f$ le long de $\gamma$ par
  	\[
- 	\int_\gamma f \, \mathrm ds = \int_I f(\gamma(t)) \cdot \norme{\gamma'(t)} \, \mathrm dt =: \sum_{j=1}^N \int_{I_j} f_{\mid I_j} (\gamma_{\mid I_j}(t)) \cdot \norme{\gamma_{I_j} ' (t)} \, \mathrm dt
+ 	\int_\gamma f \, \mathrm ds = \int_I f(\gamma(t)) \, \norme{\gamma'(t)} \, \mathrm dt =: \sum_{j=1}^N \int_{I_j} f(\gamma(t)) \, \norme{\gamma'(t)} \, \mathrm dt
  	\]
- 	où
- 	\[
- 	\norme{\gamma'(t)} = \left(\sum_{i=1}^n \gamma_i'(t)^2 \right)^\frac12
- 	\]
+ 	où $\norme{ \gamma'(t)} = \sqrt{\sum_{i=1}^n \gamma_i'(t)^2}$.
  \end{definition}
  
  \begin{definition}[Reparamétrisation d'un chemin] \label{def: Reparamétrisation d'un chemin}
@@ -47,25 +48,29 @@
  	un difféomorphisme de classe $C^1$ tel que $\varphi' > 0$. Alors la composition $\gamma \circ \varphi : [\tilde s, \tilde t] \to U$ est encore un chemin.
  \end{definition}
  
- \begin{lemme} Soit $U \subset \Rn$ un domaine, $f \in C^0(U)$ un champ scalaire, $\gamma : I \to U$ et $\gamma \circ \varphi : \tilde I \to U$ une reparamétrisation. Alors
+ \begin{theorem}[Invariance par reparamétrisation] \label{thm: Invariance par reparamétrisation}
+ 	Soit $U \subset \Rn$ un domaine, $f \in C^0(U)$ un champ scalaire, $\gamma : I \to U$ et $\gamma \circ \varphi : \tilde I \to U$ une reparamétrisation. Alors
  	\[
  	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_\gamma f \, \mathrm ds
  	\]
-\end{lemme}
+\end{theorem}
 \prf{Soit $\tilde I = [\tilde s, \tilde t]$, $I =[s,t]$. Alors
-	\begin{align*}
-	\int_{\gamma \circ \varphi} f \, \mathrm ds &= \int_{\tilde I} f(\gamma \circ \varphi) \cdot \norme{(\gamma \circ \varphi)'(t)} \, \mathrm dt &= \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(t)) \cdot \norme{\gamma'\circ \varphi(t) \varphi'(t)} \, \mathrm dt = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(t)) \varphi'(t) \cdot \norme{\gamma' \circ \varphi(t)} \, \mathrm dt
-	\end{align*}
-	et donc avec un changement de variable on trouve
 	\[
-	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\varphi(\tilde s)}^{\varphi(\tilde t)} f(\gamma(x)) \cdot \norme{\gamma'(x)} \, \mathrm dx = \int_s^t f(\gamma(x)) \cdot \norme{\gamma'(x)}\, \mathrm dx = \int_\gamma f \, \mathrm ds	
+	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\tilde I} f(\gamma \circ \varphi \, (x)) \, \norme{(\gamma \circ \varphi)'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \, \norme{\gamma'\circ \varphi(x) \, \varphi'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \varphi'(x) \, \norme{\gamma' \circ \varphi(x)} \, \mathrm dx
 	\]
+	et donc par changement de variable on a bien, 
+	\[
+	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\varphi(\tilde s)}^{\varphi(\tilde t)} f(\gamma(y)) \, \norme{\gamma'(y)} \, \mathrm dy	 = \int_\gamma f \, \mathrm ds	
+	\]
+	d'où le résultat.
 }
 
+\subsection{Circulation d'un champ vectoriel}
+
 \begin{definition}[Circulation] \label{def: Circulation}
-	 Soit $U \subset \Rn$ un domaine et $\bm f \in C^0(\Rn)$ un champ vectoriel et, soit $\gamma : I \to U$ un chemin, alors on définit la \textbf{circulation} du champ vectoriel le long de $\gamma$ par
+	 Soit $U \subset \Rn$ un domaine et $\bm f \in C^0(U, \Rn)$ un champ vectoriel et $\gamma : I \to U$ un chemin, alors on définit la \textbf{circulation} du champ vectoriel le long de $\gamma$ par
 	\[
-	\int_{\gamma} \bm f \cdot \, \mathrm d \bm s = \int_I \bm f(\gamma(t)) \cdot \bm \gamma'(t) \, \mathrm dt
+	\int_{\gamma} \bm f \cdot \mathrm d \bm s = \int_I \bm f(\gamma(t)) \cdot \bm \gamma'(t) \, \mathrm dt
 	\]
 	où $\cdot$ désigne le produit scalaire euclidien.
 \end{definition}
@@ -78,43 +83,41 @@
 \end{remarque}
 
 \begin{definition}[Concaténation de chemin] \label{def: Concaténation de chemin}
-	Soit $\gamma : [a,b] \to U$ et $\tilde \gamma : [b, c] \to U$ des chemines, alors on définit la \textbf{concaténation} $\gamma\oplus \tilde \gamma$ par 
+	Soit $\gamma : [a,b] \to U$ et $\tilde \gamma : [b, c] \to U$ des chemins tels que $\gamma(b) = \tilde \gamma(b)$, alors on définit la \textbf{concaténation} $\gamma\oplus \tilde \gamma$ par 
 	\[
 	\begin{array}{cccc}
-		\gamma \oplus \tilde \gamma : & [a,c] & \to & U \\
-										& t & \mapsto & \gamma \oplus \tilde \gamma (t) = \left \{ \begin{array}{cl} \gamma & t \in [a,b] \\ \tilde \gamma & t \in [b,c] \end{array} \right.	
+		\gamma \oplus \tilde \gamma : & [a,c] & \longrightarrow & U \\
+										& t & \longmapsto & 
+										\begin{cases}
+											\gamma(u), & u \in [a,b] \\
+											\tilde\gamma(u), & u \in [b,c]
+										\end{cases}
 	\end{array}
 	\]
+	Il est facile de voir que $\gamma \oplus \tilde \gamma$ est bien $C^1$ par morceaux et donc il s'agit bien d'un chemin.
 \end{definition}
 
-\begin{definition}[Gradient] \label{def: Gradient}
-	Soit $U \subset \Rn$ un domaine, $g \in C^k(U), ~k \geqslant 1$ un champ scalaire, alors on peut introduire le \textbf{gradient} de $g$ comme le champ vectoriel définit par
-	\[
-	\bm f = \nabla g
-	\]
-\end{definition}
-
-\begin{definition}
-	On dit qu'un chemin $\gamma : [s,t] \to U$ est \textbf{lacet} si $\gamma(t) =\gamma(s)$.
-\end{definition}
+On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \bm f \cdot \mathrm d \bm s$ ne dépend que du point initial et du point final de $\gamma$.
 
 \begin{lemme}
-	Soit $U \subset \Rn$ un domaine, $\bm f \in C^k(U)$ un champ vectoriel. Alors $\bm f$ à la propriétés que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités des chemins si et seulement si $\gamma_\gamma \bm f \cdot \, \mathrm d \bm s  = 0$ pour chaque lacet $\gamma : I \to U$.
+	Soit $U \subset \Rn$ un domaine, $\bm f \in C^k(U)$ un champ vectoriel. Alors $\bm f$ à la propriétés que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités des chemins si et seulement si $\int_\gamma \bm f \cdot \, \mathrm d \bm s  = 0$ pour chaque lacet $\gamma : I \to U$.
 \end{lemme}
 
-\prf{Si $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités alors si $\gamma$ est un lacet on a 
-	
-	Et inversement, alors si $\int_\gamma \bm f \cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma : I  \to U$m  et si $\gamma_1, \gamma_2$ lient $\bm p$ et $\bm q$, alors on peut introduire le lacet qzu la concaténation de $\gamma_1$ et $-\gamma_2$ et donc
+\prf{Si $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités, on considère un lacet $\gamma$ arbitraire. Alors on sait qu'il existe $\gamma_1$ et $\gamma_2$ tel que $\gamma = \gamma_1 \oplus -\gamma_2$  et donc a 
+	\[
+	\int_\gamma \bm f \cdot \mathrm d \bm s = \int_{\gamma_1 \oplus -\gamma_2} \bm f \cdot \mathrm d \bm s = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \mathrm d \bm s = 0
+	\]	
+	Et inversement, alors si $\int_\gamma \bm f \cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma : I  \to U$m  et si $\gamma_1, \gamma_2$ lient $\bm p$ et $\bm q$, alors on peut introduire le lacet qui la concaténation de $\gamma_1$ et $-\gamma_2$ et donc
 	\[
 	\int_{\gamma_1} \bm f \cdot \, \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \, \mathrm d \bm s = \int_{\gamma_1 \oplus - \gamma_2} \bm f \cdot \, \mathrm d \bm s = 0
 	\]
 	et donc on a bien la propriété voulue.
 }
 
-\begin{proposition}
+\begin{theorem}
 	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ admet un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
-\end{proposition}
+\end{theorem}
 \prf{...}
 
 
-\
+
