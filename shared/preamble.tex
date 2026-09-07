@@ -79,15 +79,9 @@
 {\textcolor{DAcolor}{\bfseries\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
 
 
-\theoremstyle{coloredtitle}
-%\newtheorem{theorem}{Théorème}[chapter]
-\newmdtheoremenv[
-backgroundcolor=DAcolor!15,
-fontcolor=black,
-linecolor=DAcolor,
-linewidth=0.5pt
-]{theorem}{Théorème}[chapter]
 
+\theoremstyle{coloredtitle}
+\newtheorem{theorem}{Théorème}[chapter]
 \newtheorem{lemme}{Lemme}[chapter]
 \newtheorem{proposition}{Proposition}[chapter]
 
@@ -99,20 +93,16 @@ linewidth=0.5pt
 \setcounter{secnumdepth}{3}
 
 \tcolorboxenvironment{definition}{
-	blanker, breakable,
-	left=4mm,
-	borderline west={2pt}{0pt}{DAcolor} 
+	blanker, breakable, left=8pt, top=2pt, bottom=2pt, borderline west={2pt}{0pt}{DAcolor}, before skip=8pt, after skip=8pt 
 }
 
 \tcolorboxenvironment{theorem}{
-	blanker, breakable,
-	left=0.6mm,
-	borderline west={4pt}{0pt}{DAcolor} 
+	enhanced, breakable, colback=DAcolor!15, colframe=DAcolor, arc=0pt, boxrule=0.8pt,leftrule=3pt, before skip=10pt, after skip=10pt
 }
 \tcolorboxenvironment{proposition}{
 	blanker, breakable,
 	left=4mm,
-	borderline west={2pt}{0pt}{DAcolor} 
+	borderline west={2pt}{0pt}{DAcolor, line cap=round} 
 }
 
 %redéfinition de l'environnement "proof"
