@@ -1,0 +1,23 @@
+\chapter{Première définition}
+\lecture{8 septembre}
+\section{Définition mathématique d'un espace de probabilité}
+\begin{definition}[Espace de probabilité] \label{def: Espaca de probabilité}
+	Un \textbf{espace de probabilité} est triplet $(\Omega, \F, \P)$ où
+	\begin{enumerate}
+		\item $\Omega$  est un ensemble 
+		\item $\F$ est un sous-ensemble de $\mathcal P(\Omega)$ satisfaisant
+		\begin{enumerate}
+			\item $\emptyset \in \F$
+			\item Si $A \in \F$, alors $A^c \in \F$
+			\item Si $A_1, A_2, \ldots \in \F$ alors $\bigcup_{i \geqslant 1} A_i  \in \F$
+		\end{enumerate}
+		$\F$ est appelé \textbf{collection des événements} ou $\textbf{$\sigma$-algèbre}$ et tout $A \in \F$ est appelé un \textbf{événement}.
+		\item Et finalement, on a une fonction $\P : \F \to [0,1]$ satisfaisant $\P(\Omega) = 1$ et pour $A_1, A_2, \ldots \in \F$ deux à deux disjoints alors
+		\[
+		\P\left( \bigcup_{i \geqslant 1} A_i \right) = \sum_{i \geqslant 1} \P(A_i)
+		\]
+		Une telle fonction $\P$ est appelé \textbf{mesure de probabilité}.
+		
+	\end{enumerate}
+	
+\end{definition}
