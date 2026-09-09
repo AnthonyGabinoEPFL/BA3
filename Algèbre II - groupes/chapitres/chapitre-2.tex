@@ -4,8 +4,119 @@
 	Un \textbf{groupe} est un ensemble $G$ muni d'une \emph{loi de composition interne} tels que : 
 	\begin{enumerate}
 		\item Il existe $e \in G, \, \forall g \in G, \quad g e = e g = g$
-		\item $\forall g \in G, \, \exists g^{-1} \in G, \quad g g^{-1} = g^{-1} g = e$
+		\item $\forall g \in G, \, \exists ! g^{-1} \in G, \quad g g^{-1} = g^{-1} g = e$
 		\item $\forall g_1, g_2, g_3 \in G, \quad g_1(g_2 g_3) = (g_1 g_2) g_3$
 	\end{enumerate}	
 	De plus on dira que $G$ est \textbf{abélien} si la loi de composition interne est \emph{commutative}.
 \end{definition}
+
+\begin{exemple}
+	Un groupe important est le \textbf{groupe diédral} que l'on définit par
+	\[
+	D_{2n} = \{ \text{rotations et réflexions qui préservent un $n$-gone régulier}\}
+	\]
+	il en va de même avec le \textbf{groupe symétrique} que l'on définit par
+	\[
+	S_n = \S(\entiers)
+	\]
+\end{exemple}
+
+\begin{definition}[Action de groupe] \label{def: Action de groupe}
+	Une \textbf{action de groupe} $G$ sur un ensemble $X$ noté $G \curvearrowright X$, est une attribution qui à tout élément $g \in G$ associé une bijection 
+	\[
+	\Phi_g : X \to X
+	\]
+	qui respecte
+	\begin{enumerate}
+		\item L'élément neutre,
+		\[
+		\Phi_e = \mathrm{Id}_X
+		\]
+		\item L'inverse
+		\[
+		\forall g \in G, \quad \Phi_{g^{-1}} = (\Phi_g)^{-1}
+		\]
+		\item Le produit
+		\[
+		\forall g_1, g_2 \in G, \quad \Phi_{g_1 g_2} = \Phi_{g_1} \circ \Phi_{g_2}
+		\]
+	\end{enumerate}
+	il est facile de voir que la propriétés $2.$ découle des deux autres.
+\end{definition}
+
+\begin{remarque}
+	Bien que moins précis, on note usuellement les bijections $\Phi_g$ par le symbole
+	\[
+	\Phi_g(x) = g \cdot x
+	\]
+	pour tout $g \in G$ et $x \in X$. Dans cette esprit, les propriétés d'une action de groupe devient
+	\[
+	\forall x \in X, \quad e \cdot x = x, \et \forall g_1, g_2 \in G, \, \forall x \in X, \quad (g_1 g_2) \cdot x = g_1 \cdot (g_2 \cdot x)
+	\]
+\end{remarque}
+
+\begin{exemple}
+	Tout groupe $G$ agit sur le même de 3 façon différentes
+	\begin{enumerate}
+		\item Son \textbf{action à gauche} $G \curvearrowright G$ est l'attribution
+		\[
+		h \cdot g = gh, \quad \forall g,h \in G
+		\]
+		\item Son \textbf{action à droite} $G \curvearrowleft G$
+		
+		\item Son \textbf{action action adjointe} $G \curvearrowright G$ est l'attribution
+		\[
+		h \cdot g = h g h^{-1}, \quad \forall h,g \in G
+		\]
+	\end{enumerate}
+\end{exemple}
+\prf{Il est facile de voir que les actions à gauche et à droite définissent effectivement des actions de groupes, il reste donc à montrer l'action adjointe. On a 
+	\[
+	\forall g \in G, \quad e g e^{-1} = g
+	\]
+	Et finalement on a pour tout $g_1, g_2, h \in G$ alors 
+	\[
+	g_1 \cdot (g_2 \cdot h) = g_1 \cdot (g_2 h g_2^{-1}) = g_1 g_2 h g_2^{-1} g_1^{-1} = (g_1 g_2) h (g_1 g_2)^{-1} = (g_1 g_2) \cdot h
+	\]
+	Ainsi l'action adjointe définit bel et bien une action de groupe.
+}
+
+\begin{definition}[Morphisme de groupe] \label{def: Morphisme de groupe}
+	Soit $G$ et $G'$ deux groupes, une fonction
+	\[
+	\varphi : G \to G'
+	\]
+	s'appelle \textbf{morphisme de groupe} si elle préserve les structures de groupe de $G$ et $G'$, c'est-à-dire
+	\[
+	\varphi(e) = e' \et \forall g_1, g_2 \in G, \quad \varphi(g_1 g_2) = \varphi(g_1) \varphi(g_2)
+	\]
+	De plus si $\varphi$ est également bijectif, alors on parlera d'isomorphisme et on pourra noté
+	\[
+	G \simeq G'
+	\]
+\end{definition}
+
+\begin{proposition}
+	Si $\varphi : G \to G'$ est un isomorphisme alors $\varphi^{-1} : G' \to G$ est également un isomorphisme.
+\end{proposition}
+
+\prf{Soit $g, h \in G$, on a
+\[
+gh = (\varphi^{-1} \circ \varphi) (gh) = \varphi^{-1} (\varphi(gh)) = \varphi^{-1}(\varphi(g) \varphi(h))
+\]
+de plus comme $\varphi$ est un isomorphisme alors il existe $g', h' \in G'$ tels que $\varphi(g) = g'$ et $\varphi(h) = h'$ et donc on a
+\[
+\varphi^{-1}(g') \varphi^{-1}(h') = \varphi^{-1} (g' h')
+\]
+Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
+}
+
+\begin{theorem}
+	Donner une action de groupe $G \curvearrowright X$ est équivalent à donner un morphisme
+	\[
+	G \to S_X
+	\]
+\end{theorem}
+
+\prf{...}
+
