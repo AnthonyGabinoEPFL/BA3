@@ -1,0 +1,59 @@
+\chapter{Transformation}
+\lecture{9 septembre}
+Formellement, la façon dont on modélise une transformation en mathématique est de considérer un \emph{ensemble} $X$, et d'interpréter une \emph{fonction}
+\[
+f : X \longrightarrow X
+\]
+comme une transformation de $X$. De plus si on considère deux transformations
+\[
+f : X \to X \et g : X \to X
+\]
+alors on peut définir la \textbf{composition} de $f \circ g$ définie par
+\[
+\forall x \in X, \quad (f \circ g)(x) = f(g(x))
+\]
+Maintenant on se pose la question si au lieu de passer de $x$ à $f(x)$ on peut passer de $f(x)$ à $x$, pour tout $x \in X$. Mathématiquement, cela est modélisé par la notion de fonction inverse, ainsi si une fonction $f : X \to X$ admet une \text{réciproque}
+\[
+f^{-1} : X \to X
+\]
+dont les propriétés définissantes sont
+\[
+f \circ f^{-1} = f^{-1} \circ f = \mathrm{Id}_X
+\]
+Avant de montrer l'unicité de la réciproque on a besoin d'introduire la notion d'associativité de la loi $\circ$ définit par
+\begin{definition}[Associativité] \label{def: Associativité}
+	Soit $f,g,h : X \to X$ trois fonctions alors
+	\[
+	f \circ (g \circ h) = (f \circ g) \circ h
+	\]
+\end{definition}
+
+\begin{lemme}[Unicité de la réciproque] \label{lem: Unicité de la réciproque}
+	Si une fonction $f$ admet une fonction inverse, alors cette réciproque est nécessairement unique.
+\end{lemme}
+
+\prf{Supposons que la fonction $f$ ait deux réciproque $g_1 : X \to X$ et $g_2 : X \to X$. Alors on a par définition
+\[
+\forall x \in X, \quad g_2(x) = g_1(f(g_2(x)) = g_1(x)
+\]
+ainsi on a bien $g_1(x) = g_2(x)$ pour tout $x \in X$ et donc on a bien $g_1=g_2$, ce qui montre bien l'unicité de la réciproque.}
+
+
+\begin{definition}
+	La notion de réiprocité est lié à la notion d'\textbf{injectivité} et de \textbf{surjectivité} que l'on définit par
+	\begin{enumerate}
+		\item \textbf{Injectivité} : $\forall x,x' \in X, \quad x \neq x' \implies f(x) \neq f(x')$.
+		\item \textbf{surjectivité} : $\forall y \in X, \, \exists x \in X, \quad y = f(x)$.
+	\end{enumerate}
+	Si on fonction $f$ est à la fonction injective et surjective alors on dira qu'elle est \textbf{bijective}. On voit alors que si une fonction est bijective, alors pour tout $y \in X$, il existe un uniquement $x \in X$ tel que $f(x)=y$, alors on définit de façon unique $f^{-1}(y)=x$, ce qui implique bien l'unicité de la fonction inverse.
+\end{definition}
+
+Ainsi on a vu que pour un ensemble $X$ si on considère l'ensemble des fonctions bijectives $\S(X)$ alors on a les propriétés suivantes
+\begin{enumerate}
+	\item $\exists \mathrm{Id}_X : X \to X, \,\forall f \in \S(X), \quad f \circ \mathrm{Id}_X = \mathrm{Id}_X \circ f$
+	\item $\forall f \in \S(X), \, \exists f^{-1} \in \S(X), \quad f \circ f^{-1} = f^{-1} \circ f = \mathrm{Id}_X$
+	\item $\forall f,g,h \in \S(X), \quad (f \circ g) \circ h = f \circ (g \circ h)$
+\end{enumerate}
+On dit alors que $(\S(X), \circ)$ définit un groupe, que l'on peut définir de façon plus générale.
+
+
