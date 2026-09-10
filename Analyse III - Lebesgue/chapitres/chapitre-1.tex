@@ -175,6 +175,68 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 \end{definition}
 
 
+\begin{definition}[Contractibilité et simplement connexe] \label{def: Contractibilité et simplement connexe}
+	Soit $U \subset \Rn$ un domaine, et $\gamma : [0,1] \to U$ un lacet, alors on dit que $\gamma$ est \textbf{contractible} pourvu qu'il soit homotope à un lacet constant en $U$. En plus si $U \subset \Rn$ dont tous les lacets sont contractibles, alors on dira que $U$ est \textbf{simplement connexe}.
+\end{definition}
+
+\begin{definition}[Étoilé] \label{def: Étoilé}
+	ON appelle un domaine $U \subset \Rn$ \textbf{étoilé}, pourvu qu'il existe un $p \in U$ tel que pour tout $x \in U$, le segment de ligne droite $[p,x]$ est inclus dans $U$. De plus on dira que $U$ est \textbf{convexe} pourvu que $U$ est étoilé par rapport à chacun de ses points.
+\end{definition}
+
+\begin{lemme}
+	Si $U$ est étoilé alors $U$ est simplement connexe.
+\end{lemme}
+
+\prf{Soit $\gamma : [0,1] \to U$ un lacet. Soit $p$ dans la définition, alors on pose
+	\[
+	\Gamma(s,t) = sp + (1-s) \gamma(t), \quad s \in [0,1], \, t \in [0,1]
+	\]
+	Si $s = 1, \quad \Gamma(1,t) = p$ donc c'est un lacet constant. Et $\Gamma(s,t) \in U$ pour tout $(s,t) \in [0,1]^2$. 
+}
+
+
+\subsection{Green-Riemann et potentiels scalaires}
+\begin{proposition}
+	Soit $K \subset \Rn$ un sous-ensemble compact, soit $U_i, V_i$ pour $i = 1, \ldots, N$ des domaines tels que $\overline U_i \subset V_i$, chaque $U_i$ est borné, et 
+	\[
+	K \subset \bigcup_{i=1}^N U_i
+	\]
+	Alors, il existe des fonctions $\phi_j \in C^\infty_0(V_j), \quad \phi_j \geqslant 0$ et telles que
+	\[
+	\forall x \in K, \quad \sum_{j=1}^N \phi_j(x) = 1
+	\]
+\end{proposition}
+
+\prf{...}
+
+\begin{proposition}
+	Soit $U \subset \Rn$ un domaine et $\bm f \in C^1(U, \Rn)$. Supposons que $\rot \bm f = 0$.
+	\begin{enumerate}
+		\item Soient $\gamma_1, \gamma_2 : [0,1] \to U$ deux chemines en $U$ avec les mêmes extrémités qui sont homotopes, alors
+		\[
+		\int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_{\gamma_2} \bm f \cdot \mathrm d \bm s
+		\]
+		\item Soit $\gamma : [0,1] \to U$ un lacet contractible, alors
+		\[
+		\int_\gamma \bm f \cdot \mathrm d \bm s = 0
+		\]
+		\item Si $U$ est simplement connexe, alors $\bm f$ dérive d'un potentiel, c'est-à-dire
+		\[
+		\bm f = \nabla g
+		\]
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
+	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\partial V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
+	\[
+	\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \mathrm d x \, \mathrm dy
+	\]
+\end{theorem}
+
+\begin{remarque}
+	Un lacet $\gamma$ est dit \textbf{simple} $\gamma : [0,1] \to U$ est injective à la condition près $\gamma(0) = \gamma(1)$. Un lacet $\gamma$ est dit \textbf{régulier} si $\gamma \in C^1([0,1], U)$ avec $\gamma'(t) \neq 0$ pour tout $t \in [0,1]$ et $\gamma'(1) = \gamma'(0)$.
+\end{remarque}
 
 
 
