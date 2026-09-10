@@ -114,10 +114,67 @@ On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \b
 	et donc on a bien la propriété voulue.
 }
 
+
+\lecture{10 septembre}
+7
 \begin{theorem}
-	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ admet un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
+	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ dérive d'un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
 \end{theorem}
-\prf{...}
+
+
+
+\prf{Supposons que $\bm f = \nabla g$, et que $\gamma : [0,1] \to U$ est un lacet, alors
+\[
+\int_\gamma \bm f \cdot \mathrm d \bm s = \int_0^1 \nabla g(\gamma(t)) \cdot \gamma'(t) \, \mathrm dt = \int_0^1 \frac{\mathrm d}{\mathrm dt} g(\gamma(t)) \, \mathrm dt = g(\gamma(1)) - g(\gamma(0))
+\]
+mais comme $\gamma$ est un lacet alors $\gamma(1) = \gamma(0)$ et donc on a bien
+\[
+\int_\gamma \bm f \cdot \mathrm d \bm s = 0
+\]
+
+Réciproquement supposons que $\int_\gamma \bm f \cdot \mathrm d \bm s = 0$ pour tout lacet, alors il faut exhiber $g \in C^1(U)$ avec $\bm f = \nabla g$. Par connexité de $U$, on considère $p \in U$, et on pose
+\[
+g(x) = \int_\gamma \bm f \cdot \mathrm d \bm s
+\]
+où $\gamma$ est un chemin arbitraire en $U$ qui relie $p$ à $x$. D'après  les hypothèse, alors $g$ est bien défini. Il est facile de voir que $g$ est $C^0$, il reste donc à montrer que $g$ est $C^1$ et qu'on a bien $\nabla g = \bm f$. Or pour montrer que $\nabla g = f$, et donc à fortiori que $g \in C^1(U)$ on calcule les dérivées partielles de $g$. Alors on a 
+\[
+\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} 
+\]
+or 
+\[
+g(x + h e_j) = \int_{\tilde \gamma} \bm f \cdot \mathrm d\bm s
+\]
+avec $\tilde \gamma $ est un chemin arbitraire qui lie $p$ à $x + he_j$. Or par concaténation on peut écrire, $\tilde \gamma = \gamma \oplus \gamma_1$ où $\gamma_1 : [0,1] \to U, \quad \gamma_1(t) = x  + t h e_j$
+Et donc par hypothèse
+\[
+g(x +he_j) = \int_{\gamma \oplus \gamma_1} \bm f \cdot \mathrm d \bm s = \int_\gamma \bm f \cdot \mathrm d \bm s + \int_{\gamma_1} \bm f \cdot \mathrm d \bm s
+\]
+Et donc on a
+\[
+g(x + h e_j) - g(x) = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_0^1 \bm f(x + th e_) \cdot h e_j \, \mathrm dt = h \int_0^1 f_j(x + the_j) \, \mathrm dt = h \int_0^1 f_j(x) \, \mathrm dt + h \int_0^1 r_j(t,h,x) \, \mathrm dt
+\]
+où $r_j(t,h,x) = f_j(x + the_j) - f_j(x) \longrightarrow 0$ et donc $h \int_0^1 r_j(t,h,x) \, \mathrm dt = o(h)$ et donc 
+\[
+\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} = f_j(x)
+\]
+Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, ainsi $g \in C^1(U)$ et $\nabla g = \bm f$.
+}
+
+\begin{remarque}
+	On voit que si $\bm f = \nabla g$ avec $g \in C^2(U)$ 
+\end{remarque}
+
+\subsection{Concepts topologiques}
+
+\begin{definition}[Homotopie] \label{def: Homotopie}
+	Soit $U \subset \Rn$ un domaine, et soient $\gamma_1, \gamma_2 : [0,1] \to U$ deux lacets dans $U$ possédant les mêmes points d'extrémité. Alors on dit que $\gamma_1$ est \textbf{homotope} à $\gamma_2$ s'il existe une application continue
+	\[
+	\Gamma: [0,1] \times [0,1] \to U
+	\]
+	telle que $\Gamma(0,t) =  \gamma_1(t)$ et $\Gamma(1,t) = \gamma_2(t)$ et pour chaque $s \in [0,1]$ fixé, $\Gamma(s,t)$ est un chemin qui lie les mêmes point d'extrémité que $\gamma_1$ et $\gamma_2$. La définition est analogue pour les lacets.
+\end{definition}
+
+
 
 
 
