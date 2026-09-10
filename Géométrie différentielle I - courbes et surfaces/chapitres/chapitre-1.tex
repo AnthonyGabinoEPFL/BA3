@@ -1,0 +1,170 @@
+\chapter{Rappels des espaces euclidiens}
+
+\lecture{10 septembre}
+
+\section{Orientation d'un espace vectoriel réelle de dimension finie}
+Soit $\{u_1, \ldots, u_n\}$ et $\{v_1, \ldots, v_n\}$ deux bases de $V$, on appelle $P \in \R^{n \times n}$ la \textbf{matrice de changement de base} de la base $\{u_i\}$ vers la base $\{v_i\}$ définie par
+\[
+v_j = \sum_{i=1}^n p_{ij} u_i
+\]
+
+\begin{definition}[Orientation]
+	On dit que deux base $\{u_i\}$, $\{v_i\}$ ont la même \textbf{orientation} si le déterminant de la matrice de passage $P$ est positive. On voit facilement que cela définit une relation d'équivalence dont il n'y a que deux classes d'équivalence. 
+\end{definition}
+
+\begin{definition}
+	Une application linéaire $f : V \to V$ préserve l'orientation si $\det f > 0$ et inverse l'orientation si $\det f < 0$. On définit alors
+	\[
+	\Gl_+(V) = \{ f \in \Gl(V) \mid \det f > 0\}
+	\]
+\end{definition}
+
+\section{Similitudes et isométries d'un espace vectoriel euclidien}
+\begin{definition}[Similitudes] \label{def: Similitude}
+Une \textbf{similitude de rapport} $\lambda > 0$ est une application $f : \E \to \E$ telle que 
+\[
+\forall x,y \in \E, \quad \norme{f(x) - f(y)}= \lambda \norme{x -y}
+\]
+Une \textbf{isométrie} de $\E$ est une similitude de rapport $1$. C'est donc une bijection qui respecte les distances.
+\end{definition}
+
+Il est facile de voir qu'à partir des définitions que les similitudes de $\E$ forment un groupe et que les isométries forment un sous-groupe normal de ce groupe.
+
+\begin{lemme}[Propriétés des isométries] \label{uwu}
+	Toute isométrie $g : \E \to \E$ qui fixe l'origine ;
+	\begin{enumerate}
+		\item préserve le produit scalaire, c'est-à-dire
+		\[
+		\forall x,y \in \E, \quad \langle g(x), g(y) \rangle = \langle x, y\rangle
+		\]
+		\item est linéaire.
+	\end{enumerate}
+\end{lemme}
+\prf{
+	\begin{enumerate}
+		\item On remarque que pour tout $x \in \E$,
+		\[
+		\norme{g(x)} = \norme{g(x) - g(0)} = \norme{x - 0} = \norme{x}
+		\]
+		Et donc par polarisation on a
+		\begin{align*}
+			\langle g(x) , g(y) \rangle &= \frac12 (\norme{g(x)}^2 + \norme{g(y)}^2 - \norme{g(x) - g(y)}^2) \\
+										&= \frac12 (\norme{x}^2 + \norme{y}^2 - \norme{x -y}^2)\\
+										&= \langle x,y \rangle
+		\end{align*}
+		Donc $g$ préserve bien le produit scalaire.
+		\item Pour tout $x \in \E$ et $\alpha \in \R$, on a
+		\begin{align*}
+		\norme{g(\alpha x) - \alpha g(x)}^2 &= \norme{g(\alpha x)}^2 - 2 \langle g(\alpha x), \alpha g(x) \rangle + \alpha^2 \norme{g(x)}^2 \\
+											&= \norme{\alpha x}^2 - 2 \alpha \langle \alpha x, x \rangle + \alpha^2 \norme{x}^2  \\
+											&= 0
+		\end{align*}
+		ce qui prouve que $g(\alpha x) = \alpha g(x)$.
+		
+		D'autre part pour tout $x, y \in \E$ on a,
+		\[
+		\norme{g(x) + g(y) - g(x+y)}^2 = \ldots = 0
+		\]
+		ce qui prouve que $g(x + y) = g(x) + g(y)$. On a donc montré qu'une isométrie de $\E$ qui fixe l'origine est une application linéaire.		
+	\end{enumerate}
+}
+
+\begin{theorem}
+	L'application $f : \E \to \E$ est une similitude de rapport $\lambda$ si et seulement s'il existe un vecteur $b \in \E$ et une isométrie linéaire $g : \E \to \E$ tels que $f(x) = \lambda g(x) + b$ pour tout $x \in \E$.
+\end{theorem}
+
+\prf{Soit $f$ une similitude de $\E$ de rapport $\lambda$. On pose
+	\[
+	g(x) = \frac1\lambda (f(x) - f(0))
+	\]
+	Alors il est claire que $g(0) = 0$ et pour tout $x,y \in \E$ on a
+	\begin{align*}
+		\norme{g(x) - g(y)} = \norme{\frac1\lambda (f(x) - f(0)) - \frac1\lambda (f(y) - f(0))} = \frac1\lambda \norme{f(x) - f(y)} = \norme{x -y}
+	\end{align*}
+	Ainsi par le lemme \eqref{uwu} $g$ est linéaire. Donc $f(x) = \lambda g(x) + b$ où $b = f(0) \in \E$ est un vecteur constant et $g$ est une isométrie linéaire.
+}
+
+\begin{proposition}
+	Une application $f : \E \to \E$ est une isométrie pour le produit scalaire standard de $\Rn$ si et seulement si on a
+	\[
+	f(x) = Ax + b
+	\]
+	où $b = f(0)$ et $A \in \Gl_n(\R)$ est une matrice orthogonal $A^\top A = \mathrm I_n$.
+\end{proposition}
+
+\prf{Par définition du produit scalaire standard de $\Rn$, on a
+	\[
+	\delta_{ij} = \langle e_i, e_j \rangle
+	\]
+	où $\{e_1, \ldots, e_n\}$ est la base canonique de $\Rn$, et donc
+	\[
+	\delta_{rs} = \langle e_r, e_s \rangle = \langle A e_r, A e_s \rangle = \left\langle \sum_{i=1}^n a_{ir} e_r, \sum_{j=1}^n a_{js} e_s \right\rangle = \sum_{i=1}^n \sum_{j=1}^n a_{ir} a_{js} \delta_{ij} = \sum_{i=1}^n a_{ir} a_{rs} = \left( A^\top A\right)_{rs}
+	\]
+	ce qui prouve bien que $A^\top A = \mathrm I_n$.
+}
+
+\section{Le groupe orthogonal}
+
+\begin{definition}[Matrice orthogonale] \label{def: Groupe orthogonal}
+	Une matrice $A \in M_n(\R)$ est \textbf{orthogonale} si $A^\top A = \mathrm I_n$. L'ensemble des matrices orthogonales se note
+	\[
+	O(n) = \{ A \in M_n(\R) \mid A^\top A = \mathrm I_n\}
+	\]
+	il est facile de voir que cela forme un groupe, on parlera alors de \textbf{groupe orthogonal}.
+\end{definition}
+
+Remarquons que l'application déterminant définit un morphisme de groupes,
+\[
+\det : O(n) \to \{\pm 1\}
+\]
+et le noyau de ce morphisme est le \textbf{groupe spécial orthogonal} :
+\[
+SO(n) = \{ A \in M_n(\R) \mid A^\top A = \mathrm I_n \et \det A = 1\}
+\]
+
+\begin{proposition}
+	Pour une  matrice $A \in O(2)$, il existe $\theta \in R$ tel que
+	\[
+	A = R_\theta = \begin{pmatrix} \cos \theta & -\sin\theta \\ \sin \theta & \cos \theta \end{pmatrix}
+	\]
+	si $\det A = 1$, et 
+	\[
+	A = S_{\theta / 2} = \begin{pmatrix} \cos \theta & \sin\theta \\ \sin \theta & -\cos \theta \end{pmatrix}
+	\]
+	si $\det A = -1$.
+\end{proposition}
+
+\prf{Les colonnes d'une matrice orthogonale $A \in O(2)$ doivent former une base orthonormée de $\R^2$. Il existe donc $\theta \in ]- \pi, \pi]$ tel que la première colonne s'écrive $\begin{pmatrix} \cos \theta \\ \sin \theta \end{pmatrix}$.
+	
+La deuxième colonne de $A$ doit être un vecteur de norme $1$ orthogonal à la première colonne, par conséquent $\pm \begin{pmatrix}
+	-\sin\theta \\ \cos \theta
+\end{pmatrix}$. Ceci démontre bien que ou bien $A = R_\theta$ ou bien $A = S_{\theta/2}$.
+}
+
+\begin{remarque}
+	Il est facile de voir que $R_\theta$ est une matrice de rotation d'angle $\theta$ et que $S_{\theta/2}$ est une symétrie à travers la droite vectorielle formant un angle $\theta/2$ avec le premier vecteur $e_1$ de la base canonique.
+\end{remarque}
+
+\section{Géométrie vectorielle dans l'espace euclidien orienté de dimension $3$}
+
+\begin{proposition}[Propriétés du produit vectoriel]
+	Il existe une uniquement application $ \cdot \times  \cdot : \E \times \E \to \E$ telle que pour tout $\bm x, \bm y \in \E$ 
+	\begin{enumerate}
+		\item $(\bm x \times \bm y) \perp  \bm x\et (\bm x \times \bm y) \perp \bm y$;
+		\item $\norme{\bm x \times \bm y} = \aire(\mathcal P(\bm x,\bm y))$ où $\mathcal P(\bm x,\bm y)$ est le parallélogramme construit sur les vecteurs $\bm x$ et $\bm y$;
+		\item Si $\bm x$ et $\bm y$ sont linéaire indépendants, alors $\{\bm x, \bm y, \bm x \times \bm y\}$ est une base directe de $\E$.
+	\end{enumerate}
+\end{proposition}
+
+\prf{...}
+
+
+\begin{definition}
+	On apelle \textbf{produit mixte} de trois vecteurs $\bm x, \bm y, \bm z \in \E$, le produit	scalaire
+	\[
+	[\bm x, \bm y, \bm z] = \langle \bm x \times \bm y, \bm z \rangle
+	\]
+	Cette quantité représente le \emph{volume orienté} du parallélépipède $\mathcal P(\bm x, \bm y, \bm z)$ construit sur les trois vecteurs.
+\end{definition}
+
+

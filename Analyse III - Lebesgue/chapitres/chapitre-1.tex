@@ -151,7 +151,7 @@ g(x +he_j) = \int_{\gamma \oplus \gamma_1} \bm f \cdot \mathrm d \bm s = \int_\g
 \]
 Et donc on a
 \[
-g(x + h e_j) - g(x) = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_0^1 \bm f(x + th e_) \cdot h e_j \, \mathrm dt = h \int_0^1 f_j(x + the_j) \, \mathrm dt = h \int_0^1 f_j(x) \, \mathrm dt + h \int_0^1 r_j(t,h,x) \, \mathrm dt
+g(x + h e_j) - g(x) = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_0^1 \bm f(x + th e_j) \cdot h e_j \, \mathrm dt = h \int_0^1 f_j(x + the_j) \, \mathrm dt = h \int_0^1 f_j(x) \, \mathrm dt + h \int_0^1 r_j(t,h,x) \, \mathrm dt
 \]
 où $r_j(t,h,x) = f_j(x + the_j) - f_j(x) \longrightarrow 0$ et donc $h \int_0^1 r_j(t,h,x) \, \mathrm dt = o(h)$ et donc 
 \[
@@ -161,7 +161,18 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 }
 
 \begin{remarque}
-	On voit que si $\bm f = \nabla g$ avec $g \in C^2(U)$ 
+	On voit que si $\bm f = \nabla g$ avec $g \in C^2(U)$ alors
+	\[
+	\frac{\partial f_j}{\partial k} = \frac{\partial^2 g}{\partial x_k \partial x_j} = \frac{\partial^2 g}{\partial x_j \partial x_k} = \frac{\partial f_k}{\partial x_j}
+	\]
+	Ainsi on condition nécessaire pour que $\bm f \in C^1(U, \Rn)$ dérive d'un potentiel est alors que
+	\[
+	\forall i,j \in \entiers, \quad \frac{\partial f_j}{\partial x_i} - \frac{\partial f_i}{\partial x_j}
+	\]
+	Cependant dans le cadre de ce cours, on va se restreindre au cas $n=2$ ou $n=3$, alors on a la condition nécessaire
+	\[
+	\bm f = \nabla g \implies \rot \bm f = 0
+	\]
 \end{remarque}
 
 \subsection{Concepts topologiques}
@@ -196,7 +207,7 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 
 
 \subsection{Green-Riemann et potentiels scalaires}
-\begin{proposition}
+\begin{proposition}[Partition de l'unité] \label{prop: Partition de l'unité}
 	Soit $K \subset \Rn$ un sous-ensemble compact, soit $U_i, V_i$ pour $i = 1, \ldots, N$ des domaines tels que $\overline U_i \subset V_i$, chaque $U_i$ est borné, et 
 	\[
 	K \subset \bigcup_{i=1}^N U_i
@@ -228,7 +239,7 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 \end{proposition}
 
 \begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
-	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\partial V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
+	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\overline V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
 	\[
 	\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \mathrm d x \, \mathrm dy
 	\]
