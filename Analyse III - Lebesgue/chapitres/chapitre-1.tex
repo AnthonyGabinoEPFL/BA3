@@ -218,8 +218,45 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 	\]
 \end{proposition}
 
-\prf{...}
+\lecture{14 septembre}
 
+\prf{On construit les fonctions $g_i \in C^0_0(V_i)$ avec ${g_i}_{\mid \overline U_i} = 1$ pour tout $i \in \llbracket 1, N \rrbracket$. Pour arriver à $g_i$, on va considérer la composition de la fonction $\dist(x, U_i)$ avec une autre fonction. Ainsi soit $\varepsilon_i = \dist(U_i, V_i^c) = \dist(\overline U_i, V_i^c) > 0$ car $\overline U_i$ est compact, $V_i^c$ fermé, et $\overline U_i \cap V_i^c = \emptyset$. Donc soit $\varepsilon = \min_{i \in \llbracket 1,N \rrbracket} \varepsilon_i$. On définit la fonction suivante
+	\[
+	\begin{array}{cccc}
+		\zeta : & \R_+ & \to & \R \\
+		& t & \mapsto & \begin{cases}
+			1 & 0 \leqslant t \leqslant \varepsilon/4 \\
+			(\varepsilon/2 - t) / (\varepsilon/4) & \varepsilon/4< t < \varepsilon/2 \\
+			0 & t \geqslant \varepsilon/2
+		\end{cases}
+	\end{array}
+	\]
+	Ainsi il nous suffit de poser $g_i(x) = \zeta(\dist(x, U_i))$. On a $g_i \in C^0(\R)$.
+	
+	Il reste donc à régulariser les $g_i$. Soit $\psi \in C^\infty_0(B_1(0))$, de plus on peut supposer que $\psi \geqslant 0$ et $\int_{\Rn} \psi(x) \, \mathrm d x = 1$. Pour chaque $\delta > 0$, on définit $\psi_\delta(x) = \delta^{-n} \psi\!\left(\frac{x}{\delta}\right)$. On choisit en particulier $\delta < \varepsilon/4$. On remplace les fonctions $g_i$ par les intégrales paramétrées,
+	\[
+	\tilde \varphi_i(x) = \int_\Rn g_i(x -y) \psi_\delta (y) \, \mathrm dy
+	\]
+	Il faut vérifier que $\tilde \varphi_i$ satisfait encore $\left.\tilde \varphi_i\right|_{\overline U_i} = 1$, et $\left.\tilde \varphi_i\right|_{V_i^c} = 0$. En effet, si $x \in \overline U_i$, on a 
+	\[
+	\dist(x-y, U_i) \leqslant \dist(x, U_i) + \norme y \leqslant \dist(x, U_i) + \delta < \varepsilon/4
+	\]
+	par le choix de $\delta$. Ainsi on a
+	\[
+	\forall x \in \overline U_i, \quad \tilde \varphi_i(x) = \int_{B_\delta(0)} g_i(x -y) \psi_\delta(y) \, \mathrm d y= \int_{B_\delta(0)} \psi_\delta (y) \, \mathrm dy = 1
+	\]
+	De la même manière si $x \in V_i^c$ et $y \in B_\delta(0)$ alors 
+	\[
+	\dist(x-y, U_i) \geqslant \dist(x, U_i) - \norme y \geqslant \varepsilon_i - \varepsilon/4 \geqslant \varepsilon - \varepsilon/4 = \frac{3 \varepsilon}{4}
+	\]
+	Ainsi $\zeta(\dist(x-y, U_i)) = 0$ si $x \in \overline U_i, ~ y \in V_i^c$ et donc $g_i(x-y) = 0$. Ainsi 
+	\[
+	\forall x \in V_i^c, \quad \tilde \varphi_i(x) = \int_{B_\delta(0)} g_i(x-y) \, \psi_\delta(y) \, \mathrm d y = 0
+	\]
+	Ainsi les propriétés des $g_i$ sont conservées sur les $\tilde \varphi_i$ sauf que désormais $\tilde \varphi_i \in C_0^\infty$.
+	
+	On construit à présent les $\varphi_i$ à partir de $\tilde \varphi_i$ de sorte que $\sum_{i=1}^N \varphi_i (x) = 1$ sur $K$.
+}
 \begin{proposition}
 	Soit $U \subset \Rn$ un domaine et $\bm f \in C^1(U, \Rn)$. Supposons que $\rot \bm f = 0$.
 	\begin{enumerate}
@@ -248,6 +285,5 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 \begin{remarque}
 	Un lacet $\gamma$ est dit \textbf{simple} $\gamma : [0,1] \to U$ est injective à la condition près $\gamma(0) = \gamma(1)$. Un lacet $\gamma$ est dit \textbf{régulier} si $\gamma \in C^1([0,1], U)$ avec $\gamma'(t) \neq 0$ pour tout $t \in [0,1]$ et $\gamma'(1) = \gamma'(0)$.
 \end{remarque}
-
 
 
