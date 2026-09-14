@@ -235,7 +235,7 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 	
 	Il reste donc à régulariser les $g_i$. Soit $\psi \in C^\infty_0(B_1(0))$, de plus on peut supposer que $\psi \geqslant 0$ et $\int_{\Rn} \psi(x) \, \mathrm d x = 1$. Pour chaque $\delta > 0$, on définit $\psi_\delta(x) = \delta^{-n} \psi\!\left(\frac{x}{\delta}\right)$. On choisit en particulier $\delta < \varepsilon/4$. On remplace les fonctions $g_i$ par les intégrales paramétrées,
 	\[
-	\tilde \varphi_i(x) = \int_\Rn g_i(x -y) \psi_\delta (y) \, \mathrm dy
+	\tilde \varphi_i(x) = \int_{\Rn} g_i(x -y) \psi_\delta (y) \, \mathrm dy
 	\]
 	Il faut vérifier que $\tilde \varphi_i$ satisfait encore $\left.\tilde \varphi_i\right|_{\overline U_i} = 1$, et $\left.\tilde \varphi_i\right|_{V_i^c} = 0$. En effet, si $x \in \overline U_i$, on a 
 	\[
@@ -255,8 +255,68 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 	\]
 	Ainsi les propriétés des $g_i$ sont conservées sur les $\tilde \varphi_i$ sauf que désormais $\tilde \varphi_i \in C_0^\infty$.
 	
-	On construit à présent les $\varphi_i$ à partir de $\tilde \varphi_i$ de sorte que $\sum_{i=1}^N \varphi_i (x) = 1$ sur $K$.
+	On construit à présent les $\varphi_i$ à partir de $\tilde \varphi_i$ de sorte que $\sum_{i=1}^N \varphi_i (x) = 1$ sur $K$. On pose pour tout $i \in \llbracket 1, N \rrbracket$,
+	\[
+	\varphi_i = (1 -\tilde \varphi_1)(1 - \tilde \varphi_2) \cdot \ldots \cdot (1 - \tilde \varphi_i)
+	\]
+	Par récurrence immédiate on vérifie que 
+	\[
+	1 - \sum_{i=1}^N \varphi_i(x) = (1 - \tilde \varphi_1)(1 - \tilde \varphi_2) \cdot \ldots \cdot (1 - \varphi_N)
+	\]
+	Et donc si $x \in K \subset \bigcup_{i=1}^N$, alors il existe $j$ tel que $x \in U_j$, donc $\tilde \varphi_j(x) = 1$ et par conséquent $1 - \sum_{i=1}^N \varphi_i(x) = 0$. Ainsi $\sum_{i=1}^N \varphi_i(x) = 1$ sur $K$.
 }
+
+
+\begin{lemme}
+Soit $V$ un région de type $I$, c'est-à-dire qu'il existe $h_{1,2} \in C^1([a,b], \R)$ avec $h_1 < h_2$ tel que
+\[
+V = \{ (x,y) \in \R^2 \mid x \in [a,b], \quad h_1(x) < y < h_2(x)\}
+\]
+Alors la conclusion de Green-Riemann s'applique
+\[
+\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \, \mathrm d x \mathrm dy
+\]
+pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$ entourant $V$ au sens positif.
+\end{lemme}
+\begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
+	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\overline V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
+	\[
+	\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \mathrm d x \, \mathrm dy
+	\]
+\end{theorem}
+
+\begin{remarque}
+	Un lacet $\gamma$ est dit \textbf{simple} $\gamma : [0,1] \to U$ est injective à la condition près $\gamma(0) = \gamma(1)$. Un lacet $\gamma$ est dit \textbf{régulier} si $\gamma \in C^1([0,1], U)$ avec $\gamma'(t) \neq 0$ pour tout $t \in [0,1]$ et $\gamma'(1) = \gamma'(0)$.
+\end{remarque}
+
+\prf{Soit $\gamma$ et $V$ comme donnée dans l'énoncé, et $\bm f \in C^1$, alors par régularité de $\gamma$, on a que 
+	\[
+	\gamma'(t) = \begin{pmatrix} \gamma_1'(t) \\ \gamma_2'(t) \end{pmatrix} \neq 0, \quad \forall t \in I
+	\]
+	Soit $t_\star \in I$ tel que $\gamma_1'(t_\star) \neq 0$. Ainsi par le théorème des fonctions implicite, il existe un intervalle ouvert $J$ tel que $\gamma_1(t_\star) \in J$, ainsi qu'un autre intervalle ouvert $\tilde J$ tel que $t_\star \in \tilde J$, tel que
+	\[
+	\forall x \in J, \, \exists ! t \in \tilde J, \quad \gamma_1(t) = x
+	\]
+	En plus, si on pose $t = t(x) \in C^1(J, \tilde J)$, on peut écrire $y = \gamma_2(t) = \gamma_2(t(x)) := h(x) \in C^1(J)$. Ainsi localement on a 
+	\[
+	\{ \gamma(x) \mid t \in \tilde J \} = \{ (x, h(x)) \mid x \in J\}
+	\]
+	
+	Pour chaque $t \in I$ on considère le point $\gamma(t)$, et on prend un rectangle $V$ ouvert aligné avec les axes de coordonnées, tel que $V \cap \gamma $ est le graphe d'une fonction par rapport à $x$ ou à $y$. On peut aussi choisir un rectangle ouvert $U$ tel que $\overline U \subset V$ et $\gamma(t) \in U$. On fait ça pour tout $t \in I$, ainsi les $\{U\}$ forment un recouvrement de $\gamma(I)$ par des ouverts. Ainsi par compacité de $\gamma(I)$, d'après Heine-Borel, on peut choisir un nombre fini $\{U_i, V_i\}_{i=i}^N$ tels que $\overline U_i \subset V_i$ et 
+	\[
+	\gamma(I) \subset \bigcup_{i=1}^N U_i 
+	\]
+	Pour obtenir un recouvrement de tout $\overline V$. On rajoute encore une paire $U_{N+1}, V_{N+1}$ construit comme suit ; par construit les $U_i$ déjà choisies forment un recouvrement ouvert de $\gamma(I)$, on peut se convaincre qu'il existe $\delta > 0$ tel que
+	\[
+	\{ x \in V \mid \dist(x, \gamma(I)) < \delta \} \subset \bigcup_{i=1}^N U_i
+	\]
+	Ensuite on pose,
+	\[
+	U_{N+1} = \{x \in V \mid \dist(x, \gamma(I)) > \frac\delta2\} \et V_{N+1} = \{x \in V \mid \dist(x, \gamma(I)) > \frac\delta4\}
+	\]
+	Maintenant qu'on a un recouvrement, on utilise la proposition précédente avec $K = \overline V$, et $(U_i, V_i)$, $i \in \llbracket 1, N+1 \rrbracket$. Ensuite on remplce $\bm f$ par $\varphi_i \bm f \in C^1_0(V_i)$.
+}
+
 \begin{proposition}
 	Soit $U \subset \Rn$ un domaine et $\bm f \in C^1(U, \Rn)$. Supposons que $\rot \bm f = 0$.
 	\begin{enumerate}
@@ -274,16 +334,3 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 		\]
 	\end{enumerate}
 \end{proposition}
-
-\begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
-	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\overline V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
-	\[
-	\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \mathrm d x \, \mathrm dy
-	\]
-\end{theorem}
-
-\begin{remarque}
-	Un lacet $\gamma$ est dit \textbf{simple} $\gamma : [0,1] \to U$ est injective à la condition près $\gamma(0) = \gamma(1)$. Un lacet $\gamma$ est dit \textbf{régulier} si $\gamma \in C^1([0,1], U)$ avec $\gamma'(t) \neq 0$ pour tout $t \in [0,1]$ et $\gamma'(1) = \gamma'(0)$.
-\end{remarque}
-
-
