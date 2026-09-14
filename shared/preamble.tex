@@ -15,7 +15,7 @@
 \usepackage[margin=1in]{geometry} %marge
 \usepackage{lmodern} %police d'écriture vectoriel
 \usepackage[colorlinks=true, linkcolor=AntiDAcolor, urlcolor=AntiDAcolor]{hyperref} %référence
-%\usepackage{cleveref}
+\usepackage{cleveref}
 \usepackage{graphicx} %images
 \usepackage{todonotes} %lecture note
 \usepackage{fancyhdr} %en-tête
@@ -91,6 +91,15 @@
 \newtheorem{definition}{Définition}[chapter]
 \newtheorem{exemple}{Exemple}[chapter]
 \newtheorem{remarque}{Remarque}[chapter]
+
+\renewcommand{\theoremautorefname}{Théorème}
+\newcommand{\lemmeautorefname}{Lemme}
+\newcommand{\definitionautorefname}{Définition}
+\newcommand{\exempleautorefname}{Exemple}
+\newcommand{\remarqueautorefname}{Remarque}
+\newcommand{\propositionautorefname}{Proposition}
+
+
 
 \setcounter{secnumdepth}{3}
 

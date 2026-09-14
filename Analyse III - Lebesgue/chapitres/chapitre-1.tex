@@ -267,7 +267,7 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 }
 
 
-\begin{lemme}
+\begin{lemme}[Green-Riemann sur des régions de type I ou II] \label{lem: Green-Riemann sur des régions de type I ou II}
 Soit $V$ un région de type $I$, c'est-à-dire qu'il existe $h_{1,2} \in C^1([a,b], \R)$ avec $h_1 < h_2$ tel que
 \[
 V = \{ (x,y) \in \R^2 \mid x \in [a,b], \quad h_1(x) < y < h_2(x)\}
@@ -278,6 +278,43 @@ Alors la conclusion de Green-Riemann s'applique
 \]
 pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$ entourant $V$ au sens positif.
 \end{lemme}
+
+\prf{On calcule explicitement les deux cotés, ainsi on pour le coté droite
+	\[
+	\iint_V \partial_x f_2 - \partial y f_1 \, \mathrm d x \, \mathrm dy = \underbrace{\int_a^b \int_{h_1(x)}^{h_2(x)} \partial_x f_2 (x,y) \, \mathrm d x \,\mathrm dy}_A - \underbrace{\int_a^b \int_{h_1(x)}^{h_2(x)} \partial_y f_1 (x,y) \, \mathrm d x \, \mathrm dy}_B
+	\]
+	Ainsi pour $A$ on trouve
+	\begin{align*} 
+	A &=  \int_a^b \frac{\partial }{\partial x} \left[ \int_{h_1(x)}^{h_2(x)} f_2(x,y) \, \mathrm dy \right] \mathrm dx - \int_a^b h_2'(x) f_2(x, h_2(x)) \, \mathrm dx + \int_a^b h_1'(x) f_2(x, h_1(x)) \, \mathrm dx \\
+	&=\int_{h_1(b)}^{h_2(b)} f_2(b,y) \, \mathrm dy - \int_{h_1(a)}^{h_2(a)} f_2(a,y) \, \mathrm dy - \int_a^b h_2'(x) f_2(x, h_2(x)) \, \mathrm dx + \int_a^b h_1'(x) f_2(x, h_1(x)) \, \mathrm dx 
+	\end{align*}
+		et pour $B$ on a plus simplement,
+	\[
+	B =\int_a^b \left(\int_{h_1(x)}^{h_2(x)} \partial_y f_1 (x,y) \, \mathrm d x \right)\mathrm dy = \int_a^b f_1(x, h_2(x)) \, \mathrm dx - \int_a^b - \int_a^b f_1(x, h_1(x)) \, \mathrm dx
+	\]
+	Ensuite par concaténation on pose $\gamma_1 = \{(x,h_1(x)) \mid x \in [a,b]\}$, alors
+	\[
+	\int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_a^b \bm f(x, h_1(x)) \cdot \begin{pmatrix}
+		1 \\ h_1'(x) \end{pmatrix} \,\mathrm dx = \int_a^b f_1(x, h_1(x)) \, \mathrm dx + \int_a^b h_1'(x) f_2(x, h_1(x)) \, \mathrm dx 
+	\]
+	De plus on pose $\gamma_2 = \{ (b,y) \mid y \in [h_1(b), h_2(b)]\}$ ainsi
+	\[
+	\int_{\gamma_2} \bm f \cdot \mathrm d \bm s = \int_{h_1(b)}^{h_2(b)} \bm f(b,y) \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix} \, \mathrm dy = \int_{h_1(b)}^{h_2(b)} f_2(b,y) \, \mathrm dy 	
+	\]
+	En posant $-\gamma_3 = \{ (x, h_2(x)) \mid x \in [a,b] \}$ alors
+	\[
+	\int_{\gamma_3} \bm f \cdot \mathrm d \bm s = - \int_{- \gamma_3} \bm f \cdot \mathrm d \bm s = - \int_a^b f_1(x, h_2(x)) + h_2'(x) f_2(x, h_2(x)) \, \mathrm dx 
+	\]
+	Et finalement avec $\gamma_4 = \{ (a,y) \mid y \in [h_2(a), h_1(x)]\}$ alors
+	\[
+	\int_{\gamma_4} \bm f \cdot \mathrm d \bm s = - \int_{h_1(a)}^{h_2(a)} f_2(a, y) \, \mathrm d \bm s
+	\]
+	Et donc par concaténation on a bien 
+	\[
+	\int_\gamma \bm f \cdot \mathrm d \bm s = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s + \int_{\gamma_2} \bm f \cdot \mathrm d \bm s + \int_{\gamma_3} \bm f \cdot \mathrm d \bm s + \int_{\gamma_4} \bm f \cdot \mathrm d \bm s = A - B = \iint_V \rot \bm f \, \mathrm d x \mathrm dy
+	\]
+	D'où le lemme. La preuve les des domaines de types II est analogue.
+}
 \begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
 	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\overline V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
 	\[
@@ -314,7 +351,47 @@ pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$
 	\[
 	U_{N+1} = \{x \in V \mid \dist(x, \gamma(I)) > \frac\delta2\} \et V_{N+1} = \{x \in V \mid \dist(x, \gamma(I)) > \frac\delta4\}
 	\]
-	Maintenant qu'on a un recouvrement, on utilise la proposition précédente avec $K = \overline V$, et $(U_i, V_i)$, $i \in \llbracket 1, N+1 \rrbracket$. Ensuite on remplce $\bm f$ par $\varphi_i \bm f \in C^1_0(V_i)$.
+	Maintenant qu'on a un recouvrement, on utilise la \autoref{prop: Partition de l'unité} précédente avec $K = \overline V$, et $(U_i, V_i)$, $i \in \llbracket 1, N+1 \rrbracket$. On obtient alors des fonctions
+	\[
+	\varphi_j \in C^\infty_0 (V_j), \quad \varphi_j \geqslant 0, \quad \sum_{j=1}^{N+1} \varphi_j(x) = 1,\quad \forall x \in \overline V
+	\]
+	On a alors, pour le champ $\bm f$,
+	\[
+	\bm f = \sum_{j=1}^{N+1} \varphi_j \bm f
+	\]
+	Il s'ensuit alors que 
+	\[
+	\int_\gamma \bm f \cdot \mathrm d \bm s = \int_\gamma \sum_{j=1}^{N+1} \varphi_j \bm f \cdot \mathrm d \bm s = \sum_{j=1}^{N+1} \int_\gamma \varphi_j \bm f \cdot \mathrm d \bm s
+	\]
+	et de même
+	\[
+	\iint_V \rot \bm f \, \mathrm dx \, \mathrm dy = \iint_V \rot \sum_{j=1}^{N+1} \varphi_j \bm f \, \mathrm dx \, \mathrm dy = \sum_{j=1}^{N+1} \iint_V \rot(\varphi_j \bm f) \, \mathrm dx \, \mathrm dy
+	\]
+	Donc il suffit de montrer l'égalité terme par terme. En appliquant le \autoref{lem: Green-Riemann sur des régions de type I ou II} alors 
+	\[
+	\int_{\partial (V \cap V_j)} \varphi_j \bm f \cdot \mathrm d \bm s = \iint_{V \cap V_j} \rot(\varphi_j \bm f) \, \mathrm d x \, \mathrm dy 
+	\]
+	Mais comme $\varphi_j \bm f$ est nul en dehors de $V_j$, alors 
+	\[
+	\iint_V \rot(\varphi_j \bm f) \, \mathrm dx \, \mathrm dy = \iint_{V \cap V_j} \rot(\varphi_j \bm f) \, \mathrm dx \, \mathrm dy
+	\]
+	De plus le bord de $V \cap V_j$ est constitué de deux morceaux, un morceau de $\gamma$ et un morceau de bord de $V_j$. Or comme $\varphi_j$ est à support compact dans $V_j$, alors elle nulle sur $\partial V_j$ et donc
+	\[
+	\int_\gamma \varphi_j \bm f \cdot \mathrm d \bm s = \int_{\partial(V \cap V_j)}  \varphi_j \bm f \cdot \mathrm d \bm s
+		\]
+		On a donc montré que $\int_\gamma \varphi_j \bm f \cdot \mathrm d \bm s = \iint_V \rot(\varphi_j \bm f) \, \mathrm dx \, \mathrm dy$ pour tout $j = 1, 2, \ldots, N$. De plus si $j = N+1$, alors
+		\[
+		\int_{\gamma} \varphi_{N+1} \bm f \cdot \mathrm ds = 0
+		\]
+		parce que $\varphi_{N+1}$ n'intersecte pas le lacet $\gamma$. De plus on a
+		\[
+		\iint_V \rot(\varphi_{N+1} \bm f) \, \mathrm dx \, \mathrm dy = \iint_{\R^2} \rot(\varphi_{N+1} \bm f) \, \mathrm dx \, \mathrm dy = 0
+		\]
+		car le support de $\varphi_{N+1}$ est un sous-ensemble de $V$. Et donc on a bien l'égalité souhaité
+		\[
+		\forall j \in \llbracket 1, N+1 \rrbracket, \quad \int_\gamma \varphi_j \bm f \cdot \mathrm d \bm s = \iint_V \rot(\varphi_j \bm f) \, \mathrm dx \, \mathrm dy
+		\]
+		Ce qui conclut la preuve.
 }
 
 \begin{proposition}
