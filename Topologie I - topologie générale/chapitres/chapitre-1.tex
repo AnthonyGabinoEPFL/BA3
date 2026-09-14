@@ -55,7 +55,7 @@
 	\]
 \end{definition}
 
-\begin{theorem}[Caractérisation de la continuité] \label{prop: Caractérisation de la continuité}
+\begin{theorem}[Caractérisation de la continuité] \label{thm: Caractérisation de la continuité}
 	Soit $f : \Rn \to \Rm$ une application, alors $f$ est continue si et seulement si,
 	\[
 	\forall w \in \Rn, ~\forall r > 0, ~\forall v \in f^{-1}(B_{euc}(w,r)), ~\exists s > 0, \quad B_{euc}(v, s) \subset f^{-1}(B_{euc}(w,r))
@@ -133,3 +133,138 @@
 	\]
 	où un \textbf{chemin} de $v$ à $w$ consiste en une suite $(v_0, \ldots, v_n)$ de sommets telle que $v_0 = v$ et $v_n = w$, et $\{v_i, v_{i+1}\} \in E$ pour tout $i \in \llbracket 0, n-1 \rrbracket$.	
 \end{exemple}
+
+\lecture{14 septembre}
+
+
+\begin{exemple}[Métrique de Hamming] \label{ex: Métrique de Hamming}
+Soit $A$ un ensemble, et soit $n \geqslant 0$ un nombre naturel, alors on pose
+\[
+W_n(A) = \{ (a_1, \ldots, a_n) \mid a_i \in A \}
+\]	
+l'ensemble des mots de longueur $n$ dans l'alphabet $A$. Alors la \emph{métrique de Hamming} sur $W_n(A)$ est définie par
+\[
+\begin{array}{cccc}
+	d_H : & W_n(A) \times W_n(A) & \longrightarrow & \R \\
+			& (a,b) & \longmapsto & \# \{ i \mid a_i \neq b_i \}
+\end{array}
+\]
+On vérifie facilement que c'est bien une métrique, de plus on remarque que $(W_n(A), d_h)$ est un espace métrique borné.
+\end{exemple}
+
+\begin{exemple}[Métrique uniforme]
+	Soit $(X,d)$ un espace métrique et soit $B$ un ensemble quelconque, alors on pose 
+	\[
+	\mathcal F(B, X) = \{ f : B \to X\}
+	\]
+	l'ensemble des applications de $B$ à valeurs dans $X$. Si $(X,d)$ est borné, alors la \textbf{métrique uniforme} définie par
+	\[
+	d_{unif}(f,g) = \sup_{b \in B} d(f(b), g(b))
+	\]
+	existe.
+\end{exemple}
+
+\section{Construction d'espaces métriques}
+On se demande comment construire un espace métrique à partir d'autres espaces métriques donnés.
+
+\subsection{Sous-espace métrique}
+
+\begin{definition}[Sous-espace métrique] \label{def: Sous-espace métrique}
+	Soit $(X,d)$ un espace métrique et $Y \subset X$ un sous-ensemble de $X$. Si on pose
+	\[
+	 \begin{array}{cccc}
+	 	d_Y = d_{\mid Y \times Y} : & Y \times Y & \longrightarrow & \R \\
+	 								& (y_1, y_2) & \longmapsto & d(y_1, y_2)
+	 \end{array}
+	\]
+	alors $(Y, d_Y)$ est appelé le \textbf{sous-espace métrique} déterminé par $Y$.
+\end{definition}
+
+\begin{exemple}
+	En reprenant l'\autoref{ex: Métrique de Hamming} alors si on pose
+	\[
+	\mathrm{Inj}_n(A) = \{ (a_1, \ldots a_n) \in W_n(A) \mid a_i \neq a_j \forall i\neq j\} \subset W_n(A)
+	\]
+	l'ensemble des mots injectifs, alors $(\mathrm{Inj}_n(A), d_h)$ est un sous-espace métrique.
+\end{exemple}
+
+\subsection{Métrique produit}
+Si on souhaire définir une métrique sur $X_1 \times \ldots \times X_n$, au lieu d'avoir
+\[
+d_\pi : (X_1 \times \ldots \times X_n) \times (X_1 \times \ldots \times X_n) \longrightarrow \R
+\]
+comme une application partant de deux grands produit, on peut le considérer comme $n$ produit de $X_i$ avec lui-même.
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		{(X_1 \times \ldots \times X_n) \times (X_1 \times \ldots \times X_n)} && {\mathbb R} \\
+		{(X_1 \times X_1) \times \ldots \times (X_n \times X_n)} \\
+		{\mathbb R^n}
+		\arrow[from=1-1, to=1-3]
+		\arrow["\simeq", from=1-1, to=2-1]
+		\arrow["{d_1 \times \ldots \times d_n}"', from=2-1, to=3-1]
+		\arrow["{\| \cdot \|_{euc}}"{description}, bend right=30, from=3-1, to=1-3]
+	\end{tikzcd}
+	\caption{Diagramme commutatif}
+\end{figure}
+Et donc on a naturellement la définition suivante pour définir une métrique produit induite par les $X_i$.
+\begin{definition}
+	Soient $(X_1, d_1), (X_2, d_2), \ldots (X_n, d_n)$ des espaces métriques.  Alors  la \textbf{métrique produit} induite sur $X_1 \times X_2 \times \ldots X_n$ est
+	\[
+	\begin{array}{cccc}
+		d_\pi : & (X_1, \times \ldots \times X_n) \times (X_1 \times \ldots \times X_n) & \longrightarrow & \R \\
+				& ((x_1, \ldots , x_n), (x_1', \ldots, x_n')) & \longmapsto & \left(\sum_{i=1}^n d_i(x_i, x_i')^2\right)^\frac12
+	\end{array} 
+	\]
+	Il est ensuite facile de vérifier que $d_\pi$ définit bien une métrique.
+\end{definition}
+
+\section{Application entre espaces métriques}
+\begin{definition}[Fonction préservant les distances et isométries]
+	Soit $(X, d_X)$ et $(Y, d_Y)$ deux espaces métriques et soit $f : X \to Y$ une application. Alors on dit que $f$ \textbf{préserve les distances} si
+	\[
+	\forall x_1, x_2 \in X, \quad d_X(x_1, x_2) = d_Y(f(x_1), f(x_2))
+	\]
+	De plus on dira que $f$ est une \textbf{isométrie} si elle préserve les distances et est surjective (et donc bijective).
+\end{definition}
+
+\begin{remarque}
+	Il est facile de voir que si $f$ préserve les distances alors elle est nécessairement injective, en effet on a
+	\[
+	f(x_1) = f(x_2) \implies 0 = d_Y(f(x_1), f(x_2)) = d_X(x_1, x_2) \implies x_1 = x_2
+	\]
+	d'où l'injectivité.
+\end{remarque}
+
+\begin{definition}
+	Soient $X, d_X)$ et $(Y, d_Y)$ des espaces métriques et $f : X \to Y$ une application. Soit encore $K \in \R_{> 0}$. On dit que $f$ est $K$\textbf{-lipschitzienne} par rapport à $d_X$ et $d_Y$ si
+	\[
+	\forall x_1, x_2 \in X, \quad d_Y(f(x_1), f(x_2)) \leqslant K d_X(x_1, x_2)
+	\]
+
+\end{definition}
+Il reste une dernière notion qui utilise la notion de la continuité. Ainsi on a
+\begin{definition}
+	Soient $X, d_X)$ et $(Y, d_Y)$ des espaces métriques et $f : X \to Y$ une application. Alors on dit que $f$ est continue par rapport $d_X$ et $d_Y$ si 
+	\[
+	\forall \varepsilon > 0, \, \forall x \in X, \, \exists \delta >  0, \, \forall y \in X, \quad d_X(x,y) < \delta \implies d_Y(f(x), f(y)) < \varepsilon
+	\]
+\end{definition}	
+
+\begin{remarque}
+	Il est facile de voir que 
+	\[
+	\text{$f$ préservant les distances} \implies \text{$f$ Lipschitzienne} \implies \text{$f$ continue}
+	\]
+	Mais les réciproques ne sont généralement pas vraie, et donc la notion de préservation des distances et une notion beaucoup plus contraignante sur $f$, mais c'est en contre parti la notion la plus forte. De plus pour la continuité, on a toujours la caractérisation qui est analogue à la \hyperref[thm: Caractérisation de la continuité]{caractérisation de la continuité dans $\Rn$}.
+\end{remarque}
+
+\begin{theorem}
+	Une application
+	\[
+	f : (X, d_X) \longrightarrow (Y, d_Y)
+	\]
+	est \textbf{continue} si et seulement si pour tout $y \in Y$, $r > 0$ et $x \in f^{-1}(B_{d_Y}(y,r))$, il existe un $\delta > 0$ tel que $B_{d_X} (x, \delta) \subset f^{-1} (B_{d_Y}(y,r))$.
+\end{theorem}
+
+\prf{La preuve est analogue au cas euclidien.}
