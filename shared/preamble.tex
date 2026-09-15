@@ -25,9 +25,10 @@
 \usepackage{setspace} %interligne
 \usepackage{tikz-cd}
 \usepackage{xcolor} %couleur perso
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usepackage{mdframed}
  \usepackage{float}
+ \usepackage{footnote}
 
 \tcbuselibrary{skins, breakable,theorems}
 
@@ -103,6 +104,7 @@
 
 
 \setcounter{secnumdepth}{3}
+\numberwithin{equation}{section}
 
 \tcolorboxenvironment{definition}{
 	blanker, breakable, left=8pt, top=2pt, bottom=2pt, borderline west={2pt}{0pt}{DAcolor}, before skip=8pt, after skip=8pt 
@@ -116,6 +118,8 @@
 	left=4mm,
 	borderline west={2pt}{0pt}{DAcolor, line cap=round} 
 }
+
+\makesavenoteenv{proposition}
 
 %redéfinition de l'environnement "proof"
 \renewenvironment{proof}

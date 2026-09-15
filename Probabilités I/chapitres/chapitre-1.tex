@@ -13,11 +13,64 @@
 		\end{enumerate}
 		$\F$ est appelé \textbf{collection des événements} ou $\textbf{$\sigma$-algèbre}$ et tout $A \in \F$ est appelé un \textbf{événement}.
 		\item Et finalement, on a une fonction $\P : \F \to [0,1]$ satisfaisant $\P(\Omega) = 1$ et pour $A_1, A_2, \ldots \in \F$ deux à deux disjoints alors
-		\[
+		\begin{equation} \label{eq: sigma additivité}
 		\P\left( \bigcup_{i \geqslant 1} A_i \right) = \sum_{i \geqslant 1} \P(A_i)
-		\]
+		\end{equation}
 		Une telle fonction $\P$ est appelé \textbf{mesure de probabilité}.
 		
 	\end{enumerate}
 	
 \end{definition}
+
+\begin{remarque}
+	Implicitement si on spécifie pas la $\sigma$-algèbre d'un ensemble $\Omega$ alors on parlera toujours de la $\sigma$-algèbre \textbf{Borélienne} qui est la $\sigma$-algèbre engendrée par tous les ouverts de $\Omega$. 
+\end{remarque}
+
+\lecture{15 septembre}
+\section{Quelquess propriétés basiques d'un espace de probabilité}
+
+\begin{proposition}
+	Pour n'importe quelle séquence d'événement $E_1 \supset E_2 \supset \ldots$ avec $\bigcap_{i \geqslant 1} E_i = \emptyset$, alors on a 
+	\[
+	\P (E_i) \underset{i \to \infty}{\longrightarrow}  0 
+	\]
+	si et seulement si on a la \hyperref[eq: sigma additivité]{$\sigma$-additivité}.
+\end{proposition}
+
+\prf{Supposons qu'on ait que $A_j \cap A_i = \emptyset$ pour tout $i \neq j$. Alors on pose $A = \bigcup_{i\geqslant i} A_i$, alors on pose
+	\[
+	E_0 = A \et E_n = A \backslash \left(\bigcup_{i=1}^n A_i \right)
+	\]
+	Donc par hypothèse 
+	\[
+	\lim_{n \to \infty} \P(E_n) = 0
+	\]
+	Or on sait que par additivité finie on a
+	\[
+	\P(E_n) = \P(A) - \sum_{i=1}^n \P(A_i)
+	\]
+	et donc par limite on a bien
+	\[
+	\P(A) = \sum_{i \geqslant 1}^\infty \P(A_i)
+	\]
+	La réciproque est analogue.
+}
+
+\begin{proposition}
+	Si $\Omega$ est dénombrable %\footnote{on peut rajouter comme hypothèse supplémentaire que pour tout $x \in \Omega$ il existe $E \in \F$ tel que $x \in E$ et $E$ est fini.} 
+	et $\F$ est une $\sigma$-algèbre alors il existe $E_1, E_2, \ldots$ dans $\F$ deux à deux disjoints tel que pour tout $E \in \F$	on peut écrire,
+	\[
+	E = \bigcup_{i \in I_E} E_i
+	\]
+\end{proposition}
+
+\prf{Soit $x \in \Omega$ alors on pose
+	\[
+	E_x = \bigcap \{ E \in \F \mid x \in E\} \in \F
+	\]
+	On a que si $x,y \in \Omega$ alors soit $E_x = E_y$ soit $E_x \cap E_y = \emptyset$. Ainsi soit $E \in \F$ quelconque, on se demande si 
+	\[
+	E = \bigcup_{x \in E} E_x
+	\]
+	Si c'était faux alors il existe $x,y$ tel que $y \in E_x$ mais $y \not \in E$. Alors cela contredirait la minimalité de $E_x$ ce qui est absurde.
+}
