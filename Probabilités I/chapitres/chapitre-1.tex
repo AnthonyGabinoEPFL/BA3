@@ -14,7 +14,7 @@
 		$\F$ est appelé \textbf{collection des événements} ou $\textbf{$\sigma$-algèbre}$ et tout $A \in \F$ est appelé un \textbf{événement}.
 		\item Et finalement, on a une fonction $\P : \F \to [0,1]$ satisfaisant $\P(\Omega) = 1$ et pour $A_1, A_2, \ldots \in \F$ deux à deux disjoints alors
 		\begin{equation} \label{eq: sigma additivité}
-		\P\left( \bigcup_{i \geqslant 1} A_i \right) = \sum_{i \geqslant 1} \P(A_i)
+		\P\bigg( \bigcup_{i \geqslant 1} A_i \bigg) = \sum_{i \geqslant 1} \P(A_i)
 		\end{equation}
 		Une telle fonction $\P$ est appelé \textbf{mesure de probabilité}.
 		
@@ -39,7 +39,7 @@
 
 \prf{Supposons qu'on ait que $A_j \cap A_i = \emptyset$ pour tout $i \neq j$. Alors on pose $A = \bigcup_{i\geqslant i} A_i$, alors on pose
 	\[
-	E_0 = A \et E_n = A \backslash \left(\bigcup_{i=1}^n A_i \right)
+	E_0 = A \et E_n = A \backslash \bigg(\bigcup_{i=1}^n A_i \bigg)
 	\]
 	Donc par hypothèse 
 	\[
@@ -74,3 +74,89 @@
 	\]
 	Si c'était faux alors il existe $x,y$ tel que $y \in E_x$ mais $y \not \in E$. Alors cela contredirait la minimalité de $E_x$ ce qui est absurde.
 }
+
+\lecture{22 septembre}
+\section{Variable aléatoire}
+\begin{definition}[Variable aléatoire] \label{def: Variable aléatoire}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité. On dit qu'un fonction $X : \Omega \to \R$ est une \textbf{variable aléatoire} si
+	\[
+	\forall a < b \in \R, \quad X^{-1}(]a,b[) := \{ \omega \in \Omega \mid X(\omega) \in ]a,b[\} \in \F
+	\]
+\end{definition}
+
+\begin{theorem}
+	Soit $X : \Omega \to \R$ une fonction, alors $X$ est un variable aléatoire si et seulement si
+	\[
+	\forall b \in \R, \quad \{ X < b \} := \{ \omega \in \Omega \mid X(\omega) < b\} \in \F
+	\]
+\end{theorem}
+
+\prf{Premièrement on peut écrire pour $a \in \R$,
+	\[
+	\{ X > a \} = \bigcup_{n \geqslant 1} \{ \omega \in \Omega \mid X(\omega)  \geqslant a + \frac1n \} = \bigcup_{n \geqslant 1} \{\omega \in \Omega \mid X(\omega) < a + \frac1n\}^c \in \F
+	\]
+	et donc on a bien
+	\[
+	X^{-1}(]a,b[) = \{X > a \}\cap \{X < b\} \in \F
+	\]
+	Ainsi $X$ est bien une variable aléatoire. Réciproquement supposons que $X$ soit un variable aléatoire on a
+	\[
+	\{X < b\} = \bigcup_{n \geqslant 1} X^{-1}(]b-n, b[) \in \F
+	\]
+}
+
+\subsection{Loi d'une variable aléatoire}
+On se demande maintenant comment comparer deux variables aléatoire $X, Y$. Premièrement on remarque que
+\begin{lemme}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et $X : \Omega \to \R$ une variable aléatoire, alors on définit la mesure de probabilité $\P_X$ induite sur $(\R, \F_B)$ par
+	\[
+	\forall F \in \F_B \footnote{$\F_B$ désigne la plus petite $\sigma$-algèbre de $\Rn$ qui contient tout les ouverts et qu'on appelle généralement \textbf{tribu de Borel}}, \quad \P_X(F) := \P(X^{-1}(F))
+	\]
+	Cette mesure de probabilité $\P_X$ est appelé \textbf{loi (ou distribution) d'un variable aléatoire} $X$.
+\end{lemme}
+
+\prf{On doit montrer qu'il s'agit bien d'une mesure de probabilité,
+	 \begin{enumerate}
+	 	\item On a $\P_X(\R) = \P(X^{-1}(\R)) = \P(\Omega) = 1$.
+	 	\item De la même manière $\forall F \in F_B, \quad \P(X^{-1}(F)) \in [0,1]$
+	 	\item Et finalement il reste l'additivité, ainsi soit $F_1, F_2, \ldots \in \F_B$ deux à deux disjoints, alors
+	 	\[
+	 	\P_X \bigg( \bigcup_{i \geqslant 1} F_i \bigg) = \P \bigg( X^{-1} \bigg( \bigcup_{i \geqslant 1} F_i \bigg)\bigg) = \P \bigg( \bigcup_{i \geqslant 1} X^{-1} (F_i) \bigg) = \sum_{i \geqslant 1} \P(X^{-1} (F_i)) = \sum_{i \geqslant 1} \P_X(F_i)
+	 	\]
+	 \end{enumerate}
+}
+
+\begin{definition}
+	Soit $X, Y$ deux variables aléatoires, alors on dit que $X$ et $Y$ sont \textbf{égales en loi (equal in law)}, noté $X \sim Y$ si
+	\[
+	\forall E \in \F_B, \quad \P_X(E) = \P_Y(E)
+	\]
+	Mais cette notion est relativement faible, c'est pour ça que l'on a deux autres notions de comparaison. 
+	Ainsi, soit $X, Y : \Omega \to \R$ deux variables aléatoires définit, alors on dit que $X$ et $Y$ sont \textbf{partout égale (everywhere equal)} si
+	\[
+	\forall \omega \in \Omega, \quad  X(\omega) = Y(\omega)
+	\]
+	Similairement on dit que $X$ et $Y$ sont \textbf{égale presque partout (almost surely equal)} si
+	\[
+	\P(\{ \omega \in \Omega \mid X(\omega) = Y(\omega)\}) = 1
+	\]
+\end{definition}
+
+\begin{remarque}
+	Il est claire qu'être partout égale implique d'être égale presque partout, mais la réciproque est fausse. De même, il est claire qu'être égale en loi n'implique pas d'être égale presque partout. Et finalement
+\end{remarque}
+
+\begin{theorem}
+	Soit $X,Y : \Omega \to \R$ égale presque partout, alors elles sont égale en loi.
+\end{theorem}
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		& {\text{En loi}} & \\
+		\\
+		{\text{Presque partout}} && {\text{Partout}}
+		\arrow[Leftarrow, from=1-2, to=3-1]
+		\arrow[Rightarrow, from=3-3, to=3-1]
+	\end{tikzcd}
+	\caption{Relation entre les notions d'égalité}
+\end{figure}

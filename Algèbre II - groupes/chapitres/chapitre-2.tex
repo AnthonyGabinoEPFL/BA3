@@ -111,6 +111,7 @@ de plus comme $\varphi$ est un isomorphisme alors il existe $g', h' \in G'$ tels
 Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 }
 
+\lecture{16 septembre}
 \begin{theorem}
 	Donner une action de groupe $G \curvearrowright X$ est équivalent à donner un morphisme
 	\[
@@ -120,3 +121,137 @@ Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 
 \prf{...}
 
+
+\begin{definition}[Sous-groupe] \label{def: Sous-groupe}
+	Soit $G$ un groupe, un sous-ensemble $H \subset G$ est appelé \textbf{sous-groupe} s'il est fermé par rapport à
+	\begin{enumerate}
+		\item $e \in H$
+		\item $\forall h \in H, \quad h^{-1} \in H$
+		\item $\forall h_1, h_2 \in H, \quad h_1 h_2 \in H$
+	\end{enumerate}
+\end{definition}
+
+\begin{lemme}\label{lem: Noyau trivial}
+	Un morphisme $f : G \to G'$ est injectif si et seulement si son noyau
+	\[
+	\ker f = \{ g \in G \mid f(g) = e'\}
+	\]
+	est le \emph{sous-groupe trivial} $\{e\} \subset G$.
+\end{lemme}
+
+\begin{theorem}[Théorème de Cayley] \label{thm: Théorème de Cayley}
+	Tout groupe $G$ est un groupe de permutation, c'est-à-dire un sous-groupe de $S_X$ pour un certain ensemble $X$.
+\end{theorem}
+
+\prf{Il faut construire un morphisme injectif $\Psi : G \to S_X$ et donc par le \autoref{lem: Noyau trivial} on doit avoir $\ker \Phi = \{e\}$. De plus on a vu que $\Phi$ peut être induit par une action $G \curvearrowright X$.
+	
+Or on a
+\[
+\ker \Psi = \{g \in G \mid \Psi_g = \mathrm{Id}_X\} = \{ g \in G \mid g \cdot x = x, \forall x \in X\}
+\]
+Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à gauche est fidèle, en effet on a 
+\[
+\ker = \{ g \in G \mid g \cdot h = h, \forall h \in G\} = \{ g \in G \mid gh = h, \forall h \in G\} = \{ g \in G \mid g = e\} = \{e\}
+\]
+}
+
+\subsection{Relation d'équivalence induit par une action de groupe}
+\begin{definition}
+	Soit $G \curvearrowright X$, alors cela induit une relation d'équivalence sur $X$ via
+	\[
+	x \sim y \iff \exists g \in G, \quad g \cdot x = y
+	\]
+	Et donc on peut alors parler de classe d'équivalence appelé \textbf{orbite}, et elle peut s'écrire
+	\[
+	G \cdot x = \{g \cdot x \mid g \in G\}
+	\]
+	et elle sera appelé l'orbite de $x$. De plus s'il n'y a qu'une seule orbite, alors l'action $G \curvearrowright X$ on parlera d'action \textbf{transitive}. Et finalement si $G \curvearrowright X$ est une action de groupe, alors pour tout $x \in X$ on définit son \textbf{stabilisateur} comme 
+	\[
+	\stab_G(x) = \{g \in G \mid g \cdot x = x\}
+	\]
+	Il est facile de voir que $\stab_G(x)$ est un sous-groupe de $G$. Une action de groupe $G \curvearrowright X$ est dit \textbf{libre} si
+	\[
+	\forall x \in X, \quad \stab_G(x) = \{e\}
+	\]
+\end{definition}
+
+\begin{theorem}[théorème de l'orbite-stabilisateur] \label{thm: théorème de l'orbite-stabilisateur}
+	Soit $G \curvearrowright X$ une action de groupe fini, alors
+	\[
+	\forall x \in X, \quad |G \cdot x| = \frac{|G|}{|\stab_G(x)}
+	\]
+\end{theorem}
+
+\prf{On considère l'application,
+	\[
+	\begin{array}{cccc}
+		f : & G & \to & G\cdot x \\
+			& g & \mapsto & g\cdot x
+	\end{array}
+	\]
+	alors il est facile de voir que $f$ est surjective. De plus on a
+	\[
+	f^{-1} (h \cdot x) = \{ g \in G \mid g \cdot x = h \cdot x\} = \{ g \in G \mid h^{-1} g \cdot x = x\} = h \stab_G(x)
+	\]
+	Et donc on 
+	\[
+	\forall x \in X, \quad |f^{-1}(h \cdot x)| = |\stab_G(x)|
+	\]
+	Mais comme 
+	\[
+	|G| = |f(G)| |f^{-1}(x)| = |G \cdot x| |f^{-1}(x)|
+	\]
+	ce qui conclut la preuve.
+	
+}
+
+\begin{remarque}
+	De plus si $X$ est finit, alors on a
+	\[
+	|X| = \sum_{G \cdot x} |G \cdot x| = \sum_{G \cdot x} \frac{|G|}{|\stab_G(x)|}
+	\]
+\end{remarque}
+
+\begin{definition}
+	Lorsque $H$ est un sous-groupe de $G$, alors les orbites de l'action à gauche
+	\[
+	H \curvearrowright G, \quad h \cdot g = hg
+	\]
+	sont les \textbf{classe à droite}. Cela vient du fait que les orbites s'écrivent
+	\[
+	Hg = \{hg \mid h \in H\}
+	\]
+	où $g$ est à droite. De plus il est facile de voir que les actions à gauche et à droite sont libre. 
+	
+	On note
+	\[
+	G / H
+	\]
+	l'ensemble des classes à gauches de $G$ par rapport à $H$.
+\end{definition}
+
+\begin{proposition}
+	On a 
+	\[
+	|G / H| =  \frac{|G|}{|H|} = |H \backslash G|
+	\]
+	On désigne alors ce nombre par $[G : H]$ et on l'appelle l'\textbf{indice} du sous-groupe $H$ de $G$.
+\end{proposition}
+\subsection{Action adjointe}
+\begin{definition}
+	On considère désormais l'action adjointe $G \curvearrowright G$, alors les orbites sont appelés \textbf{classe de conjugaison}. Plus précisément, la classe de conjugaison de $g \in G$ est l'ensemble
+	\[
+	\{h g h^{-1} \mid h \in G\}
+	\]
+	En parallèle, le stabilisateur de $g$ par rapport à l'action adjointe est appelé son \textbf{centralisateur}
+	\[
+	C_G(g) = \{	h \in G \mid hg = gh\}
+	\]
+\end{definition}
+
+\begin{proposition}
+	Si $g_1$ et $g_2$ sont conjugués dans un groupe $G$, alors leurs centralisateurs sont isomorphes.
+\end{proposition}
+
+\prf{Si $g_1 = h g_2 h^{-1}$, alors l'application $x \mapsto h^{-1} x h$ donne un isomorphisme $C_G(g_1) \to C_G(g_2)$.
+}
