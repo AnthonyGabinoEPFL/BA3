@@ -55,13 +55,13 @@
 	\]
 \end{definition}
 
-\begin{theorem}[Caractérisation de la continuité] \label{thm: Caractérisation de la continuité}
+\begin{theoreme}[Caractérisation de la continuité] \label{thm: Caractérisation de la continuité}
 	Soit $f : \Rn \to \Rm$ une application, alors $f$ est continue si et seulement si,
 	\[
 	\forall w \in \Rn, ~\forall r > 0, ~\forall v \in f^{-1}(B_{euc}(w,r)), ~\exists s > 0, \quad B_{euc}(v, s) \subset f^{-1}(B_{euc}(w,r))
 	\]
 	Autrement dit, $f$ est continue si et seulement si toute pré-image d'un ouvert par $f$ est un ouvert.
-\end{theorem}
+\end{theoreme}
 
 \prf{En premier lieu on remarque que pour $v \in \Rn$
 	\[
@@ -259,12 +259,12 @@ Il reste une dernière notion qui utilise la notion de la continuité. Ainsi on 
 	Mais les réciproques ne sont généralement pas vraie, et donc la notion de préservation des distances et une notion beaucoup plus contraignante sur $f$, mais c'est en contre parti la notion la plus forte. De plus pour la continuité, on a toujours la caractérisation qui est analogue à la \hyperref[thm: Caractérisation de la continuité]{caractérisation de la continuité dans $\Rn$}.
 \end{remarque}
 
-\begin{theorem}
+\begin{theoreme}
 	Une application
 	\[
 	f : (X, d_X) \longrightarrow (Y, d_Y)
 	\]
 	est \textbf{continue} si et seulement si pour tout $y \in Y$, $r > 0$ et $x \in f^{-1}(B_{d_Y}(y,r))$, il existe un $\delta > 0$ tel que $B_{d_X} (x, \delta) \subset f^{-1} (B_{d_Y}(y,r))$.
-\end{theorem}
+\end{theoreme}
 
 \prf{La preuve est analogue au cas euclidien.}

@@ -1,0 +1,76 @@
+\chapter{Axiomes de la topologie}
+\lecture{28 septembre}
+
+\section{Topologie et base}
+
+\begin{definition}[Espace topologique] \label{def: Espace topologique}
+	Soit $X$ un ensemble, une \textbf{topologie} sur $X$ est un sous-ensemble $\T \subset \mathcal P(X)$ tel que
+	\begin{enumerate}
+		\item $\empty, X \in \T$
+		\item $\forall \mathcal A \subset \T, \quad \bigcup_{U \in \mathcal A} U \in \T$
+		\item $\forall U_1, \ldots, U_n \in \T, \quad \bigcup_{i=1}^n U_i \in \T$
+	\end{enumerate}
+	le couple $(X, \T)$ est alors appelé un \textbf{espace topologique} et les éléments de $\T$ sont appelés des \textbf{ouverts} de $(X, \T)$.
+\end{definition}
+
+\begin{exemple}
+	Tout ensemble $X$ possède les topologies suivantes
+	\begin{enumerate}
+		\item La \textbf{topologie grossière} définit par
+		\[
+		\Tgr = \{ \emptyset, X\}
+		\]
+		\item La \textbf{topologie discrète} définit par
+		\[
+		\Tdis = \mathcal P(X)
+		\]
+		\
+	
+	 \item Mais il existe un topologie moins intuitive qu'on appelle \textbf{topologie du complément fini} que l'on définit par
+	\[
+	\Tcomp = \{ U \in \mathcal P(X) \mid \# U^c < \infty\} \cup \{\emptyset\}
+	\]
+	En effet on a $X \in \Tcomp$ car $\# X^c = \# \emptyset = 0$, de plus pour $ \mathcal A \subset \Tcomp$ alors
+	\[
+	\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \bigcap_{U \in \mathcal A} U^c
+	\]
+	donc
+	\[
+	\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \#\bigcap_{U \in \mathcal A} U^c \leqslant \# V^c < \infty
+	\]
+	où $V \in \mathcal A$ quelconque. Et finalement pour $U_1, \ldots, U_n \in \Tcomp$ alors
+	\[
+	\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \bigcup_{i=1}^n U_i^c
+	\]
+	ainsi
+	\[
+	\#\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \#\bigcup_{i=1}^n U_i^c \leqslant \sum_{i=1}^n \# U_i^c < \infty
+	\]
+	Ainsi $(X, \Tcomp)$ est bien une topologie.
+\end{enumerate}
+
+\end{exemple}
+
+\begin{definition}
+	Soit $\T, \T'$ des topologies sir $X$. Si $\T \subset \T'$, alors on dit que $\T'$ est plus \textbf{fine} que $\T$. Mais aucune des topologies n'est incluses dans l'autre alors on dira qu'elles sont \textbf{incomparable}.
+\end{definition}
+
+
+\begin{definition}
+	Soit $X$ un ensemble. Une \textbf{base de topologie} est un sous-ensemble $\mathcal B \subset \mathcal P(X)$ qui vérifie
+	\begin{enumerate}
+		\item On a $X = \bigcup_{B \in \mathcal B} B$,
+		\item Pour tout $B_1, B_2 \in \mathcal B$, on a que pour tout $x \in B_1 \cap B_2$, il existe un $B_3 \in \mathcal B$ tel que 
+		\[
+		x \in B_3 \subset B_1 \cap B_2
+		\]
+		Il est facile de voir qu'une topologie $\T$ sur $X$ est aussi une base de topologie. Par contre la réciproque est généralement fausse.
+	\end{enumerate}
+\end{definition}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{"images/base topologique.png"}
+	\caption{Illustration honteusement volé dans le polycopié du cours}
+	\label{fig: Illustration d'une base topologique}
+\end{figure}
