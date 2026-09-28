@@ -74,3 +74,63 @@
 	\caption{Illustration honteusement volé dans le polycopié du cours}
 	\label{fig: Illustration d'une base topologique}
 \end{figure}
+
+\begin{definition}
+	Soit $\B$ une base de topologie sur $X$, alors on définit la \textbf{topologie engendré} par $\B$ comme
+	\[
+	\T_\B = \left\{ \bigcup_{\mathcal V \in \mathcal A} V \mid A \subset \B \right\}
+	\]
+\end{definition}
+
+\begin{lemme}
+	$\T_\B$ est bien une topologie sur $X$.
+\end{lemme}
+
+\prf{Par définition d'une base on a en particulier pour $\mathcal A = \mathcal B$
+	\[
+	X = \bigcup_{V \in \mathcal B} V \in \T_\B
+	\]
+	et de même pour $\mathcal A = \emptyset$ on a bien $\emptyset \in \T_\B$.
+	
+	Soit $\{U_\alpha \mid \alpha \in I\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $\alpha \in I$ il existe $\mathcal A_\alpha \subset \B$ tel que $U_\alpha = \bigcup_{V \in \mathcal A_\alpha} V$, d'où
+	\[
+	\bigcup_{\alpha \in I} U_\alpha = \bigcup_{\alpha \in I} \bigcup_{V \in \mathcal A_\alpha} V = \bigcup_{V \subset \bigcup_{\alpha \in I} \mathcal A_\alpha} V \in \T_\B
+	\]
+	
+	Finalement, soit $\{U_1, \ldots, U_n\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $i$ il existe $\mathcal A_i \subset \B$ tel que $U_i = \bigcup_{V \in \mathcal A_i} V$ ainsi
+	\[
+	\bigcap_{i=1}^n U_i = \bigcap_{i=1}^n \bigcup_{V \in \mathcal A_i} V
+	\]
+	Pour conclure, il suffit de considérer le cas $n = 2$ car on peut ensuite conclure par récurrence, car si on sait que
+	\[
+	U_1, U_2 \in \T_\B \implies U_1 \cap U_2 \in \T_\B
+	\]
+	alors
+	\[
+	U_1 \cap U_2 \cap U_3 = (U_1 \cap U_2) \cap U_3 \in \T_\B
+	\]
+	Or
+	\[
+	U_1 \cap U_2 = \bigcup_{V \in A_1} V \cap \bigcup_{V' \in A_2} V' = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2} (V \cap V')
+	\]
+	or par définition de la base on a
+	\[
+	V \cap V' = \bigcap_{x \in V \cap V'} V_x
+	\]
+	d'où 
+	\[
+	U_1 \cap U_2 = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2}\bigcap_{x \in V \cap V'} V_x \in \T_\B
+	\]
+}
+
+\begin{theoreme}[Caractérisation de la topologie engendrée]
+	Soit $\B$ une base de topologie sur un ensemble $X$, alors
+	\[
+	\T_\B = \{U \in \mathcal P(X) \mid \forall x \in U, \, \exists B \in \B, \, x \in B \subset U\}
+	\]
+\end{theoreme}
+
+\prf{Soit $U = \bigcup_{V\in \mathcal A} V \in \T_\B$, alors pour tout $x \in U$ il existe $v \in \mathcal A \subset B$ tel que $x \in V$. Ainsi $\T_\B \subset \T'$.
+	
+	Réciproquement, soit $U \in \T'$, alors pour tout $x \in U$, il existe $V_x$ tel que $x \in V_x \subset U$ et donc par conséquent $U = \bigcup_{x \in U} V_x \in \T_\B$.
+}
