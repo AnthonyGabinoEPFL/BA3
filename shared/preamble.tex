@@ -85,7 +85,7 @@
 
 
 \theoremstyle{coloredtitle}
-\newtheorem{theorem}{Théorème}[chapter]
+\newtheorem{theoreme}{Théorème}[chapter]
 \newtheorem{lemme}{Lemme}[chapter]
 \newtheorem{proposition}{Proposition}[chapter]
 
@@ -94,7 +94,7 @@
 \newtheorem{exemple}{Exemple}[chapter]
 \newtheorem{remarque}{Remarque}[chapter]
 
-\renewcommand{\theoremautorefname}{Théorème}
+\newcommand{\theoremeautorefname}{Théorème}
 \newcommand{\lemmeautorefname}{Lemme}
 \newcommand{\definitionautorefname}{Définition}
 \newcommand{\exempleautorefname}{Exemple}
@@ -107,10 +107,10 @@
 \numberwithin{equation}{section}
 
 \tcolorboxenvironment{definition}{
-	blanker, breakable, left=8pt, top=2pt, bottom=2pt, borderline west={2pt}{0pt}{DAcolor}, before skip=8pt, after skip=8pt 
+	blanker, left=8pt, top=2pt, bottom=2pt, borderline west={2pt}{0pt}{DAcolor}, before skip=8pt, after skip=8pt 
 }
 
-\tcolorboxenvironment{theorem}{
+\tcolorboxenvironment{theoreme}{
 	enhanced, breakable, colback=DAcolor!15, colframe=DAcolor, arc=0pt, boxrule=0.8pt,leftrule=3pt, before skip=10pt, after skip=10pt
 }
 \tcolorboxenvironment{proposition}{

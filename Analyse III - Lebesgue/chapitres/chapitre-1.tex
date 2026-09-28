@@ -48,12 +48,12 @@
  	un difféomorphisme de classe $C^1$ tel que $\varphi' > 0$. Alors la composition $\gamma \circ \varphi : [\tilde s, \tilde t] \to U$ est encore un chemin.
  \end{definition}
  
- \begin{theorem}[Invariance par reparamétrisation] \label{thm: Invariance par reparamétrisation}
+ \begin{theoreme}[Invariance par reparamétrisation] \label{thm: Invariance par reparamétrisation}
  	Soit $U \subset \Rn$ un domaine, $f \in C^0(U)$ un champ scalaire, $\gamma : I \to U$ et $\gamma \circ \varphi : \tilde I \to U$ une reparamétrisation. Alors
  	\[
  	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_\gamma f \, \mathrm ds
  	\]
-\end{theorem}
+\end{theoreme}
 \prf{Soit $\tilde I = [\tilde s, \tilde t]$, $I =[s,t]$. Alors
 	\[
 	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\tilde I} f(\gamma \circ \varphi \, (x)) \, \norme{(\gamma \circ \varphi)'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \, \norme{\gamma'\circ \varphi(x) \, \varphi'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \varphi'(x) \, \norme{\gamma' \circ \varphi(x)} \, \mathrm dx
@@ -117,9 +117,9 @@ On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \b
 
 \lecture{10 septembre}
 7
-\begin{theorem}
+\begin{theoreme}
 	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ dérive d'un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
-\end{theorem}
+\end{theoreme}
 
 
 
@@ -315,12 +315,13 @@ pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$
 	\]
 	D'où le lemme. La preuve les des domaines de types II est analogue.
 }
-\begin{theorem}[Green-Riemann] \label{thm: Green-Riemann}
+\lecture{17 septembre}
+\begin{theoreme}[Green-Riemann] \label{thm: Green-Riemann}
 	Soit $U \subset \Rn$ un domaine, et soit $V \subset U$ un sous-domaine borné, avec $\overline V \subset U$, borné pour un lacet $\gamma$ régulier, simple, orienté positivement. Alors on a que
 	\[
 	\int_\gamma \bm f \cdot \mathrm d \bm s = \iint_V \rot \bm f \mathrm d x \, \mathrm dy
 	\]
-\end{theorem}
+\end{theoreme}
 
 \begin{remarque}
 	Un lacet $\gamma$ est dit \textbf{simple} $\gamma : [0,1] \to U$ est injective à la condition près $\gamma(0) = \gamma(1)$. Un lacet $\gamma$ est dit \textbf{régulier} si $\gamma \in C^1([0,1], U)$ avec $\gamma'(t) \neq 0$ pour tout $t \in [0,1]$ et $\gamma'(1) = \gamma'(0)$.
@@ -412,5 +413,119 @@ pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$
 	\end{enumerate}
 \end{proposition}
 
-\lecture{17 septembre}
+\lecture{24 septembre}
+
+\prf{Les points $1.$ et $2.$ découle du $3.$, donc on va montrer uniquement le dernier points. Ainsi soit $p \in U$, on doit montrer que 
+	\[
+	g(x) = \int_\gamma \bm f \cdot \mathrm d \bm s
+	\]
+	où $\gamma$ est un chamin arbitraire en $U$ qui lie $p$ à $x$, ne dépend pas du choix de $\gamma$.
+	...
+} 
+
+
+\subsection{Théorème de Kelvin-Stokes}
+On pense d'une surface $S \subset \R^2$ comme une généralisation d'un lacet : 
+
+\begin{definition}[Surface paramétrisée] \label{def: Surface paramétrisée}
+	Si $U \subset \R^2$ est un domaine et $\varphi : U \to \R^3$ de régularité $C^1$, on dit que $ S = \varphi(U) \subset R^3$ est une \textbf{surface paramétrisée régulière}, pourvu que
+	\begin{enumerate}
+		\item $\varphi$ est injective,
+		\item $\varphi_u \times \varphi_v \neq \bm 0$, où $(u,v)$ sont les coordonnées de $\R^2$, et $\varphi_u = \frac{\partial \varphi}{\partial u}$ et $\varphi_v = \frac{\partial \varphi}{\partial v}$.
+	\end{enumerate}
+	De plus, soit $\varphi : U \subset \R^2 \to \R^3$ une surface paramétrisée régulière en $\R^3$, alors on dira qu'une fonction $f : S = \varphi(U) \to \R$ est \emph{continue} si $f \circ \varphi : U \to \R$ est continue. 
+\end{definition}
+
+\begin{definition}
+	Soit $f : S \to \R$ une fonction continue au sens définit précédemment, si le support de $f$ est compact, alors on définit
+	\[
+	\iint_S f  \, \mathrm d s = \iint_U f \circ \varphi \, \norme{\varphi_u \times \varphi_v} \, \mathrm du \, \mathrm dv
+	\]
+	De plus, soit $(S, \varphi)$ une surface paramétrisée et soit $V \subset \R^3$ un domaine, si $\psi : V \to U$ est une difféomorphisme $C^1$, alors on appelle la paramétrisation $\varphi \circ \psi : V \to S$ une \textbf{reparamétrisation} de $(S, \varphi)$.
+\end{definition}
+
+\begin{lemme}
+	L'intégrale est invariante sous reparamétrisation. Alors si on pose $\tilde \varphi := \varphi \circ \psi$, on a 
+	\[
+	\iint_U f \circ \varphi \, \norme{\varphi_u \times \varphi_v } \, \mathrm du \, \mathrm dv =  \iint_V f \circ \tilde \varphi \, \norme{\tilde \varphi_{\tilde u} \times \tilde \varphi_{\tilde v} } \, \mathrm d \tilde u \, \mathrm d \tilde v
+	\]
+\end{lemme}
+
+\prf{Si on note $\psi = (\psi^1, \psi^2)$, alors on remarque que
+\[
+\tilde \varphi_{\tilde u} = (\varphi \circ \psi)_{\tilde u} = \psi_{\tilde u}^1\varphi_u + \psi_{\tilde u}^2 \varphi_v \et \tilde \varphi_{\tilde v} = (\varphi \circ \psi)_{\tilde v} = \psi_{\tilde v}^1\varphi_u + \psi_{\tilde v}^2 \varphi_v
+\]
+et donc il s'ensuit que
+\[
+\tilde \varphi_{\tilde u} \times \tilde \varphi_{\tilde v} = \varphi_u \times \varphi_v \, (\psi_{\tilde u}^1 \psi_{\tilde v}^2 - \psi_{\tilde u}^2 \varphi_{\tilde v}^1)
+\]
+Alors
+\[
+\norme{\tilde \varphi_{\tilde u} \times \tilde \varphi_{\tilde v}} = \norme{\varphi_u \times \varphi_v} \cdot |D \psi(\tilde u, \tilde v) |
+\]
+Ce qui permet de conclure
+\begin{align*}
+	\iint_V f \circ \tilde \varphi \, \norme{\tilde \varphi_{\tilde u} \times \tilde \varphi_{\tilde v} } \, \mathrm d \tilde u \, \mathrm d \tilde v &=   \iint_V f \circ \tilde \varphi \, \norme{(\varphi_u \times \varphi_v)(\psi(\tilde u, \tilde v))} \cdot |D \psi(\tilde u, \tilde v)| \, \mathrm d \tilde u \, \mathrm d \tilde v \\
+	&= \iint_U f \circ \varphi \, \norme{\varphi_u \times \varphi_v } \, \mathrm du \, \mathrm dv
+\end{align*}
+}
+
+Soit $(S, \varphi)$ une surface paramétrisée en $\R^3$, on appelle \emph{orientation} un choix de vecteur $\bm n$ normal et	unitaire en chaque $p \in S$ qui dépend continument de $p$. On peut exprimer un choix de $\bm n$ en terme de paramétrisation
+\[
+\bm n : = \frac{\varphi_u \times v}{\norme{ \varphi_u \times \varphi_v}} \ou \bm n : = - \frac{\varphi_u \times v}{\norme{ \varphi_u \times \varphi_v}}
+\]
+On a donc la définition naturelle suivante
+\begin{definition}[Flux] \label{def: Flux}
+	Soit $(S, \varphi)$, une surface paramétrisée régulière en $\R^3$ munie d'une orientation $\bm n$. Alors si $\bm f \in C^0(S, \R^3)$ est un champ vectoriel continue sur $S$, on appelle l'intégrale
+	\[
+	\iint_S \bm f \cdot \bm n \, \mathrm ds
+	\]
+	le \textbf{flux} de $\bm f$ à travers $(S, \varphi, \bm n)$.
+\end{definition}
+
+\lecture{28 septembre}
+\begin{theoreme}[Théorème de Kelvin-Stokes] \label{thm: Théorème de Kelvin-Stokes}
+	Soit $U \subset \R^2$ un domaine tel que $\overline U$ est compact et $\partial U$ est un lacet simple et régulier muni de l'orientation positive. Soit $\varphi \in C^1(\overline U, \R^3)$ une paramétrisation régulière de la surface $S = \varphi(\overline U)$ avec $\partial S = \varphi(\overline U)$ avec $\partial S = \varphi(\partial U)$. Ainsi si $\bm f \in C^1(\R^3, \R^3)$, alors on a 
+	\[
+	\int_{\partial S} \bm f \cdot \mathrm d \bm s = \iint_S \rot \bm f \cdot \bm n \, \mathrm ds
+	\]
+\end{theoreme}
+
+\prf{On observe que 
+	\begin{align*}
+		\int_{\partial S} \bm f \cdot \mathrm d \bm s &= \int_0^1 \bm f(\varphi(\gamma(t))) \cdot  \frac{\mathrm d}{\mathrm dt} (\varphi \circ \gamma) \, \mathrm dt \\
+		&= \int_0^1 \bm f(\varphi(\gamma(t))) \cdot [ \gamma_1' \varphi_u + \gamma_2' \varphi_v] \, \mathrm dt	\\
+		&= \int_0^1 \bm f(\varphi(\gamma(t))) \cdot \gamma_1' \varphi_u + \bm f (\varphi(\gamma(t))) \cdot \gamma_2' \varphi_v \, \mathrm dt
+	\end{align*}
+	Ainsi on posant le champ vectoriel $\bm g = \binom{g_1}{g_2}$, donné par $g_1 = \bm f(\varphi) \cdot \varphi_u$ et $g_2 = \bm f(\varphi) \cdot \varphi_v$, alors on a 
+	\[
+	\int_{\partial S} \bm f \cdot \mathrm d \bm s = \int_{\partial U} \bm g \cdot \mathrm d \bm s
+	\]
+	On applique alors le \autoref{thm: Green-Riemann} pour le champ vectoriel $\bm g$
+	\[
+	\int_{\partial U} \bm g \cdot \mathrm d \bm s = \iint_U \rot \bm g \, \mathrm du \, \mathrm dv
+	\]
+	Or on a 
+	\[
+	\rot \bm g = \partial_u g_2 - \partial_v g_1 = \partial_u[\bm f (\varphi) \cdot \varphi_v] - \partial_v [\bm f(\varphi) \cdot \varphi_u] = \partial_u[\bm f(\varphi)] \cdot \varphi_v - \partial_v [\bm f(\varphi)] \cdot \varphi_u
+	\]
+	Or par la règle de dérivation des composition on a
+	\[
+	\partial_u[\bm f(\varphi)] = D \bm f \,\varphi_u \et \partial_v[\bm f(\varphi)] = D \bm f \,\varphi_v
+	\]
+	et donc
+	\[
+	\rot \bm g =  (D \bm f \, \varphi_u) \cdot \varphi_v - (D \bm f \, \varphi_v) \cdot \varphi_v = \varphi_u^\top D \bm f^\top \varphi_v - \varphi_v^\top D \bm f^\top \varphi_u = \varphi_u^\top (D \bm f^\top - D \bm f) \varphi_v
+	\]
+	Or on remarque que
+	\[
+	\bm u^\top (D \bm f^\top - D \bm f) \bm v = (\bm u \times \bm v) \cdot \rot \bm f
+	\]
+	Et donc
+	\[
+	\int_{\partial S} \bm f \cdot \mathrm d \bm s = \int_{\partial U} \bm g \cdot \mathrm d \bm s = \iint_U \rot \bm g \, \mathrm d u \, \mathrm dv = \iint_U \varphi_u \times \varphi_v \cdot \rot \bm f \, \mathrm d u \, \mathrm dv = \iint_U  \bm n \cdot \rot \bm f \, \mathrm ds
+	\]
+}
+
+
 
