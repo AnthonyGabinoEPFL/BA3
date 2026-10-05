@@ -529,7 +529,50 @@ On a donc la définition naturelle suivante
 
 
 \subsection{Théorème de la Divergence / Gauss-Ostrogradsky}
-Avant d'introduire le thèorème de Gauss-Ostrogradsky on a besoin de définir plusieurs notions au préalable
+Avant d'introduire le théorème de Gauss-Ostrogradsky on a besoin de définir plusieurs notions au préalable. Ainsi soit $U \subset \R^3$ un domaine borné par une surface $S$ compacte, fermée et régulière $(C^1)$. Alors on a les équivalences suivantes : 
+\begin{enumerate}
+	\item[$\iff$] $S$ est localement une surface paramétrée régulière de classe $C^1$.
+	\item[$\iff$] $\forall p \in S, \, \exists \delta > 0$ tel que $B_\delta (p) \cap S$ admet une paramétrisation $C^1$ régulière.
+\end{enumerate}
+Par le théorème des fonctions implicites, on peut supposer que $B_\delta (p) \cap S$ est le graphe d'une fonction, soit de $(x,y)$, soit de $(x,z)$ ou soit de $(y,z)$.
 
+\begin{theoreme}[Théorème de Gauss-Ostrogradsky] \label{thm: Gauss-Ostrogradsky}
+	Soit $U \subset \R^2$, un domaine borné par $S$, une surface compacte fermé et régulière. Alors, si $\bm n$ est l'orientation de $S$ qui pointe vers l'extérieur et $\bm f \in C^1(\overline U, \R^3)$, alors on a 
+	\[
+	\iint_S \bm f \cdot \bm n \, \mathrm d \sigma = \iiint_U \dive \bm f \, \mathrm dx \, \mathrm dy \, \mathrm dz
+	\]
+	où $\dive \bm f = \nabla \cdot \bm f$.
+\end{theoreme}
 
+\prf{La preuve est similaire au \autoref{thm: Green-Riemann}, sauf qu'ici on considère 3 types de régions
+	\begin{enumerate}
+		\item[(I)] \label{def: I}$S\cap V$ est donné par $z = h(x,y)$,
+		\item[(II)] \label{def: II}$S\cap V$ est donné par $y = h(x,z)$,
+		\item[(III)] \label{def: III}$S\cap V$ est donné par $x = h(y,z)$.
+	\end{enumerate}
+	Puis comme $S$ est compact, on peut extraire un sous-recouvrement fini,
+	\[
+	S \subset \bigcup_{i=1}^L V_j
+	\]
+	Et donc par la \autoref{prop: Partition de l'unité} on a 
+	\[
+	\bm f = \sum_{j=1}^{L+1} \varphi_j \bm f 
+	\]
+	où $\varphi \in C^\infty_0(V_j)$, $\varphi_j \geqslant 0$ et $\sum_{j=1}^{L+1} \varphi_j (x) = 1$. Et donc par linéarité de l'intégrale, on a 
+	\[
+	\iint_S \bm f \cdot \bm n \, \mathrm d \sigma = \sum_{j=1}^{L+1} \iint_S \varphi_j \bm f \cdot \bm n \, \mathrm d \sigma
+	\]
+	Ensuite on montre que
+	\[
+	\iint_S \varphi_j \bm f \cdot n \, \mathrm d \sigma = \iiint_U \dive \varphi_j \bm f \, \mathrm dV
+	\]
+	Ce qui ce fait naturellement par calcul explicite car
+	\[
+	\iint_S \varphi_j \bm f \cdot n \, \mathrm d \sigma = \iint_{S \cap V_j} \varphi_j \bm f \cdot n \, \mathrm d \sigma 
+	\]
+	et on sait que $S \cap V_j$ est soit de type \hyperref[def: I]{(I)}, soit de type \hyperref[def: II]{(II)} ou soit de type \hyperref[def: III]{(III)}. Ainsi on conclut bien que,
+	\[
+	\iint_S \bm f \cdot \bm n \, \mathrm d \sigma = \iiint_U \dive \bm f \, \mathrm dx \, \mathrm dy \, \mathrm dz
+	\]
+}
 
