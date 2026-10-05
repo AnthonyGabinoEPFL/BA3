@@ -135,3 +135,168 @@
 	Réciproquement, soit $U \in \T'$, alors pour tout $x \in U$, il existe $V_x$ tel que $x \in V_x \subset U$ et donc par conséquent $U = \bigcup_{x \in U} V_x \in \T_\B$.
 }
 
+\lecture{5 octobre}
+
+\begin{exemple}
+	Soit $(X,d)$ un espace métrique, on définit les boules ouvertes
+	\[
+	B_d(x,r) = \{y \in X \mid d(x,y) < r\}
+	\]
+	pour tout $x \in X$ et $r > 0$. Alors
+	\[
+	\mathcal B_d = \{ B_d(x,r) \mid x \in X, ~ r > 0\}
+	\]
+	est une base de topologie sur $X$. En effet on a 
+	\[
+	\forall r > 0,~ \forall x \in X, \quad x \in B_d(x,r)
+	\]
+	donc on a bien un recouvrement. De plus soit $B_d(x_1, r_1)$ et $B_d(x_2, r_2)$ deux boules, alors si on considère
+	\[
+	r = \min\{ r_1 - d(x, x_1), r_2 - d(x, x_2)\}
+	\]
+	alors $B_d(x,r) \subset B_d(x_1, r_1) \cap B_d(x_2, r_2)$ car si $y \in B_d(x,r)$ alors $d(x,y) < r$ et donc
+	\[
+	d(x_i, y) \leqslant d(x_1, x) + d(x,y)  < d(x_i, x) + (r_i - d(x_i, x)) < r
+	\]
+	pour $i =1,2$. Ainsi on pose $\mathcal T_d = \mathcal T_{\mathcal B_d}$ la \textbf{topologie métrique} sur $X$ induite par la métrique $d$. Par la suite si $X = \Rn$ et $d = d_{euc}$, on écrit $\T_{st} = \T_{d_{euc}}$ la \textbf{topologie standard}.
+\end{exemple}
+
+\begin{lemme}
+	Soit $X$ un ensemble, soient $\B_1, \B_2$ des bases topologies sur $X$. Alors
+	\[
+	\T_{\B_1} \subset \T_{\B_2} \iff \forall V_1 \in \B_1, \, \forall x \in V_1, \, \exists V_2 \in \mathcal B_2, \quad x \in V_2 \subset V_1
+	\]
+\end{lemme}
+
+\prf{Supposons que $\T_{\B_1} \subset \T_{\B_2}$ alors par définition $\forall U \in \T_{B_1}, \quad U \in \T_{B_2}$ d'où par définition de $\T_{\B_2}$ il existe $V_2 \in \B_2$ tel que $x \in V_2 \subset U$. Donc puisque $\B_1 \subset \T_{\B}$, on sait que $\forall V_1 \in \B_1$ il existe $V_2 \in \B_2$ tel que $x \in V_2 \subset V_1$.
+	
+Réciproquement, soit $U \subset \T_{\B_1}$...
+}
+
+\begin{lemme}[Lemme de test de base]
+Soit $(X, \T)$ un espace topologique, soit $\mathcal C \subset \T$, alors $\mathcal C$ est une base de topologie et $\T_{\mathcal C} = \T$ si et seulement si
+\[
+\forall U \in \T, \, \forall x \in U, \, \exists C \in \mathcal C, \quad x \in C \subset U
+\]
+\end{lemme}
+
+\prf{Soit $\mathcal C$ une base de topologie, et $\T_{\mathcal C} = \T = \T_\T$, et donc en particulier $\T_\T \subset \T_\C$, d'où par le lemme de comparaison de base,
+	\[
+	\forall U \in \T, \, \forall x \in U, \, \exists C \in \C, \quad x \in C \subset U
+	\]
+	
+Réciproquement, par hypothèse sur $\C$, en particulier pour $X \in \T$, 
+\[
+\forall x \in X, \, \exists C \in \C, \quad x \in C \subset X
+\]
+d'où le recouvrement. De plus soit $C_1, C_2 \in \C$ et soit $x \in C_1 \cap C_2$, mais comme $C_1$ et $C_2$ sont des ouverts, alors $C_1 \cap C_2$ est aussi un ouvert, et donc par hypothèse on a pour $x \in C_1 \cap C_2$, et on en déduit qu'il existe $C_3 \in \C$ tel que
+\[
+x \in C_3 \subset C_1 \cap C_2
+\]
+Il nous à montrer que $\T \subset \T_\C$. Les hypothèses sur $\C$ implique, par le lemme des comparaison de base que $\T = \T_\T \subset \T_\C$.
+}
+
+\section{Les sous-bases de la topologie}
+
+\begin{definition}
+	Soit $X$ un ensemble. Une \textbf{sous-base de topologie} $\SB$ est un sous-ensemble ded $\mathcal (X)$ tel que
+	\begin{enumerate}
+		\item[(S1)] $X = \bigcup_{S \in \SB} S = X$
+	\end{enumerate}	
+\end{definition}
+
+\begin{lemme}
+	Étant donné une sous-base de topologie sur $X$, alors la collection
+	\[
+	\B_\SB = \{ S_1 \cap \ldots  \cap S_n \mid S_i \in \SB, \, n \geqslant 1\}
+	\]
+	est une base de topologie. 
+\end{lemme}
+
+\prf{On a $\SB \subset \B_\SB$ donc B1 est vrai car S1 est vérifié. De plus, il est clair que si $V_1, V_2 \in \B_\SB$ alors $V_1 \cap V_2 \in \B_\SB$. Ainsi $\B_\SB$ est bien une base de topologie.
+}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{"images/diagramme topologique.png"}
+	\caption{Illustration honteusement volé dans le polycopié du cours}
+	\label{fig: Diagramme topologique}
+\end{figure}
+
+
+\section{Autour de la notion de fermé}
+
+\begin{definition}[Ensemble fermé] \label{def: Ensemble fermé}
+	Soit $(X, \T)$ un espace topologique. Soit $A \subset X$, alors $A$ est dit \textbf{fermé par rapport à la topologie} $\T$ si $A^c \in \T$.
+\end{definition}
+
+\begin{exemple}
+	On a
+	\begin{enumerate}
+	 \item Par si on considère la topologie grossière $(X, \T_{gr})$ alors les seuls fermés sont $X$ et $\emptyset$ donc $\emptyset$ et $X$ sont à la fois ouvert et fermé. 
+	
+	Mais plus généralement, pour tout espace topologique $\T$ sur $X$ alors $\emptyset$ et $X$ sont ouverts et fermés.
+	
+	 \item Maintenant si on considère la topologie discrète $\T_{disc}$ alors tout $A \subset X$ est fermé et ouvert.
+	\end{enumerate}
+\end{exemple}
+
+\begin{proposition}
+	Soit $(X, \T)$ un espace topologique, alors
+	\begin{enumerate}
+		\item $\emptyset, \, X$ sont fermés par rapport à $\T$
+		\item Toute intersection de fermés est fermé.
+		\item Toute réunion finie de fermés est fermé.
+	\end{enumerate}
+\end{proposition}
+
+\prf{
+Soit $\{A_\alpha \mid \alpha \in I\}$ une collection de fermés de $X$ par rapport à $\T$, alors
+\[
+\left(\bigcap_{\alpha \in I} A_\alpha\right)^c = \bigcup_{\alpha \in I} A_\alpha^c \in \T
+\]
+donc $\bigcap A_\alpha$ est bien fermé.
+
+De plus, soient $A_1, \ldots, A_n$ des fermés par rapport à $\T$, alors
+\[
+\left(\bigcup_{i = 1}^n A_i\right)^c = \bigcap_{i=1}^n A_i^c \in \T
+\]
+Donc $\bigcup A_i$ est bien fermé
+}
+
+\begin{definition}
+	Soit $(X, \T)$ un espace topologique, et $A \subset X$, alors on définit
+	\begin{enumerate}
+		\item L'\textbf{intérieur} de $A$ comme
+		\[
+		\Int A := \mathring A := \bigcup_{\{U \mid U \in \T, \, U \subset A\}} U
+		\]
+		\item L'\textbf{adhérence} de $A$ comme
+		\[
+		\overline A = \bigcap_{ \{C \mid C \text{ fermé}, \, A \subset C\}} C 
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{remarque}
+	On a toujours les inclusions
+	\[
+	\Int A \subset A \subset \overline A 
+	\]
+	avec des égalités si et seulement $A$ est respectivement ouvert ou fermé.
+\end{remarque}
+
+
+\begin{theoreme}
+	Soient $(X, \T)$ un espace topologique et $\B$ une base de $\T$. Alors pour tout $A \subset X$,
+	\[
+	\overline A = \{x \in X \mid \forall B \in \B, \, x \in B, \quad A \cap B \neq \emptyset\}
+	\]
+\end{theoreme}
+
+\prf{Soit $x \in \overline A$, alors pour tout fermé $C$ tel que $A \subset C$ alors $x \in C$. De plus soit $V \in \B$ tel que $x \in \B$, si on suppose que $A \cap B = \emptyset$, alors on aurait
+	\[
+	(A \cap B)^c = \emptyset^c = X
+	\]
+	or $(A \cap B)^c = A^c \cup B^c$. Mais comme $A \subset X$ et $A \cap A^c = \emptyset$, on en déduit que $A \subset B^c$ et donc on devrait avoir $x \in B^c$ ce qui contradictoire. Par conséquent, on a bien $A \cap B \neq \emptyset$.
+}
