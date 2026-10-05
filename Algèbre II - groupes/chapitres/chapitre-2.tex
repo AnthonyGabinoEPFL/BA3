@@ -1,5 +1,6 @@
 \chapter{Groupes}
 
+\section{définition de base}
 \begin{definition}[Groupe] \label{def: Groupe}
 	Un \textbf{groupe} est un ensemble $G$ muni d'une \emph{loi de composition interne} tels que : 
 	\begin{enumerate}
@@ -112,12 +113,12 @@ Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 }
 
 \lecture{16 septembre}
-\begin{theorem}
+\begin{theoreme}
 	Donner une action de groupe $G \curvearrowright X$ est équivalent à donner un morphisme
 	\[
 	G \to S_X
 	\]
-\end{theorem}
+\end{theoreme}
 
 \prf{...}
 
@@ -139,9 +140,9 @@ Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 	est le \emph{sous-groupe trivial} $\{e\} \subset G$.
 \end{lemme}
 
-\begin{theorem}[Théorème de Cayley] \label{thm: Théorème de Cayley}
+\begin{theoreme}[Théorème de Cayley] \label{thm: Théorème de Cayley}
 	Tout groupe $G$ est un groupe de permutation, c'est-à-dire un sous-groupe de $S_X$ pour un certain ensemble $X$.
-\end{theorem}
+\end{theoreme}
 
 \prf{Il faut construire un morphisme injectif $\Psi : G \to S_X$ et donc par le \autoref{lem: Noyau trivial} on doit avoir $\ker \Phi = \{e\}$. De plus on a vu que $\Phi$ peut être induit par une action $G \curvearrowright X$.
 	
@@ -175,12 +176,12 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 	\]
 \end{definition}
 
-\begin{theorem}[théorème de l'orbite-stabilisateur] \label{thm: théorème de l'orbite-stabilisateur}
+\begin{theoreme}[théorème de l'orbite-stabilisateur] \label{thm: théorème de l'orbite-stabilisateur}
 	Soit $G \curvearrowright X$ une action de groupe fini, alors
 	\[
 	\forall x \in X, \quad |G \cdot x| = \frac{|G|}{|\stab_G(x)}
 	\]
-\end{theorem}
+\end{theoreme}
 
 \prf{On considère l'application,
 	\[
@@ -255,3 +256,145 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 
 \prf{Si $g_1 = h g_2 h^{-1}$, alors l'application $x \mapsto h^{-1} x h$ donne un isomorphisme $C_G(g_1) \to C_G(g_2)$.
 }
+
+\section{Sous-groupe normal}
+
+\lecture{24 septembre}
+
+\begin{definition}[Sous-groupe normal] \label{def: Sous-groupe normal}
+	Soit $H \leq G$ un sous-groupe de $G$, on dira que $H$ est un sous-groupe \textbf{normal} de $G$, si
+	\[
+	\forall g \in G, \quad g H g^{-1} = H
+	\]
+	et on le note $H \trianglelefteq G$.
+\end{definition}
+
+\begin{lemme}
+	Si $f : G \to G'$ est un morphisme de groupe quelconque, alors $\ker f$ est un sous-groupe normal
+\end{lemme}
+
+\prf{Soit $g \in G$, et $h \in \ker f$, alors
+	\[
+	f(g h g^{-1}) = f(g) f(h) f(g^{-1}) = f(g) f(g)^{-1} = e'
+	\]
+	ainsi $g h g^{-1} \in \ker f$.
+}
+
+\begin{proposition}
+	On  a deux propriétés importantes des sous-groupes normaux : 
+	\begin{enumerate}
+		\item Soit $H_1, H_2 \trianglelefteq G$, alors $H_1 \cap H_2 \trianglelefteq G$,
+		
+		\item Si $H \trianglelefteq G $, alors pour tout $F \leq G$ tel que $H \subset F$ alors $H \trianglelefteq F$
+	\end{enumerate}	
+\end{proposition}
+
+\prf{
+	\begin{enumerate}
+	\item Soit $g \in G$ et $h \in H_1 \cap H_2$, alors
+	\[
+	g h g^{-1} \in H_1 \et g h g^{-1} \in H_2
+	\]
+	car $H_1$ et $H_2$ sont normaux, et donc on a bien $g h g^{-1} \in H_1 \cap H_2$. Et donc $H_1 \cap H_2 \trianglelefteq G$.
+	\item Soit $f \in F$ et $h \in H$, alors en particulier $f \in G$ et donc par normalité de $H$
+	\[
+	f h f^{-1} \in H
+	\]
+	De plus comme $H$ est un sous-groupe de $G$ contenu dans $F$, c'est un sous-groupe de $F$. Ainsi on a bien $H \trianglelefteq F$.
+	\end{enumerate}
+}
+
+
+\begin{theoreme}[Premier théorème d'isomorphisme] \label{thm: Premier théorème d'isomorphisme}
+	Pour tout morphisme $f : G \to G'$, on a un isomorphisme
+	\[
+	G / \ker f \simeq\Ima f
+	\]
+	induit par $[g] \mapsto f(g)$, pour tout $g \in G$.
+\end{theoreme}
+
+\begin{figure}[H]
+	\centering
+	\Large
+		\begin{tikzcd}[row sep=huge, column sep=huge]	
+			G & {G'} \\
+			{G/\ker f} & {\mathrm{Im} f}
+			\arrow["f", from=1-1, to=1-2]
+			\arrow["\sigma"', two heads, from=1-1, to=2-1]
+			\arrow["{\hat f}"', hook, two heads, from=2-1, to=2-2]
+			\arrow["j"', hook, from=2-2, to=1-2]
+		\end{tikzcd}
+		\caption{Premier théorème d'isomorphisme}
+\end{figure}
+
+
+\begin{definition}
+	Pour tout sous-ensemble $X$ d'un groupe $G$, on définit son \textbf{centralisateur} comme
+	\[
+	C_G(X) = \big\{ g \in G \mid  gx = xg, \forall x \in X\}
+	\]
+	ainsi son \textbf{normalisateur} comme
+	\[
+	N_G(X) = \{g \in G \mid g X = Xg\}
+	\]
+	Il est clair que $C_G(X) \leq N_G(X)$ pour tout ensemble $X \subset G$.
+\end{definition}
+
+\begin{proposition}
+	Pour tout ensemble $X \subset G$, son centralisateur est un sous-groupe normal de sons normalisateur
+	\[
+	C_G(X) \trianglelefteq N_G(X)
+	\]
+\end{proposition}
+
+\prf{On remarque que pour tout sous-ensemble $X$ d'un groupe, on a une action naturelle
+	\[
+	N_G(X) \curvearrowright X, \quad g \cdot x = g x g^{-1}
+	\]
+	Le noyau de cette action est, par définition, le sous-groupe centralisateur $C_G(X)$. Étant donné que le noyau de tout action de groupe est normal, ainsi la proposition suit. De plus, on obtient une action fidèle
+	\[
+	N_G(X) / C_G(X) \curvearrowright X
+	\]
+}
+
+\begin{definition}
+	Un \textbf{automorphisme} d'un groupe $G$ est un isomorphisme $G \to G$, et on écrit
+	\[
+	\Aut G
+	\]
+	pour le groupe des automorphismes de $G$, par rapport à la composition. De plus on dit qu'un groupe $L$ agit sur un groupe $K$ \emph{par automorphisme}, encore noté
+	\[
+	L \curvearrowright K
+	\]
+	si les bijections $\Phi_j(k) = l \cdot k$ sont des automorphismes pour tout $l \in L$.
+\end{definition}
+
+\begin{lemme}
+	Si $H$ est un sous-groupe de $G$, alors l'action
+	\[
+		N_G(H) / C_G(H) \curvearrowright H
+	\]
+	est par automorphisme.
+\end{lemme}
+
+\prf{C'est un conséquence immédiate de la formule
+	\[
+	g hh' g^{-1} = g h g^{-1} g h' g^{-1}
+	\]
+	pour tout $h, h' \in H$ et $g \in G$.
+}
+
+\begin{proposition}
+	Soit $H$ et $K$ des sous-groupes de $G$, alors
+	\begin{enumerate}
+		\item On a $HK = KH$ si et seulement si $HK$ est un sous-groupe de $G$.
+		\item Si $H$ et $K$ sont des sous-groupes normaux de $G$, alors $HK$ est un sous-groupe normal de $G$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theoreme}
+	Si $K$ et $H$ sont des sous-groupes de $G$ tels que $K \leq N_G(H)$, alors
+	\[
+	K /K \cap H \simeq HK/ H
+	\]
+\end{theoreme}
