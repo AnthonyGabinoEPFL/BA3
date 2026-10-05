@@ -87,4 +87,52 @@ où on a utiliser la première partie pour la dernière égalité.
 	\Vol R = \lim_{\delta \to 0} \Bigg( \prod_{j=1}^n (N_j + 1) \Bigg) \delta^n \geqslant m^*(R) 
 	\]
 }
+
+
+\section{Propriétés de le mesure extérieure}
+Pour commencer, il est facile de voir que si $E_1 \subset E_2 \subset \Rn$ alors
+\[
+\om{E_1} \leqslant \om{E_2}
+\]
+En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c'est aussi un recouvrement de $E_1$, et donc 
+\[
+\om{E_2} = \inf_{\bigcup Q_j \supset E_2} \sum_j \Vol Q_j \geqslant \inf_{\bigcup Q_j \supset E_1} \sum_j \Vol Q_j = \om{E_1}
+\]
+
+\begin{proposition}[Sous-additivité dénombrable] \label{prop: Sous-additivité dénombrable}
+	Soit $E = \{E_j\}$, alors
+	\[
+	\om E \leqslant \sum_{j=1}^\infty \om{E_j}
+	\]
+\end{proposition}
+
+\prf{On peut supposer que pour chaque $E_j$ on ait $\om{E_j} < \infty$. Ainsi soit $\varepsilon >0$, par caractérisation de l'infimum, pour tout $j \geqslant 1$, il existe une collection de cubes $\{Q_{jl}\}_{l = 1}^\infty$ telle que 
+	\[
+	\sum_{l \geqslant 1} \Vol Q_{jl} \leqslant \om{E_j} + \frac\varepsilon{2^j} \et E_j \subset \bigcup_{l \geqslant 1} Q_{jl}.
+	\]
+	Ensuite, la collection de cubes ${Q_{jl}}_{j,l}$ est dénombrable, et $E = \cup_{j \geqslant 1} E_j \cup_{j,l \geqslant 1} Q_{jl}$, et donc
+	\[
+	\om E \leqslant \sum_{j,l \geqslant 1} \Vol Q_{jl} = \sum_{j \geqslant 1} \sum_{l \geqslant 1} \Vol Q_{jl} \leqslant \sum_{j \geqslant 1} \bigg( \om{E_j} + \frac\varepsilon{2^j}\bigg) = \sum_{j \geqslant 1} \om{E_j} + \varepsilon
+	\]
+	Mais comme $\varepsilon > 0$ est arbitraire, alors le résultat suit.
+}
+
+\begin{theoreme}[Additivité]
+	Soit $E_1, E_2 \subset \Rn$ deux ensembles non vides tel que $\dist(E_1, E_2) > 0$, alors
+	\[
+	\om{E_1\cup E_2} = \om{E_1} + \om{E_2}
+	\]
+\end{theoreme}
+
+\prf{On pose $E = E_1 \cup E_2$, alors par la \autoref{prop: Sous-additivité dénombrable} on sait que
+	\[
+	\om E \leqslant \om{E_1} + \om{E_2}
+	\]
+	Il suffit donc de montrer l'inégalité inverse
+	\[
+	\om E \geqslant \om{E_1} + \om{E_2}
+	\]
+	...
+}
+
 	
