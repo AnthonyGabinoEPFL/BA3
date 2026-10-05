@@ -1,0 +1,90 @@
+\chapter{Mesure de Lebesgue}
+\lecture{1 octobre}
+Le but de ce chapitre est de développer une théorie d'intégration plus sophistiquée que celle de Riemann
+
+\section{Décomposition en boîtes}
+
+\begin{definition}[Boîte rectangulaire] \label{def: Boîte rectangulaire}
+	Soit $a_i \leqslant b_i \in \R$. On appelle \textbf{boîte rectangulaire} tout ensemble
+	\[
+	B := \{ \bm x \in \Rn \mid a_j \leqslant x_j \leqslant b_j\}
+	\]
+	De plus on pose
+	\[
+	|B| = \Vol B = \prod_{j=1}^n (b_j - a_j).
+	\]
+	En particulier on a $\Vol B = 0$ si et seulement il existe $k$ tel que $a_k = b_k$.
+\end{definition}
+
+Cette définition est compatible avec les partitions finies de boîtes rectangulaires. On appelle $\mathcal B = \{B_j\}_{j=1}^N$, où les $B_j$ sont des boîtes rectangulaires, une \textbf{partition} d'une autre boîte rectangulaire $B$, pourvu que
+\[
+\forall i\neq j, \quad \mathring B_i \cap \mathring B_j = \emptyset \et \bigcup_{j=1}^N B_j = B
+\]
+\begin{proposition} \label{prop: partition de boîte}
+	Soit $\mathcal B$ une partition finie de la boîte rectangulaire $B$. Alors on a
+	\[
+	\Vol B = \sum_{B_j \in \mathcal B} \Vol B_j
+	\]
+	De plus si $\{B_j\}$ est un recouvrement fini de $B$ par boîtes rectangulaires, alors on a
+	\[
+	\Vol B \leqslant \sum_j \Vol B_j
+	\]
+\end{proposition}
+
+\prf{La première partie est un résultat démontrée en analyse avancée II dans le chapitre consacré à l'intégrale de Riemann. Pour l'inégalité finale, on se réduit à la première partie.
+	
+Ainsi on choisit une partition finit $\{\tilde B_j\}$ de $\bigcup_j B_j$ en boîtes rectangulaires, de sorte que chaque $B_j$, ainsi que $B$, est une réunion de membre de cette partition
+\[
+B_j = \bigcup_{i \in A_j} \tilde B_i \et B = \bigcup_{i \in A_*} \tilde B_i
+\]
+Ainsi par hypothèse, on a que $i \in A_*$ implique qu'il existe $j$ avec $i \in A_j$. Il suit que
+\[
+\Vol B = \sum_{i \in A_*} \Vol \tilde B_i \leqslant \sum_j \sum_{i \in A_j} \Vol \tilde B_i = \sum_j \Vol B_j
+\]
+où on a utiliser la première partie pour la dernière égalité.
+}
+
+\lecture{5 octobre}
+
+\begin{definition}[Mesure extérieure] \label{def: Mesure extérieure}
+	Soit $E \subset \Rn$. Alors nous définissons la \textbf{mesure extérieure} de $E$ par
+	\[
+	m^*(E) := \inf_{\bigcup Q_j \supset E} \sum_j \Vol Q_j \in [0, \infty]
+	\]
+	où $Q_j$ sont des \textbf{cubes fermés}, c'est-à-dire des \hyperref[def: Boîte rectangulaire]{boîtes rectangulaires} dont tous les côtés sont de longueurs identiques.
+\end{definition}
+
+\begin{lemme}
+	Soit $R \subset \Rn$ une boîte rectangulaire. Alors on a 
+	\[
+	m^*(R) = \Vol R
+	\]
+\end{lemme}
+
+\prf{On va traiter uniquement le cas où $R$ est non-dégénérée. Ainsi par définition de l'infimum, pour $\varepsilon > 0$ il existe un recouvrement $\{Q_j\}$ de $R$ tel que 
+	\[
+	\sum_j \Vol Q_j \leqslant m^*(R) + \varepsilon
+	\]
+	Ensuite on dilate les cubes $Q_j$ par un facteur $(1 + \varepsilon)$ de sorte que l'intérieur des nouveaux cubes $Q_j^\varepsilon$ forment un recouvrement de l'ensemble compact $R$. Et donc par Heine-Borel, il existe un sous-recouvrement fini tel que 
+	\[
+	R \subset \bigcup_{k=1}^N \mathring Q_{j_k}^\varepsilon \subset \bigcup_{k=1}^N Q_{j_k}^\varepsilon
+	\]
+	Alors la \autoref{prop: partition de boîte} implique que
+	\[
+	\Vol R \leqslant (1 + \varepsilon)^n\sum_{k=1}^N \Vol Q_{j_k} \leqslant (1 + \varepsilon)^n \sum_j \Vol Q_j.
+	\]
+	En laissant $\varepsilon \to 0$, on obtient bien que $\Vol R \leqslant m^*(R)$.
+	
+	De l'autre sens, pour $0 < \delta \ll b_j - a_j$, on construit les partitions
+	\[
+	[a_j, b_j] = [a_j, a_j + \delta] \cup [a_j + \delta, a_j + 2 \delta] + \ldots + [a_j + N_j \delta,  b_j]
+	\] où $N_j = \left \lfloor \frac{b_j - a_j}{\delta} \right \rfloor$. On a alors un recouvrement de $R$ par des cubes, et donc par la \autoref{prop: partition de boîte} on a
+	\[
+	m^*(R) \leqslant \Bigg( \prod_{j=1}^n (N_j + 1) \Bigg) \delta^n.
+	\]
+	En laissant tendre $\delta$ vers $0$, on obtient
+	\[
+	\Vol R = \lim_{\delta \to 0} \Bigg( \prod_{j=1}^n (N_j + 1) \Bigg) \delta^n \geqslant m^*(R) 
+	\]
+}
+	
