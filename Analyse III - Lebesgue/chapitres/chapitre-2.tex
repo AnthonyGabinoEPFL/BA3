@@ -54,7 +54,7 @@ où on a utiliser la première partie pour la dernière égalité.
 	où $Q_j$ sont des \textbf{cubes fermés}, c'est-à-dire des \hyperref[def: Boîte rectangulaire]{boîtes rectangulaires} dont tous les côtés sont de longueurs identiques.
 \end{definition}
 
-\begin{lemme}
+\begin{lemme} \label{lem: Mesure des boîtes rectangulaires}
 	Soit $R \subset \Rn$ une boîte rectangulaire. Alors on a 
 	\[
 	m^*(R) = \Vol R
@@ -117,7 +117,7 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 	Mais comme $\varepsilon > 0$ est arbitraire, alors le résultat suit.
 }
 
-\begin{theoreme}[Additivité]
+\begin{theoreme}[Additivité 1] \label{thm: Additivité 1}
 	Soit $E_1, E_2 \subset \Rn$ deux ensembles non vides tel que $\dist(E_1, E_2) > 0$, alors
 	\[
 	\om{E_1\cup E_2} = \om{E_1} + \om{E_2}
@@ -132,7 +132,60 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 	\[
 	\om E \geqslant \om{E_1} + \om{E_2}
 	\]
-	...
+	Pour ceci, soit $\varepsilon > 0$, et soit $\{Q_j\}_{j=1}^\infty$ une collection de cube \footnote{Encore une fois, on peut supposer que $\om E < \infty$.}
+	\[
+	\sum_j \Vol Q_j \leqslant \om E + \varepsilon \et E \subset \bigcup_j Q_j
+	\]
+	On choisit $\delta >  0$ avec $\delta < \dist(E_1, E_2)$. Désormais, on décompose chaque cube $Q_j$ de diamètre $\diam Q_j > \frac\delta2$ où
+	\[
+	\diam Q_j = \sup_{\bm x, \bm y \in Q_j} \norme{\bm x - \bm y}
+	\]
+	en des cubes plus petits de diamètres $< \frac\delta2$, et en rejetant les cubes qui ont une intersection vide avec $E$, ce qui nous donne alors une collection $\{\tilde Q_j\}_{j = 1}^\infty$. Or on a toujours
+	\[
+	\sum_j \Vol \tilde Q_j \leqslant \sum_j \Vol Q_j \leqslant \om E + \varepsilon
+	\]
+	Mais par construction, on a pour tout cube $\tilde Q_j$ soit
+	\[
+	\tilde Q_j \subset E_1 \et \tilde Q_j \cap E_2 = \emptyset
+	\]
+	soit
+	\[
+	\tilde Q_j \subset E_2 \et \tilde Q_j \cap E_1 = \emptyset
+	\]
+	On peut alors partitionner la collection $\{\tilde Q_j\} = \{\tilde Q_j^1\}_j \cup \{\tilde Q_j^2\}_j$, où la première famille de cube $\{\tilde Q_j^1\}_j$ est un recouvrement de $E_1$, et la deuxième un recouvrement de $E_2$. Il suit que
+	\[
+	\om E + \varepsilon \geqslant \sum_j \Vol \tilde Q_j = \sum_j \Vol \tilde Q_j^1 + \sum_j \Vol \tilde Q_j^2 \geqslant \om{E_1} + \om{E_2}.
+	\]
+	Comme $\varepsilon > 0$ est arbitraire, l'inégalité désirée suit.
 }
 
+\begin{theoreme}[Additivité 2] \label{thm: Additivité 2}
+	Soit $E = \bigcup_{j=1}^\infty Q_j$ un réunion de cube presque disjoints, c'est-à-dire d'intérieurs disjoints. Il suit que
+	\[
+	\om E = \sum_j \Vol Q_j = \sum_j \om Q_j
+	\]
+\end{theoreme}
+
+\prf{La deuxième égalité est une conséquence du \autoref{lem: Mesure des boîtes rectangulaires}. Pour la première, par sous-additivité, on a 
+	\[
+	\om E \leqslant \sum_j \Vol Q_j
+	\]
+	et donc il suffit de montrer l'inégalité inverse. Pour ceci, on considère la collection $\{Q_j^\varepsilon\}$ des cubes $Q_j$ dilaté d'un facteur $(1- \varepsilon)$ où $\varepsilon > 0$. Ces cubes ont alors une distance positive et donc en utilisant le \autoref{thm: Additivité 1}, on conclut que pour tout $N \geqslant 1$, on a
+	\[
+	m^* \left(\bigcup_{j=1}^N Q_j^\varepsilon \right) = \sum_{j=1}^N \om{Q_j^\varepsilon}
+	\]
+	Mais par monotonie, et par le fait que 
+	\[
+	\bigcup_{j=1}^N Q_j^\varepsilon \bigcup_{j=1}^N Q_j \subset E
+	\]
+	on a aussi
+	\[
+	\om E \geqslant 	m^* \left(\bigcup_{j=1}^N Q_j^\varepsilon \right) = \sum_{j=1}^N \om{Q_j^\varepsilon} = (1-\varepsilon)^n \sum_{j=1}^N \Vol Q_j
+	\]
+	En laissant tendre $N \to + \infty$, on obtient
+	\[
+	\om E \geqslant (1- \varepsilon) \sum_{j \geqslant 1} \Vol Q_j
+	\]
+	et comme $\varepsilon > 0$ est arbitraire, le théorème suit.
+}
 	
