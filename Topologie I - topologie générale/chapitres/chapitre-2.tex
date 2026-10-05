@@ -6,9 +6,9 @@
 \begin{definition}[Espace topologique] \label{def: Espace topologique}
 	Soit $X$ un ensemble, une \textbf{topologie} sur $X$ est un sous-ensemble $\T \subset \mathcal P(X)$ tel que
 	\begin{enumerate}
-		\item $\empty, X \in \T$
-		\item $\forall \mathcal A \subset \T, \quad \bigcup_{U \in \mathcal A} U \in \T$
-		\item $\forall U_1, \ldots, U_n \in \T, \quad \bigcup_{i=1}^n U_i \in \T$
+		\item[(T1)] \label{def: T1} $\empty, X \in \T$
+		\item[(T2)] \label{def: T2} $\forall \mathcal A \subset \T, \quad \bigcup_{U \in \mathcal A} U \in \T$
+		\item[(T3)] \label{def: T3} $\forall U_1, \ldots, U_n \in \T, \quad \bigcup_{i=1}^n U_i \in \T$
 	\end{enumerate}
 	le couple $(X, \T)$ est alors appelé un \textbf{espace topologique} et les éléments de $\T$ sont appelés des \textbf{ouverts} de $(X, \T)$.
 \end{definition}
@@ -30,23 +30,31 @@
 	\[
 	\Tcomp = \{ U \in \mathcal P(X) \mid \# U^c < \infty\} \cup \{\emptyset\}
 	\]
-	En effet on a $X \in \Tcomp$ car $\# X^c = \# \emptyset = 0$, de plus pour $ \mathcal A \subset \Tcomp$ alors
-	\[
-	\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \bigcap_{U \in \mathcal A} U^c
-	\]
-	donc
-	\[
-	\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \#\bigcap_{U \in \mathcal A} U^c \leqslant \# V^c < \infty
-	\]
-	où $V \in \mathcal A$ quelconque. Et finalement pour $U_1, \ldots, U_n \in \Tcomp$ alors
-	\[
-	\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \bigcup_{i=1}^n U_i^c
-	\]
-	ainsi
-	\[
-	\#\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \#\bigcup_{i=1}^n U_i^c \leqslant \sum_{i=1}^n \# U_i^c < \infty
-	\]
-	Ainsi $(X, \Tcomp)$ est bien une topologie.
+	En effet on a 
+	\begin{enumerate}
+		\item[\TU : ] Par définition $\emptyset \in \Tcomp$. De plus $X \in \Tcomp$ car $\# X^c = \# \emptyset = 0 < \infty$
+		
+		\item[\TD : ] De plus pour $ \mathcal A \subset \Tcomp$ alors
+		\[
+		\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \bigcap_{U \in \mathcal A} U^c
+		\]
+		donc
+		\[
+		\bigg(\bigcup_{U \in \mathcal A} U \bigg)^c = \#\bigcap_{U \in \mathcal A} U^c \leqslant \# V^c < \infty
+		\]
+		où $V \in \mathcal A$ quelconque. 
+		
+		\item[\TT: ] Et finalement pour $U_1, \ldots, U_n \in \Tcomp$ alors
+		\[
+		\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \bigcup_{i=1}^n U_i^c
+		\]
+		ainsi
+		\[
+		\#\bigg(\bigcap_{i=1}^n U_i \bigg)^c = \#\bigcup_{i=1}^n U_i^c \leqslant \sum_{i=1}^n \# U_i^c < \infty
+		\]
+		Ainsi $(X, \Tcomp)$ est bien une topologie.
+		
+	\end{enumerate}
 \end{enumerate}
 
 \end{exemple}
@@ -55,12 +63,13 @@
 	Soit $\T, \T'$ des topologies sir $X$. Si $\T \subset \T'$, alors on dit que $\T'$ est plus \textbf{fine} que $\T$. Mais aucune des topologies n'est incluses dans l'autre alors on dira qu'elles sont \textbf{incomparable}.
 \end{definition}
 
+\subsection{Bases}
 
-\begin{definition}
+\begin{definition}[Base topologique] \label{def: Base topologique}
 	Soit $X$ un ensemble. Une \textbf{base de topologie} est un sous-ensemble $\mathcal B \subset \mathcal P(X)$ qui vérifie
 	\begin{enumerate}
-		\item On a $X = \bigcup_{B \in \mathcal B} B$,
-		\item Pour tout $B_1, B_2 \in \mathcal B$, on a que pour tout $x \in B_1 \cap B_2$, il existe un $B_3 \in \mathcal B$ tel que 
+		\item[(B1)] \label{def: B1} On a $X = \bigcup_{B \in \mathcal B} B$,
+		\item[(B2)] \label{def: B2} Pour tout $B_1, B_2 \in \mathcal B$, on a que pour tout $x \in B_1 \cap B_2$, il existe un $B_3 \in \mathcal B$ tel que 
 		\[
 		x \in B_3 \subset B_1 \cap B_2
 		\]
@@ -75,8 +84,8 @@
 	\label{fig: Illustration d'une base topologique}
 \end{figure}
 
-\begin{definition}
-	Soit $\B$ une base de topologie sur $X$, alors on définit la \textbf{topologie engendré} par $\B$ comme
+\begin{definition} \label{def: Topologie engendrée}
+	Soit $\B$ une base de topologie sur $X$, alors on définit la \textbf{topologie engendrée} par $\B$ comme
 	\[
 	\T_\B = \left\{ \bigcup_{\mathcal V \in \mathcal A} V \mid A \subset \B \right\}
 	\]
@@ -86,41 +95,45 @@
 	$\T_\B$ est bien une topologie sur $X$.
 \end{lemme}
 
-\prf{Par définition d'une base on a en particulier pour $\mathcal A = \mathcal B$
-	\[
-	X = \bigcup_{V \in \mathcal B} V \in \T_\B
-	\]
-	et de même pour $\mathcal A = \emptyset$ on a bien $\emptyset \in \T_\B$.
-	
-	Soit $\{U_\alpha \mid \alpha \in I\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $\alpha \in I$ il existe $\mathcal A_\alpha \subset \B$ tel que $U_\alpha = \bigcup_{V \in \mathcal A_\alpha} V$, d'où
-	\[
-	\bigcup_{\alpha \in I} U_\alpha = \bigcup_{\alpha \in I} \bigcup_{V \in \mathcal A_\alpha} V = \bigcup_{V \subset \bigcup_{\alpha \in I} \mathcal A_\alpha} V \in \T_\B
-	\]
-	
-	Finalement, soit $\{U_1, \ldots, U_n\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $i$ il existe $\mathcal A_i \subset \B$ tel que $U_i = \bigcup_{V \in \mathcal A_i} V$ ainsi
-	\[
-	\bigcap_{i=1}^n U_i = \bigcap_{i=1}^n \bigcup_{V \in \mathcal A_i} V
-	\]
-	Pour conclure, il suffit de considérer le cas $n = 2$ car on peut ensuite conclure par récurrence, car si on sait que
-	\[
-	U_1, U_2 \in \T_\B \implies U_1 \cap U_2 \in \T_\B
-	\]
-	alors
-	\[
-	U_1 \cap U_2 \cap U_3 = (U_1 \cap U_2) \cap U_3 \in \T_\B
-	\]
-	Or
-	\[
-	U_1 \cap U_2 = \bigcup_{V \in A_1} V \cap \bigcup_{V' \in A_2} V' = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2} (V \cap V')
-	\]
-	or par définition de la base on a
-	\[
-	V \cap V' = \bigcap_{x \in V \cap V'} V_x
-	\]
-	d'où 
-	\[
-	U_1 \cap U_2 = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2}\bigcap_{x \in V \cap V'} V_x \in \T_\B
-	\]
+\prf{On doit vérifié que $\TB$ vérifie les trois conditions requises pour être une topologie.
+	\begin{enumerate}
+		\item[\TU :] Par définition d'une base on a en particulier pour $\mathcal A = \mathcal B$
+		\[
+		X = \bigcup_{V \in \mathcal B} V \in \T_\B
+		\]
+		et de même pour $\mathcal A = \emptyset$ on a bien $\emptyset \in \T_\B$.
+		
+		\item[\TD :] Soit $\{U_\alpha \mid \alpha \in I\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $\alpha \in I$ il existe $\mathcal A_\alpha \subset \B$ tel que $U_\alpha = \bigcup_{V \in \mathcal A_\alpha} V$, d'où
+		\[
+		\bigcup_{\alpha \in I} U_\alpha = \bigcup_{\alpha \in I} \bigcup_{V \in \mathcal A_\alpha} V = \bigcup_{V \subset \bigcup_{\alpha \in I} \mathcal A_\alpha} V \in \T_\B
+		\]
+		
+		\item[\TT :] Finalement, soit $\{U_1, \ldots, U_n\} \subset \T_\B$, alors par définition de $\T_\B$ pour tout $i$ il existe $\mathcal A_i \subset \B$ tel que $U_i = \bigcup_{V \in \mathcal A_i} V$ ainsi
+		\[
+		\bigcap_{i=1}^n U_i = \bigcap_{i=1}^n \bigcup_{V \in \mathcal A_i} V
+		\]
+		Pour conclure, il suffit de considérer le cas $n = 2$ car on peut ensuite conclure par récurrence, car si on sait que
+		\[
+		U_1, U_2 \in \T_\B \implies U_1 \cap U_2 \in \T_\B
+		\]
+		alors
+		\[
+		U_1 \cap U_2 \cap U_3 = (U_1 \cap U_2) \cap U_3 \in \T_\B
+		\]
+		Or
+		\[
+		U_1 \cap U_2 = \bigcup_{V \in A_1} V \cap \bigcup_{V' \in A_2} V' = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2} (V \cap V')
+		\]
+		or par définition de la base on a
+		\[
+		V \cap V' = \bigcap_{x \in V \cap V'} V_x
+		\]
+		d'où 
+		\[
+		U_1 \cap U_2 = \bigcup_{V \in \mathcal A_1, \, V \in \mathcal A_2}\bigcap_{x \in V \cap V'} V_x \in \T_\B
+		\]
+	\end{enumerate}
+	Ainsi la topologie engendrée $\TB$ est bien une topologie.
 }
 
 \begin{theoreme}[Caractérisation de la topologie engendrée]
@@ -137,7 +150,7 @@
 
 \lecture{5 octobre}
 
-\begin{exemple}
+\begin{lemme}
 	Soit $(X,d)$ un espace métrique, on définit les boules ouvertes
 	\[
 	B_d(x,r) = \{y \in X \mid d(x,y) < r\}
@@ -146,11 +159,16 @@
 	\[
 	\mathcal B_d = \{ B_d(x,r) \mid x \in X, ~ r > 0\}
 	\]
-	est une base de topologie sur $X$. En effet on a 
+	est une base de topologie sur $X$.
+\end{lemme}
+
+\prf{
+\begin{enumerate}
+	\item[\BU :] On sait que pour tout $x \in X$, on a $x \in B_d(x,r)$ pour $r > 0$, ce qui implique que
 	\[
-	\forall r > 0,~ \forall x \in X, \quad x \in B_d(x,r)
+	X = \bigcup_{x \in X} B_d(x,r)
 	\]
-	donc on a bien un recouvrement. De plus soit $B_d(x_1, r_1)$ et $B_d(x_2, r_2)$ deux boules, alors si on considère
+	\item[\BD :] De plus soit $B_d(x_1, r_1)$ et $B_d(x_2, r_2)$ deux boules, alors si on considère
 	\[
 	r = \min\{ r_1 - d(x, x_1), r_2 - d(x, x_2)\}
 	\]
@@ -158,50 +176,65 @@
 	\[
 	d(x_i, y) \leqslant d(x_1, x) + d(x,y)  < d(x_i, x) + (r_i - d(x_i, x)) < r
 	\]
-	pour $i =1,2$. Ainsi on pose $\mathcal T_d = \mathcal T_{\mathcal B_d}$ la \textbf{topologie métrique} sur $X$ induite par la métrique $d$. Par la suite si $X = \Rn$ et $d = d_{euc}$, on écrit $\T_{st} = \T_{d_{euc}}$ la \textbf{topologie standard}.
-\end{exemple}
+	pour $i =1,2$. 
+\end{enumerate}
+Ainsi on pose $\mathcal T_d = \mathcal T_{\mathcal B_d}$ la \textbf{topologie métrique} sur $X$ induite par la métrique $d$. Par la suite si $X = \Rn$ et $d = d_{euc}$, on écrit $\T_{st} = \T_{d_{euc}}$ la \textbf{topologie standard}.
+}
 
-\begin{lemme}
+\begin{lemme}[Comparaison de bases] \label{lem: Comparaison de bases}
 	Soit $X$ un ensemble, soient $\B_1, \B_2$ des bases topologies sur $X$. Alors
 	\[
-	\T_{\B_1} \subset \T_{\B_2} \iff \forall V_1 \in \B_1, \, \forall x \in V_1, \, \exists V_2 \in \mathcal B_2, \quad x \in V_2 \subset V_1
+	\T_{\B_1} \subset \T_{\B_2} \iff \forall B_1 \in \B_1, \, \forall x \in B_1, \, \exists B_2 \in \mathcal B_2, \quad x \in B_2 \subset B_1
 	\]
 \end{lemme}
 
-\prf{Supposons que $\T_{\B_1} \subset \T_{\B_2}$ alors par définition $\forall U \in \T_{B_1}, \quad U \in \T_{B_2}$ d'où par définition de $\T_{\B_2}$ il existe $V_2 \in \B_2$ tel que $x \in V_2 \subset U$. Donc puisque $\B_1 \subset \T_{\B}$, on sait que $\forall V_1 \in \B_1$ il existe $V_2 \in \B_2$ tel que $x \in V_2 \subset V_1$.
-	
-Réciproquement, soit $U \subset \T_{\B_1}$...
+\prf{
+	\begin{enumerate}
+		\item[$\implies$ :] Puisque $\mathcal B_1 \subset \T_{\B_1} \subset \T_{\B_2}$, alors pour tout $B_1 \in \B_1$, on a que pour tout $x \in B_1$, il existe $B_2 \in \B_2$ tel que $x \in B_2 \subset B_1$.
+		
+		\item[$\impliedby$ :] Réciproquement, alors par hypothèse on a $B_1 \in \T_{\B_2}$ pour tout $B_1 \in \B_1$. Autrement dit, $\B_1 \subset \T_{\B_2}$. Soit $U \in \T_{\B_1}$, alors par la \autoref{def: Topologie engendrée}, il existe une collection $\{B_i\} \subset \B_1$ telle que $U = \bigcup_{i \in I} B_i$. Or on sait que $B_i \in \T_{\B_2}$ pour tout $i \in I$. Puisque $\T_{B_2}$ est une topologie, alors
+		\[
+		U = \bigcup_{i \in I} B_i \in \T_{\B_2}
+		\]
+	\end{enumerate}
 }
 
-\begin{lemme}[Lemme de test de base]
+\begin{lemme}[Test de base] \label{lem: Test de base}
 Soit $(X, \T)$ un espace topologique, soit $\mathcal C \subset \T$, alors $\mathcal C$ est une base de topologie et $\T_{\mathcal C} = \T$ si et seulement si
 \[
 \forall U \in \T, \, \forall x \in U, \, \exists C \in \mathcal C, \quad x \in C \subset U
 \]
 \end{lemme}
 
-\prf{Soit $\mathcal C$ une base de topologie, et $\T_{\mathcal C} = \T = \T_\T$, et donc en particulier $\T_\T \subset \T_\C$, d'où par le lemme de comparaison de base,
-	\[
-	\forall U \in \T, \, \forall x \in U, \, \exists C \in \C, \quad x \in C \subset U
-	\]
-	
-Réciproquement, par hypothèse sur $\C$, en particulier pour $X \in \T$, 
-\[
-\forall x \in X, \, \exists C \in \C, \quad x \in C \subset X
-\]
-d'où le recouvrement. De plus soit $C_1, C_2 \in \C$ et soit $x \in C_1 \cap C_2$, mais comme $C_1$ et $C_2$ sont des ouverts, alors $C_1 \cap C_2$ est aussi un ouvert, et donc par hypothèse on a pour $x \in C_1 \cap C_2$, et on en déduit qu'il existe $C_3 \in \C$ tel que
-\[
-x \in C_3 \subset C_1 \cap C_2
-\]
-Il nous à montrer que $\T \subset \T_\C$. Les hypothèses sur $\C$ implique, par le lemme des comparaison de base que $\T = \T_\T \subset \T_\C$.
+\prf{
+	\begin{enumerate}
+		\item[$\implies$ :] Soit $\mathcal C$ une base de topologie, et $\T_{\mathcal C} = \T = \T_\T$, et donc en particulier $\T_\T \subset \T_\C$, d'où par le \autoref{lem: Comparaison de bases},
+		\[
+		\forall U \in \T, \, \forall x \in U, \, \exists C \in \C, \quad x \in C \subset U
+		\]
+		
+		\item[$\impliedby$ :] On doit montrer que $\C$ engendre $\T$, il faut donc vérifier les deux axiomes
+		\begin{enumerate}
+			\item[\BU :] par hypothèse sur $\C$, en particulier pour $X \in \T$, 
+			\[
+			\forall x \in X, \, \exists C \in \C, \quad x \in C \subset X
+			\]
+			d'où le recouvrement.
+			\item[\BD :] Soit $C_1, C_2 \in \C$ et soit $x \in C_1 \cap C_2$, mais comme $C_1$ et $C_2$ sont des ouverts, alors $C_1 \cap C_2$ est aussi un ouvert, et donc par hypothèse on a pour $x \in C_1 \cap C_2$, et on en déduit qu'il existe $C_3 \in \C$ tel que
+			\[
+			x \in C_3 \subset C_1 \cap C_2
+			\]
+			Il nous à montrer que $\T \subset \T_\C$. Les hypothèses sur $\C$ implique, par le \autoref{lem: Comparaison de bases} que $\T = \T_\T \subset \T_\C$.
+		\end{enumerate}
+	\end{enumerate}
 }
 
 \section{Les sous-bases de la topologie}
 
 \begin{definition}
-	Soit $X$ un ensemble. Une \textbf{sous-base de topologie} $\SB$ est un sous-ensemble ded $\mathcal (X)$ tel que
+	Soit $X$ un ensemble. Une \textbf{sous-base de topologie} $\SB$ est un sous-ensemble de $\mathcal P(X)$ tel que
 	\begin{enumerate}
-		\item[(S1)] $X = \bigcup_{S \in \SB} S = X$
+		\item[(S1)] \label{def: S1} $X = \bigcup_{S \in \SB} S$
 	\end{enumerate}	
 \end{definition}
 
@@ -213,9 +246,17 @@ Il nous à montrer que $\T \subset \T_\C$. Les hypothèses sur $\C$ implique, pa
 	est une base de topologie. 
 \end{lemme}
 
-\prf{On a $\SB \subset \B_\SB$ donc B1 est vrai car S1 est vérifié. De plus, il est clair que si $V_1, V_2 \in \B_\SB$ alors $V_1 \cap V_2 \in \B_\SB$. Ainsi $\B_\SB$ est bien une base de topologie.
-}
-
+\prf{On doit montrer que $\B_\SB$ vérifie bien les axiomes d'une base
+	\begin{enumerate}
+		\item[\BU :] Comme $\SB$ est une sous-base, elle vérifie \SU = \BU. Comme $\SB \subset \BS$, on peut conclure que $\BS$ vérigie \BU.
+		
+		\item[\BD :] Soient $B = \bigcap_{i=1}^m S_i$ et $\tilde B = \bigcap_{j=1}^n \tilde S_j$ deux éléments de $\BS$. Alors leur intersection
+		\[
+		B \cap \tilde B = \left(\bigcap_{i=1}^m S_i\right) \cap \left(\bigcap_{j=1}^n \tilde S_j\right) \in \BS
+		\]
+	\end{enumerate}
+	Ainsi $\BS$ est bien une base.
+}	
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{"images/diagramme topologique.png"}
