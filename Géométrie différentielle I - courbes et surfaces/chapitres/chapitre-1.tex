@@ -30,7 +30,7 @@ Une \textbf{isométrie} de $\E$ est une similitude de rapport $1$. C'est donc un
 
 Il est facile de voir qu'à partir des définitions que les similitudes de $\E$ forment un groupe et que les isométries forment un sous-groupe normal de ce groupe.
 
-\begin{lemme}[Propriétés des isométries] \label{uwu}
+\begin{lemme}[Propriétés des isométries] \label{lem: Propriétés des isométries}
 	Toute isométrie $g : \E \to \E$ qui fixe l'origine ;
 	\begin{enumerate}
 		\item préserve le produit scalaire, c'est-à-dire
@@ -69,9 +69,9 @@ Il est facile de voir qu'à partir des définitions que les similitudes de $\E$ 
 	\end{enumerate}
 }
 
-\begin{theorem}
+\begin{theoreme}
 	L'application $f : \E \to \E$ est une similitude de rapport $\lambda$ si et seulement s'il existe un vecteur $b \in \E$ et une isométrie linéaire $g : \E \to \E$ tels que $f(x) = \lambda g(x) + b$ pour tout $x \in \E$.
-\end{theorem}
+\end{theoreme}
 
 \prf{Soit $f$ une similitude de $\E$ de rapport $\lambda$. On pose
 	\[
@@ -81,7 +81,7 @@ Il est facile de voir qu'à partir des définitions que les similitudes de $\E$ 
 	\begin{align*}
 		\norme{g(x) - g(y)} = \norme{\frac1\lambda (f(x) - f(0)) - \frac1\lambda (f(y) - f(0))} = \frac1\lambda \norme{f(x) - f(y)} = \norme{x -y}
 	\end{align*}
-	Ainsi par le lemme \eqref{uwu} $g$ est linéaire. Donc $f(x) = \lambda g(x) + b$ où $b = f(0) \in \E$ est un vecteur constant et $g$ est une isométrie linéaire.
+	Ainsi par le \autoref{lem: Propriétés des isométries} $g$ est linéaire. Donc $f(x) = \lambda g(x) + b$ où $b = f(0) \in \E$ est un vecteur constant et $g$ est une isométrie linéaire.
 }
 
 \begin{proposition}
@@ -145,6 +145,59 @@ La deuxième colonne de $A$ doit être un vecteur de norme $1$ orthogonal à la 
 	Il est facile de voir que $R_\theta$ est une matrice de rotation d'angle $\theta$ et que $S_{\theta/2}$ est une symétrie à travers la droite vectorielle formant un angle $\theta/2$ avec le premier vecteur $e_1$ de la base canonique.
 \end{remarque}
 
+\section{Théorème d'Euler}
+\begin{theoreme}[Théorème d'Euler] \label{thm: Théorème d'Euler}
+	Toute isométrie directe $f : \R^3 \to \R^3$ fixant un point est ou bien l'identité ou bien un rotation autour d'un axe passant par ce point.
+\end{theoreme}
+
+\prf{On peut supposer que $f$ fixe l'origine. Alors $f$ est une transformation linéaire, on a donc $f(\bm x) = A \bm x$ avec $A \in SO(3)$. Ainsi
+\[
+\det(A - \bm I) = \det(A^\top(A - \bm I)) = \det(A^\top A - A^\top) = \det(\bm I - A) = - \det(A - \bm I)
+\]
+et donc $\det(A - \bm I) = 0$, ainsi $\lambda = 1$ est valeur propre et donc il existe un vecteur propre $\bm a \in \Rn$ tel que $A \bm a = \bm a$, alors la droite $\R \bm a$ est fixé pour la transformation $f$.
+
+Il reste à montrer que $f$ est bien une rotation autour de l'axe $\R \bm a$. Ainsi soit $\bm u_1$ un vecteur de longueur $1$ et perpendiculaire à $\bm a$, et notons $\bm u_2 = \bm a \bm \times u_1$, alors on remarque que
+\[
+\langle A \bm u_i, \bm a \rangle = \langle A \bm u_i, A \bm a \rangle = \langle \bm u_i, \bm a \rangle = 0
+\]
+ce qui implique que les vecteurs $A\bm u_1$ et $A\bm u_2$ sont aussi orthogonaux à l'axe et donc ils sont combinaison linéaire de $\bm u_1$ et $\bm u_2$, mais comme $\bm u_1$ et $\bm u_2$ sont le longueur $1$ et orthogonaux, alors
+\[
+A \bm u_1 = \cos \theta \bm u_1	\sin \theta \bm u_2
+\]
+\[
+A \bm u_2 = -\sin \theta \bm u_1	\cos \theta \bm u_2
+\]
+où $\theta$ est l'angle entre $\bm u_1$ et $A \bm u_1$. Ainsi dans la base orthonormée $\bm u_1, \bm u_2, \bm a$ on a la matrice associé à $f$,
+\[
+\begin{pmatrix}
+	\cos \theta & -\sin \theta & 0 \\
+	\sin \theta & \cos \theta & 0 \\
+	0 & 0 & 1	
+\end{pmatrix}
+\]
+et il s'agit bien d'une rotation autour de l'axe $\R \bm a$.
+}
+
+\begin{corollaire}
+	L'angle $\theta$ d'une rotation $A \in SO(3)$ est donné par l'équation
+	\[
+	\tr A =  1 + 2 \cos \theta
+	\]
+\end{corollaire}
+
+\prf{On a vu quand dans une base orthonormée particulière $A$ était de la forme 
+	\[
+	\begin{pmatrix}
+		\cos \theta & -\sin \theta & 0 \\
+		\sin \theta & \cos \theta & 0 \\
+		0 & 0 & 1	
+	\end{pmatrix}
+	\]
+	et donc par invariance de la trace par similitude, alors on a bien 
+	\[
+	\tr A =  1 + 2 \cos \theta
+	\]
+}
 \section{Géométrie vectorielle dans l'espace euclidien orienté de dimension $3$}
 
 \begin{proposition}[Propriétés du produit vectoriel]
@@ -156,9 +209,34 @@ La deuxième colonne de $A$ doit être un vecteur de norme $1$ orthogonal à la 
 	\end{enumerate}
 \end{proposition}
 
-\prf{...}
-
-
+\prf{On a dans l'ordre,
+	
+\begin{enumerate}
+	\item Par calcul explicite on a
+		\[
+		\langle \bm x \times \bm y \rangle = (x_2 y_3 - x_3 y_2) x_1 + (x_3 y_1 - x_1 y_3) x_2 + (x_1 y_2 - x_2 y_1) x_3 = \det 	\begin{pmatrix} x_1 & y_1 & x_1 \\
+			x_2 & y_2 & x_2 \\
+			x_3 & y_3 & x_3 
+		\end{pmatrix} = 0
+		\]
+		ce qui montre bien que $\bm x \times \bm  y \perp \bm x$. De même $\langle \bm x \times \bm y, \bm y \rangle = 0$.
+	
+	\item On a
+	\[
+	\norme{\bm x \times \bm y}^2 =  \sum_{i \neq j} x_i^2 y_j^2 - 2 \sum_{i < j} x_i x_j y_i y_j =  \sum_i x_i^2 \cdot \sum_j y_j^2 - \sum_i x_i y_i^2 = \norme{\bm x}^2 \norme{\bm y}^2 - \langle \bm x, \bm y \rangle^2
+	\]
+	ce qui donne bien $\norme{\bm x \times \bm y}^2 = \norme{\bm x}^2 \norme{\bm y}^2 - \langle \bm x, \bm y \rangle^2 = \aire(\mathcal P(\bm x, \bm y))^2$.
+	
+	\item On remarque finalement que si $\bm x$ et $\bm y$ sont linéaire indépendant, alors $\bm x \times \bm y$ est non nul, et donc pour $\bm z = \bm x \times \bm y$ on a
+	\[
+	\det 	\begin{pmatrix} x_1 & y_1 & z_1 \\
+		x_2 & y_2 & z_2 \\
+		x_3 & y_3 & z_3 
+	\end{pmatrix} = z_1^2 + z_2^2 + z_3^2 = \norme{\bm z}^2 > 0
+	\]
+	ce qui implique que $\{\bm x, \bm y, \bm z = \bm x \times \bm y\}$ est une base directe.
+\end{enumerate}
+}
 \begin{definition}
 	On apelle \textbf{produit mixte} de trois vecteurs $\bm x, \bm y, \bm z \in \E$, le produit	scalaire
 	\[
@@ -169,3 +247,7 @@ La deuxième colonne de $A$ doit être un vecteur de norme $1$ orthogonal à la 
 
 
 \lecture{17 septembre}
+
+\section{Géométrie vectorielle dans le plan euclidien orienté $\E^2$}
+
+
