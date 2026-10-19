@@ -2,7 +2,9 @@
 \lecture{1 octobre}
 Le but de ce chapitre est de développer une théorie d'intégration plus sophistiquée que celle de Riemann
 
-\section{Décomposition en boîtes}
+\section{Notions de base}
+
+\subsection{Décomposition en boîte rectangulaire}
 
 \begin{definition}[Boîte rectangulaire] \label{def: Boîte rectangulaire}
 	Soit $a_i \leqslant b_i \in \R$. On appelle \textbf{boîte rectangulaire} tout ensemble
@@ -44,8 +46,14 @@ Ainsi par hypothèse, on a que $i \in A_*$ implique qu'il existe $j$ avec $i \in
 où on a utiliser la première partie pour la dernière égalité.
 }
 
+\begin{proposition}[Décomposition d'ouverts en cubes] \label{prop: Décomposition d'ouverts en cubes}
+	Soit $U \subset \Rn$ un ouvert. Alors il existe une collection de cube $\{Q_j\}_{j=1}^\infty$ deux à deux presque disjoints telle que
+	\[
+	U = \bigcup_{j=1}^\infty Q_j
+	\]
+\end{proposition}
+\subsection{Mesure extérieure}
 \lecture{5 octobre}
-
 \begin{definition}[Mesure extérieure] \label{def: Mesure extérieure}
 	Soit $E \subset \Rn$. Alors nous définissons la \textbf{mesure extérieure} de $E$ par
 	\[
@@ -89,7 +97,9 @@ où on a utiliser la première partie pour la dernière égalité.
 }
 
 
-\section{Propriétés de le mesure extérieure}
+\section{Propriétés de le mesure extérieure et ensemble mesurable}
+
+\subsection{Propriétés de la mesure extérieure}
 Pour commencer, il est facile de voir que si $E_1 \subset E_2 \subset \Rn$ alors
 \[
 \om{E_1} \leqslant \om{E_2}
@@ -100,7 +110,7 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 \]
 
 \begin{proposition}[Sous-additivité dénombrable] \label{prop: Sous-additivité dénombrable}
-	Soit $E = \{E_j\}$, alors
+	Soit $E = \bigcup_{i=1}^\infty E_j$, alors
 	\[
 	\om E \leqslant \sum_{j=1}^\infty \om{E_j}
 	\]
@@ -162,7 +172,7 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 \begin{theoreme}[Additivité 2] \label{thm: Additivité 2}
 	Soit $E = \bigcup_{j=1}^\infty Q_j$ un réunion de cube presque disjoints, c'est-à-dire d'intérieurs disjoints. Il suit que
 	\[
-	\om E = \sum_j \Vol Q_j = \sum_j \om Q_j
+	\om E = \sum_j \Vol Q_j = \sum_j \om{Q_j}
 	\]
 \end{theoreme}
 
@@ -184,10 +194,326 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 	\]
 	En laissant tendre $N \to + \infty$, on obtient
 	\[
-	\om E \geqslant (1- \varepsilon) \sum_{j \geqslant 1} \Vol Q_j
+	\om E \geqslant (1- \varepsilon)^n \sum_{j \geqslant 1} \Vol Q_j
 	\]
 	et comme $\varepsilon > 0$ est arbitraire, le théorème suit.
 }
 
+\begin{corollaire}
+	Soit $U \subset \Rn$ un ensemble ouvert, et soit $U \subset \bigcup_{j=1}^\infty Q_j$ une décomposition presque disjointe en cube fermés. Alors
+	\[
+	\om U = \sum_j \om{Q_j}
+	\]
+	En particulier, la somme à droite est indépendante de la décomposition en cube choisie. On peut encore généraliser en disant que si on considère une collection dénombre d'ouverts $U_i$ et disjoints, alors
+	\[
+	m^* \Bigg(\bigcup_{i=1}^\infty U_j\Bigg) = \sum_{j=1}^\infty \om{U_j}
+	\]
+\end{corollaire}
 
+\prf{Conséquence directe de la \autoref{prop: Décomposition d'ouverts en cubes} et du \autoref{thm: Additivité 2}.}
+
+\subsection{Mesure de Lebesgue}
+\begin{definition}[Mesure de Lebesgue] \label{def: Mesure de Lebesgue}
+	On dit que $E \subset \Rn$ est \textbf{mesure au sens de Lebesgue} pourvu que, pour tout $\varepsilon > 0$, il existe un ouvert $U \subset \Rn$ contenant $E$ tel que
+	\[
+	\om{U \backslash E} < \varepsilon
+	\]
+	Si $E$ est mesurable au sens de Lebesgue, on définit sa mesure au sens de Lebesgue par
+	\[
+	m(E) := \om E.
+	\]
+\end{definition}
+
+\begin{proposition} \label{prop: Mesurabilité d'un ensemble de mesure nulle}
+	Soit $E \subset \Rn$ avec $\om E = 0$. Alors $E$ est mesurable au sens de Lebesgue, et $m(E) = 0$.
+\end{proposition}
+
+\prf{Soit $E \subset \Rn$ avec $\om E = 0$. Alors par définition de la \nameref{def: Mesure extérieure}, pour tout $\varepsilon > 0$, il existe une collection au plus dénombrable $\{Q_j\}$ de cube tel que
+	\[
+	\sum_j \Vol Q_j < \frac\varepsilon2 \et E \subset \bigcup_j Q_j
+	\]
+	Si $\tilde Q_j$ sont des cubes concentriques avec deux fois le volume des $Q_j$, alors $E \subset \bigcup_j \mathring{\tilde Q_j} =: U$, et on a
+	\[
+	\om{U \backslash E} \leqslant \om U \leqslant \sum_j \Vol \tilde Q_j < \varepsilon 
+	\]
+}
+
+\begin{proposition}
+	Soit $U \subset \Rn$ un ouvert. Alors est mesurable.
+\end{proposition}
+
+\prf{Pour tout $\varepsilon > 0$, il suffit de prendre $E = U$, et on a bien
+	\[
+	\om{U \backslash E} = \om{U \backslash U} = \om \emptyset = 0 < \varepsilon
+	\]	
+	Ainsi $U$ est bien mesurable au sens de Lebesgue.
+}
+
+
+\begin{definition}[$\sigma$-algèbre] \label{def: sigma algèbre}
+	Soit $\mathcal A \subset \mathcal P(\Rn)$ une collection de sous-ensemble de $\Rn$. On dit que $\mathcal A$ est une $\sigma$\textbf{-algèbre} pour vu que
+	\begin{enumerate}
+		\item $\Rn, \emptyset \in \mathcal A$
+		\item Si $A \in \mathcal A$ alors $A^c \in \mathcal A$
+		\item Et finalement, si $\{A_i\}_{i=1}^\infty$ est une collection dénombrable d'ensemble dans $\mathcal A$, alors
+		\[
+		\bigcup_{i=1}^\infty A_i \in \mathcal A
+		\]
+	\end{enumerate}
+\end{definition}
+
+
+\begin{proposition}[Mesurabilité d'une union] \label{prop: Mesurabilité d'une union}
+	Soit $E_j$ une collection dénombrable de sous-ensemble de $\Rn$ qui sont mesurable au sens de Lebesgue. Alors
+	\[
+	\bigcup_{j=1}^\infty E_j 
+	\]
+	est mesurable au sens de Lebesgue.
+\end{proposition}
+\prf{Soit $\varepsilon > 0$. Pour chaque $j \geqslant 1$, on choisit un ouvert $E_j \subset U_j \subset \Rn$ de sorte que
+	\[
+	\om{U_j \backslash E_j} < \frac{\varepsilon}{2^j}
+	\]
+	Alors si on pose $U = \bigcup_{j=1}^\infty U_j$, alors $U$ est bien ouvert, par par \nameref{prop: Sous-additivité dénombrable},il suit que
+	\[
+	m^*\Bigg( U \backslash \bigcup_j E_j \Bigg) \leqslant \sum_j m^* \Bigg( U_j \backslash \bigcup_l E_j \Bigg) \leqslant \sum_j \om{U_j \backslash E_j} < \sum_j \frac\varepsilon{2^j} = \varepsilon
+	\]
+	Comme $\varepsilon > 0$ est arbitraire, la mesurabilité de $\bigcup_j E_j$ suit.
+}
+
+\begin{lemme}[Mesurabilité d'un fermé] \label{lem: Mesurabilité d'un fermé}
+	Soit $E \subset \Rn$ un ensemble fermé. Alors $E$ est mesurable au sens de Lebesgue.
+\end{lemme}
+
+\prf{On remarque qu'on écrire $E = \bigcup_{i=1}^\infty E \cap \overline{B_j(0)}$, ainsi $E$ s'écrit comme union dénombrable de compact et donc par la \autoref{prop: Mesurabilité d'une union}, il suffit de montrer le lemme pour $E$ compact. Ainsi soit $U \supset E$ un ouvert ouvert et borné contenant $E$. Alors il est clair que $U \backslash E$ est aussi ouvert et borné et donc par la \autoref{prop: Décomposition d'ouverts en cubes} on peut écrire
+	\[
+	U \backslash E = \bigcup_{l=1}^\infty Q_l
+	\]
+	où les $Q_l$ sont presque disjoints et fermés. En plus on remarque que
+	\[
+	\sum_{l=1}^\infty \Vol Q_j = \om{U \backslash E} < \infty
+	\]
+	Et donc étant donné $\varepsilon >0$, on choisit $N > 0$ tel que
+	\[
+	\sum_{l=N +1}^\infty \Vol Q_j < \varepsilon
+	\]
+	Mais comme $\bigcup_{l=1}^N Q_l$ est un sous-ensemble fermé de $U \backslash E$, il suit que
+	\[
+	E \subset U \backslash \bigcup_{l=1}^N Q_l 
+	\]
+	et que $U \backslash \bigcup_{l=1}^N Q_l$ est ouvert. En plus on a
+	\[
+	m^* \Bigg(  \left[ U \backslash\bigcup_{l=1}^N Q_j\right] \backslash E \Bigg) = \sum_{l=N+1}^\infty \Vol Q_j < \varepsilon.
+	\]
+	Comme $\varepsilon > 0$ est arbitraire, alors $E$ est bien mesurable.
 	
+}
+
+\begin{proposition} \label{prop: Mesurabilité du complémentaire}
+	Soit $E \subset \Rn$ mesurable au sens de Lebesgue. Alors $E^c$ l'est aussi.
+\end{proposition}
+
+\prf{Par définition  de la \nameref{def: Mesure de Lebesgue}, pour chaque entier $n \geqslant 1$ il existe $U_n \supset E$ avec $U_n$ ouvert tel que
+	\[
+	\om{U_n \backslash E} < \frac1n
+	\]
+	Par le \autoref{lem: Mesurabilité d'un fermé} $U_n^c$ est mesurable, et on a 
+	\[
+	\om{E^c \backslash U_n^c} = \om{U_n \backslash \backslash E} < \frac1n
+	\]
+	Ceci implique que 
+	\[
+	m^* \Bigg( E^c \backslash \bigcup_m U_m^c \Bigg) \leqslant \om{E^c \backslash U_n^c} < \frac1n, \quad \forall n \in \N^*
+	\]
+	et donc
+	\[
+	m^* \Bigg( E^c \backslash \bigcup_m U_m^c \Bigg) = 0
+	\]
+	Et finalement si on écrit
+	\[
+	E^c = \Bigg( E^c \backslash \bigcup_m U_m^c \Bigg) \cup \Bigg(\bigcup_m U_m^c \Bigg),
+	\]
+	alors le premier ensemble est mesurable d'après la \autoref{prop: Mesurabilité d'un ensemble de mesure nulle}, et le deuxième ensemble est mesurable d'après le \autoref{lem: Mesurabilité d'un fermé} et de la \autoref{prop: Mesurabilité d'une union}.
+}
+
+\begin{corollaire} \label{cor: Caractérisation de la mesurabilité par les fermés}
+	Soit $E \subset \Rn$ mesurable et $\varepsilon > 0$. Alors il existe un fermé $F \subset E$ avec 
+	\[
+	\om{E \backslash F} < \varepsilon
+	\]
+\end{corollaire}
+
+\prf{Il suffit de choisir un ouvert $U \supset E^c$ avec $\om{U \backslash E^c	} < \varepsilon$, et de poser $F = U^c$.
+}
+
+\begin{theoreme}
+	L'ensemble $\M$ des ensembles mesurables au sens de Lebesgue en $\Rn$ forment une $\sigma$-algèbre.
+\end{theoreme}
+
+\prf{Il suffit de vérifier les trois propriétés d'une \nameref{def: sigma algèbre} ; 
+\begin{enumerate}
+	\item Comme $\om \emptyset = 0$ alors $\emptyset$ est mesurable par la \autoref{prop: Mesurabilité d'un ensemble de mesure nulle} et donc il en découle que $\Rn$ est mesurable par la \autoref{prop: Mesurabilité du complémentaire},
+	
+	\item Conséquence directe de la \autoref{prop: Mesurabilité du complémentaire},
+	
+	\item Conséquence directe de la \autoref{prop: Mesurabilité d'une union}
+	\end{enumerate}
+	Ainsi $\mathcal M$ forme bien une $\sigma$-algèbre.
+}
+
+\begin{corollaire}
+	Si $\{E_j\}_{j=1}^\infty$ est une collection d'ensemble mesurable au sens de Lebesgue en $\Rn$, alors
+	\[
+	\bigcap_{j=1}^\infty E_j
+	\]
+	l'est aussi.
+\end{corollaire}
+
+\prf{Il suffit de remarquer que
+	\[
+	\Bigg(\bigcap_{j=1}^\infty E_j\Bigg)^c = \bigcup_{i=1}^\infty E_j^c
+	\]
+}
+
+\section{Propriétés fondamentales de la mesure de Lebesgue}
+
+\subsection{Les ensembles mesurables munis de $m$ forment un espace mesuré}
+\begin{definition}
+	Soit $\mathcal A$ une $\sigma$-algèbre, alors on dira qu'une application $m : \mathcal A \to [0, +\infty]$ est une \textbf{mesure} pourvu que $m(\emptyset) = 0$ et 
+	\[
+	m \Bigg(\bigcup_{j=1}^\infty E_j\Bigg) = \sum_{j=1}^\infty m(E_j)
+	\]
+	pourvu que les ensembles $E_j \in \mathcal A$ soient disjoints. Si c'est le cas, on dira alors que $(\Rn, \mathcal A, m)$ est un \textbf{espace mesuré}.
+\end{definition}
+
+\begin{theoreme} \label{thm: additivité de la mesure de Lebesgue}
+	L'ensemble $\mathcal M$ des ensembles mesurables au sens de Lebesgue muni de la mesure de Lebesgue $m = m^*$ forment un espace mesuré. C'est-à-dire que pour toute collection $\{E_j\}_{j=1}^\infty$ dénombrable de $\M$ deux à deux disjoints, on a
+	\[
+	m(E) = \sum_{j=1}^\infty m(E_j), \quad E = \bigcup_{j=1}^\infty E_j
+	\]
+\end{theoreme}
+
+\prf{On commence par considérer le cas où les ensembles $E_j$ sont tous bornés. Par \nameref{prop: Sous-additivité dénombrable}, on sait que
+	\[
+	m(E) \leqslant \sum_{j=1}^\infty m(E_j).
+	\]
+	Il faut donc montrer l'inégalité inverse. Ainsi on considère $\varepsilon > 0$ arbitraire, par le \autoref{cor: Caractérisation de la mesurabilité par les fermés} pour chaque $j \geqslant 1$, il existe un ensemble fermé $F_j \subset E_j$ avec
+	\[
+	m(E_j \backslash F_j) < \frac\varepsilon{2^j}.
+	\]
+	Comme $E_j$ est borné, alors $F_j$ l'est aussi et donc est compact. De plus comme les $F_i$ sont disjoints, il suit que
+	\[
+	\dist(F_i, F_j) > 0, \quad i \neq j
+	\]
+	Ainsi, par le \autoref{thm: Additivité 1}, il en résulte que
+	\[
+	m(E) \geqslant m \Bigg(\bigcup_{j=1}^N \Bigg) = \sum_{j=1}^N m(F_j) > \sum_{j=1}^N \Big[m(E_j) - \frac\varepsilon{2^j}\Big] > \sum_{j=1}^N m(E_j) - \varepsilon
+	\]
+	Comme $N \geqslant 1$ est arbitraire, on obtient par passage à la limite
+	\[
+	m(E) \geqslant \sum_{j=1}^\infty m(E_j) - \varepsilon
+	\]
+	En laissant $\varepsilon \to 0$, l'autre inégalité suit.	
+	
+	Il reste à traiter le cas où des ensembles $E_j$ ne sont pas bornés. On pose $Q_k = [-k, k]^n$ la suite de cube de longueur $2k$. Il est clair que $Q_k \subset Q_{k+1}$ et $\bigcup_k Q_k = \Rn$. On pose ensuite
+	\[
+	E_{jk} := E_j \cap (Q_{k+1} \backslash Q_k), \quad k \geqslant 1, \qquad E_{j0} = E_j \cap Q_1
+	\]
+	Il est alors claire que les $E_{jk}$ sont mesurable par opération préservant la mesurabilité et par mesurabilité des  $Q_k$ puisque fermés, de plus on a 
+	\[
+	E_j = \bigcup_{k=0}^\infty E_{jk}
+	\]
+	Et donc d'après la première étape de la preuve, on a
+	\[
+	m(E) = \sum_{jk} m(E_{jk}) \et \forall j, \quad m(E_j) = \sum_k m(E_{jk})
+	\]
+	Ce qui permet de conclure
+	\[
+	m(E) = \sum_{jk} m(E_{jk}) = \sum_j \sum_k m(E_{jk}) = \sum_j m(E_j)
+	\]
+}
+
+
+\begin{proposition}
+	On a deux propriétés analogue concernant des suites d'ensembles monotone ; 
+	\begin{enumerate}
+		\item Soit ${E_j}_{j=1}^\infty$ une suite d'ensemble mesurable dans $\Rn$ telle que $E_j \subset E_{j+1}$ pour tout $j$. Alors, si on pose
+		\[
+		E = \bigcup_{j=1}^\infty E_j
+		\]
+		alors $E$ est mesurable et 
+		\[
+		m(E) = \lim_{j \to \infty} m(E_j)
+		\]
+		\item Soit ${E_j}_{j=1}^\infty$ une suite d'ensemble mesurable dans $\Rn$ telle que $E_{j+1} \subset E_j$ pour tout $j$. Alors, si on pose
+		\[
+		E = \bigcap_{j=1}^\infty E_j
+		\]
+		alors $E$ est mesurable et 
+		\[
+		m(E) = \lim_{j \to \infty} m(E_j)
+		\]
+	\end{enumerate}
+\end{proposition}
+
+\prf{La mesurabilité de $E$ est dans les deux cas une conséquence du fait que les ensembles mesurables forment un $\sigma$-algèbre. Pour le reste on a
+	\begin{enumerate}
+		\item Si on pose 
+		\[
+		F_j := E_{j+1} \backslash E_j, \quad j \geqslant 1, \quad 	F_0 := E_1
+		\]
+		Alors on remarque 
+		\[
+		E = \bigcup_{j = 0}^\infty F_j
+		\]
+		et les ensembles $F_j$ sont mesurables et disjoints. Ainsi par le \autoref{thm: additivité de la mesure de Lebesgue} on en déduit que
+		\[
+		m(E) = \sum_{j=0}^\infty m(F_j) \et m(F_j) = m(E_{j+1}) - m(E_J), \quad j \geqslant 1
+		\]
+		Il suit que
+		\[
+		\sum_{j=0}^N = m(E_1) + \sum_{j=1}^N [ m(E_{j+1}) - m(E_J)] = m(E_{N+1}), \quad N \geqslant 1
+		\]
+		On peut donc conclure que
+		\[
+		m(E) = \lim_{N \to \infty} \sum_{j=0}^N m(F_j) = \lim_{N \to \infty} m(E_{N+1}) = \lim_{j \to \infty} m(E_j)
+		\]
+		
+		\item On remarque que
+		\[
+		E_1 \backslash E = \bigcup_{j=1}^\infty (E_j \backslash E_{j+1})
+		\]
+		On a alors une union d'ensembles disjoints et donc par le \autoref{thm: additivité de la mesure de Lebesgue} on en déduit que
+		\begin{align*}
+			m(E_1\backslash E) &= \sum_{j=1}^\infty m(E_j \backslash E_{j+1}) = \lim_{N \to \infty} \sum_{j=1}^N  m(E_j \backslash E_{j+1}) \\
+			&= \lim_{N \to \infty} \sum_{j=1}^N [ m(E_j \backslash E_{j+1})] = \lim_{N \to \infty} [m(E_1)- m(E_{N+1})]
+		\end{align*}
+		On a déduit que
+		\[
+		m(E_1) - m(E) = m(E_1\backslash E) = m(E_1) - \lim_{N \to \infty} m(E_{N+1})
+		\]
+		ainsi on a bien
+		\[
+		m(E) = \lim_{N \to \infty} m(E_{N+1}) = \lim_{j \to \infty} m(E_j)
+		\]
+	\end{enumerate}	
+}
+
+\begin{theoreme}[Invariance par translation] \label{thm: Invariance par translation}
+	Soit $T : \Rn \to \Rn$ une translation. Alors si $E$ est mesurable, $T(E)$ l'est aussi, et
+	\[
+	m(T(E)) = m(E)
+	\]
+\end{theoreme}
+
+\prf{Soit $Q \subset \Rn$ un cube, alors $T(Q)$ est aussi un cube, et $\Vol T(Q) = \Vol Q$. On en déduit alors facilement que
+	\[
+	m^*(E) = \inf_{\bigcup_j Q_j \supset E} \sum_j \Vol Q_j = \inf_{\bigcup_j T(Q_j) \supset T(E)} \sum_j \Vol Q_j = \inf_{\bigcup_j T(Q_j) \supset T(E)} \sum_j \Vol T(Q_j) = m(T(E))
+	\]
+	En particulier si $E$ est mesurable, étant donné $\varepsilon > 0$, il existe $U \subset \Rn$ ouvert avec $E \subset U$ et $m^*(U \backslash E) < \varepsilon$. Mais $T(E) \subset T(U)$ et donc
+	\[
+	m^*(T(U) \backslash T(E)) = m^*(T(U \backslash E)) = m^*(U \backslash E) < \varepsilon.
+	\]
+	Il suit que $T(E)$ est mesurable. Et comme $m^*(E) = m(E)$ pour $E$ mesurable, le théorème suit.
+}
+
