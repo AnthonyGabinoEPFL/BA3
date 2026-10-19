@@ -1,89 +1,75 @@
 \chapter{Analyse vectorielle dans $\Rn$}
 \lecture{7 septembre}
 \begin{definition}[Définition de base]
-	Soit $U \subset \Rn$ un \textbf{domaine} \label{def: Domaine}, c'est-à-dire un sous-ensemble \emph{ouvert} et \emph{connexe}, on appelle
+	Soit $U \subset \Rn$ un \textbf{domaine}, c'est-à-dire un ouvert et connexe, on appelle
 	\begin{enumerate}
-		\item $f \in C^k(U, \R), ~k \geqslant 0$ un \textbf{champ scalaire}. \label{def: Champ scalaire}
-		\item $\bm f \in C^k(U, \Rn)$ un \textbf{champ vectoriel}. \label{def: Champ vectoriel}
+		\item $f : U \to \R$, un \textbf{champ scalaire},
+		\item $f : U \to \Rn$, un \textbf{champ vectoriel}.
 	\end{enumerate}
+	De plus si $f$ est $k$-fois continûment dérivable, on notera respectivement $f \in C^k(U, \R)$ et $\bm f \in C^k(U, \Rn)$, ou de manière générale $f \in C^k$ si le contexte est clair.
 \end{definition}
 
 \begin{definition}[Gradient] \label{def: Gradient}
-	Soit $g \in C^1(U, \R)$ un champ scalaire. Alors on apelle
+	Soit $g \in C^1$ un champ scalaire. Alors on apelle
 	\[
 	\bm f = \nabla g
 	\]
 	le \textbf{gradient} de $g$. Dans ce cas, on dit que $\bm f$ dérive d'un champ scalaire $\bm f$.
 \end{definition}
 
- \section{Notions d'intégration}
+\section{Intégrale de chemin}
  
- \begin{definition}[chemin] \label{def: Chemin}
- 	Un \textbf{chemin} est une application continue 
+ \begin{definition}[chemin et reparamétrisation] \label{def: Chemin et reparamétrisation}
+ 	Un \textbf{chemin} est une application continue
  	\[
- 	\gamma : I \to U
+ 	\gamma : I := [s,t] \to U
  	\]
- 	où $I = [s,t], \quad s < t \in \R$, et tel qu'il existe une partition de $I = \bigcup_{j=1}^N I_j$ où les $I_j$ sont des intervalles fermés et d'intérieurs disjoints, tel que les restrictions
+ 	$C^1$ par morceaux, on dira que $\gamma$ est un \textbf{lacet} si $\gamma(s) = \gamma(t)$. De plus si on considère un difféomorphisme $\varphi : [\tilde s, \tilde t] \to [s,t]$ tel que $\varphi' > 0$. Alors on appelle
  	\[
- 	\gamma_{\mid I_j} \in C^1(I_j, U)
+ 	\tilde \gamma := \gamma \circ \varphi : [\tilde s, \tilde t] \to U
  	\]
- 	autrement dit $\gamma$ est \emph{continue par morceaux}. De plus on dira que $\gamma$ est un \textbf{lacet} ou \textbf{chemin fermé} si $\gamma(s) = \gamma(t)$.
+ 	une \textbf{reparamétrisation} de $\gamma$.
  \end{definition}
  
  \subsection{Intégrale curviligne}
 
  \begin{definition}[Intégrale curviligne] \label{def: Intégrale curviligne}
- 	Soit $f \in C^0(U, \R)$ un champ scalaire, et soit $\gamma : I \to U$ un chemin, alors on définit l'\textbf{intégrale curviligne} de $f$ le long de $\gamma$ par
+ 	Soit $f \in C^0$ un champ scalaire, et soit $\gamma : I \to U$ un chemin, alors on définit l'\textbf{intégrale curviligne} de $f$ le long de $\gamma$ par
  	\[
- 	\int_\gamma f \, \mathrm ds = \int_I f(\gamma(t)) \, \norme{\gamma'(t)} \, \mathrm dt =: \sum_{j=1}^N \int_{I_j} f(\gamma(t)) \, \norme{\gamma'(t)} \, \mathrm dt
+ 	\int_\gamma f  \, \mathrm ds = \int_I f(\gamma(t)) \, \norme{\gamma'(t)} \, \mathrm dt
  	\]
- 	où $\norme{ \gamma'(t)} = \sqrt{\sum_{i=1}^n \gamma_i'(t)^2}$.
+ 	où $\norme{\gamma'(t)} = \sqrt{\sum_{i=1}^n \gamma_i'(t)^2}$.
  \end{definition}
  
- \begin{definition}[Reparamétrisation d'un chemin] \label{def: Reparamétrisation d'un chemin}
- 	Soit $\gamma : [s,t] \to U$ un chemin et soit
- 	\[
- 	\varphi : [\tilde s, \tilde t] \to [s,t]
- 	\]
- 	un difféomorphisme de classe $C^1$ tel que $\varphi' > 0$. Alors la composition $\gamma \circ \varphi : [\tilde s, \tilde t] \to U$ est encore un chemin.
- \end{definition}
  
  \begin{theoreme}[Invariance par reparamétrisation] \label{thm: Invariance par reparamétrisation}
- 	Soit $U \subset \Rn$ un domaine, $f \in C^0(U)$ un champ scalaire, $\gamma : I \to U$ et $\gamma \circ \varphi : \tilde I \to U$ une reparamétrisation. Alors
+ 	Soit $U \subset \Rn$ un domaine, $f \in C^0$ un champ scalaire, $\gamma : [s,t] \to U$ un chemin et $\tilde \gamma : [\tilde s, \tilde s] \to U$ une reparamétrisation, alors
  	\[
- 	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_\gamma f \, \mathrm ds
+ 	\int_{\tilde \gamma} f \, \mathrm ds = \int_\gamma f \, \mathrm ds
  	\]
+ 	autrement dit $\int_\gamma f \, \mathrm ds$ est \textbf{invariant par reparamétrisation}.
 \end{theoreme}
-\prf{Soit $\tilde I = [\tilde s, \tilde t]$, $I =[s,t]$. Alors
-	\[
-	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\tilde I} f(\gamma \circ \varphi \, (x)) \, \norme{(\gamma \circ \varphi)'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \, \norme{\gamma'\circ \varphi(x) \, \varphi'(x)} \, \mathrm dx = \int_{\tilde s}^{\tilde t} f(\gamma \circ \varphi(x)) \varphi'(x) \, \norme{\gamma' \circ \varphi(x)} \, \mathrm dx
-	\]
-	et donc par changement de variable on a bien, 
-	\[
-	\int_{\gamma \circ \varphi} f \, \mathrm ds = \int_{\varphi(\tilde s)}^{\varphi(\tilde t)} f(\gamma(y)) \, \norme{\gamma'(y)} \, \mathrm dy	 = \int_\gamma f \, \mathrm ds	
-	\]
+\prf{En utilisant les mêmes notations que dans la \autoref{def: Chemin et reparamétrisation}, on a
+	\begin{align*}
+		\int_{\tilde \gamma} f \, \mathrm ds = \int_{\gamma \circ \varphi} f \, \mathrm ds &= \int_{\tilde I} f(\gamma \circ \varphi(t)) \, \norme{(\gamma \circ \varphi)'(t)} \, \mathrm dt = \int_{\tilde I} f(\gamma (\varphi(t))) \, \norme{\varphi'(t) \gamma'(\varphi(t))} \, \mathrm dt \\
+		&= \int_{\tilde I} f(\gamma(\varphi(t))) \, \norme{\gamma'(\varphi(t))} \, \varphi'(t) \, \mathrm dt = \int_{\varphi(\tilde s)}^{\varphi(\tilde t)} f(\gamma(y)) \, \norme{\gamma'(y)} \, \mathrm dy \\
+		&= \int_s^t f(\gamma(y)) \, \norme{\gamma'(y)} \, \mathrm dy = \int_\gamma f \, \mathrm ds
+	\end{align*}
 	d'où le résultat.
 }
 
 \subsection{Circulation d'un champ vectoriel}
 
 \begin{definition}[Circulation] \label{def: Circulation}
-	 Soit $U \subset \Rn$ un domaine et $\bm f \in C^0(U, \Rn)$ un champ vectoriel et $\gamma : I \to U$ un chemin, alors on définit la \textbf{circulation} du champ vectoriel le long de $\gamma$ par
+	Soit $U \subset \Rn$ un domaine et $\bm f \in C^0$ un champ vectoriel et $\gamma : I \to U$ un chemin, alors on définit la \textbf{circulation} du champ vectoriel le long de $\gamma$ comme
 	\[
 	\int_{\gamma} \bm f \cdot \mathrm d \bm s = \int_I \bm f(\gamma(t)) \cdot \bm \gamma'(t) \, \mathrm dt
 	\]
 	où $\cdot$ désigne le produit scalaire euclidien.
 \end{definition}
 
-\begin{remarque} L'intégrale est invariante par reparamétrisation. Mais si on change le sens de parcours, alors le signe change. Par exemple, soit $\gamma : [0,1] \to U$ un chemin et $\varphi : [0,1] \to [0,1], ~\varphi(t) = 1-t$ alors on trouve bien
-	\[
-	 \int_{\gamma \circ \varphi} \bm f \cdot \, \mathrm \bm s = - \int_{\gamma} \bm f \cdot \, \mathrm d \bm s
-	\]
-	alors on peut noter plus simplement $\gamma \circ \varphi = - \gamma$.
-\end{remarque}
-
 \begin{definition}[Concaténation de chemin] \label{def: Concaténation de chemin}
-	Soit $\gamma : [a,b] \to U$ et $\tilde \gamma : [b, c] \to U$ des chemins tels que $\gamma(b) = \tilde \gamma(b)$, alors on définit la \textbf{concaténation} $\gamma\oplus \tilde \gamma$ par 
+	Soit $U \subset \Rn$ un domaine et soient $\gamma_1 : [a,b] \to U$ et $\gamma_1 : [b, c] \to U$ deux chemins tels que $\gamma_1(b) = \gamma_2(b)$, alors on définit la \textbf{concaténation} $\gamma_1 \oplus \gamma_2$ par 
 	\[
 	\begin{array}{cccc}
 		\gamma \oplus \tilde \gamma : & [a,c] & \longrightarrow & U \\
@@ -97,67 +83,80 @@
 	Il est facile de voir que $\gamma \oplus \tilde \gamma$ est bien $C^1$ par morceaux et donc il s'agit bien d'un chemin.
 \end{definition}
 
+\begin{remarque}
+	Il est facile de voir que
+	\[
+	\int_{\gamma_1 \oplus \gamma_2} \bm f \cdot \mathrm d \bm s = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s + \int_{\gamma_2} \bm f \cdot \mathrm d \bm s \et \int_{-\gamma_1} \bm f \cdot \mathrm d \bm s = - \int_{\gamma_1} \bm f \cdot \mathrm d \bm s 
+	\]
+	où $-\gamma_1(t) := \gamma_1(a+b -t)$.
+\end{remarque}
+
 On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \bm f \cdot \mathrm d \bm s$ ne dépend que du point initial et du point final de $\gamma$.
 
 \begin{lemme}
-	Soit $U \subset \Rn$ un domaine, $\bm f \in C^k(U)$ un champ vectoriel. Alors $\bm f$ à la propriétés que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités des chemins si et seulement si $\int_\gamma \bm f \cdot \, \mathrm d \bm s  = 0$ pour chaque lacet $\gamma : I \to U$.
+	Soit $U \subset \Rn$ un domaine, $\bm f \in C^0$ un champ vectoriel. Alors $\bm f$ à la propriétés que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités des chemins si et seulement si $\int_\gamma \bm f \cdot \, \mathrm d \bm s  = 0$ pour chaque lacet $\gamma : I \to U$.
 \end{lemme}
 
-\prf{Si $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités, on considère un lacet $\gamma$ arbitraire. Alors on sait qu'il existe $\gamma_1$ et $\gamma_2$ tel que $\gamma = \gamma_1 \oplus -\gamma_2$  et donc a 
-	\[
-	\int_\gamma \bm f \cdot \mathrm d \bm s = \int_{\gamma_1 \oplus -\gamma_2} \bm f \cdot \mathrm d \bm s = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \mathrm d \bm s = 0
-	\]	
-	Et inversement, alors si $\int_\gamma \bm f \cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma : I  \to U$m  et si $\gamma_1, \gamma_2$ lient $\bm p$ et $\bm q$, alors on peut introduire le lacet qui la concaténation de $\gamma_1$ et $-\gamma_2$ et donc
-	\[
-	\int_{\gamma_1} \bm f \cdot \, \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \, \mathrm d \bm s = \int_{\gamma_1 \oplus - \gamma_2} \bm f \cdot \, \mathrm d \bm s = 0
-	\]
-	et donc on a bien la propriété voulue.
+\prf{
+	\begin{enumerate}
+		\item[$\implies$ :] 
+		Supposons que $\int_\gamma \bm f \cdot \, \mathrm d \bm s$ ne dépend que des extrémités, on considère un lacet $\gamma$ arbitraire. On considère deux points arbitraire $\bm p$ et $\bm q$ du lacet, alors on sait qu'il existe $\gamma_1$ et $\gamma_2$ reliant $\bm p$ et $\bm q$ tel que $\gamma = \gamma_1 \oplus -\gamma_2$  et donc a 
+		\[
+		\int_\gamma \bm f \cdot \mathrm d \bm s = \int_{\gamma_1 \oplus -\gamma_2} \bm f \cdot \mathrm d \bm s = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \mathrm d \bm s = 0
+		\]	
+		\item[$\impliedby$ :]
+		Et inversement, alors si $\int_\gamma \bm f \cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma : I  \to U$m  et si $\gamma_1, \gamma_2$ lient $\bm p$ et $\bm q$, alors on peut introduire le lacet qui la concaténation de $\gamma_1$ et $-\gamma_2$ et donc
+		\[
+		\int_{\gamma_1} \bm f \cdot \, \mathrm d \bm s - \int_{\gamma_2} \bm f \cdot \, \mathrm d \bm s = \int_{\gamma_1 \oplus - \gamma_2} \bm f \cdot \, \mathrm d \bm s = 0
+		\]
+		et donc on a bien la propriété voulue.
+	\end{enumerate}
 }
 
 
 \lecture{10 septembre}
-7
 \begin{theoreme}
-	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ dérive d'un potentiel, donc s'il existe $g \in C^{k+1}(U, \R)$ tel que $\bm f = \nabla g$.
+	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ dérive d'un potentiel.
 \end{theoreme}
 
-
-
-\prf{Supposons que $\bm f = \nabla g$, et que $\gamma : [0,1] \to U$ est un lacet, alors
-\[
-\int_\gamma \bm f \cdot \mathrm d \bm s = \int_0^1 \nabla g(\gamma(t)) \cdot \gamma'(t) \, \mathrm dt = \int_0^1 \frac{\mathrm d}{\mathrm dt} g(\gamma(t)) \, \mathrm dt = g(\gamma(1)) - g(\gamma(0))
-\]
-mais comme $\gamma$ est un lacet alors $\gamma(1) = \gamma(0)$ et donc on a bien
-\[
-\int_\gamma \bm f \cdot \mathrm d \bm s = 0
-\]
-
-Réciproquement supposons que $\int_\gamma \bm f \cdot \mathrm d \bm s = 0$ pour tout lacet, alors il faut exhiber $g \in C^1(U)$ avec $\bm f = \nabla g$. Par connexité de $U$, on considère $p \in U$, et on pose
-\[
-g(x) = \int_\gamma \bm f \cdot \mathrm d \bm s
-\]
-où $\gamma$ est un chemin arbitraire en $U$ qui relie $p$ à $x$. D'après  les hypothèse, alors $g$ est bien défini. Il est facile de voir que $g$ est $C^0$, il reste donc à montrer que $g$ est $C^1$ et qu'on a bien $\nabla g = \bm f$. Or pour montrer que $\nabla g = f$, et donc à fortiori que $g \in C^1(U)$ on calcule les dérivées partielles de $g$. Alors on a 
-\[
-\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} 
-\]
-or 
-\[
-g(x + h e_j) = \int_{\tilde \gamma} \bm f \cdot \mathrm d\bm s
-\]
-avec $\tilde \gamma $ est un chemin arbitraire qui lie $p$ à $x + he_j$. Or par concaténation on peut écrire, $\tilde \gamma = \gamma \oplus \gamma_1$ où $\gamma_1 : [0,1] \to U, \quad \gamma_1(t) = x  + t h e_j$
-Et donc par hypothèse
-\[
-g(x +he_j) = \int_{\gamma \oplus \gamma_1} \bm f \cdot \mathrm d \bm s = \int_\gamma \bm f \cdot \mathrm d \bm s + \int_{\gamma_1} \bm f \cdot \mathrm d \bm s
-\]
-Et donc on a
-\[
-g(x + h e_j) - g(x) = \int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_0^1 \bm f(x + th e_j) \cdot h e_j \, \mathrm dt = h \int_0^1 f_j(x + the_j) \, \mathrm dt = h \int_0^1 f_j(x) \, \mathrm dt + h \int_0^1 r_j(t,h,x) \, \mathrm dt
-\]
-où $r_j(t,h,x) = f_j(x + the_j) - f_j(x) \longrightarrow 0$ et donc $h \int_0^1 r_j(t,h,x) \, \mathrm dt = o(h)$ et donc 
-\[
-\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} = f_j(x)
-\]
-Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, ainsi $g \in C^1(U)$ et $\nabla g = \bm f$.
+\prf{\begin{enumerate}
+		\item[$\implies$ :] 
+		Supposons que $\bm f = \nabla g$, et que $\gamma : [0,1] \to U$ est un lacet, alors
+		\[
+		\int_\gamma \bm f \cdot \mathrm d \bm s = \int_0^1 \nabla g(\gamma(t)) \cdot \gamma'(t) \, \mathrm dt = \int_0^1 \frac{\mathrm d}{\mathrm dt} g(\gamma(t)) \, \mathrm dt = g(\gamma(1)) - g(\gamma(0))
+		\]
+		mais comme $\gamma$ est un lacet alors $\gamma(1) = \gamma(0)$ et donc on a bien
+		\[
+		\int_\gamma \bm f \cdot \mathrm d \bm s = 0
+		\]	
+		\item[$\impliedby$ :]
+		Réciproquement supposons que $\int_\gamma \bm f \cdot \mathrm d \bm s = 0$ pour tout lacet. Par connexité de $U$, on considère $p \in U$, et on pose
+		\[
+		g(x) = \int_\gamma \bm f \cdot \mathrm d \bm s
+		\]
+		où $\gamma$ est un chemin arbitraire en $U$ qui relie $p$ à $x$. D'après  les hypothèse, alors $g$ est bien défini. Il est facile de voir que $g$ est de classe $C^0$. De plus
+		\[
+		\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} 
+		\]
+		or $g(x + h e_j) = \int_{\tilde \gamma} \bm f \cdot \mathrm d\bm s$ avec $\tilde \gamma $ est un chemin arbitraire qui lie $p$ à $x + he_j$. Or par concaténation on peut écrire, $\tilde \gamma = \gamma \oplus \gamma_1$ où $\gamma_1 : [0,1] \to U, \quad \gamma_1(t) = x  + t h e_j$,
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.25\textwidth]{"images/concaténation.png"}	
+		\end{figure}
+		ce qui est bien valable car $\int_\gamma \bm f \cdot \mathrm d \bm s$ ne dépend que des extrémités. Ainsi
+		\[
+		g(x +he_j) = \int_{\gamma \oplus \gamma_1} \bm f \cdot \mathrm d \bm s = \int_\gamma \bm f \cdot \mathrm d \bm s + \int_{\gamma_1} \bm f \cdot \mathrm d \bm s
+		\]
+		Et donc on a
+		\begin{align*}
+		g(x + h e_j) - g(x) &= \int_{\gamma_1} \bm f \cdot \mathrm d \bm s = \int_0^1 \bm f(x + th e_j) \cdot h e_j \, \mathrm dt = h \int_0^1 f_j(x + the_j) \, \mathrm dt  \\&= h \int_0^1 f_j(x) \, \mathrm dt + h \int_0^1 r_j(t,h,x) \, \mathrm dt
+		\end{align*}
+		où $r_j(t,h,x) = f_j(x + the_j) - f_j(x) \longrightarrow 0$ et donc $h \int_0^1 r_j(t,h,x) \, \mathrm dt = o(h)$ et donc 
+		\[
+		\frac{\partial g}{\partial x_j} (x) = \lim_{h \to 0} \frac{g(x + h e_j) - g(x)}{h} = f_j(x)
+		\]
+		Ainsi les dérivées partielles existent et sont continues, ainsi $g \in C^1$, de plus on a bien $\nabla g = \bm f$.
+	\end{enumerate}
 }
 
 \begin{remarque}
@@ -206,7 +205,7 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 }
 
 
-\subsection{Green-Riemann et potentiels scalaires}
+\section{Green-Riemann et potentiels scalaires}
 \begin{proposition}[Partition de l'unité] \label{prop: Partition de l'unité}
 	Soit $K \subset \Rn$ un sous-ensemble compact, soit $U_i, V_i$ pour $i = 1, \ldots, N$ des domaines tels que $\overline U_i \subset V_i$, chaque $U_i$ est borné, et 
 	\[
@@ -220,50 +219,53 @@ Ainsi les dérivées partielles existent, sont continues, et $g$ est continue, a
 
 \lecture{14 septembre}
 
-\prf{On construit les fonctions $g_i \in C^0_0(V_i)$ avec ${g_i}_{\mid \overline U_i} = 1$ pour tout $i \in \llbracket 1, N \rrbracket$. Pour arriver à $g_i$, on va considérer la composition de la fonction $\dist(x, U_i)$ avec une autre fonction. Ainsi soit $\varepsilon_i = \dist(U_i, V_i^c) = \dist(\overline U_i, V_i^c) > 0$ car $\overline U_i$ est compact, $V_i^c$ fermé, et $\overline U_i \cap V_i^c = \emptyset$. Donc soit $\varepsilon = \min_{i \in \llbracket 1,N \rrbracket} \varepsilon_i$. On définit la fonction suivante
+\prf{On construit des fonctions $g_i \in C^0_0(V_i)$ de sorte que ${g_i}_{\mid \overline U_i} = 1$ pour tout $i \in \llbracket 1, N \rrbracket$. 
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.2\textwidth]{"images/ui-vi.png"}
+	\end{figure}
+	Ainsi soit $\varepsilon_i = \dist(U_i, V_i^c) = \dist(\overline U_i, V_i^c) > 0$ car $\overline U_i$ et $V_i^c$ sont fermés et $\overline U_i \cap V_i^c = \emptyset$. On pose donc $\varepsilon = \min_{i \in \llbracket 1, N \rrbracket} \varepsilon_i$ et on définit $\zeta : \R_+ \to \R$ comme
 	\[
-	\begin{array}{cccc}
-		\zeta : & \R_+ & \to & \R \\
-		& t & \mapsto & \begin{cases}
-			1 & 0 \leqslant t \leqslant \varepsilon/4 \\
-			(\varepsilon/2 - t) / (\varepsilon/4) & \varepsilon/4< t < \varepsilon/2 \\
-			0 & t \geqslant \varepsilon/2
-		\end{cases}
-	\end{array}
+	\zeta : t \mapsto \begin{cases} 1 & t \in [0, \varepsilon/2] \\ (\varepsilon/2 -t)/(\varepsilon/4) & t \in [\varepsilon/4, \varepsilon/2] \\ 0 & t \in [\varepsilon/2, \infty[ 
+	\end{cases}
 	\]
-	Ainsi il nous suffit de poser $g_i(x) = \zeta(\dist(x, U_i))$. On a $g_i \in C^0(\R)$.
+	et finalement on pose $g_i = \zeta(\dist(x, U_i))$. On remarque alors que $g_i \in C^0$ par composition de fonction continue. Il reste donc à régulariser $g_i$
 	
-	Il reste donc à régulariser les $g_i$. Soit $\psi \in C^\infty_0(B_1(0))$, de plus on peut supposer que $\psi \geqslant 0$ et $\int_{\Rn} \psi(x) \, \mathrm d x = 1$. Pour chaque $\delta > 0$, on définit $\psi_\delta(x) = \delta^{-n} \psi\!\left(\frac{x}{\delta}\right)$. On choisit en particulier $\delta < \varepsilon/4$. On remplace les fonctions $g_i$ par les intégrales paramétrées,
+	Ainsi soit $\psi \in C^\infty_0(B_1(0))$, de plus on peut supposer que $\psi \geqslant 0$ et $\int_{\Rn} \psi (x) \, \mathrm dx = 1$. Pour tout $\delta > 0$ on définit $\psi_\delta(x) = \delta^{-n} \psi(x \delta^{-1}) \in C^\infty_0(B_\delta(0))$. On considère ensuite les convolutions suivantes
 	\[
-	\tilde \varphi_i(x) = \int_{\Rn} g_i(x -y) \psi_\delta (y) \, \mathrm dy
+	\tilde \varphi_i(x) = (g_i * \psi_\delta)(x) = \int_{\Rn} g_i(x -y) \psi_\delta(y) \, \mathrm dy =  \int_{\Rn} g_i(x) \psi_\delta(x - y) \, \mathrm dy
 	\]
-	Il faut vérifier que $\tilde \varphi_i$ satisfait encore $\left.\tilde \varphi_i\right|_{\overline U_i} = 1$, et $\left.\tilde \varphi_i\right|_{V_i^c} = 0$. En effet, si $x \in \overline U_i$, on a 
+	les fonctions $\tilde \varphi_i$ sont bien définit et sont de classe $C^\infty$. On considère en particulier $\delta < \varepsilon/4$, alors pour tout $x \in \overline U_i$ et $y \in B_\delta(0)$, alors
 	\[
-	\dist(x-y, U_i) \leqslant \dist(x, U_i) + \norme y \leqslant \dist(x, U_i) + \delta < \varepsilon/4
+	\dist(x-y, U_i) \leqslant \dist(x, U_i) + \norme y < \delta < \varepsilon/4
 	\]
-	par le choix de $\delta$. Ainsi on a
+	ainsi pour tout $y \in B_\delta(0), \quad g_i(x -y) = 1$ si $x \in \overline U_i$, et donc
 	\[
-	\forall x \in \overline U_i, \quad \tilde \varphi_i(x) = \int_{B_\delta(0)} g_i(x -y) \psi_\delta(y) \, \mathrm d y= \int_{B_\delta(0)} \psi_\delta (y) \, \mathrm dy = 1
+	\forall x \in \overline U_i, \quad \tilde \varphi_i (x) = \int_{\Rn} g_i(x-y) \psi_\delta(y) \, \mathrm dy = \int_{B_\delta(0)}g_i(x-y) \psi_\delta(y) \, \mathrm dy = \int_{B_\delta(0)} \psi_\delta(y) \, \mathrm dy = 1
 	\]
-	De la même manière si $x \in V_i^c$ et $y \in B_\delta(0)$ alors 
+	ainsi ${\tilde{\varphi}_i}{}_{\mid \overline{U}_i} = 1$. De la même manière si $x \in V^c$ et $y \in B_\delta(0)$ alors
 	\[
-	\dist(x-y, U_i) \geqslant \dist(x, U_i) - \norme y \geqslant \varepsilon_i - \varepsilon/4 \geqslant \varepsilon - \varepsilon/4 = \frac{3 \varepsilon}{4}
+	\dist(x -y, U_i) \geqslant \dist(x, U_i) - \norme y \geqslant \varepsilon_i - \varepsilon/4 \geqslant \varepsilon - \varepsilon/4 = \frac{3\varepsilon}4
 	\]
-	Ainsi $\zeta(\dist(x-y, U_i)) = 0$ si $x \in \overline U_i, ~ y \in V_i^c$ et donc $g_i(x-y) = 0$. Ainsi 
+	donc $\forall y \in B_\delta(0), \quad g_i(x-y)$ si $x \in V_i^c$, ainsi
 	\[
-	\forall x \in V_i^c, \quad \tilde \varphi_i(x) = \int_{B_\delta(0)} g_i(x-y) \, \psi_\delta(y) \, \mathrm d y = 0
+	\forall x \in V_i^c, \quad \tilde \varphi_i(x) = \int_{\Rn} g_i(x-y) \psi_\delta(y) \, \mathrm dy = \int_{B_\delta(0)}g_i(x-y) \psi_\delta(y) \, \mathrm dy = 0
 	\]
-	Ainsi les propriétés des $g_i$ sont conservées sur les $\tilde \varphi_i$ sauf que désormais $\tilde \varphi_i \in C_0^\infty$.
+	ainsi ${\tilde \varphi_i}{}_{\mid V_i^c} = 0$. Ainsi les propriétés des $g_i$ sont conservées sur les $\tilde \varphi_i$, sauf que désormais $\tilde \varphi_i \in C^\infty_0(V_i)$. 
 	
-	On construit à présent les $\varphi_i$ à partir de $\tilde \varphi_i$ de sorte que $\sum_{i=1}^N \varphi_i (x) = 1$ sur $K$. On pose pour tout $i \in \llbracket 1, N \rrbracket$,
+	Finalement, pour tout $i \in \llbracket1, N\rrbracket$, on pose
 	\[
-	\varphi_i = (1 -\tilde \varphi_1)(1 - \tilde \varphi_2) \cdot \ldots \cdot (1 - \tilde \varphi_i)
+	\phi_i = (1 - \tilde \varphi_1)(1 - \tilde \varphi_2) \cdot \ldots \cdot (1- \tilde \varphi_i)
 	\]
 	Par récurrence immédiate on vérifie que 
 	\[
-	1 - \sum_{i=1}^N \varphi_i(x) = (1 - \tilde \varphi_1)(1 - \tilde \varphi_2) \cdot \ldots \cdot (1 - \varphi_N)
+	1 - \sum_{i=1}^N \phi_i = (1 - \tilde \varphi_1) \cdot \ldots \cdot (1 - \tilde \varphi_N)
 	\]
-	Et donc si $x \in K \subset \bigcup_{i=1}^N$, alors il existe $j$ tel que $x \in U_j$, donc $\tilde \varphi_j(x) = 1$ et par conséquent $1 - \sum_{i=1}^N \varphi_i(x) = 0$. Ainsi $\sum_{i=1}^N \varphi_i(x) = 1$ sur $K$.
+	et donc si $x \in K \subset \bigcup_{i=1}^N U_i$, alors il existe $j$ tel que $x \in U_j$, donc $\tilde \varphi_j(x) = 1$ et par conséquent
+	\[
+	1 - \sum_{i=1}^N \phi_i(x) = 0
+	\]
+	d'où le résultat.
 }
 
 
