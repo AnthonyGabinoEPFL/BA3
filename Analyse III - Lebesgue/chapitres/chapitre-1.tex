@@ -115,7 +115,7 @@ On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \b
 
 
 \lecture{10 septembre}
-\begin{theoreme}
+\begin{theoreme} \label{thm: caractérisation de dérive}
 	Soit $U \subset \Rn$ un domaine, et $\bm f \in C^k(U)$ un champ vectoriel, alors $\int_\gamma \bm f\cdot \, \mathrm d \bm s = 0$ pour tout lacet $\gamma$ si et seulement si $\bm f$ dérive d'un potentiel.
 \end{theoreme}
 
@@ -206,6 +206,8 @@ On se demande s'il existe des champs vectoriels $\bm f$ tels que $\int_\gamma \b
 
 
 \section{Green-Riemann et potentiels scalaires}
+
+\subsection{Green-Riemann}
 \begin{proposition}[Partition de l'unité] \label{prop: Partition de l'unité}
 	Soit $K \subset \Rn$ un sous-ensemble compact, soit $U_i, V_i$ pour $i = 1, \ldots, N$ des domaines tels que $\overline U_i \subset V_i$, chaque $U_i$ est borné, et 
 	\[
@@ -397,7 +399,8 @@ pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$
 		Ce qui conclut la preuve.	
 }
 
-\begin{proposition}
+\subsection{Potentiel scalaire en $\R^2$}
+\begin{proposition}\label{prop: Condition suffisante de dérive d'un potentiel scalaire}
 	Soit $U \subset \Rn$ un domaine et $\bm f \in C^1(U, \Rn)$. Supposons que $\rot \bm f = 0$.
 	\begin{enumerate}
 		\item Soient $\gamma_1, \gamma_2 : [0,1] \to U$ deux chemines en $U$ avec les mêmes extrémités qui sont homotopes, alors
@@ -417,18 +420,37 @@ pour tout $\bm f \in C^1$, où $\gamma$ est une paramétrisation de $\partial V$
 
 \lecture{24 septembre}
 
-\prf{Les points $1.$ et $2.$ découle du $3.$, donc on va montrer uniquement le dernier points. Ainsi soit $p \in U$, on doit montrer que 
+\prf{On va montrer que le point 3. car c'est le plus important. On traite déjà le cas où $U$ est étoilé, ainsi par hypothèse il existe $\bm a \in U$ tel que pour tout $\bm x \in U$, le segment $[\bm a, \bm x]$ est contenu dans $U$. Ainsi il est naturel de définir la fonction
 	\[
-	g(x) = \int_\gamma \bm f \cdot \mathrm d \bm s
+	g(\bm x) = \int_{\gamma_{\bm a \to \bm x}} \bm f \cdot \mathrm d \bm s 
 	\]
-	où $\gamma$ est un chamin arbitraire en $U$ qui lie $p$ à $x$, ne dépend pas du choix de $\gamma$.
-	...
-} 
-
-
-\subsection{Théorème de Kelvin-Stokes}
+	où $\gamma_{\bm a \to \bm x}$ désigne le chemin reliant $\bm a$ et $\bm x$ par un segment. Soit maintenant $\bm x \in U$ et $|h| > 0$ suffisamment petit tel que $\bm x + h \bm e_i \in U$. Alors
+	\begin{align*}
+		g(\bm x + h \bm e_i) - g (\bm x) &= \int_{[\bm a, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s -\int_{[\bm a, \bm x]} \bm f \cdot \mathrm d \bm s \\
+			=&  \left(\int_{[\bm a, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s - \int_{[\bm a, \bm x]} \bm f \cdot \mathrm d \bm s  -\int_{[\bm x, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s  \right) + \int_{[\bm x, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s
+			=& \int_{\partial \Delta_{\bm a, \bm x, \bm x + h \bm e_i}} \bm f \cdot \mathrm d \bm s + \int_{[\bm x, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s
+	\end{align*} 
+	Où $\Delta_{\bm a, \bm x, \bm x + h \bm e_i}$ désigne le triangle de sommets $\bm a, \bm x$ et $\bm x + h \bm e_i$.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.15\textwidth]{"images/triangle.png"}
+	\end{figure}
+	Ainsi par le \autoref{thm: Green-Riemann} on obtient que l'intégral est nulle le long de $\partial \Delta$ et donc
+	\[
+	g(\bm x + h \bm e_i) - g (\bm x) = \int_{[\bm x, \bm x + h \bm e_i]} \bm f \cdot \mathrm d \bm s = \int_0^h \bm f(\bm x + t \bm e_i) \cdot \bm e_i \, \mathrm dt = \int_0^h f_i(\bm x + t \bm e_i) \, \mathrm dt
+	\]
+	Et donc
+	\[
+	\frac{\partial g}{\partial x_i}(\bm x) = \lim_{h \to 0} \frac{	g(\bm x + h \bm e_i) - g (\bm x)}{h} = \lim_{h \to 0} \int_0^h f_i(\bm x + t\bm e_i) \, \mathrm dt = f_i(\bm x)
+	\]
+	Il suit alors que $\nabla g (\bm x) = \bm f(x)$. Et donc $\bm f$ dérive bien d'un potentiel.	
+	
+	
+	Maintenant il nous reste à traiter le cas où $U$ est simplement connexe.
+}
+\section{Théorème de Kelvin-Stokes et potentiel scalaire en $\R^3$}
+\subsection{Intégrale de surface et flux d'un champ à travers une surface}
 On pense d'une surface $S \subset \R^2$ comme une généralisation d'un lacet : 
-
 \begin{definition}[Surface paramétrisée] \label{def: Surface paramétrisée}
 	Si $U \subset \R^2$ est un domaine et $\varphi : U \to \R^3$ de régularité $C^1$, on dit que $ S = \varphi(U) \subset R^3$ est une \textbf{surface paramétrisée régulière}, pourvu que
 	\begin{enumerate}
@@ -482,12 +504,12 @@ On a donc la définition naturelle suivante
 	\[
 	\iint_S \bm f \cdot \bm n \, \mathrm ds
 	\]
-	le \textbf{flux} de $\bm f$ à travers $(S, \varphi, \bm n)$.
+	le \textbf{flux} de $\bm f$ à travers $(S,\bm n)$.
 \end{definition}
 
 \lecture{28 septembre}
 \begin{theoreme}[Théorème de Kelvin-Stokes] \label{thm: Théorème de Kelvin-Stokes}
-	Soit $U \subset \R^2$ un domaine tel que $\overline U$ est compact et $\partial U$ est un lacet simple et régulier muni de l'orientation positive. Soit $\varphi \in C^1(\overline U, \R^3)$ une paramétrisation régulière de la surface $S = \varphi(\overline U)$ avec $\partial S = \varphi(\overline U)$ avec $\partial S = \varphi(\partial U)$. Ainsi si $\bm f \in C^1(\R^3, \R^3)$, alors on a 
+	Soit $U \subset \R^2$ un domaine tel que $\overline U$ est compact et $\partial U$ est un lacet simple et régulier muni de l'orientation positive. Soit $\varphi \in C^1(\overline U, \R^3)$ une paramétrisation régulière de la surface $S = \varphi(\overline U)$ avec $\partial S = \varphi(\partial U)$. Ainsi si $\bm f \in C^1(\R^3, \R^3)$, alors on a 
 	\[
 	\int_{\partial S} \bm f \cdot \mathrm d \bm s = \iint_S \rot \bm f \cdot \bm n \, \mathrm ds
 	\]
@@ -529,8 +551,24 @@ On a donc la définition naturelle suivante
 	\]
 }
 
+\subsection{Potentiel scalaire en $\R^3$}
+\begin{proposition}
+	Si $U$ est un ensemble simplement connexe et $\bm f \in C^1(U, \R^3)$ avec $\rot \bm f = 0$, alors $\bm f$ dérive d'un potentiel scalaire.
+\end{proposition}
 
-\subsection{Théorème de la Divergence / Gauss-Ostrogradsky}
+\prf{On a une preuve presque analogue à celle en $\R^2$ dans la \autoref{prop: Condition suffisante de dérive d'un potentiel scalaire} que l'on peut résumer par
+	\begin{enumerate}
+		\item Supposons $U \subset \R^3$ un étoilé, alors par le \autoref{thm: Théorème de Kelvin-Stokes} nous avons pour des triangles bien choisis
+		\[
+		\iint_\Delta \rot \bm f \cdot \bm n \, \mathrm d \sigma = \int_{\partial \Delta} \bm f \cdot \mathrm d \bm s
+		\]
+		Car $\rot \bm f = 0$, nous savons que $\int_{\partial \Delta} \bm f \cdot \mathrm d \sigma = 0$ ce qui permet de montrer que $\bm f$ dérive d'un potentiel scalaire.
+		\item Ensuite par le \autoref{thm: caractérisation de dérive} il suffit de montrer que $\int_\gamma \bm f \cdot \mathrm d \bm s = 0$ pour tout lacet $\gamma$ dans $U$.
+		\item et finalement on procède de manière identique à la preuve en dimension deux pour conclure.
+	\end{enumerate}
+}	
+
+\section{Théorème de la Divergence / Gauss-Ostrogradsky}
 Avant d'introduire le théorème de Gauss-Ostrogradsky on a besoin de définir plusieurs notions au préalable. Ainsi soit $U \subset \R^3$ un domaine borné par une surface $S$ compacte, fermée et régulière $(C^1)$. Alors on a les équivalences suivantes : 
 \begin{enumerate}
 	\item[$\iff$] $S$ est localement une surface paramétrée régulière de classe $C^1$.
