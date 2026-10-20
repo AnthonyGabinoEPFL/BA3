@@ -61,10 +61,12 @@
 	\begin{enumerate}
 		\item Son \textbf{action à gauche} $G \curvearrowright G$ est l'attribution
 		\[
-		h \cdot g = gh, \quad \forall g,h \in G
+		h \cdot g = hg, \quad \forall g,h \in G
 		\]
-		\item Son \textbf{action à droite} $G \curvearrowleft G$
-		
+		\item Son \textbf{action à droite} $G \curvearrowright G$ est l'attribution
+		\[
+		h \cdot g = g h^{-1}, \quad \forall g,h \in G
+		\]	
 		\item Son \textbf{action action adjointe} $G \curvearrowright G$ est l'attribution
 		\[
 		h \cdot g = h g h^{-1}, \quad \forall h,g \in G
@@ -123,6 +125,7 @@ Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 \prf{...}
 
 
+\subsection{Sous-groupe}
 \begin{definition}[Sous-groupe] \label{def: Sous-groupe}
 	Soit $G$ un groupe, un sous-ensemble $H \subset G$ est appelé \textbf{sous-groupe} s'il est fermé par rapport à
 	\begin{enumerate}
@@ -144,13 +147,13 @@ Ainsi $\varphi^{-1}$ définit bien un isomorphisme.
 	Tout groupe $G$ est un groupe de permutation, c'est-à-dire un sous-groupe de $S_X$ pour un certain ensemble $X$.
 \end{theoreme}
 
-\prf{Il faut construire un morphisme injectif $\Psi : G \to S_X$ et donc par le \autoref{lem: Noyau trivial} on doit avoir $\ker \Phi = \{e\}$. De plus on a vu que $\Phi$ peut être induit par une action $G \curvearrowright X$.
+\prf{Il faut construire un morphisme injectif $\Psi : G \to S_X$ et donc par le \autoref{lem: Noyau trivial} on doit avoir $\ker \Psi = \{e\}$. De plus on a vu que $\Psi$ peut être induit par une action $G \curvearrowright X$.
 	
 Or on a
 \[
 \ker \Psi = \{g \in G \mid \Psi_g = \mathrm{Id}_X\} = \{ g \in G \mid g \cdot x = x, \forall x \in X\}
 \]
-Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à gauche est fidèle, en effet on a 
+Et donc il suffit de trouver une action fidèle\footnote{une action est dit \textbf{fidèle} si son noyau est juste le sous-groupe trivial.}. Or il se trouve que l'action à gauche est fidèle, en effet on a 
 \[
 \ker = \{ g \in G \mid g \cdot h = h, \forall h \in G\} = \{ g \in G \mid gh = h, \forall h \in G\} = \{ g \in G \mid g = e\} = \{e\}
 \]
@@ -179,7 +182,7 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 \begin{theoreme}[théorème de l'orbite-stabilisateur] \label{thm: théorème de l'orbite-stabilisateur}
 	Soit $G \curvearrowright X$ une action de groupe fini, alors
 	\[
-	\forall x \in X, \quad |G \cdot x| = \frac{|G|}{|\stab_G(x)}
+	\forall x \in X, \quad |G \cdot x| = \frac{|G|}{|\stab_G(x)|}
 	\]
 \end{theoreme}
 
@@ -206,13 +209,14 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 	
 }
 
-\begin{remarque}
+\begin{remarque} \label{rmq: théorème de l'orbite-stabilisateur}
 	De plus si $X$ est finit, alors on a
 	\[
 	|X| = \sum_{G \cdot x} |G \cdot x| = \sum_{G \cdot x} \frac{|G|}{|\stab_G(x)|}
 	\]
 \end{remarque}
 
+\subsection{Action à droite et Action à gauche}
 \begin{definition}
 	Lorsque $H$ est un sous-groupe de $G$, alors les orbites de l'action à gauche
 	\[
@@ -222,32 +226,53 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 	\[
 	Hg = \{hg \mid h \in H\}
 	\]
-	où $g$ est à droite. De plus il est facile de voir que les actions à gauche et à droite sont libre. 
-	
+	où $g$ est à droite. Il en va de même pour les orbites de l'action à droite
+	\[
+	H \curvearrowright G, \quad h \cdot g = g h^{-1}
+	\]
+	sont appelées \textbf{classe à gauche}
+	\[
+	g H = \{gh^{-1} \mid h \in H\} = \{ g h \mid h \in H\}
+	\]De plus il est facile de voir que les actions à gauche et à droite sont libre. 	
 	On note
 	\[
-	G / H
+	G / H \et H \backslash G
 	\]
-	l'ensemble des classes à gauches de $G$ par rapport à $H$.
+	respectivement l'ensemble des classes à gauches de $G$ par rapport à $H$ et l'ensemble des classes à droite droite de $G$ par rapport à $H$.
 \end{definition}
 
 \begin{proposition}
-	On a 
+	Supposons que $G$ soit fini, et que $H \leq G$ est un sous-groupe quelconque alors
 	\[
 	|G / H| =  \frac{|G|}{|H|} = |H \backslash G|
 	\]
 	On désigne alors ce nombre par $[G : H]$ et on l'appelle l'\textbf{indice} du sous-groupe $H$ de $G$.
 \end{proposition}
+
+\prf{En effet on remarque que les actions à gauche et à droite sont libres, car
+	\[
+	hg = g \ou  g h^{-1} = g \implies h = e
+	\]
+	ainsi $\stab_H(g) = \{e\}$ pour tout $g \in G$. Et donc par le \autoref{thm: théorème de l'orbite-stabilisateur} alors on a 
+	\[
+	\forall g \in G, \quad |H \cdot g | = |H|
+	\]
+	Mais puisque $G$ est partitionné en classes à gauche ou à droite, on conclus que le nombre de ces classes est exactement
+	\[
+	|G/H| = |H \backslash G| = \frac{|G|}{|H|}
+	\]
+}
 \subsection{Action adjointe}
 \begin{definition}
 	On considère désormais l'action adjointe $G \curvearrowright G$, alors les orbites sont appelés \textbf{classe de conjugaison}. Plus précisément, la classe de conjugaison de $g \in G$ est l'ensemble
 	\[
 	\{h g h^{-1} \mid h \in G\}
 	\]
-	En parallèle, le stabilisateur de $g$ par rapport à l'action adjointe est appelé son \textbf{centralisateur}
+	Les éléments de la même orbites sont appelés \textbf{conjugués}. En parallèle, le stabilisateur de $g$ par rapport à l'action adjointe est appelé son \textbf{centralisateur}
 	\[
-	C_G(g) = \{	h \in G \mid hg = gh\}
+	C_G(g) = \{h \in G \mid h g h^{-1} = g\} = \{	h \in G \mid hg = gh\}
 	\]
+	Autrement dit le centralisateur correspond à l'ensemble des éléments de $G$ qui commute avec $g$.
 \end{definition}
 
 \begin{proposition}
@@ -257,6 +282,92 @@ Et donc il suffit de trouver une action fidèle. Or il se trouve que l'action à
 \prf{Si $g_1 = h g_2 h^{-1}$, alors l'application $x \mapsto h^{-1} x h$ donne un isomorphisme $C_G(g_1) \to C_G(g_2)$.
 }
 
+\begin{proposition} \label{prop: Équation de classe}
+	Soit $G$ un groupe, alors
+	\[
+	1 = \sum_{\text{classe de conjugaison } \tilde g} \frac1{|C_G(\tilde g)|}
+	\]
+\end{proposition}
+
+\prf{Par la \autoref{rmq: théorème de l'orbite-stabilisateur} on a
+	\[
+	|G| = \sum_{\text{classe de conjugaison } \tilde g} |\tilde g|
+	\]
+	Or par le \autoref{thm: théorème de l'orbite-stabilisateur}, on sait que
+	\[
+	|\tilde g| = \frac{|G|}{|\stab_G(\tilde g)|}
+	\]
+	Mais comme les stabilisateurs ne sont autres que les centralisateurs, on a
+	\[
+	|\tilde g| = \frac{|G|}{|C_G(\tilde g)|}
+	\]
+	Ce qui conclut bien que
+	\[
+		1 = \sum_{\text{classe de conjugaison } \tilde g} \frac1{|C_G(\tilde g)|}
+	\]
+	d'où la proposition.	
+}
+
+\subsection{Groupe diédral}
+On se rappelle que l'on peut définir
+\[
+D_{2n} = \{e, \sigma, \sigma^2, \ldots, \sigma^{n-1}, \tau, \sigma \tau, \sigma^2 \tau, \ldots, \sigma^{n-1} \tau\}
+\]
+où $\sigma$ désigne un rotation d'angle $\frac{2\pi}{n}$ et $\tau$ est un réflexion d'axe principale. On va regarder le cas $n=3$, on a donc
+\[
+D_6 = \{e, \sigma, \sigma^2, \tau, \sigma \tau, \sigma^2 \tau\}
+\]
+où $\sigma^3 = \tau^2 = e$ et $\sigma \tau = \tau \sigma^{-1}$. On remarque alors que l'on a trois classe de conjugaison
+\[
+\{e\}, \quad \{\sigma, \sigma^2\} \et \{\tau, \sigma \tau, \sigma^2 \tau\}
+\]
+De plus il est facile de voir que le centralisateur est respectivement le groupe entier, les réflexions et les symétries. Ainsi par la \autoref{prop: Équation de classe} on a
+\[
+1 = \frac16 + \frac13 + \frac12
+\]
+ce qui est assurément une affirmation véridique.
+
+\subsection{Groupe symétrique}
+On se rappelle que tout permutation $\sigma \in \S_n$ peut s'écrire comme un produit de cycles disjoints. La définition suivante est alors naturelle
+\begin{definition}
+	Soit $\sigma \in \S_n$ une permutation, alors le \textbf{type cyclique} de $\sigma$ sera une \emph{partition} de $n$, c'est-à-dire une collection d'entiers positifs,
+	\[
+	\lambda = (\lambda_1 \geqslant \lambda_2 \geqslant \ldots \geqslant \lambda_k)
+	\]
+	avec une somme totale $|\lambda| = \sum_i |\lambda_i| = n$.
+\end{definition}
+
+\begin{proposition}
+	Deux permutations $\sigma, \tau \in \S_n$ sont conjugués si et seulement s'ils ont le même type cyclique.
+\end{proposition}
+
+\prf{On remarque que si on considère $\sigma, \tau \in \S_n$, alors
+	\[
+	\tau \sigma \tau^{-1} =
+	\begin{pmatrix}
+		\cdots & \tau(i) & \cdots \\
+		\cdots & \tau(\sigma(i))& \cdots 
+	\end{pmatrix}
+	\]
+	Ainsi, il y a une correspondance biunivoque entre les cycles $i_1 \to i_1 \to \ldots \to i_k \to i_1$ de la permutation $\sigma$ et les cycles $\tau(i_1) \to \tau(i_2) \to \ldots \to \tau(i_k) \to \tau(i_1)$ de la permutation $\tau \sigma \tau^{-1}$. Cela montre immédiatement que toutes permutations conjuguées ont les types cycliques, mais cela montre aussi la réciproque : car toute permutation de type cyclique $\lambda$ peut être écrite comme $\tau \sigma_\lambda \tau^{-1}$ pour $\sigma_\lambda$ et $\tau$ bien choisit
+}
+
+Ainsi il reste à déterminer l'ordre des centralisateurs d'un éléments donné. Mais il suffit de le faire pour le représentant $\sigma_\lambda$. On a $\tau \in C_{\S_n}(\sigma_\lambda)$ si et seulement si
+\[
+\tau \sigma_\lambda \tan^{-1} = \sigma_\lambda
+\] 
+Cela signifie que $\tau$ doit permuter les cycles de $\sigma_\lambda$ de longueur $i$ entre eux. Ainsi si on note $\#^i_\lambda$ le nombre de tel cycles, on peut se convaincre que
+\[
+|C_{\S_n}(\sigma_\lambda)| = \prod_{i \geqslant 1} i^{\#^i_\lambda} \#^i_\lambda!
+\]
+Et donc on peut conclure par la \autoref{prop: Équation de classe} que
+\[
+1 = \sum_{\lambda \text{ une partition de $n$}} \frac1{\prod_{i \geqslant 1} i^{\#^i_\lambda} \#^i_\lambda!}
+\]
+Ce qui pour $n=4$ nous donne
+\[
+1 = \frac1{24} + \frac14 + \frac18 + \frac13 + \frac14
+\]
 \section{Sous-groupe normal}
 
 \lecture{24 septembre}
