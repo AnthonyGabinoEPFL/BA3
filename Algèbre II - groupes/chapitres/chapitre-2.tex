@@ -368,12 +368,15 @@ Ce qui pour $n=4$ nous donne
 \[
 1 = \frac1{24} + \frac14 + \frac18 + \frac13 + \frac14
 \]
+ce qui est vrai.
 \section{Sous-groupe normal}
 
+
 \lecture{24 septembre}
+\subsection{Définition de base}
 
 \begin{definition}[Sous-groupe normal] \label{def: Sous-groupe normal}
-	Soit $H \leq G$ un sous-groupe de $G$, on dira que $H$ est un sous-groupe \textbf{normal} de $G$, si
+	Soit $H \leq G$ un sous-groupe de $G$, on dira que $H$ est un sous-groupe \textbf{normal} de $G$, si les classes à gauche et les classes à droite de $G$ par rapport à $H$ sont égales, ce qui peut se réécrire comme
 	\[
 	\forall g \in G, \quad g H g^{-1} = H
 	\]
@@ -381,7 +384,7 @@ Ce qui pour $n=4$ nous donne
 \end{definition}
 
 \begin{lemme}
-	Si $f : G \to G'$ est un morphisme de groupe quelconque, alors $\ker f$ est un sous-groupe normal
+	Si $f : G \to G'$ est un morphisme de groupe quelconque, alors $\ker f$ est un sous-groupe normal.
 \end{lemme}
 
 \prf{Soit $g \in G$, et $h \in \ker f$, alors
@@ -424,6 +427,20 @@ Ce qui pour $n=4$ nous donne
 	induit par $[g] \mapsto f(g)$, pour tout $g \in G$.
 \end{theoreme}
 
+\prf{Comme $H \trianglelefteq G$ est un sous-groupe normal, alors
+	\[
+	G/H
+	\]
+	hérite naturellement d'une structure de groupe, et donc cela assure que la \emph{projection}
+	\[
+	\pi : G \to G/H, \quad g \mapsto [g]
+	\]
+	est bien une morphisme dont le noyau est naturellement $H$. Et donc si on considère le morphisme
+	\[
+	[g] \mapsto f(g), \quad \forall g \in G
+	\]
+	alors on a bien un isomorphisme.
+}
 \begin{figure}[H]
 	\centering
 	\Large
@@ -438,7 +455,41 @@ Ce qui pour $n=4$ nous donne
 		\caption{Premier théorème d'isomorphisme}
 \end{figure}
 
+\begin{proposition}
+	Soit $G \curvearrowright X$ une action de groupe et soit $H \trianglelefteq G$ un certain sous-groupe normal agissant trivialement sur $X$, c'est-à-dire
+	\[
+	\forall h \in H, \, \forall x \in X, \quad h \cdot x = x
+	\]
+	donc $H$ est dans le noyau de l'action. Alors cela induit une action
+	\[
+	G/H \curvearrowright X
+	\]
+\end{proposition}
 
+\prf{Si on considère l'application telle que
+	\[
+	[g] \cdot x = g \cdot x, \quad \forall g \in G, \forall x \in X
+	\]
+	Il reste à montrer que c'est bien définit sur les classes, or
+	\[
+	\forall h \in H, \quad [gh] \cdot x = (gh) \cdot x = g \cdot (h \cdot x) = g \cdot x
+	\]
+	ainsi cela ne dépend pas du représentant choisit et donc on a bien une action de groupe.
+}
+
+\begin{remarque} \label{rmq: action fidèle induite}
+	Si on prend $H = \ker(G \curvearrowright X)$, alors l'action de groupe
+	\[
+	G/H \curvearrowright X
+	\]
+	est fidèle. En effet on a
+	\[
+	\ker(G/H \curvearrowright X) = \{ [g] \in G/H \mid \forall x \in X, \quad [g] \cdot x = x\} = \{ [g] \in G/H \mid \forall x \in X, \quad g \cdot x = x\} = \{[e]\}
+	\]
+	ainsi on a bien une action fidèle.
+\end{remarque}
+
+\subsection{Centralisateur et normalisateur}
 \begin{definition}
 	Pour tout sous-ensemble $X$ d'un groupe $G$, on définit son \textbf{centralisateur} comme
 	\[
@@ -462,7 +513,7 @@ Ce qui pour $n=4$ nous donne
 	\[
 	N_G(X) \curvearrowright X, \quad g \cdot x = g x g^{-1}
 	\]
-	Le noyau de cette action est, par définition, le sous-groupe centralisateur $C_G(X)$. Étant donné que le noyau de tout action de groupe est normal, ainsi la proposition suit. De plus, on obtient une action fidèle
+	Le noyau de cette action est, par définition, le sous-groupe centralisateur $C_G(X)$. Étant donné que le noyau de tout action de groupe est normal, ainsi la proposition suit. De plus par la \autoref{rmq: action fidèle induite}, on obtient une action fidèle
 	\[
 	N_G(X) / C_G(X) \curvearrowright X
 	\]
@@ -473,11 +524,11 @@ Ce qui pour $n=4$ nous donne
 	\[
 	\Aut G
 	\]
-	pour le groupe des automorphismes de $G$, par rapport à la composition. De plus on dit qu'un groupe $L$ agit sur un groupe $K$ \emph{par automorphisme}, encore noté
+	pour le groupe des automorphismes de $G$, par rapport à la composition. De plus on dit qu'un groupe $L$ agit sur un groupe $K$ \textbf{par automorphisme}, encore noté
 	\[
 	L \curvearrowright K
 	\]
-	si les bijections $\Phi_j(k) = l \cdot k$ sont des automorphismes pour tout $l \in L$.
+	si les bijections $\Phi_l(k) = l \cdot k$ sont des automorphismes pour tout $l \in L$.
 \end{definition}
 
 \begin{lemme}
@@ -495,6 +546,16 @@ Ce qui pour $n=4$ nous donne
 	pour tout $h, h' \in H$ et $g \in G$.
 }
 
+
+\begin{definition}
+	Soit $H$ et $K$ des sous-groupes d'un groupe $G$. Alors définit les sous-ensembles
+	\[
+	HK = \{hk \mid h \in H, \, k \in K\} \et KH = \{kh \mid h \in H, \, k \in K\}
+	\]
+	de $G$ qui sont en générale différents.
+\end{definition}
+
+
 \begin{proposition}
 	Soit $H$ et $K$ des sous-groupes de $G$, alors
 	\begin{enumerate}
@@ -503,9 +564,261 @@ Ce qui pour $n=4$ nous donne
 	\end{enumerate}
 \end{proposition}
 
+\prf{On a dans l'ordre
+	\begin{enumerate}
+		\item \begin{enumerate}
+			\item["$\implies$" :] Supposons que $HK = KH$, alors on a pour tout $hk \in HK$ et $h_1k_1 \in HK$
+			\[
+			hk (h_1k_1)^{-1} = h \underbrace{k k_1^{-1}}_{k_2} h_1^{-1} = \underbrace{h k_2}_{k_3 h_2} h_1^{-1} = k_3 \underbrace{h_2 h_1^{-1}}_{h_3} = k_3 h_3 \in KH = HK
+			\]
+			Ainsi par le critère de sous-groupe, $HK$ est bien un sous-groupe.
+			\item["$\impliedby$" :] Supponsons que $HK$ soit un sous-groupe, alors soit $y \in HK$ alors $y^{-1} \in HK$ et donc $y^{-1} = hk$, ainsi
+			\[
+			y = (hk)^{-1} = k^{-1} h^{-1} \in KH
+			\]
+			Donc $HK \subset KH$, inversement soit $y\in KH$ alors $y = kh$. Or
+			\[
+			y = (h^{-1} k^{-1})^{-1} \in HK
+			\]
+			et donc $KH \subset HK$. Il est résulte qe $HK = KH$ par double inclusion.
+		\end{enumerate}
+		
+		\item Supposons que $H$ et $K$ soient des sous-groupes normaux de $G$ alors
+		\[
+		\forall g \in G, \quad gHKg^{-1} = gHg^{-1} gKg^{-1} = HK
+		\]
+		ainsi $HK$ est bien un sous-groupe normal de $G$.
+	\end{enumerate}
+}
+
 \begin{theoreme}
-	Si $K$ et $H$ sont des sous-groupes de $G$ tels que $K \leq N_G(H)$, alors
+	Si $F$ et $H$ sont des sous-groupes de $G$ tels que $F \leq N_G(H)$, alors
 	\[
-	K /K \cap H \simeq HK/ H
+	F /F \cap H \simeq FH/ H
 	\]
 \end{theoreme}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		{F/F\cap H} && {FH/H = HF/H} \\
+		{f(F\cap H)} && {fH = Hf}
+		\arrow[hook, two heads, from=1-1, to=1-3]
+		\arrow["\in"{marking, allow upside down}, draw=none, from=2-1, to=1-1]
+		\arrow[maps to, from=2-1, to=2-3]
+		\arrow["\in"{marking, allow upside down}, draw=none, from=2-3, to=1-3]
+	\end{tikzcd}
+\end{figure}
+\prf{Si on note $\phi : FH \to FH / H, \quad f$ le morphisme de projection standard, alors il est claire que $\ker \phi = H$. De plus
+	\[
+	\ker \phi_{\mid F} = \{ f \in F \mid \phi(f) = e\} = \ker \phi \cap F = H \cap F
+	\]
+	et comme $\phi_{\mid F}(F) = FH/H$, on a bien par le \autoref{thm: Premier théorème d'isomorphisme} que
+	\[
+	F /F \cap H \simeq FH/ H
+	\]
+}
+
+\section{Suite exacte courte}
+
+\begin{definition}
+	Une \textbf{suite exacte courte}
+	\[
+	1 \to K \overset{f}{\to} G \overset{g}{\to} L \to 1
+	\]
+	est la donnée de deux morphismes $f$ et $g$ comme ci-dessus, où $f$ est injectif, $g$ surjectif, et
+	\[
+	\Ima f = \ker g
+	\]
+\end{definition}
+
+\begin{remarque}
+	On remarque que $f$ induit un isomorphisme entre $K$ est un sous-groupe normal $H \trianglelefteq G$ puisque $H$ peut-être vu comme le noyau d'un isomorphisme. Tandis que le \autoref{thm: Premier théorème d'isomorphisme} implique que $g$ induit un isomorphisme entre $L$ et le groupe quotient $G/H$, pour cette raison, s'il existe une suite exacte courte, nous appellerons $G$ une \textbf{extension} de $L$ par $K$.
+\end{remarque}
+
+\begin{definition}
+	Si un groupe $L$ agit sur une groupe $K$ par automorphisme, alors le \textbf{produit semi-direct} correspondant
+	\[
+	K \rtimes L = \{(k,l) \mid k \in K, \, l \in L\}
+	\]
+	est fait pour devenir un groupe avec l'élément neutre $(e,e)$ via
+	\[
+	(k,l)(k',l') = (k ~ l \cdot k', ll')
+	\]
+	Ainsi les produits directs sont le cas particulier des produits semi-directs pour $\Phi_j = \mathrm{Id}_K$, pour tout $l \in L$.
+\end{definition}
+
+\begin{theoreme}
+	Étant donné un produit semin-direct, nous avons une suite exacte courte
+	\[
+	1 \to K \overset{f}{\to} K \rtimes L \overset{g}{\to} L \to 1
+	\]
+	où $f(k) = (k,e)$ et $g(k,l) = l$, pour tout $k \in K$ et $l \in L$.
+\end{theoreme}
+
+\prf{Il est facile de voir que $f$ est injectif et $g$ est surjectif, et que $\Ima f = \ker g$. Il reste donc à montrer que $f$ et $g$ sont des morphismes. Pour $f$ on a
+	\[
+	f(k k') = (kk', e) = (k e \cdot k', e) = (k,e)(k', e) = f(k) f(k'), \quad \forall k, k'\in K
+	\]
+	De même pour $g$,
+	\[
+	g((k,l)(k',l')) = g(k ~ l \cdot k', ll') = ll' = g(k,l) g(k',l')
+	\]
+}
+
+\begin{definition}\label{def: Suite exactes courtes équivalentes}
+	Deux suite exactes courtes
+	\[
+	1 \to K \overset{f}{\to} G \overset{g}{\to} L \to 1 \et 1 \to K \overset{f'}{\to} G' \overset{g'}{\to} L \to 1
+	\]
+	sont dites \textbf{équivalentes} s'il existe un morphisme $s : G \to G'$ qui fait commuter les carrés dans le diagramme suivant :
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}[ampersand replacement=\&]
+		1 \& K \& G \& L \& 1 \\
+		1 \& K \& {G' } \& L \& 1
+		\arrow[from=1-1, to=1-2]
+		\arrow["f", from=1-2, to=1-3]
+		\arrow["{\mathrm{Id}_K}"', from=1-2, to=2-2]
+		\arrow["g", from=1-3, to=1-4]
+		\arrow["s", from=1-3, to=2-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow["{\mathrm{Id}_L}", from=1-4, to=2-4]
+		\arrow[from=2-1, to=2-2]
+		\arrow["{f'}", from=2-2, to=2-3]
+		\arrow["{g'}", from=2-3, to=2-4]
+		\arrow[from=2-4, to=2-5]
+	\end{tikzcd}
+\end{figure}
+\end{definition}
+
+
+\begin{proposition}
+	Si deux suites exactes courtes sont équivalentes, alors le morphisme $s : G \to G'$ dans la \autoref{def: Suite exactes courtes équivalentes} doit être un isomorphisme.
+\end{proposition}
+
+\prf{Soit $x \in G$ tel que $s(x) = e'$. Ainsi
+	\[
+	g(x) = g' \circ s(x) = g'(e) = e
+	\]
+	Ainsi $x \in \ker g = \Ima f$ donc il existe $y \in K$ tel que $x = f(y)$. Ainsi
+	\[
+	f'(y) = s \circ f(y) = s(x) = e
+	\]
+	ainsi par injectivité de $f'$ on en déduit que $y = e$ et donc $x = e$. Ainsi $s$ est injectif.
+	
+	Similairement, soit $x' \in G'$, par surjectivité de $g$, il existe $x \in G$ tel que $g(x) = g'(x')$. Mais par commutativité du diagramme on sait que $g = s \circ g'$ et donc
+	\[
+	g'(s(x)) = g'(x') \implies g'(s(x)^{-1}x') = e'
+	\]
+	ainsi $s(x)^{-1} x' \in \ker g' = \Ima f$ donc il existe $y' \in K$ tel que $f'(y') = s(x)^{-1} x'$. Or on sait que $f' = s \circ f$, et donc
+	\[
+	x' = s(x) f'(y') = s(x) s(f(y')) = s(xf(y'))
+	\]
+	ce qui établit la surjectivité de $s$.
+}
+
+\begin{proposition}
+	Une suite exacte courte $1 \to K \overset{f}{\to} G \overset{g}{\to} L \to 1$ est équivalente à la suite exacte courte induite par le produit direct si et seulement s'il existe un morphisme $\phi : G \to K$ tel que
+	\[
+	\phi \circ f = \mathrm{Id}_K
+	\]
+	un tel $\phi$ est appelé une \textbf{rétraction}.
+\end{proposition}
+
+\prf{Supposons que nous avons un tel morphisme $\phi$, alors le diagramme commutatif ci-dessous donne l'équivalence requise des suites exactes courtes.
+\[		
+	\begin{tikzcd}[ampersand replacement=\&]
+		1 \& K \& G \& L \& 1 \\
+		1 \& K \& {K \times L} \& L \& 1 \\
+		\&\& {} \& {}
+		\arrow[from=1-1, to=1-2]
+		\arrow["f", from=1-2, to=1-3]
+		\arrow["{\mathrm{Id}_K}"', from=1-2, to=2-2]
+		\arrow["g", from=1-3, to=1-4]
+		\arrow["{\phi \times g}"', from=1-3, to=2-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow["{\mathrm{Id}_L}", from=1-4, to=2-4]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-2, to=2-3]
+		\arrow[from=2-3, to=2-4]
+		\arrow[from=2-4, to=2-5]
+	\end{tikzcd}
+\]
+
+}
+
+\begin{proposition}
+	Une suite exacte courte $1 \to K \overset{f}{\to} G \overset{g}{\to} L \to 1$ est équivalente à la suite exacte courte induite par le produits semi direct si et seulement s'il existe un morphisme $\psi :L \to G $ tel que
+	\[
+	g \circ \psi = \mathrm{Id}_L
+	\]
+	Un tel $\psi$ est appelé une \textbf{section}.
+\end{proposition}
+
+\prf{Supposons que nous avons un tel morphisme $\psi$, on définit alors une action
+	\[
+	L \curvearrowright K
+	\]
+	comme suit : Pour tout $k \in K$ et $l \in L$, on sait par hypothèse que
+	\[
+	\psi(l) f(k) \psi(l)^{-1} \in G
+	\]
+	se trouve dans $\ker g = \Ima f$, et donc peut être écrit comme $f(x)$ pour un unique $x \in K$. On définit alors
+	\[
+	\Phi : K \to K, \quad k \mapsto x
+	\]
+	On remarque que $\Phi_\bullet$ définit bien une action de groupe $L \curvearrowright K$. On considère l'application $f \times \psi$, alors on a
+	\begin{align*}
+		(f \times \psi)((k,l)(k',l')) &= (f \times \psi)(k l \cdot k', ll') = f(k l \cdot k') \psi (ll')  = \\
+		&= 	f(k) f(l \cdot k')\psi(l) \psi(l') = f(k) \psi(l) f(k') \psi(l') = (f \times \psi)(k,l) (f \times \psi)(k',l')
+	\end{align*}
+	Ainsi $f \times \psi$ définit bine un morphisme, de plus on remarque facilement que ce diagramme est commutatif et donne l'équivalence,
+	\[		
+	\begin{tikzcd}[ampersand replacement=\&]
+		1 \& K \& G \& L \& 1 \\
+		1 \& K \& {K \rtimes L} \& L \& 1 \\
+		\&\& {} \& {}
+		\arrow[from=1-1, to=1-2]
+		\arrow["f", from=1-2, to=1-3]
+		\arrow["{\mathrm{Id}_K}"', from=2-2, to=1-2]
+		\arrow["g", from=1-3, to=1-4]
+		\arrow["{f \times \psi}"', from=2-3, to=1-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow["{\mathrm{Id}_L}", from=2-4, to=1-4]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-2, to=2-3]
+		\arrow[from=2-3, to=2-4]
+		\arrow[from=2-4, to=2-5]
+	\end{tikzcd}
+	\]
+}
+	\begin{definition}
+		Un groupe est dit \textbf{abélien} si tout ces éléments commutent deux à deux, c'est-à-dire
+		\[
+		\forall g,h \in G, \quad gh = hg
+		\]
+	\end{definition}
+	
+	\begin{lemme}
+		Soient $K$ et $L$ des groupes abéliens, et considérons une action $L \curvearrowright K$ une action par morphisme. Alors
+		\[
+		K \rtimes L
+		\]
+		est abélien si et seulement si l'action est triviale, c'est-à-dire $l \cdot k = k$ pour tout $k \in K$ et $l \in L$.
+	\end{lemme}
+	
+	\prf{On remarque que si $K \rtimes L$ est abélien, alors
+		\[
+		k + l \cdot k' = k' + l' \cdot k
+		\]
+		pour tout $k,k' \in K$ et $l,l' \in L$ et donc en prenant $k$ et $l'$ comme les éléments neutres, cela implique bien que
+		\[
+		l \cdot k' = k', \quad \forall k' \in K, ~\forall l \in L
+		\]
+		d'où le résultat.
+	}
+	
+	\section{Groupe abélien de type fini}
+	
