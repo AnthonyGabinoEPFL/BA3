@@ -141,7 +141,7 @@ Cependant, $\delta$ est injectif car $G$ est sans torsion et donc le morphisme q
 	est un morphisme. De plus par construction cela défini bien un section au sens où $\pi \circ \psi = \mathrm{Id}_{\Z^l}$. Par conséquent la suite exacte courte est scindée.
 }
 
-\begin{theoreme}
+\begin{theoreme} \label{thm: groupe abélien isomorphe à Zr fois Tosr G}
 	Tout groupe abélien de type fini on a
 	\[
 	G \simeq  \Z^r \times \Tors G
@@ -219,7 +219,7 @@ Cependant, $\delta$ est injectif car $G$ est sans torsion et donc le morphisme q
 	Il est facile de voir que $A_p(G)$ définit bien un sous-groupe.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: Decomposition du groupe de torsion}
 	Pour tout groupe abélien, on a 
 	\[
 	\Tors G \simeq \bigoplus_\text{$p$ premier} A_p(G)
@@ -232,8 +232,8 @@ Cependant, $\delta$ est injectif car $G$ est sans torsion et donc le morphisme q
 	\varphi : \bigoplus_{i=1}^\infty A_p(G) \to \Tors G, \quad (g_{p_1}, g_{p_2}, \ldots) \mapsto \sum_{i=1}^\infty g_{p_i}
 	\]
 	Cette somme est bien définie puisque les $g_{p_i}$ sont nuls à partir d'un certain rang et donc on a une somme finie. Il reste donc à montrer que $\varphi$ définit en fait un isomorphisme.
-	\begin{enumerate}
-		\item[Injectif :] Soit $g_{p_1}, \ldots, g_{p_k} \in G$ tels que
+	\begin{itemize}
+		\item[$\bullet$] Injectif: Soit $g_{p_1}, \ldots, g_{p_k} \in G$ tels que
 		\[
 		p_1^{d_1} g_{p_1} = \ldots = p_k^{d_k} g_{p_k} = 0
 		\]
@@ -247,6 +247,114 @@ Cependant, $\delta$ est injectif car $G$ est sans torsion et donc le morphisme q
 		\]
 		Cependant, on sait aussi que $p_1^{d_1}g_{p_1} = 0$. Comme $p_1^{d_1}$ et $p_2^{d_2} \cdots p_k^{d_k}$ sont premiers entre eux, alors cela implique que $g_1 = 0$. Par un argument analogue, on montre que $g_1 = g_2 = \ldots = g_k = 0$, ce qui implique que le noyau $\ker \varphi$ est trivial est donc $\varphi$ est bien injectif.
 		
-		\item[Surjcetif :] Soit $g \in 
-	\end{enumerate}
+		\item[$\bullet$] Surjectif: Soit $g \in \Tors_n G \subset \Tors G$ et considérons la décomposition en facteurs premiers
+		\[
+		n = p_1^{d_1} p_2^{d_2} \cdot p_k^{d_k}
+		\]
+		où $p_1, \ldots, p_k$ sont des nombres premiers distincts. Alors l'élément
+		\[
+		g_i = p_1^{d_1} \cdots p_{i-1}^{d_{i-1}} p_{i+1}^{d_{i+1}} \cdot p_k^{d_k}g
+		\]
+		a un ordre divisant $p_i^{d_i}$, et donc appartient à $A_{p_i}(G)$. Cependant les entiers naturels
+		\[
+		\Big\{  p_1^{d_1} \cdots p_{i-1}^{d_{i-1}} p_{i+1}^{d_{i+1}} \cdot p_k^{d_k}\}_{i\in \llbracket1,k \rrbracket}
+		\]
+		ont un $\pgcd$ égal à $1$. Et donc par Bézout, il existe des entiers $a_1, \ldots, a_k$ tels que
+		\[
+		\sum_{i=1}^k  a_i p_1^{d_1} \cdots p_{i-1}^{d_{i-1}} p_{i+1}^{d_{i+1}} \cdot p_k^{d_k} = 1
+		\]
+		Et donc par conséquent on a
+		\[
+		a_1 g_1 + \ldots + a_k g_k = \Bigg(\sum_{i=1}^k  a_i p_1^{d_1} \cdots p_{i-1}^{d_{i-1}} p_{i+1}^{d_{i+1}} \cdot p_k^{d_k} \Bigg) g = g
+		\]
+		ce qui implique que $g$ appartient à l'image du morphisme $\varphi$.
+	\end{itemize}
+}	
+
+\begin{definition}[$p$-groupe]
+	Soit $G$ un groupe, alors on dira que $G$ est un $p$-\textbf{groupe} si l'ordre de chaque élément de $G$ est une puissant de $p$.
+\end{definition}
+
+\begin{lemme} \label{lem: ordre d'un groupe abélien}
+	Si un nombre premier $p$ divise l'ordre d'un groupe abélien $G$, alors $G$ est à un élément d'ordre $p$.
+\end{lemme}
+
+\prf{On va résonner par récurrence sur l'ordre de $G$. Premièrement si $G$ cyclique, alors le résultat est évident. Sinon, on peut considérer un élément $h \in G$ qui n'engendre par tout $G$. Si $p \mid a = \ord_G(h)$, il est facile de trouver un multiple de $h$ d'ordre $p$. Si $p \not \mid a$, on considère le sous-groupe $H$ engendré par $h$ et on considère le quotient
+	\[
+	G/H
+	\]
+	Comme l'ordre de $H$ est premier avec $p$, alors $p$ divise l'ordre de $G/H$. Par hypothèse de récurrence, il existe un élément $g \in G$ tel que $[g]$ est d'ordre $p$ dans $G/H$. Ce qui implique que
+	\[
+	pg \in H \implies apg = 0
+	\]
+	dans $G$. Et donc ce qui implique que $ag$ est soit d'ordre $p$, soit que $ag = 0$ Cependant, puisque $\pgcd(a,p) =1$, alors $pg \in H$ et $ag = 0 \in H$ impliquerait que $g \in H$, ce qui contredirait le fait que $[g]$ est d'ordre $p$ dans $G/H$.
+}
+
+\begin{theoreme} \label{thm: Classification des p-groupe}
+	Un groupe abélien fini $G$ est un $p$-groupe si et seulement si $|G|$ est une puissance de $p$.
+\end{theoreme}
+
+\prf{Conséquence immédiate du théorème de Lagrange et du \autoref{lem: ordre d'un groupe abélien}.}
+
+
+\begin{proposition} \label{prop: Classification des p-groupe par isomorphisme}
+	Tout $p$-groupe abélien fini est isomorphe à
+	\[
+	\Z/p^{d_1}\Z\times \dots \times \Z/p^{d_k} \Z
+	\]
+	pour divers entiers positifs $d_1, \ldots, d_k$.
+\end{proposition}
+
+\prf{On résonner par récurrence sur $|G|$, on considère un élément de $G$ d'ordre maximal possible, on l'appelle $h$ et on suppose qu'il est d'ordre $p^{d_1}$. Soit $H \simeq \Z/p^{d_1} \Z$ le sous-groupe de $G$ engendré par $h$. Ainsi le groupe quotient
+	\[
+	G/H
+	\]
+	est un $p$-groupe en raison du \autoref{thm: Classification des p-groupe}. Et donc par hypothèse récurrence, il existe des entiers positifs $d_2, \ldots, d_k$ tels que
+	\[
+	G /H \simeq \Z/p^{d_2}\times \dots \times \Z/p^{d_k} \Z
+	\]
+	De plus comme tout élément de $G/H$ a un ordre inférieur dans $G$ et que $p^{d_1}$ soit l'ordre maximal, on conclut que $d_1 \geqslant d_2, \ldots, d_k$. Ce qui implique l'existence d'une suite exacte courte
+	\[
+	0 \to \Z/p^{d_1} \Z \to G \overset\pi\to \Z/p^{d_2}\times \dots \times \Z/p^{d_k} \Z \to 0
+	\]
+	Il nous reste donc à exhiber une section puisque tout les groupes en jeu sont abéliens. Pour ce faire, on définit pour tout $i \in \llbracket 2, k \rrbracket$,
+	\[
+	g_i \in \pi^{-1}(e_i)
+	\]
+	Alors on a
+	\[
+	p^{d_i}[g_i] = 0 \in G/H \implies p^{d_i} g_i = a_i h, \quad \forall i \in \llbracket 2, k \rrbracket
+	\]
+	pour un certain $a_i \in \Z$. On décompose $a_i = p^{s_i} t_i$ de sorte que $t_i$ soit premier avec $p$. Ce qui donne
+	\[
+	p^{d_i}g_i = p^{s_i}t_i h
+	\]
+	Mais comme tout les éléments de $G$ on a un ordre qui est par hypothèse inférieur à $p^{d_1}$, alors
+	\[
+	0 = p^{d_1} g_i = p^{d_1 - d_i + s_i} t_i h
+	\]
+	Puisque $t_i$ est premier avec $p$, alors l'ordre de $h$ est le même que l'ordre de $t_ih$ et donc nécessairement $d_1 - d_i + s_i \geqslant d_1 \implies s_i \geqslant d_i$ pour tout $i$. Donc on peut revenir à notre expression de toute à l'heure
+	\[
+	p^{d_i}g_i = p^{s_i}t_i h \implies p^{d_i}\underbrace{(g_i - p^{s_i-d_i}t_i h)}_{g_i'} = 0
+	\]
+	La formule ci-dessus garantit que l'application
+	\[
+	\Z/p^{d_2}\times \dots \times \Z/p^{d_k} \Z  \overset\psi\to G, \quad (x_2,\ldots, x_k) \mapsto x_2 g_2' + \ldots + x_k g_k'
+	\]
+	est un morphisme bien défini. Il est également clair que $\pi \circ \psi = \mathrm{Id}$ par construction.
+}
+
+\begin{theoreme}[Classification des groupes abélien de type fini]
+	Tout groupe abélien de type fini $G$ est isomorphe à un produit direct
+	\[
+	\Z^r \times \Z/p_1^{d_1} \times \ldots \times \Z/p_k^{d_k} \Z
+	\]
+	pour un certain $r \geqslant 0$, appelé le \textbf{rang} de $G$ et divers puissances premières $p_1^{d_1}, \ldots, p_k^{d_k}$, appelés les \textbf{diviseurs élémentaires} de $G$. De plus la décomposition est unique à permutation des facteurs près.
+\end{theoreme}
+
+\prf{Par le \autoref{thm: groupe abélien isomorphe à Zr fois Tosr G}, tout groupe abélien de type fini est de la forme
+	\[
+	\Z^r \times \Tors G
+	\]
+	De plus par la \autoref{prop: Classification des sous-groupes de groupe de type fini} et puisque tout groupe abélien de torsion de type fini est fini, alors le sous-groupe de torsion en question peut s'écrire comme somme direct fini de $p$-groupes d'après la \autoref{prop: Decomposition du groupe de torsion}. Et finalement la \autoref{prop: Classification des p-groupe par isomorphisme} cela assure que tout ces facteurs sont des produits de la forme $\Z/p^d\Z$ pour divers $p$ premier.
 }
