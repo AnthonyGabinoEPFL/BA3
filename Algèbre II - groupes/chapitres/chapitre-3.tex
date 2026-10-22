@@ -1,0 +1,252 @@
+\chapter{Groupe abélien de type fini}
+\lecture{7 octobre}
+
+\section{Groupe abélien de type fini}
+\begin{definition}[Groupe de type fini] \label{def: Groupe de type fini}
+	On dit que les éléments $g_1, \ldots, g_k$ \textbf{engendrent} un groupe abélien $G$ si tout élément de $G$ peut être écrit comme combinaison linéaire 
+	\[
+	a_1 g_1 + \ldots + a_k g_k
+	\]
+	où $a_1, \ldots ,a_k \in \Z$. Si un groupe abélien admet un ensemble fini de générateur, alors on dira que $G$ est de \textbf{type fini}.
+\end{definition}
+
+\begin{proposition}
+	Le groupe des nombres rationnels $\Q$ par rapport à l'addition n'est pas de type fini.
+\end{proposition}
+
+\prf{Supposons par l'absurde que $\Q$ sont de type fini. Alors il existe des rationnels
+	\[
+	\frac{b_1}{c_1}, \ldots , \frac{b_k}{c_k}
+	\]
+	tels que  pour tout éléments de $\Q$ puisse s'écrire comme
+	\[
+	a_1 \frac{b_1}{c_1} + \ldots + a_k \frac{b_k}{c_k}
+	\]
+	pour divers $a_1, \ldots, a_k \in \Z$. Mais le dénominateur doit diviser le nombre $c_1 \ldots c_k$, il est dont impossible que tout les nombres rationnels soient de cette forme.
+}
+
+\begin{definition}
+	Pour tout groupe abélien $G$ et tout $n \in \Z$, la fonction
+	\[
+	G \to G, \quad g \mapsto ng
+	\]
+	est un morphisme. Le noyau de ce morphisme
+	\[
+	\Tors_n G = \ker(g \mapsto ng) = \big\{ g \in G \mid ng = 0 \big\}
+	\]
+	est appelé le $\bm n$-\textbf{ième sous-groupe de torsion}.
+\end{definition}
+
+\begin{proposition}
+	Pour tout groupe abélien $G$, l'ensemble
+	\[
+	\Tors G = \bigcup_{i=1}^\infty \Tors_n G
+	\]
+	est un sous-groupe. Il sera appelé le \textbf{sous-groupe de torsion} de $G$. De plus un groupe abélien dont le sous-groupe de torsion est réduit au sous-groupe inverse est appelé \textbf{sans-torsion}.
+\end{proposition}
+
+\prf{Puisque $\Tors_n G$ est un sous-groupe de $G$ alors $\Tors G$ contient l'élément neutre et est fermé par inverse. De plus soit $g \in \Tors_n G$ et $h \in \Tors_m G$, alors
+	\[
+	nm(g+h) = nm g + nm h = m(ng) + n(mh) = 0
+	\]
+	ainsi $g+h \in \Tors_{mn} G\subset \Tors G$. Ainsi $\Tors G$ est bien un sous-groupe de $G$.
+}
+
+\begin{lemme}
+	Pour tout groupe abélien $G$, le groupe quotient
+	\[
+	G / \Tors G
+	\]
+	est sans torsion.
+\end{lemme}
+
+\prf{Soit $g \in G$ tel que $n[g] = 0$ dans $G /\Tors G$ pour un certain $n \in \N$. Alors
+	\[
+	ng \in \Tors G
+	\]
+	et donc il existe $m \in \N$ tel que $mng = 0$. Ce qui implique que $g \in \Tors G$ et donc $[g] = 0$ dans $G/\Tors G$.
+}
+
+\begin{lemme}[Classification des groupes abéliens de type fini sans torsion] \label{lem: Classification des groupes abéliens de type fini sans torsion}
+	Tout groupe abélien $G$ de type fini et sans torsion est isomorphe à un sous-groupe de $\Z^k$, pour un certain $k \geqslant 0$.
+\end{lemme}
+
+\prf{
+Similairement à l'algèbre linéaire, on dira que $g_1, \ldots, g_k \in G$ sont \textbf{linéairement indépendants} si pour tout $a_1, \ldots, a_k \in \Z$,
+\[
+a_1 g_1 + \ldots + a_k g_k = 0 \implies a_1 = \ldots = a_k = 0
+\]
+Ainsi un considère un ensemble de générateur $g_1, \ldots, g_{k + l}$ de $G$, et supposons que $g_1, \ldots, g_k$ sont un sous-ensemble maximal d'éléments linéaire indépendants parmi les générateurs mentionnés. Ainsi, le morphisme
+\[
+\Z^k \overset\gamma\to G, \quad (a_1, \ldots, a_k) \mapsto a_1 g_1 + \ldots + a_k g_k
+\]
+est injectif. De plus par maximalité, on sait que pour tout $i \in \llbracket k + 1, l \rrbracket$, on peut écrire	
+\[
+b_i g_i = a_1^i g_1 + \ldots a_k^i g_k
+\]
+Soit $m$ le $\ppmc$ de $b_{k+1}, \ldots, b_l$, alors les $m g_i$ peuvent s'écrire comme combinaison linéaire des $g_1, \ldots, g_k$ pour tout $i \in \llbracket k + 1, l \rrbracket$. Et donc pour tout $g \in G$, on conclut que $mg$ peut s'écrire comme combinaison linéaire de $g_1, \ldots, g_k$. Et donc le morphisme
+\[
+G \overset\delta\to G,\quad g \mapsto mg
+\]
+est contenue dans l'image du morphisme injectif	$\gamma$. Cela implique que $\delta$ se factorise comme
+\[
+\delta : G \to \Z^k \overset\gamma\to G
+\]
+Cependant, $\delta$ est injectif car $G$ est sans torsion et donc le morphisme qu'on vient de construire $G \to \Z^k$ est aussi injectif. Ainsi, $G$ est isomorphe à l'image de ce morphisme.
+}
+
+\begin{lemme}[Classification des sous-groupes de $\Z^k$] \label{lem: Classification des sous-groupes de Zr}
+	Tout sous-groupe de $\Z^k$ est isomorphe à $\Z^r$ pour un certain $r \geqslant 0$.
+\end{lemme}
+
+\prf{On résonne par récurrence, si $k = 1$, on sait que tout les sous-groupe de $\Z$ sont de la forme $n \Z$. Or il est claire que
+	\[
+	n \Z \simeq \Z
+	\]
+	
+	Désormais, par récurrence, supposons que tout sous-groupe de $\Z^{k-1}$ soit abélien, soit $G \subset \Z^k$ un sous-groupe, alors on construit la suite exacte courte
+	\[
+	0 \to \Z^{k-1} \overset\gamma\to \Z^k \overset\pi\to \Z \to 0
+	\]
+	où le morphisme $\pi$ est la projection sur la dernière coordonnée. De plus on définit 
+	\[
+	K = \ker(\pi_{\mid G}) = \{(x_1, \ldots, x_k) \in G \mid x_k = 0\} \et L = \pi(G)
+	\]
+	ainsi cela induit naturellement la suite exacte courte
+	\[
+	0 \to K \overset{\gamma'}\to G \overset{\pi'}\to L \to 0
+	\]
+	Alors $L$ est un sous-groupe de $\Z$ puisque c'est l'image d'un isomorphisme, ainsi on a deux possibilités
+	\begin{enumerate}
+		\item Si $L = 0$, alors $G \simeq K$ est un sous-groupe de $\Z^{k-1}$, que l'hypothèse montre être abélien et libre.
+		\item Si $L \simeq \Z$,  il nous reste à construire une section ou une rétraction, pour ce faire il suffit de prendre une section de la projection, pour ce faire on peut envoyer $1 \in L$ sur un élément quelconque dans $\pi'^{-1}(1)$. Ainsi, on a construit une suite exacte courte scindée de groupe abélien, et donc on a 
+		\[
+		G \simeq K \times L \simeq \Z^r \times\Z = \Z^{r+1}
+		\]
+	\end{enumerate}
+}
+
+\begin{corollaire} \label{cor: suite exacte courte scindée}
+		Toute suite exacte courte de groupes abéliens
+		\[
+		0 \to K \to G \overset\pi\to \Z^l \to 0
+		\]
+		est scindée, et en particulier, $G \simeq K \times \Z^l$.
+\end{corollaire}
+
+\prf{Par l'algèbre linéaire, on a que le $e_i$ sont les générateur standard de $\Z^l$. Et puisque le morphisme $\pi : G \to \Z^l$ dans la suite exacte courte est surjectif, alors on peut choisir $g_i \in \pi^{-1}(e_i)$ pour tout $i$. Alors la fonction
+	\[
+	\psi : \Z^l	\to G, \quad (n_1, \ldots, n_l) \mapsto n_1 g_1 + \ldots + n_l g_l
+	\]
+	est un morphisme. De plus par construction cela défini bien un section au sens où $\pi \circ \psi = \mathrm{Id}_{\Z^l}$. Par conséquent la suite exacte courte est scindée.
+}
+
+\begin{theoreme}
+	Tout groupe abélien de type fini on a
+	\[
+	G \simeq  \Z^r \times \Tors G
+	\]
+	pour un certain $r \geqslant 0$.
+\end{theoreme}
+
+\prf{Par le \autoref{lem: Classification des groupes abéliens de type fini sans torsion}, on a une suite exacte courte
+	\[
+	0 \to \Tors G \overset\pi\to L \to 0
+	\]
+	où $L$ est un groupe abélien sans torsion. Mais comme $G$ est de type fini, alors $L$ l'est aussi. Et donc par le \autoref{lem: Classification des groupes abéliens de type fini sans torsion} et le \autoref{lem: Classification des sous-groupes de Zr}, on trouve que $L$ est isomorphe à $\Z^r$ pour un certain $r \geqslant 0$. Et finalement par le \autoref{cor: suite exacte courte scindée}, on peut conclure que
+	\[
+	G \simeq L \times \Tors G \simeq \Z^r \times \Tors G
+	\]
+}
+
+\lecture{14 octobre}	
+
+\section{Groupe de torsion $\Tors G$}
+
+\begin{proposition}[Sous-groupe de type fini] \label{prop: Classification des sous-groupes de groupe de type fini}
+	Si $G$ est un groupe de type fini, alors tout sous-groupe $H \leqslant G$ est également de type fini.
+\end{proposition}
+
+
+\prf{On procède par récurrence, supposons que la \autoref{prop: Classification des sous-groupes de groupe de type fini} soit vraie pour tout groupe abélien avec moins de $n$ générateurs. Soit $H \leqslant G$ un sous-groupe arbitraire. De plus soit $G' \leqslant G$ le sous-groupe engendrée par $g_1, \ldots, g_{n-1}$, et considérons la suite exacte courte
+	\[
+	0 \to G' \overset\imath\to G \overset\pi\to G/G' \to 0
+	\]
+	Similairement à la preuve du \autoref{lem: Classification des sous-groupes de Zr}, on pose
+	\[
+	K = \ker(\pi_{\mid H}) = H \cap G'  \et L = \pi(G)
+	\]	
+	ce qui induit la suite exacte courte
+	\[
+	0 \to K \overset{\imath'}\to H \overset{\pi'}\to L \to 0
+	\]
+	Comme $K$ et $L$ sont des sous-groupes, l'hypothèse de récurrence implique que $K$ et $L$ sont tout deux de type fini. Soit $x_1, \ldots, x_k$ des générateurs $K$ et $y_1, \ldots, y_l$ des générateurs de $L$. Alors
+	\[
+	\imath'(x_1), \ldots, \imath'(x_k), g_1, \ldots, g_l
+	\]
+	sont des générateurs de $H$, pour tout choix de $\{g_i \in \pi'^{-1}(y_i)\}_{i \in \llbracket1,l \rrbracket}$. En effet, pour tout $h \in H$, on peut écrire
+	\[
+	\pi'(h) = b_1 y_1 + \ldots + b_l y_l
+	\]
+	Ce qui implique que 
+	\[
+	h - b_1 g_1 - \ldots - b_l g_l \in \ker \pi' = \Im \imath'
+	\]
+	Mais comme $\imath'$ est injective alors par le \autoref{thm: Premier théorème d'isomorphisme} on a
+	\[
+	K \simeq \Ima \imath'
+	\]
+	et donc il doit exister $a_1, \ldots, a_k \in \Z$ tels que 
+	\[
+	h - b_1 g_1 - \ldots - b_l g_l = a_1 \imath'(x_1) + \ldots \imath'(x_k)
+	\]
+	Et donc la proposition suit.
+}
+
+\begin{definition} \label{def: produit et somme direct}
+	Soit $G_1, G_2, \ldots$ une collection au plus dénombrable de groupes abéliens, alors on définit
+	\[
+	\prod_{i=1}^\infty G_i = \{(g_1, g_2, \ldots) \mid g_i \in G_i\} \et \bigoplus_{i=1}^\infty G_i =  \{ (g_1, g_2, \ldots) \mid g_i \in G_i, \et \exists k \in \N, \, \forall i \geqslant k, \quad g_i = 0\}
+	\]
+	Qu'on appelle respectivement le \textbf{produit direct} et la \textbf{somme directe}.
+\end{definition}
+
+\begin{definition}[Sous-groupe de $p$-torsion]
+	Soit $G$ un groupe abélien quelconque et $p$ un nombre premier, alors on définit le \textbf{sous-groupe de $p$-torsion} comme
+	\[
+	A_p(G) = \bigcup_{n=1}^\infty \Tors_{p^n} G
+	\]
+	Il est facile de voir que $A_p(G)$ définit bien un sous-groupe.
+\end{definition}
+
+\begin{proposition}
+	Pour tout groupe abélien, on a 
+	\[
+	\Tors G \simeq \bigoplus_\text{$p$ premier} A_p(G)
+	\]
+	avec la somme directes des groupes abéliens définie comme dans la \autoref{def: produit et somme direct}.
+\end{proposition}
+
+\prf{On définit naturellement le morphisme
+	\[
+	\varphi : \bigoplus_{i=1}^\infty A_p(G) \to \Tors G, \quad (g_{p_1}, g_{p_2}, \ldots) \mapsto \sum_{i=1}^\infty g_{p_i}
+	\]
+	Cette somme est bien définie puisque les $g_{p_i}$ sont nuls à partir d'un certain rang et donc on a une somme finie. Il reste donc à montrer que $\varphi$ définit en fait un isomorphisme.
+	\begin{enumerate}
+		\item[Injectif :] Soit $g_{p_1}, \ldots, g_{p_k} \in G$ tels que
+		\[
+		p_1^{d_1} g_{p_1} = \ldots = p_k^{d_k} g_{p_k} = 0
+		\]
+		où $p_1, \ldots, p_k$ sont des nombres premiers distincts. Si la collection de ces $g_{p_i}$ est dans le noyau de $\ker \varphi$, c'est-à-dire
+		\[
+		g_{p_1} + \ldots + \ldots g_{p_k} = 0
+		\]
+		Alors en multipliant cette somme par $p_2^{d_2} \cdots p_k^{d_k}$, on trouve
+		\[
+		p_2^{d_2} \cdots p_k^{d_k} g_{p_1}+ \underbrace{p_2^{d_2} \cdots p_k^{d_k} g_{p_2}}_{=0} + \ldots + \underbrace{p_2^{d_2} \cdots p_k^{d_k} g_{p_k}}_{=0} = 0 \implies 	p_2^{d_2} \cdots p_2^{d_2} \cdots p_k^{d_k} g_{p_1} = 0
+		\]
+		Cependant, on sait aussi que $p_1^{d_1}g_{p_1} = 0$. Comme $p_1^{d_1}$ et $p_2^{d_2} \cdots p_k^{d_k}$ sont premiers entre eux, alors cela implique que $g_1 = 0$. Par un argument analogue, on montre que $g_1 = g_2 = \ldots = g_k = 0$, ce qui implique que le noyau $\ker \varphi$ est trivial est donc $\varphi$ est bien injectif.
+		
+		\item[Surjcetif :] Soit $g \in 
+	\end{enumerate}
+}
