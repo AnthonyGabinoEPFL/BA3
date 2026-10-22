@@ -341,3 +341,27 @@ Donc $\bigcup A_i$ est bien fermé
 	\]
 	or $(A \cap B)^c = A^c \cup B^c$. Mais comme $A \subset X$ et $A \cap A^c = \emptyset$, on en déduit que $A \subset B^c$ et donc on devrait avoir $x \in B^c$ ce qui contradictoire. Par conséquent, on a bien $A \cap B \neq \emptyset$.
 }
+
+\section{Les applications continues}
+
+\subsection{Définitions et propriétés}
+
+\begin{definition}[Continuité globale] \label{def: Continuité globale}
+	Soit $(X, \T)$ et $(X', \T')$ des espaces topologiques. Une application
+	\[
+	f : X \to X
+	\]
+	est \textbf{continue par rapport} à $\T$ et $\T'$ si pour tout $U' \in \T$, on a $f^{-1}(U') \in \T'$. On écrira alors
+	\[
+	\text{"$f :(X, \T) \to (X', \T')$ est continue"}
+	\]
+\end{definition}
+Tout comme la continuité standard, il est possible d'énoncer une version locale de cette définition
+
+\begin{definition}[Continuité locale] \label{def: Continuité locale}
+	Soit $(X, \T)$ et $(X', \T')$ des espaces topologiques. Une application $f : X \to X$ est \textbf{continue en $x$ par rapport} à $\T$ et $\T'$ si pour tout $U	' \in \T'$ tel que $f(x) \in U'$, il existe $U \in \T$ tel que $x \in U \subset f^{-1}(U')$.
+\end{definition}
+
+\begin{lemme}
+	Sous les conditions des \autoref{def: Continuité globale} et \autoref{def: Continuité locale}, une application $f : (X, \T) \to (X', \T')$ est continue si et seulement si $f$ est continue en tout $x \in X$.
+\end{lemme}
