@@ -80,4 +80,23 @@
 	\vspace{0.5cm}
 }
 
+\newcommand{\minisommaire}{%
+	\begingroup
+	\hypersetup{linkcolor=black}%
+	\etocsettocstyle
+	{\noindent{\Large\bfseries Sommaire}\par\vspace{2pt}\hrule height 1pt\vspace{4pt}}
+	{\vspace{2pt}\hrule height 1pt\vspace{1.5em}}%
+	\etocsetstyle{section}
+	{}{}
+	{\noindent\hspace*{2em}{\bfseries\etocnumber\quad\etocthelinkedname\dotfill\etocthelinkedpage}\par}
+	{}%
+	\etocsetstyle{subsection}
+	{}{}
+	{\noindent\hspace*{4em}{\normalfont\mdseries\etocnumber\quad\etocthelinkedname\dotfill\etocthelinkedpage}\par}
+	{}%
+	\localtableofcontents
+	\etocstandarddisplaystyle
+	\etocstandardlines
+	\endgroup
+}
 

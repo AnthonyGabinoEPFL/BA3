@@ -33,7 +33,7 @@
 \usepackage{footnote}
 \usepackage{wrapfig}
 \usepackage{caption}
-
+\usepackage{etoc}
 
 \tcbuselibrary{skins, breakable,theorems}
 
@@ -42,7 +42,7 @@
 \definecolor{DAcolor}{RGB}{0,0,102}
 \definecolor{AntiDAcolor}{RGB}{250,150,0}
 
-\pagecolor{creme}   % fond jaune très pâle
+%\pagecolor{creme}   % fond jaune très pâle
 
 %===================================
 %	Implémentation des lectures
@@ -115,15 +115,15 @@
 %=====================================
 \pagestyle{fancy}
 \fancyhf{}  % efface tout
-
 % Numéro de page en coin extérieur bas
+
 \fancyfoot[LE]{\thepage}  % Left Even  → page de gauche
 \fancyfoot[RO]{\thepage}  % Right Odd  → page de droite
 
 % Optionnel — nom du cours en coin intérieur haut
 %\fancyhead[RE, LO]{\small\textit{\matiere}}
 \fancyhead[RO, LE]{\leftmark}
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{1pt}
 
 %inter-ligne
 \setstretch{1.1}
@@ -143,12 +143,12 @@
 {1em}                            % espace entre numéro et texte
 {}  
 
-\titleformat{\chapter}    % section = "Chapitre"
-[block]                 % format en bloc
-{\centering\large}      % style : centré, grand (pas en gras)
-{\MakeUppercase{Chapitre \thechapter}} % numéro en majuscules
-{0pt}                   % pas d’espace entre numéro et texte
-{\vspace{0.5ex}\\\bfseries\huge}  % saut de ligne + texte en énorme
+\titleformat{\chapter}[display]
+{\normalfont\raggedleft}
+{\scshape\Large\chaptertitlename\ \thechapter}
+{0.5em}
+{\bfseries\Huge}
+[\vspace{0.5em}\hrule height 1pt]
 
 
 
