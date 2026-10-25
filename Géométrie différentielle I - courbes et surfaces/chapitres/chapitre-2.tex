@@ -1,0 +1,125 @@
+\chapter{Courbes dans l'espace et le plan euclidien}
+
+\section{Notions fondamentales}
+
+\begin{definition}
+	Une \textbf{courbe paramétrée} dans $\Rn$ est une application continue $\alpha : I \to \Rn$,
+	\[
+	\alpha : u \mapsto (\alpha_1(u), \alpha_2(u), \ldots, \alpha_n(u)) \in \Rn, \quad u \in I
+	\]
+	où $I \subset \Rn$ est un intervalle appellé l'\textbf{intervalle de paramétrisation} de la courbe. De plus l'image de $I$ par $\alpha$ définit par
+	\[
+	\alpha(I) = \{ \alpha(u) \mid u \in I\} \subset \Rn
+	\]
+	s'appelle la \textbf{trace} ou le \textbf{support} de la courbe paramétrisée $\alpha$.
+	
+	On dit que la courbe $\alpha$ est \textbf{différentiable} en $u_0 \in I$ si la limite
+	\[
+	\d \alpha (u_0) = \lim_{u \to u_0} \frac{\alpha(u) - \alpha(u_0)}{u - u_0}
+	\]
+	existe. Cette limite s'appelle alors le \textbf{vecteur vitesse} de la courbe $\alpha$ en $u_0$ et on le note $\dot \alpha(u_0)$. De là on définit la \textbf{vitesse} de $\alpha$ et $u_0$ comme la norme du vecteur vitesse que l'on note
+	\[
+	V_\alpha(u_0) = \norme{\dot \alpha(u_0)}
+	\]
+\end{definition}
+
+\begin{lemme}
+	La courbe $\alpha(u) = (\alpha_1(u), \ldots, \alpha_n(u))$ est différentiable si et seulement si les fonctions $\alpha_i(u)$ sont dérivable en $u_0$. De plus
+	\[
+	\dot \alpha (u_0) = \Bigg( \d{\alpha_1}(u_0), \ldots, \d{\alpha_n}(u_0)\Bigg).
+	\]
+\end{lemme}
+
+\prf{Supposons que les $\alpha_i$ sont dérivable, alors pour tout $i \in \entiers$ la limite
+	\[
+	\d{\alpha_i}(u_0) = \lim_{u \to u_0} \frac{\alpha_i(u) - \alpha_i(u_0)}{u - u_0}
+	\]
+	existe. De plus on remarque que
+	\[
+	\frac{\alpha(u) - \alpha(u_0)}{u - u_0} = \left(\frac{\alpha_1(u) - \alpha_1(u_0)}{u - u_0}, \ldots, \frac{\alpha_n(u) - \alpha_n(u_0)}{u - u_0} \right)
+	\]
+	et donc par passage à la limite, on a bien
+	\[
+	\dot \alpha (u_0) = \Bigg( \d{\alpha_1}(u_0), \ldots, \d{\alpha_n}(u_0)\Bigg).
+	\]
+	Ainsi $\alpha$ est bien différentiable. La réciproque est analogue.
+}
+
+\begin{definition} On a plusieurs définition importantes
+	\begin{enumerate}
+		\item Soit $\alpha$ une courbe de classe $C^1$ et $u_0$ une valeur de paramètre, alors on dira $p = \alpha(u_0)$ est \textbf{singulier} si
+		\[
+		\dot \alpha(u_0) = \bm 0 
+		\]
+		Si le point $p$ n'est pas singulier on dira qu'il est \textbf{régulier}. Ainsi une courbe est dite \textbf{régulière} si elle est de classe $C^1$ et si tous ses points sont réguliers.
+		
+		\item Le point $p = \alpha(u_0)$ sur une courbe de classe $C^2$ est \textbf{birégulier} si $\dot \alpha(u_0)$ et $\ddot \alpha(u_0)$ sont linéairement indépendant. Ainsi dans ce cas on peut définir le \textbf{plan osculateur} à la courbe $\alpha$ au point $p$ comme le plan passant par $p$ et de vecteur normal $\bm n = \dot \alpha(u_0) \times \ddot \alpha(u_0)$.
+		
+		\item Un point $p$ sur une courbe $\alpha : I \to \Rn$ est un \textbf{point double} s'il existe deux valeurs distinctes du paramètres telles que
+		\[
+		p = \alpha(u_1) = \alpha(u_2)
+		\]
+		On dira alors que la courbe est \textbf{simple} s'il ne contient pas de points doubles.
+		
+		\item Et finalement si $J \subset I$ est un intervalle, alors on dira que la restriction $\alpha_{\mid J}$ est un \textbf{arc de la courbe} $\alpha$.
+		
+	\end{enumerate}
+	
+\end{definition}
+
+\section{Champ de vecteurs le long d'une courbe}
+
+\begin{definition}
+	Un \textbf{champ de vecteur} le long d'un courbe $\gamma : I \to \Rn$ est la donnée d'un vecteur
+	\[
+	\bm W(u) = w_1(u) \bm e_i + \ldots + w_n(u) \bm e_n
+	\]
+	pour toute valeur du paramètre $u \in I$.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{"images/champ de vecteurs.png"}
+		\caption*{Champ de vecteurs le long d'une courbe}
+	\end{figure}
+	Le champ de vecteur $\bm W$ est dit de classe $C^k$ si les dérivées de $w_1, \ldots, w_n$ sont de classe $C^k$.
+\end{definition}
+
+\begin{exemple}
+	Un champ important est le \textbf{vecteur tangent} d'une courbe régulière $\gamma : I \to \Rn$ de classe $C^1$ est le champ de vecteur le long de la courbe obtenu en normalisant le vecteur vitesse
+	\[
+	\bm T_\gamma(u) := \frac{\dot \gamma(u)}{\norme{\dot \gamma(u)}}
+	\]
+\end{exemple}
+
+\begin{lemme}[Règle de Leibnitz] \label{lem: Règle de Leibnitz}
+	Soit $\bm W$ et $\bm Z$ deux champs de vecteurs de classe $C^1$ le long d'une courbe $\gamma : I \to \Rn$, alors
+	\[
+	\d{} \Big\langle \bm W, \bm Z \Big \rangle = \Big \langle \dot{\bm W}, \bm Z \Big \rangle + \Big \langle \bm W, \dot{\bm Z} \Big \rangle
+	\]
+	On a la même chose en dimension $2$ et $3$ avec, respectivement, les opérateurs $\land$ et $\times$.
+\end{lemme}
+
+\prf{Pour simplifier on note
+	\[
+	\bm W \cdot \bm Z := \Big \langle \bm W, \bm Z \Big \rangle
+	\]
+	On a alors par bilinéarité
+	\[
+		\bm W(u + \varepsilon) \cdot \bm Z(u + \varepsilon) - \bm W(u) \cdot \bm Z(u) = \Bigg( \bm W(u + \varepsilon) - \bm W(u)\Bigg) \cdot \bm Z(u + \varepsilon) + \bm W(u) \cdot \Bigg(\bm Z(u+ \varepsilon) - \bm Z(u)\Bigg).
+	\]
+	Il suffit de diviser cette identité par $\varepsilon$ et faire tendre $\varepsilon$ vers $0$ pour obtenir le lemme. Les autres formules sont analogue.
+}
+
+\begin{corollaire}
+	Si $\bm W_1$ et $\bm W_2$ sont deux champs de vecteurs de classe $C^1$ le long de $\gamma$ tel que $\bm W_1 \cdot \bm W_2$ est constant, alors on a
+	\[
+	\bm W_1 \cdot \dot{\bm W}_2 = - \dot{\bm W}_1 \cdot \bm W_2
+	\]
+	De plus si $\bm W$ est de norme $\norme{\bm W}$ constante, alors $\dot{\bm W}$ est orthogonal à $\bm W$.
+\end{corollaire}
+\prf{La première affirmation est une conséquence immédiate du \autoref{lem: Règle de Leibnitz} et la deuxième découle directement de la première.
+}
+
+\section{Longueur et abscisse curviligne}
+
+
+
