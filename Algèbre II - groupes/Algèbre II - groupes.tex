@@ -13,15 +13,22 @@
 
 \begin{document}
 	\input{../shared/titlepage}
-	\newpage
-	\tableofcontents
-	\newpage
 	
-	\listoftodos
-	\todototoc
-	
-	\include{chapitres/chapitre-1}
-	\include{chapitres/chapitre-2}
-	\include{chapitres/chapitre-3}
+	\newpage
 		
+	{\hypersetup{linkcolor=blue}
+	\tableofcontents
+	
+	\todototoc
+	\listoftodos
+	}
+		
+	\newpage
+	
+	\include{chapitres/chapitre-1}	
+	\include{chapitres/chapitre-2}
+    \include{chapitres/chapitre-3}
+	
+	
+	
 \end{document}
