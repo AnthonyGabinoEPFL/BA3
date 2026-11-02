@@ -1,0 +1,117 @@
+\chapter{Intégrale de Lebesgue}
+\minisommaire
+
+\lecture{2 novembre}
+\section{Intégrale de Lebesgue pour des fonctions simples}
+
+\begin{proposition}[Egorov] \label{prop: Egorov}
+	Soit $f : \Rn \to \overline \R$ une fonction mesurable prenant des valeurs finies, presque partout, de support $E \subset \Rn$ de mesure finies. Soit $\{f_k\}_{k=1}^\infty$ une suite de fonctions mesurables, tous de support en $E$ tel que $f_k \underset{k \to \infty}{\longrightarrow} f$ presque partout. Alors pour tout $\varepsilon > 0$, il existe $A_\varepsilon \subset E$ tel que
+	\[
+	m(E \backslash A_\varepsilon) < \varepsilon
+	\] 
+	et tel que 
+	\[
+	{f_k}_{\mid A_\varepsilon}
+	\]
+	converge uniformément vers $f_{\mid A_\varepsilon}$.
+\end{proposition}
+
+\prf{Si on enlève un ensemble de mesure nulle de $E$, on peut alors supposer que $f$ prend des valeurs finies partout et que $f_k \ktoinfty f$ partout. Et donc par abus de language, l'ensemble modifié est encore appelé $E$. Donc d'après l'hypothèse,
+\[
+\forall x \in E, \quad f_k(x) \ktoinfty f(x) \iff \forall x \in E, \, \forall \varepsilon > 0, \, \exists N, \quad |f_k(x) - f(x) | < \varepsilon, \quad \forall k \geqslant N
+\]
+On va spécialiser $\varepsilon = \frac1k$. Et donc on peut écrire
+\[
+E = \bigcup_{N \geqslant 1} \{ x \in E \mid |f_n(x) - f(x)| < \frac1k, \quad \forall n  \geqslant N\}
+\]
+A droite, un a une réunion croissante dénombrable d'ensemble mesurables, et donc par la \autoref{prop: limite de mesurabilité} on a 
+\[
+m(E) = \lim_{N \to \infty} m(\{ x \in E \mid |f_n(x) - f(x)| < \frac1k, \quad \forall n  \geqslant N\})
+\]
+Il suit qu'il existe $N_k \in \N$ tel que si on pose $E_k = \{ x \in E \mid |f_n(x) - f(x)| < \frac1k, \quad \forall n  \geqslant N\}$ l'on ait
+\[
+m(E_k) > m(E) - \frac{\varepsilon}{2^k}
+\]
+Pour finir, on pose $A_\varepsilon = \bigcap_{k \geqslant 1} E_k$, alors on a 
+\[
+m(E\backslash A_\varepsilon) \leqslant \sum_{k \geqslant 1} m(E \backslash E_k) \leqslant \sum_{k \geqslant 1} (m(E) - m(E_k)) < \sum_{k \geqslant 1} \frac{\varepsilon}{2^k} = \varepsilon
+\]
+De plus, soit $\delta > 0$. On choisit $k \geqslant 1$ tel que $\frac1k < \delta$. Par construction $A_\varepsilon \subset E_k$, il suit, par définition, que si $n \geqslant N$, on a $|f_n(x) - f(x)| < \frac1k < \delta$.
+}
+
+\begin{theoreme}
+	Soit $\{\varphi_k\}_{k=1}^\infty$ une suite de fonctions simples, bornée uniformément, et tous de support contenu dans $E \subset \Rn$ avec $m(E) < \infty$. Supposons que $\varphi_k \ktoinfty f$ presque partout. Alors
+	\[
+	\lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx
+	\]
+	existe. De plus si $f = 0$, on a $\lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx = 0$.
+\end{theoreme}
+
+\prf{Par la \autoref{prop: Egorov} avec $f = \lim_{k \to \infty} \varphi_k$: on sait que $f$ est mesurables, $f$ est borné presque partout et de support de mesure fini. Alors on peut appliquer la \autoref{prop: Egorov}.
+	
+Ainsi étant donné $\varepsilon > 0$ arbitraire, il existe $A_\varphi \subset E$, avec $m(E \backslash) < \varepsilon$, et tel que ${\varphi_k}_{\mid A_\varepsilon} \ktoinfty f_{\mid A_\varepsilon}$ uniformément. En particulier, il existe $N \in \N$ tel que
+\[
+\left| {\varphi_k}_{\mid A_\varepsilon} - {\varphi_{k'}}_{\mid A_\varepsilon}\right| < \varepsilon, \quad \forall k,k' \geqslant N
+\]
+Et donc de suite
+\[
+\left|\int_{\Rn} \varphi_k - \varphi_{k'} \, \mathrm dx\right| \leqslant \int_{\Rn} | \varphi_k -\varphi_{k'}| \, \mathrm dx = \int_{A_\varepsilon} | \varphi_k -\varphi_{k'}| \, \mathrm dx + \int_{E \backslash A_{\varepsilon}} | \varphi_k -\varphi_{k'}| \, \mathrm dx \leqslant \varepsilon m(A_\varepsilon) + 2M m(E\backslash A_\varepsilon) \leqslant \varepsilon(m(E) + 2M)
+\]
+Comme $\varepsilon > 0$ était arbitraire, la convergence de $\{\int_{\Rn} \varphi_k \, \mathrm dx\}$ suit.
+
+Pour la deuxième partie du théorème, on pose $f = 0$, on trouve donc que $|{\varphi_k}_{\mid A_\varepsilon}| < \varepsilon$ et donc
+\[
+\left| \int_{\Rn} \varphi_k \, \mathrm dx\right| \leqslant \int_{\Rn} |\varphi_k| \, \mathrm dx \leqslant  \int_{A_\varepsilon} |\varphi_k| \, \mathrm dx + M m(E \backslash A_\varepsilon) \leqslant \varepsilon (m(E) + M) 
+\]
+et donc par arbitrarité de $\varepsilon$ on conclut.
+}
+
+\begin{corollaire}
+	Soit $f : \Rn \to \R$ une fonction mesurable, bornée, de support de mesure finie. Soit $\{\varphi_k\}_{k = 1}^\infty$ une suite de fonctions simples croissante telle que $\varphi_k \ktoinfty f$ simplement. Alors
+	\[
+	\lim_{k \to \infty} \int_{\Rn} \varphi_k \, \mathrm dx
+	\]
+	existe, et est indépendante de la suite $\{\varphi_k\}_{k=1}^\infty$ choisie. On définit donc
+	\[
+	\int_{\Rn} f \, \mathrm dx := \lim_{k \to \infty} \int_{\Rn} \varphi_k \, \mathrm dx
+	\]
+\end{corollaire}
+
+
+\begin{proposition}
+	Soit $f : \Rn \to \Rn$ borné, de support compacte, et intégrable au sens de Riemann, alors $f$ est mesurable et sont intégrale au sens de Riemann coïncide avec l'intégrale de Lebesgue.
+\end{proposition}
+
+
+\begin{proposition}
+	On a $5$ propriétés de l'intégrale de Lebesgue ; 
+	\begin{enumerate}
+		\item Si $f$ et $g$ sont deux fonctions mesurables, bornés et de support de mesure bornée sur $\Rn$, alors on a 
+		\[
+		\int_{\Rn} (\alpha f + \beta g) \, \mathrm dx = \alpha \int_{\Rn} f \, \mathrm dx + \beta \int_{\Rn} g \, \mathrm dx 
+		\]
+		\item Soient $E$ et $F$ des sous-ensembles mesurables de $\Rn$. Si $f$ est comme dans le point $1.$, alors
+		\[
+		\int_{E \cup F} f \, \mathrm dx = \int_E f \, \mathrm dx + \int_F f \, \mathrm dx
+		\]
+		si on pose $\int_E f(x) \, \mathrm dx = \int_{\Rn} f(x) \chi_E(x) \, \mathrm dx$.
+		
+		\item Si $f,g$ sont deux fonctions comme avant avec $f \leqslant g$, alors
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx \leqslant \int_{\Rn} g(x) \, \mathrm dx
+		\]
+		\item On a
+		\[
+		\left|\int_{\Rn} f(x) \, \mathrm dx \right| \leqslant \int_{\Rn} |f(x)| \, \mathrm dx 
+		\]
+		\item Si $f = 0$ presque partout, alors
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx = 0
+		\]
+		En plus si $f = g$ presque partout, alors
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx = \int_{\Rn} g(x) \, \mathrm dx 
+		\]
+	\end{enumerate}
+	
+\end{proposition}
