@@ -520,3 +520,189 @@ En effet, parce que si $\{Q_j\}$ est un recouvrement de $E_2$ alors a fortiori c
 	Il suit que $T(E)$ est mesurable. Et comme $m^*(E) = m(E)$ pour $E$ mesurable, le théorème suit.
 }
 
+\section{Fonctions mesurables}
+\lecture{26 octobre}
+
+\subsection{Fonctions mesurables ; définition et propriétés de base}
+\begin{definition}
+	Soit $f : \Rn \to \overline \R$, alors on dit que $f$ est \textbf{mesurable au sens de Lebesgue}, pour vu que pour tout $a \in \R$, l'on ait que
+	\begin{equation} \label{eq: condition de fonction mesurabilité}
+	f^{-1}([-\infty, a[) = \{ x \in \Rn \mid  -\infty \leqslant f(x) < a\}
+	\end{equation}
+	soit mesurable.
+\end{definition}
+
+\begin{remarque}
+	Pour nos besoins, on va essentiellement toujours supposer que $f$ prenne les valeurs $\pm \infty$ que sur un ensemble de mesure nulle, et donc la condition de mesurabilité de $f$ \eqref{eq: condition de fonction mesurabilité} peut être remplacer par
+	\[
+	f^{-1}(]-\infty, a[) 
+	\]
+\end{remarque}
+
+\begin{lemme} \label{lem : Caractérisation de mesurabilité}
+	$f$ est mesurable si et seulement si $f^{-1} (\{-\infty\})$ et 
+	\[
+	f^{-1}(]a,b[)
+	\]
+	est mesurable pour tout $a < b \in \R$.
+\end{lemme}
+
+\prf{\begin{enumerate}
+		\item[$"\implies"$ :] Supposons que $f$ soit mesurable, alors on peut écrire
+		\[
+		f^{-1} (]a,b[) = f^{-1} ([-\infty, b[) \cap f^{-1} (]a, \infty])
+		\]
+		et donc mesurable par définition. De plus, on a
+		\[
+		f^{-1}(\{-\infty\}) = \bigcap_{k \geqslant 1} f^{-1}([-\infty, -k[)
+		\]
+		et donc mesurable.
+		
+		\item[$"\impliedby"$ :] Inversement, si $f^{-1}(\{-\infty\})$ et $f^{-1}(]a,b[)$ est mesurable pour tout $a < b \in \R$, alors on a que
+		\[
+		f^{-1}([-\infty, a[) = f^{-1}(\{-\infty\}) \cup \bigcup_{k \geqslant 1} f^{-1}(]a-k, a[)
+		\]
+		est mesurable.
+	\end{enumerate}
+}
+\begin{theoreme} \label{thm: Caractérisation de la mesurabilité}
+	Supposons que $f$ ne prennent que des valeurs finies. Alors $f$ est mesurable si et seulement si
+	\[
+	f^{-1}	(U)
+	\]
+	est mesurable pour tout ouvert $U \subset \R$. De plus on a l'équivalence analogue pour les fermés $F \subset \R$.
+\end{theoreme}
+
+\prf{On sait que tout ouvert peut s'écrire que réunion au plus dénombrable d'intervalle ouverts et disjoints $I_j$, et donc
+	\[
+	f^{-1}(U) = \bigcup_{j \in J} f^{-1}(I_j)
+	\]
+	est mesurable par le \autoref{lem : Caractérisation de mesurabilité}. Et la deuxième suit par passage au complémentaire.
+}
+
+
+\begin{corollaire} \label{cor: composition de fonctions mesurables}
+	Si $f : \Rn \to \R$ est continue, alors $f$ est mesurable. Si $f : \Rn \to \overline \R$ prend les valeurs $\pm \infty$ sur un ensemble $E$ de mesure nulle et $\phi : \R \to \R$ continue, alors si on définit
+	\[
+	\begin{array}{cccc}
+		\phi \circ f : & \Rn & \to & \R \\
+						& x & \mapsto &  \begin{cases}
+							\phi(f(x)) & x \in E^c \\
+							0 & x \in E
+						\end{cases}
+	\end{array}
+	\]
+	alors $\phi \circ f$ est mesurable.
+\end{corollaire}
+
+\prf{Par définition, la préimage d'un ouvert par rapport à une application continue est encore un ouvert, donc la première affirmation suit. Pour la deuxième, on utilise que
+\[
+(\phi \circ f)^{-1}(U) = f^{-1}(\phi^{-1}(U))
+\]
+et comme $f$ est mesurable et prend des valeurs non finies sur un ensemble de mesure nulle, alors par le \autoref{thm: Caractérisation de la mesurabilité} la deuxième affirmation suit.
+}
+
+\subsection{Limites de fonctions mesurables}
+
+\begin{proposition}
+	Soit $\{f_k\}_{k = 1}^\infty$ une suite de fonctions mesurables, alors
+	\[
+	\sup_{k \geqslant 1} f_k, \inf_{k \geqslant 1} f_k, \limsup_{k \to \infty} f_k , \liminf_{k \to \infty} f_k
+	\]
+	sont toutes des fonctions mesurables. Dans le cas où $\lim_{k \to \infty} f_k$ est bien définie, alors cette fonction est aussi mesurable.
+\end{proposition}
+
+\prf{On remarque que
+	\[
+	\sup_{k \geqslant 1} f_k(x) < a \iff x \in \bigcup_{n \geqslant 1} \bigcap_{k \geqslant 1} \{f_k(x) < a - \frac1n\}
+	\]
+	La mesurabilité de l'ensemble de droite suit du fait que les ensembles mesurables forment une $\sigma$-algèbre. On argumente de manière similaire pour $\inf$. Enfin, en utilisant
+	\[
+	\limsup_{k \to \infty} f_k = \inf_{k \geqslant 1} \sup_{n \geqslant k} f_n \et \liminf_{k \to \infty} f_k = \sup_{k \geqslant 1} \inf_{n \geqslant k} f_n
+	\]
+	la mesurabilité des ces expressions suis des affirmations précédentes.
+}
+
+\begin{lemme} \label{lem : somme et produit de fonctions mesurables}
+	Soit $f$ et $g$ deux fonctions mesurable prenant des valeurs finies, alors 
+	\[
+	f + g \et fg
+	\]
+	sont des fonctions mesurables.
+\end{lemme}
+
+\prf{On peut écrire
+	\begin{align*}
+		\{ x \in \Rn \mid (f + g)(x) < a\} &=  \bigcup_{r \in \Q} \{x \in \Rn \mid f(x) < r, \, g(x) < a  - r\} \\
+		&= \bigcup_{r \in \Q} \{x \in \Rn \mid f(x) < r\} \cap \{ x \in \Rn \mid g(x) < a -r\}
+	\end{align*}
+	Or l'ensemble à la fin est mesurable donc la mesurabilité de $f + g$ suit. Pour $fg$, il suffit de remarquer que 
+	\[
+	fg = \frac14[(f+g)^2 - (f-g)^2]
+	\]
+	or $(f+g)^2 = \phi \circ (f+g)$ où $\phi(x) = x^2$ qui est continue, et donc par le \autoref{cor: composition de fonctions mesurables} et la première affirmation on conclut bien que $fg$ est mesurable.
+}
+
+\begin{lemme} \label{lem: suite de fonctions mesurables}
+	Soit $f$ une fonction positive et mesurable. Alors il existe une suite croissante de fonctions simples et positives $\{\varphi_k\}_{k=1}^\infty$ telle que
+	\[
+	\forall x \in \Rn, \quad \lim_{k \to \infty} \varphi_k(x) = f(x)
+	\]
+\end{lemme}
+
+\prf{Si $f$ est non-bornée, on commence par remplacer $f$ par une fonction bornée. Pour $k \geqslant 1$, on pose
+	\[
+	g_k(x) = \chi_{\{f < k\}} \chi_{|x| < k} f(x) + k\chi_{|x| < k} \chi_{\{f \geqslant k\}}
+	\]
+	On observe alors que $E_k := \{f < k\}$ est mesurable, donc $g_k$ l'est aussi par le \autoref{lem : somme et produit de fonctions mesurables}. De plus, par construction on a 
+	\[
+	\forall x \in \Rn, \quad 0 \leqslant g_k(x) \leqslant k
+	\]
+	Ensuite, on partitionne
+	\[
+	[0, k[ = \bigcup_{l=1}^{k2^k} \left[ \frac{l-1}{2^k}, \frac{l}{2^k}\right]
+	\]
+	on introduit alors les fonctions simples 
+	\[
+	g_{kl}(x) := \frac{l-1}{2^k} \chi_{E_{kl}}(x)
+	\]
+	où $E_{kl} = \{ |x| < k, ~ g_k(x) \in [ \frac{l-1}{2^k}, \frac{l}{2^k}]\}$. Ces ensembles sont mesurables. Ainsi les fonctions
+	\[
+	\varphi_k(x) := \sum_{l=1}^{k^2k} g_{kl}(x) + k \chi_{|x| < k} \chi_{f \geqslant k}
+	\]
+	sont simples, et on vérifie bien que
+	\[
+	\forall x \in \Rn, \quad \varphi_{k+1}(x) \geqslant \varphi_k(x)
+	\]
+	Et on note que
+	\[
+	\forall x \in \Rn, \quad \lim_{k \to \infty} \varphi_k(x) = f(x)
+	\]
+	En fait, si $f(x) = + \infty$, alors $\varphi_k(x) = k$ pour vu $k > |x|$, et l'affirmation suit. Si $f(x) \in [0, \infty[$, soit $\varepsilon$ donné, alors si $k > \max \{f(x), |x|\}$ et $2^{-k} < \varepsilon$, on a que
+	\[
+	0 \leqslant f(x) - \varphi_k(x) < \varepsilon
+	\]
+}
+\begin{theoreme}
+	Soit $f : \Rn \to \overline \R$ une fonction mesurable, alors il existe une suite croissante de fonctions simples $\{\varphi_k\}_{k=1}^\infty$ telle que
+	\[
+	\forall x \in \Rn, \quad \lim_{k \to \infty} \varphi_k(x) = f(x)
+	\]	
+\end{theoreme}
+
+\prf{On remarque que l'on peut décomposer $f$ par
+	\[
+	f = f_+ - f_-
+	\]
+	où $f_\pm$ sont positives et mesurables, alors par le \autoref{lem: suite de fonctions mesurables} il existe des suites de fonctions simples positives croissante $\{\varphi_k\}$ et $\{\psi_k\}$ de sorte que
+	\[
+	\forall x \in \Rn, \quad f_+(x) = \lim_{k \to \infty} \varphi_k(x) \et f_-(x) = \lim_{k \to \infty} \psi_k(x)
+	\]
+	Ainsi si on pose $\zeta_k(x) :=\varphi_k(x) - \psi_k(x)$, alors on remarque qu'on a bien 
+	\[
+	\forall x \in \R, \quad |\zeta_k(x)| \leqslant |\zeta_{k+1}(x)|, \quad \forall k \geqslant 1
+	\]
+	ainsi que $f(x) = \lim_{k \to \infty} \zeta_k(x)$. En plus, chaque $\zeta_k$ est simple par construction.
+}
+
+
