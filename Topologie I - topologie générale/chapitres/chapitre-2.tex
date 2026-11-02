@@ -366,3 +366,117 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 \begin{lemme}
 	Sous les conditions des \autoref{def: Continuité globale} et \autoref{def: Continuité locale}, une application $f : (X, \T) \to (X', \T')$ est continue si et seulement si $f$ est continue en tout $x \in X$.
 \end{lemme}
+
+
+
+\section{La compacité}
+\lecture{2 novembre}
+
+\begin{definition}
+	Soit $(X, \T)$ un espace topologique et $Y \subset X$, alors on dit que $(Y, \T_Y)$ est \textbf{compact} si et seulement si
+	\[
+	\forall \mathcal U \subset \T, ~ Y \subset \bigcup_{U \in \mathcal U}, ~\exists U_1, \ldots, U_n \in \mathcal U, \quad Y \subset \bigcup_{i=1}^n U_i
+	\]
+\end{definition}
+
+\begin{theoreme}
+	Soient $(X, \T)$ et $(X', \T')$ des espaces topologiques et $Y \subset X$. Si $(X, \T)$ est compact alors
+	\begin{enumerate}
+		\item Si $Y$ est fermé par rapport à $\T$, alors $(Y, \T_Y)$ est aussi compact,
+		\item Si $f : (X, \T) \to (X', \T')$ est continue, alors $(\Ima f, \T_{\Ima f})$ est aussi compact.
+		\item 
+	\end{enumerate}
+\end{theoreme}	
+
+\prf{On a dans l'ordre
+\begin{enumerate}
+	\item Soit $(X, \T)$ un espace topologique compact, et soit $Y \subset X$ un fermé. Puisque $Y$ est fermé, alors $Y^c \in \T$, par ailleurs
+	\[
+	X = Y \backslash Y^c = \bigcup_{U \in \mathcal U} U \cup Y^c
+	\]
+	dont $\mathcal U \cup Y^c$ est un recouvrement d'ouvert de $X$, ainsi par compacité de $(X, \T)$, il existe $U_1, \ldots, U_n \in \mathcal U$ tel que
+	\[
+	X = \bigcup_{i=1}^n U_i \cup Y^c
+	\]
+	Puisque $Y \subset X$ et $Y \cap Y^c = \emptyset$, on sait alors que $Y \subset \bigcup_{i=1}^n U_i$, d'où la compacité de $(Y, \T_Y)$.
+	
+	\item Soit $f :  (X, \T) \to (X', \T')$ une application continue où $(X, \T)$ un compact. Ainsi soit $\mathcal U' \subset \T'$ tel que 
+	\[
+	\Ima f \subset \bigcup_{U' \in \mathcal U'} U'
+	\]
+	On pose $\mathcal U = \{ f^{-1}(U') \mid U' \in \mathcal U'\}$, puisque $f$ est continue, et $U' \in \T'$, on sait que $\mathcal U \subset \T$. Par ailleurs
+	\[
+	X = \bigcup_{U \in \mathcal U} U
+	\]
+	et donc par compacité de $(X, \T)$, il existe $U_1 = f^{-1} (U_1'), \ldots, U_n = f^{U_n'}$ tel que $X = \bigcup_{i=1}^n U_i$ donc comme $f(f^{-1}(U_i')) \subset U_i'$ on obtient bien que
+	\[
+	\Ima f = \bigcup_{i=1}^n f(U_i) \subset \bigcup_{i=1}^n U_i'
+	\]
+	Donc $(\Ima f, \T_{\Ima f})$ est bien compact
+	\end{enumerate}
+}
+
+\begin{definition}[Propriété d'intersection finie] \label{def: PIF}
+	Soient $X$ un ensemble et $\mathcal C \subset \mathcal P(X)$. La collection $\mathcal C$ vérifie la \textbf{propriété d'intersection finie (PIF)} si pour tout $\{C_1, \ldots, C_n \} \subset \mathcal C$ et pour tout $n \in \N$, on a 
+	\[
+	\bigcap_{i=1}^n C_i \neq \emptyset
+	\]
+\end{definition}
+
+\begin{theoreme}
+	Soit $(X, \T)$ un espace topologique, alors $(X, \T)$ est compact si et seulement si, si $\mathcal C \subset \mathcal P(X)$ vérifie la PIF et $C$ fermée par rapport à $\T$ pour tout $C \in \mathcal C$, alors
+	\[
+	\bigcap_{C \in \mathcal C} C \neq \emptyset
+	\]
+\end{theoreme}
+
+\prf{\begin{enumerate}
+		\item[$"\implies :"$] Soit $(X, \T)$ compact, et soit $\mathcal C$ une collection de fermés  qui vérifie la PIF, supposons par l'absurde que
+		\[
+		\bigcap_{C \in \mathcal C} C = \emptyset \implies X = \left(\bigcap_{C \in \mathcal C} C\right)^c = \bigcup_{C \in \mathcal C} C^c
+		\]
+		donc $\{ C^c \mid C \in \mathcal C\}$ est un recouvrement ouvert de $(X, \T)$. Et donc par compacité de $(X, \T)$, il existe $C_1, \ldots, C_n \in \mathcal C$ tel que
+		\[
+		X = \bigcup_{i=1}^n C_i^c
+		\]
+		d'où
+		\[
+		\emptyset = X^c = \left(\bigcup_{i=1}^n C_i^c\right)^c = \bigcap_{i=1}^n C_i
+		\]
+		ce qui contredit la PIF.
+		
+		\item[$"\impliedby :"$] Soit $\mathcal U \subset \T$ tel que $X = \bigcup_{U \in \mathcal U} U$, alors on considère la collection de fermés
+		\[
+		\mathcal C = \{ U^c \mid U \in \mathcal U\}
+		\]
+		alors on remarque que
+		\[
+		\bigcap_{C \in \mathcal C} C = \bigcap_{U \in \mathcal U} U^c = \left(\bigcup_{U \in \mathcal U} U \right)^c = \emptyset
+		\]
+		Par conséquent, la collection $\mathcal C$ doit vérifier la PIF, donc il existes $U_1, \ldots, U_n$ tel que $\bigcap_{i=1}^n U_i^c = \emptyset$. D'où
+		\[
+		X = \emptyset^c = \left(\bigcap_{i=1}^n U_i^c\right)^c = \bigcup_{i=1}^n U_i
+		\]
+		donc $(X, \T)$ est bien un compact.
+	\end{enumerate}
+}
+
+\section{Les espaces produits}
+
+\subsection{Préliminaire sur le produit cartésien fini}
+\begin{definition}
+	Soit $X_1$ et $X_2$ des ensembles. Alors on définit les \textbf{projections} comme
+	\[
+	\begin{array}{cccc}
+		\pr_1 : & X_1 \times X_2 & \to X_1 \\
+		        & (x_1, x_2) & \mapsto & x_1 
+	\end{array}
+	\quad 
+	\et 
+	\quad 
+	\begin{array}{cccc}
+		\pr_2 : & X_1 \times X_2 & \to X_2 \\
+		& (x_1, x_2) & \mapsto & x_2 
+	\end{array}
+	\]
+\end{definition}
