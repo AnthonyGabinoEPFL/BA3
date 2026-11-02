@@ -367,6 +367,59 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 	Sous les conditions des \autoref{def: Continuité globale} et \autoref{def: Continuité locale}, une application $f : (X, \T) \to (X', \T')$ est continue si et seulement si $f$ est continue en tout $x \in X$.
 \end{lemme}
 
+\prf{
+	\begin{enumerate}
+		\item[$"\implies :"$] Soient $x \in X$ et $U' \in \T'$ tel que $f(x) \in U'$. Comme $f : (X, \T) \to (X', \T')$ est continue par hypothèse, on a $f^{-1} \in \T$, et donc on peut poser $U = f^{-1}(U')$ et on aura $x \in U = f^{-1}(U')$, ce qui montre la continuité locale.
+		
+		\item[$"\impliedby :"$] Soit $U' \in \T'$, alors pour $x \in f^{-1}(U')$ on a par hypothèse, il existe $U_x \in \T$ tel que $x \in U_x \subset f^{-1}(U')$. Par conséquent, $f^{-1}(U') = \bigcup_{x \in f^{-1}(U')} U_x \in \T$ par \TD.
+	\end{enumerate}
+}
+
+\subsection{Caractérisation de la continuité par les sous-bases}
+\begin{lemme}
+	Soient $(X, \T)$ et $(X', \T')$ des espaces topologiques. Soit $\mathcal S'$ une sous-bases de $\T'$. Alors une application $f : X \to X'$ est continue par rapport à $\T$ et $\T'$ si et seulement si $f^{-1}(S') \in \T$ pour tout $S' \in \mathcal S'$.
+\end{lemme}
+
+\prf{
+	\begin{enumerate}
+		\item[$"\implies :"$] On a toujours $\mathcal S' \subset \mathcal B_{\mathcal S'} \subset \T_{\mathcal B_{\mathcal S'}}$ donc si l'application $f$ est continue, on a nécessairement $f^{-1}(S') \in \T$ pour tout $S' \in \mathcal S'$.
+		
+		\item[$"\impliedby :"$] Soit $U' \in \T'$, on se rappelle que $\T' = \T_{\mathcal B_{\mathcal S'}}$ et que
+		\[
+		\mathcal B_{\mathcal S'} = \Bigg\{\bigcap_{i=1}^n S_i' \in \mathcal S' \mid S_i' \in \mathcal S'\Bigg\}
+		\]
+		et 
+		\[
+		\T_{\mathcal B_{\mathcal S'}} = \Bigg\{ \bigcup_{i \in I} B_i' \mid B_i \in \mathcal B_{\mathcal S'}\Bigg\}
+		\]
+		Comme $U' \in \T' = \T_{\mathcal B_{\mathcal S}}$ il existe une famille $\{B_i\} \subset \mathcal B$ telle que
+		\[
+		U' = \bigcup_{i \in I} B_i
+		\]
+		et pour chaque $i \in I$, il existe une collection $\{S_{i_1}', \ldots, S_{i_n}'\} \subset \mathcal S'$ telle que
+		\[
+		B_i = \bigcap_{j=1}^n S_{i_j}'
+		\]
+		Ainsi
+		\[
+		f^{-1}(U') = \bigcup_{i \in I} f^{-1}(B_i) = \bigcup_{i \in I} \bigcap_{j=1}^n f^{-1} (S_{i_j}') \in \T
+		\]
+		par hypothèse, on a donc montré que $f^{-1}(U') \in \T$ pour tout $U' \in \T'$.
+	\end{enumerate}
+}
+
+\begin{lemme}
+	Soient $(X, d)$ et $(X', d')$ des espaces métriques. Une application $f : (X, d) \to (X', d')$ est continue dans le sens de la métrique si et seulement si l'application $f : (X, \T_d) \to (X, \T_{d'})$ est continue dans le sens topologique.
+\end{lemme}
+
+
+\subsection{Homéomorphisme}
+
+\begin{definition}[Homéomorphisme]
+	Soient $(X, \T)$ et $(X', \T')$ deux espaces topologiques. Une applications continue $h : (X, \T) \to (X', \T')$ est un \textbf{homéomorphisme} si elle admet une réciproque continue $k : (X', \T') \to (X, \T)$. 
+	
+	Ainsi on dira que
+\end{definition}
 
 
 \section{La compacité}
