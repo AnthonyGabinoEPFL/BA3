@@ -683,7 +683,7 @@ et comme $f$ est mesurable et prend des valeurs non finies sur un ensemble de me
 	0 \leqslant f(x) - \varphi_k(x) < \varepsilon
 	\]
 }
-\begin{theoreme}
+\begin{theoreme} \label{thm: suite croissante de fonctions simples}
 	Soit $f : \Rn \to \overline \R$ une fonction mesurable, alors il existe une suite croissante de fonctions simples $\{\varphi_k\}_{k=1}^\infty$ telle que
 	\[
 	\forall x \in \Rn, \quad \lim_{k \to \infty} \varphi_k(x) = f(x)
@@ -704,5 +704,9 @@ et comme $f$ est mesurable et prend des valeurs non finies sur un ensemble de me
 	\]
 	ainsi que $f(x) = \lim_{k \to \infty} \zeta_k(x)$. En plus, chaque $\zeta_k$ est simple par construction.
 }
+
+
+\subsection{La notion de presque partout}
+Soit $f$ et $g$ deux fonctions mesurables, alors on dira que $f = g$ \textbf{presque partout}, ou bien \textbf{p.p} si elles ne diffèrent que sur un ensemble de mesure nulle. De même si $\varphi_n$ est une suite de fonction, on dira que $\varphi_n \to f$ p.p, pourvu que $\lim_{n \to \infty} \varphi_n(x) = f(x)$ pour tout $x \in E^c$, où $E$ est un ensemble de mesure nulle.
 
 

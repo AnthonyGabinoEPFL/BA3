@@ -1,8 +1,86 @@
 \chapter{Intégrale de Lebesgue}
 \minisommaire
+\lecture{29 octobre}
+\section{Intégrale de Lebesgue pour des fonctions simples} 
+\begin{definition}
+	Soit $\varphi$ une fonction simple de représentation canonique $\varphi = \sum_{k = 1}^n a_k \chi_{E_k}$. Alors on pose
+	\[
+	\int_{\Rn} \varphi(x) \, \mathrm dx = \sum_{k=1}^n a_k m(E_k)
+	\]
+\end{definition}
 
+\begin{remarque} \label{rem: Invariance par représentation}
+	On peut montrer que cette définition est indépendante de la représentation choisie, ainsi si on choisit 
+	\[
+	\varphi = \sum_{k=1}^m b_k \chi_{\tilde E_k}
+	\]
+	une représentation arbitraire de $\varphi$, avec $\tilde E_k$ mesurables de mesure finie mais pas nécessairement disjoints, et les $b_k$ par nécessairement distincts. Alors on a quand même
+	\[
+	\int_{\Rn} \varphi(x) \, \mathrm dx = \sum_{k=1}^m b_k \chi_{\tilde E_k}
+	\] 
+\end{remarque}
+
+\begin{proposition}[Propriétés de l'intégrale de fonctions simples] \label{prop: Propriétés de l'intégrale de fonctions simples}
+	On a les propriétés suivantes
+	\begin{enumerate}
+		\item (Linéarité) Si $\varphi$ et $\phi$ sont deux fonctions simples sur $\Rn$, alors l'on a
+		\[
+		\int_{\Rn} (\alpha \varphi + \beta \phi)(x)\, \mathrm dx = \alpha \int_{\Rn} \varphi(x) \, \mathrm dx + \beta \int_{\Rn} \phi(x) \, \mathrm dx
+		\]
+		pour tout $\alpha, \beta \in \R$.
+		\item (Localisation et additivité). Soient $E$ et $F$ des sous-ensembles mesurables de $\Rn$. Si $\varphi$ est simples, alors
+		\[
+		\int_E \varphi(x) \, \mathrm dx = \int_{\Rn} \varphi(x) \chi_E(x) \, \mathrm dx
+		\]
+		est bien défini parce que que $\chi_E$ est simple. Alors on a
+		\[
+		\int_{E \cup F} \varphi(x) \, \mathrm dx = \int_E \varphi(x) \, \mathrm dx + \int_F \varphi(x) \, \mathrm dx
+		\]
+		pourvu que $E$ et $F$ soient disjoints.
+		
+		\item (Monotonicité) Si $\varphi$ et $\psi$ sont des fonctions simples avec $\varphi \leqslant \psi$, alors
+		\[
+		\int_{\Rn} \varphi(x) \, \mathrm dx \leqslant \int_{\Rn} \psi(x) \, \mathrm dx
+		\]
+		\item (Inégalité triangulaire9 On a
+		\[
+		\left|\int_{\Rn}\varphi(x) \, \mathrm dx\right| \leqslant \int_{\Rn} |\varphi(x)| \, \mathrm dx
+		\]
+		pourvu que $\varphi$ soit simple.
+	\end{enumerate}
+\end{proposition}
+
+\prf{Toutes ces propriétés découlent de la \autoref{rem: Invariance par représentation}, pour le point $1.$, on observe que si $\varphi = \sum_{k=1}^n a_k \chi_{E_k}$ et $\phi = \sum_{l=1}^m b_l \chi_{F_l}$, alors
+	\[
+	\alpha \varphi + \beta \phi = \sum_{k=1}^m \alpha a_k \chi_{E_k} + \sum_{l=1}^m \beta b_l \chi_{F_l}
+	\]
+	et donc par la \autoref{rem: Invariance par représentation} 
+	\[
+	\int_{\Rn} (\alpha \varphi + \beta \phi)(x) \, \mathrm dx = \sum_{k=1}^n \alpha a_k m(E_k) + \sum_{l=1}^m \beta b_l m(F_l) = \alpha \int_{\Rn} \varphi(x) \, \mathrm dx + \beta \int_{\Rn} \phi(x) \, \mathrm dx
+	\]
+	De manière similaire, on remarque que
+	\[
+	\chi_E \varphi = \sum_k a_k \chi_{E_k \cap E} \et \chi_F \varphi = \sum_k a_k \chi_{E_k \cap F}
+	\]
+	et donc par la \autoref{rem: Invariance par représentation} on a
+	\begin{align*}
+		\int_E \varphi(x) \, \mathrm dx + \int_F \varphi(x) \, \mathrm dx &= \sum_k m(E_k \cap E) + \sum_k a_k m(E_k \cap F) \\
+																			&= \sum_k a_k m(E_k \cap (E \cup F)) = \int_{E \cup F} \varphi(x) \, \mathrm dx
+	\end{align*}
+	où on utilise que $E$ et $F$ sont disjoints par hypothèse. Et pour la $3.$, on remarque que $\psi - \varphi$ est une fonction simple positive, et donc sa représentation canonique a la forme
+	\[
+	\psi - \varphi = \sum_k c_k \chi_{C_k}, \quad c_k \geqslant 0
+	\]
+	Il suit que
+	\[
+	\int_{\Rn} (\psi - \varphi) \, \mathrm dx = \sum_k c_k \chi_{C_k} \geqslant 0
+	\]
+	et donc par le point 1. on a bien $\int_{\Rn} \psi(x) \, \mathrm dx \geqslant \int_{\Rn} \varphi(x) \, \mathrm dx$.
+}
 \lecture{2 novembre}
-\section{Intégrale de Lebesgue pour des fonctions simples}
+\section{Intégrale de Lebesgue pour des limites de fonctions simples}
+
+
 
 \begin{proposition}[Egorov] \label{prop: Egorov}
 	Soit $f : \Rn \to \overline \R$ une fonction mesurable prenant des valeurs finies, presque partout, de support $E \subset \Rn$ de mesure finies. Soit $\{f_k\}_{k=1}^\infty$ une suite de fonctions mesurables, tous de support en $E$ tel que $f_k \underset{k \to \infty}{\longrightarrow} f$ presque partout. Alors pour tout $\varepsilon > 0$, il existe $A_\varepsilon \subset E$ tel que
@@ -15,6 +93,8 @@
 	\]
 	converge uniformément vers $f_{\mid A_\varepsilon}$.
 \end{proposition}
+
+
 
 \prf{Si on enlève un ensemble de mesure nulle de $E$, on peut alors supposer que $f$ prend des valeurs finies partout et que $f_k \ktoinfty f$ partout. Et donc par abus de language, l'ensemble modifié est encore appelé $E$. Donc d'après l'hypothèse,
 \[
@@ -39,7 +119,7 @@ m(E\backslash A_\varepsilon) \leqslant \sum_{k \geqslant 1} m(E \backslash E_k) 
 De plus, soit $\delta > 0$. On choisit $k \geqslant 1$ tel que $\frac1k < \delta$. Par construction $A_\varepsilon \subset E_k$, il suit, par définition, que si $n \geqslant N$, on a $|f_n(x) - f(x)| < \frac1k < \delta$.
 }
 
-\begin{theoreme}
+\begin{theoreme} \label{thm: Limite de suite d'intégrale de fonctions simples}
 	Soit $\{\varphi_k\}_{k=1}^\infty$ une suite de fonctions simples, bornée uniformément, et tous de support contenu dans $E \subset \Rn$ avec $m(E) < \infty$. Supposons que $\varphi_k \ktoinfty f$ presque partout. Alors
 	\[
 	\lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx
@@ -86,21 +166,21 @@ et donc par arbitrarité de $\varepsilon$ on conclut.
 \begin{proposition}
 	On a $5$ propriétés de l'intégrale de Lebesgue ; 
 	\begin{enumerate}
-		\item Si $f$ et $g$ sont deux fonctions mesurables, bornés et de support de mesure bornée sur $\Rn$, alors on a 
+		\item (Linéarité) Si $f$ et $g$ sont deux fonctions mesurables, bornés et de support de mesure bornée sur $\Rn$, alors on a 
 		\[
-		\int_{\Rn} (\alpha f + \beta g) \, \mathrm dx = \alpha \int_{\Rn} f \, \mathrm dx + \beta \int_{\Rn} g \, \mathrm dx 
+		\int_{\Rn} (\alpha f + \beta g) \, \mathrm dx = \alpha \int_{\Rn} f(x) \, \mathrm dx + \beta \int_{\Rn} g(x) \, \mathrm dx 
 		\]
-		\item Soient $E$ et $F$ des sous-ensembles mesurables de $\Rn$. Si $f$ est comme dans le point $1.$, alors
+		\item (Additivité) Soient $E$ et $F$ des sous-ensembles mesurables de $\Rn$. Si $f$ est comme dans le point $1.$, alors
 		\[
-		\int_{E \cup F} f \, \mathrm dx = \int_E f \, \mathrm dx + \int_F f \, \mathrm dx
+		\int_{E \cup F} f(x) \, \mathrm dx = \int_E f(x) \, \mathrm dx + \int_F f(x) \, \mathrm dx
 		\]
 		si on pose $\int_E f(x) \, \mathrm dx = \int_{\Rn} f(x) \chi_E(x) \, \mathrm dx$.
 		
-		\item Si $f,g$ sont deux fonctions comme avant avec $f \leqslant g$, alors
+		\item (Monotonicité) Si $f,g$ sont deux fonctions comme avant avec $f \leqslant g$, alors
 		\[
 		\int_{\Rn} f(x) \, \mathrm dx \leqslant \int_{\Rn} g(x) \, \mathrm dx
 		\]
-		\item On a
+		\item (Inégalité triangulaire) On a
 		\[
 		\left|\int_{\Rn} f(x) \, \mathrm dx \right| \leqslant \int_{\Rn} |f(x)| \, \mathrm dx 
 		\]
@@ -115,3 +195,22 @@ et donc par arbitrarité de $\varepsilon$ on conclut.
 	\end{enumerate}
 	
 \end{proposition}
+
+\prf{Pour le premier point, par le \autoref{thm: suite croissante de fonctions simples} il existe deux suite de fonctions simples croissantes $\{\varphi_k\}_{k \geqslant 1}$ et $\{\psi_k\}_{k \geqslant 1}$, convergeant respectivement vers $f$ et $g$. Alors il est clair que $\alpha \varphi_k + \beta \psi_k$ converge vers $\alpha f + \beta g$ et est borné, et de support de mesure finie uniformément en $k$. Ainsi si $\{\zeta_k\}_{k \geqslant 1}$ est une suite croissante qui converge vers $\alpha f + \beta g$, alors par le \autoref{thm: Limite de suite d'intégrale de fonctions simples} on obtient que
+	\[
+	\lim_{k \to \infty} \int_{\Rn} (\alpha \varphi_k + \beta \psi_k - \zeta_k) \, \mathrm dx = 0
+	\]
+	Or par définition, $\int_{\Rn} (\alpha f + \beta g) \, \mathrm dx = \lim_{k \to \infty} \int_{\Rn} \zeta \, \mathrm dx$, et d'après la \autoref{prop: Propriétés de l'intégrale de fonctions simples} on a
+	\begin{align*}
+		\lim_{k \to \infty} \int_{\Rn} (\alpha \varphi_k + \beta \psi_k) \, \mathrm dx &= \alpha \lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx + \beta \lim_{k \to \infty} \int_{\Rn} \psi_k(x) \, \mathrm dx \\ &= \alpha \int_{\Rn} f(x) \, \mathrm dx + \beta \int_{\Rn} g(x) \, \mathrm dx
+	\end{align*}
+	
+Les propriétés $2-4$ sont analogue aux fonctions simples. Donc on regarde juste la dernière affirmation ; si $\varphi_k \to f$ est une suite croissante de fonctions simples, et donc $|\varphi_k| \leqslant |f|$ pour tout $k \geqslant 1$, on a que
+\[
+\int_{\Rn} \varphi_k(x) \, \mathrm dx = 0, \quad \forall k \geqslant 1
+\]
+et donc ça entraîne bien
+\[
+\int_{\Rn} f(x) \, \mathrm dx = 0
+\]
+}
