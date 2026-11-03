@@ -7,9 +7,9 @@
 \begin{definition}[Espace topologique] \label{def: Espace topologique}
 	Soit $X$ un ensemble, une \textbf{topologie} sur $X$ est un sous-ensemble $\T \subset \mathcal P(X)$ tel que
 	\begin{enumerate}
-		\item[(T1)] \label{def: T1} $\empty, X \in \T$
+		\item[(T1)] \label{def: T1} $\emptyset, X \in \T$
 		\item[(T2)] \label{def: T2} $\forall \mathcal A \subset \T, \quad \bigcup_{U \in \mathcal A} U \in \T$
-		\item[(T3)] \label{def: T3} $\forall U_1, \ldots, U_n \in \T, \quad \bigcup_{i=1}^n U_i \in \T$
+		\item[(T3)] \label{def: T3} $\forall U_1, \ldots, U_n \in \T, \quad \bigcap_{i=1}^n U_i \in \T$
 	\end{enumerate}
 	le couple $(X, \T)$ est alors appelé un \textbf{espace topologique} et les éléments de $\T$ sont appelés des \textbf{ouverts} de $(X, \T)$.
 \end{definition}
@@ -64,7 +64,7 @@
 	Soit $\T, \T'$ des topologies sir $X$. Si $\T \subset \T'$, alors on dit que $\T'$ est plus \textbf{fine} que $\T$. Mais aucune des topologies n'est incluses dans l'autre alors on dira qu'elles sont \textbf{incomparable}.
 \end{definition}
 
-\subsection{Bases}
+\subsection{Les bases topologiques}
 
 \begin{definition}[Base topologique] \label{def: Base topologique}
 	Soit $X$ un ensemble. Une \textbf{base de topologie} est un sous-ensemble $\mathcal B \subset \mathcal P(X)$ qui vérifie
@@ -412,7 +412,41 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 	Soient $(X, d)$ et $(X', d')$ des espaces métriques. Une application $f : (X, d) \to (X', d')$ est continue dans le sens de la métrique si et seulement si l'application $f : (X, \T_d) \to (X, \T_{d'})$ est continue dans le sens topologique.
 \end{lemme}
 
-
+\subsection{Caractérisation de la continuité par les fermés}
+\begin{theoreme} \label{thm: Caractérisation par les fermés}
+	Soient $(X, \T)$ et $(X', \T')$ des espaces topologiques. Soit $f : X \to X'$ une application. Alors les affirmations suivantes sont équivalentes : 
+	\begin{enumerate}
+		\item $f : (X, \T) \to (X', \T')$ est continue,
+		\item $f(\overline A) \subset \overline{f(A)}$ pour tout $A \subset X$,
+		\item Pour tout fermé $C' \subset X'$ par rapport à $\T'$, sa préimage $f^{-1} (C')$ est fermé par rapport à $\T$.
+	\end{enumerate}
+\end{theoreme}
+\prf{On va raisonner cycliquement, 
+	\begin{enumerate}
+		\item[$1. \implies 2.$ : ] Supposons que $f$ soient continue, soit $y \in f(\overline A)$. Alors il existe $x \in \overline A$ tel que $y = f(x)$. Par caractérisation de l'adhérence, pour tout $U \in \T$ tel que $x \in U$, on a
+		\begin{equation} \label{eq: adhérence}
+		U \cap A \neq \emptyset
+		\end{equation}
+		Or par continuité de $f$, si $U' \in \T'$, alors $f^{-1}(U') \in \T$. De plus comme $f(x) = y$, on sait que $x \in f^{-1} (u')$ pour un certain $U' \in \T$. Mais par \eqref{eq: adhérence}, on a $A \cap f^{-1}(U') \neq \emptyset$, et donc en appliquant $f$ on a
+		\[
+		\emptyset \neq f(A \cap f^{-1}(U')) = f(A) \cap f(f^{-1}(U')) \subset f(A) \cap U'
+		\]
+		d'où $y \in \overline{f(A)}$. Ainsi on a montré $f(\overline A) \subset \overline{f(A)}$.
+		
+		\item[$2. \implies 3.$ : ] Soit $A' \subset X'$ un sous-ensemble fermé par rapport à $\T'$. Alors
+		\[
+		f^{-1}(A') \subset \overline{f^{-1}(A')} \subset f^{-1} \Big(f \Big( \overline{f^{-1}(A')}\Big)\Big) \subset f^{-1} \Bigg(\underbrace{ \overline{f(f^{-1}(A'))}}_{\subset A'} \Bigg) \subset f^{-1}(\overline{A'}) = f^{-1}(A')
+		\]
+		Donc $f^{-1}(A') \subset \overline{f^{-1}(A')}$, donc $f^{-1}(A')$ est fermé par rapport à $\T$.
+		
+		\item[$3. \implies 1.$ : ] Soit $U'$ un ouvert. On pose $C' =  X' \backslash U'$, il donc fermé par hypothèse par rapport à $\T'$. De plus on sait que $f^{-1}(C')$ est fermé par rapport à $\T$, et donc
+		\[
+		f^{-1}(C') = f^{-1}(X' \backslash U') = X \backslash f^{-1}(U') \implies f^{-1}(U') =  X \backslash f^{-1}(C')
+		\]
+		dont $f^{-1}(U') \in \T$ puisque $f^{-1}(C')$ est fermé.
+	\end{enumerate}
+	Ainsi les 3 affirmations sont bien équivalentes.
+}
 \subsection{Homéomorphisme}
 
 \begin{definition}[Homéomorphisme]
@@ -421,6 +455,92 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 	Ainsi on dira que
 \end{definition}
 
+\section{Les sous-espaces topologiques}
+\begin{definition}
+	Soit $(X, \T)$ un espace topologique et $Y \subset X$  une partie de $X$. Alors on définit la \textbf{topologie induite} $\T_Y$ sur $Y$ comme
+	\[
+	\T_Y = \{ U \cap Y \mid U \in \T\}
+	\]
+\end{definition}
+\begin{lemme}
+	Soit $f(X, \T) \to (X', \T')$ une application continue entre espaces topologiques. Alors pour des sous-ensembles $Y \subset X$ et $Z \subset X'$ tel que $\Ima f \subset Z$, on a
+	\begin{enumerate}
+		\item La restriction $f_{\mid_Y} : (Y, \T_Y) \to (X', \T')$
+		\item La co-restriction $f_{\mid^Z} : (X, \T) \to (Z, \T_{Z}')$
+	\end{enumerate}
+	sont tout deux continues.
+\end{lemme}
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\begin{tikzcd}
+			{(X, \mathcal T)} & {(X', \mathcal T')} \\
+			{(Y, \mathcal T_Y)}
+			\arrow["f", from=1-1, to=1-2]
+			\arrow["\imath", from=2-1, to=1-1]
+			\arrow["{f_{\mid_Y}}"', from=2-1, to=1-2]
+		\end{tikzcd}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\begin{tikzcd}
+			{(X, \mathcal T)} && {(X', \mathcal T')} \\
+			& {(Z, \mathcal T_Z')}
+			\arrow["f", from=1-1, to=1-3]
+			\arrow["{f_{\mid^Z}}"', from=1-1, to=2-2]
+			\arrow["{\imath'}"', from=2-2, to=1-3]
+		\end{tikzcd}
+	\end{minipage}
+\end{figure}
+\prf{
+	\begin{enumerate}
+		\item On sait que $f_{\mid_Y} = f \circ \imath$, mais puisque $f$ et $\imath$ sont tout deux continues, leur composée l'est aussi. En effet,
+		\[
+		\forall U \in \T, \quad \imath^{-1}(U) = U \cap Y \in \T_Y
+		\]
+		dont $\imath$ est bien continue.
+		\item On sait que $\mathcal T_Z' = \{U' \cap Z \mid U' \in \T'\}$. Comme $f$ est continue, on a toujours $f^{-1} (U') \in \T$. Mais comme $\Ima f \subset Z$, on a $f^{-1}(U'\cap Z) = f^{-1}(U')$. Ainsi
+		\[
+		f_{\mid^Z}^{-1} (U'\cap Z) = f^{-1} (U'\cap Z) = f^{-1}(U') \in \T
+		\]
+		ce qui montre bien que le co-restriction $f_{\mid^Z}$ est continue.		
+	\end{enumerate}	
+}
+
+\begin{theoreme}[Théorème de recollement]
+	Soient $(X, \T)$ et $(X', \T)$ des espaces topologiques et $f : X \to X'$ une application. S'il existe une famille d'ouvert $\{U_i \mid i \in I\} \subset \T$ qui recouvre $X$ et que chaque restriction
+	\[
+	f_{\mid_{U_i}} : (U_i, \T_{U_i}) \to (X', \T')
+	\]
+	est continue pour tout $i \in I$, alors $f : (X, \T) \to (X', \T')$ est continue.	
+\end{theoreme}
+\prf{Comme les $U_i$ forment un recouvrement, on a pour $U' \in \T'$
+\[
+f^{-1}(U') = \bigcup_{i \in I} f^{-1}_{\mid_{U_i}} (U')
+\]
+or par hypothèse de continuité, pour tout $i \in I, \quad f^{-1}_{\mid_{U_i}}(U') \in \T_{U_i}$. Donc il existe $V_i \in \T$ tel que $f^{-1}_{\mid_{U_i}}(U') = V_i \cap U_i$. Ainsi on conclut que
+\[
+f^{-1} (U')= \bigcup_{i \in I} f^{-1}_{\mid_{U_i}} (U') = \bigcup_{i \in I} (V_i \cap U_i) \in \T
+\]
+ce qui montre bien que $f$ est continue.
+}
+
+\begin{proposition}[Théorème de recollement avec des fermés]
+	Soient $(X, \T)$ et $(X', \T)$ des espaces topologiques et $f : X \to X'$ une application. S'il existe une famille de fermé $\{C_1, \ldots, C_n\}$ qui recouvre $X$ et que chaque restriction
+	\[
+	f_{\mid_{C_i}} : (C_i, \T_{C_i}) \to (X', \T')
+	\]
+	est continue pour tout $i \in \entiers$, alors $f : (X, \T) \to (X', \T')$ est continue.	
+\end{proposition}
+
+\prf{On observe que
+	\[
+	f^{-1}(C')  = \bigcup_{i=1}^n f^{-1}_{\mid_{C_i}}(C')
+	\]
+	est fermé puisque $f^{-1}_{\mid_{C_i}}(C')$ le sont de par le \autoref{thm: Caractérisation par les fermés}, et donc par le même \autoref{thm: Caractérisation par les fermés} on conclut bien que $f$ est continue.
+}
 
 \section{La compacité}
 \lecture{2 novembre}
@@ -533,3 +653,17 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 	\end{array}
 	\]
 \end{definition}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		&&& {X_1} \\
+		Y && {X_1 \times X_2} \\
+		&&& {X_2}
+		\arrow["{f_1}", bend left=20, from=2-1, to=1-4]
+		\arrow["{(f_1, f_2)}", from=2-1, to=2-3]
+		\arrow["{f_2}"', bend right=20, from=2-1, to=3-4]
+		\arrow["{\mathrm{pr}_1}", from=2-3, to=1-4]
+		\arrow["{\mathrm{pr}_2}"', from=2-3, to=3-4]
+	\end{tikzcd}
+\end{figure}
