@@ -1,0 +1,209 @@
+\chapter{Groupes solvables}
+\minisommaire
+\lecture{28 octobre}
+
+\section{Groupes simples}
+
+\begin{definition}
+	Un groupe $G$ est dit \textbf{simple} s'il possède exactement deux sous-groupes normaux ; $1$ et $G$.
+\end{definition}
+
+
+\begin{theoreme}
+	Même si le groupe symétrique $\S_n$ n'est pas simples, le sous-groupe \text{alterné} 
+	\[
+	A_n = \ker \Big(\S_n \overset{\mathrm{sgn}}{\longrightarrow} \zn 2\Big)
+	\]
+	est simple, pour tout $n \geqslant 5$.
+\end{theoreme}
+
+\prf{Supposons par l'absurde qu'il existe un sous-groupe normal $H \trianglelefteq A_n$ non trivial. Alors on est nécessairement dans les cas suivants :
+	\begin{enumerate}
+		\item $H$ contient éléments $h$ possèdent un cycle $(a ~ b ~ c ~ d \ldots )$ de longueur $\geqslant 4$ dans sa décomposition en cycle disjoints. Alors soit $g =(a ~b~c)$, par normalité de $H$ on a $g h g^{-1} \in H$, or
+		\[
+		(a ~ d ~ b) = h g h^{-1} g^{-1} \in H
+		\]
+		et donc $H$ contient un cycle de longueur $3$, or on sait que tout autre cycle de longueur $3$ est conjugué à celui ci avec certain éléments de $A_n$. Ainsin $H$ contient tout les cycles de longueur $3$. De plus
+		\[
+		(a ~ b) (a ~ b) = e, \quad  (a ~ b)(a ~ c) = (c ~ b~ a) \et (a ~ b)(c ~ d) = (c ~ a ~ d)
+		\]
+		pour tout $a,b,c,d$ deux à deux distincts, ainsi on peut conclure que tout produit de deux transpositions est contenu dans $H$, ce qui implique que $H = A_n$. Ce qui est contradictoire.
+		
+		\item Ainsi, tout les éléments de $H$ sont constitués de cycles de longueur $\leqslant 3$, on peut donc écrire
+		\[
+		h = (a ~ b ~ c) \ldots
+		\]
+		pour $h \in H$. Si $h$ fixes tout les éléments autre que $a,b,c$, alors $H$ contient un cycle de longueur $3$ et on répète le processus avec le reste. S'il existe $d \notin \{a,b, c\}$ tel que $e = h(d) \neq d$, alors on pose $g = (a ~ b ~ d)$. Et donc par normalité de $H$,
+		\[
+		(a ~ d ~ c ~ e ~ b) \ldots = h g h^{-1} g^{-1} \in H
+		\]
+		ce qui est contradictoire. 
+		
+		\item Et donc tout les éléments de $H$ sont constitués de cycles de longueurs $\leqslant 2$. Ainsi, on choisit
+		\[
+		h = (a ~ b) (c ~ d) \ldots
+		\]
+		dans $H$. S'il existe $g = (a ~ c ~ e)$ pour $e \notin \{a, b, c,d\}$, alors par normalité de $H$
+		\[
+		h g h^{-1} g^{-} = \begin{cases}
+			(a ~ b~ d ~ e~ c) & h(e) = e \\ (b ~ d ~ f)(a ~ e ~ c) & h(e) = f \neq e
+		\end{cases}
+		\in H
+		\]
+		ce qui contradictoire.
+	\end{enumerate}
+}
+
+\section{Suite sous-normale et suite de composition}
+\begin{definition}
+	Une \textbf{suite sous-normale} de \textbf{longueur} $k$ d'un groupe $G$ est une collection de sous-groupes
+	\[
+	1 = G_0 \trianglelefteq G_1 \trianglelefteq \ldots \trianglelefteq G_{k-1} \trianglelefteq G_k = G
+	\]
+	telle que $G_{i-1}$ est un sous-groupe normal de $G_i$. De plus si tout les quotients $G_1/G_0, \ldots, G_{k}/G_{k-1}$ sont des groupes simples, alors on dira que la suite-normale est une \textbf{suite de composition} de $G$.
+\end{definition}
+
+\begin{proposition}
+	Tout groupe fini possède une suite de composition.
+\end{proposition}
+
+\prf{On raisonne par récurrence sur $G$. On considère un sous-groupe normal maximal $H \trianglelefteq G$, qui existe puisque $G$ est fini. Alors on considère le morphisme de projection
+	\[
+	\pi : G \to G/H
+	\]
+	Si le groupe $G/H$ n'est pas simple, alors on sait que
+	\[
+	\pi^{-1}(A \triangleleft G/H)
+	\]
+	serait un sous-groupe normal de $G$ strictement contenu entre $H$ et $G$. Ce qui est pas possible, puisque $H$ est supposé maximal, dont on peut conclure que $G/H$ est simple. Ainsi par récurrence, $H$ possède une suite de composition, on rajoute alors $G$. Ce qui nous donne bien une suite de composition de $G$.
+}	
+
+\begin{proposition} \label{prop: suite de composition d'un sous-groupe normal}
+	Si un groupe $G$ possède une suite de composition, alors pour tout $H \trianglelefteq G$ on peut former
+	\[
+	1 = H_0 \trianglelefteq H_1 \trianglelefteq \ldots \trianglelefteq H_{k-1} \trianglelefteq H_k = H
+	\]
+	où $H_i = H \cap G_i$. De plus si on enlève les redondances dans le suite ci-dessus, alors on obtient une suite de composition de $H$.
+\end{proposition}
+
+\prf{On commence par montrer que $H_{i-1}$ est un sous-groupe normale de $H_{i}$. Ainsi soit $g \in H_i$ et $h \in H_{i-1}$, alors
+	\[
+	ghg^{-1} \in H_{i-1}
+	\]
+	car $G_{i-1}$ est normal en $G_i$ et $H$ est un sous-groupe. Donc $H_{i-1}$ est bien un sous-groupe normal de $H_i$.
+	
+	De plus, l'inclusion $H_i \hookrightarrow G_i$ induit un morphisme injectif
+	\[
+	H_i/H_{i-1} \overset{\varphi}{\hookrightarrow} G_i/G_{i-1}
+	\]
+	Soit $[g], [h] \in G_i/G_{i-1}$, représenté par $g \in G_i$ et $g \in H_i$, alors
+	\[
+	ghg^{-1} \in H_i \implies [g][h][g]^{-1} \in \Ima \varphi
+	\]
+	Mais comme $G_i/G_{i-1}$ est simple, alors $\Ima \varphi$ est soit le sous-groupe trivial soit groupe entier $G_i/G_{i-1}$. Dans le premier cas, on obtient $H_{i-1} = H_i$ et dans le second
+	\[
+	H_i/H_{i-1} \simeq G_i/G_{i-1}
+	\]
+}
+
+\begin{proposition}
+	Si un groupe $G$ possède une suite de composition, alors pour tout $H \trianglelefteq G$, avec le groupe quotient correspondant $\bar G = G/H$, on peut former
+	\[
+	1 = \bar G_0 \trianglelefteq \bar G_1 \trianglelefteq \ldots \trianglelefteq \bar G_{k-1} \trianglelefteq \bar G_k = \bar G
+	\]
+	où $\bar G_i = H G_i/H$. De plus si on enlève les redondances dans ls suite ci-dessus, alors on obtient une suite de composition de $\bar G$.
+\end{proposition}
+
+\prf{On commence par montrer que $H G_{i-1}$ est normale en $H G_i$. Ainsi soit $hg \in HG_i$ et $h'g' \in HG_{i-1}$, alors
+	\[
+	(hg)(h'g')(hg)^{-1} = hg h'g'g^{-1} h^{-1} \in hgHg' g^{-1} h^{-1} = hH \underbrace{g g' g^{-1}}_{g'' \in G_{i-1}} h^{-1} \subset H g'' H = H g''
+	\]
+	Ainsi $HG_{i-1}$ est bien un sous-groupe normale de $HG_i$, et donc $\bar G_{i-1}$ est bien un sous-groupe normal de $\bar G_i$, et donc par le troisième d'isomorphisme on a 
+	\[
+	\bar G_i / \bar G_{i-1} \simeq HG_i / H G_{i-1}
+	\]
+	L'application
+	\[
+	\psi : G_i \to  HG_i / H G_{i-1}
+	\]
+	est naturellement surjectif et son noyau contient $G_{i-1}$. D'après le propriétés universelle du quotient, $\psi$ induit un morphisme
+	\[
+	\tilde \psi : G_i/G_{i-1}\to HG_i / H G_{i-1}
+	\]
+	qui est surjectif. Et donc par le premier théorème d'isomorphisme
+	\[
+	 HG_i / H G_{i-1} \simeq (G_i/G_{i-1})/\ker \tilde \psi
+	\]
+	Or par hypothèse $G_i/G_{i-1}$ est simple, donc $\ker \tilde \psi$ est soit le groupe trivial, soit le tout le groupe, et donc
+	\begin{enumerate}
+		\item Si $\ker \tilde \psi = G_i/G_{i-1}$, alors $HG_i / H G_{i-1}$ est trivial et donc $HG_i = H G_{i-1}$, c'est à dire $\bar G_i = \bar G_{i-1}$.
+		\item Si $\ker \tilde \psi = \{e\}$, alors $\tilde \psi$ est un isomorphisme et donc 
+		\[
+		\bar G_i / \bar G_{i-1} \simeq HG_i / H G_{i-1} \simeq G_i/G_{i-1}
+		\]
+		est simple.
+	\end{enumerate}
+	Dans les deux cas, après une suppressions des répétitions, les quotients restants sont simples.
+}
+
+\begin{proposition}
+	Si on suppose qu'on a une suite exacte courte
+	\[
+	1 \to K \to G \overset\pi\to L \to 1
+	\]
+	et que $K$ et $L$ possèdent une suite de composition
+	\[
+	1 = K_0 \triangleleft K_1 \triangleleft \ldots \triangleleft K_{m-1} \triangleleft K_m = K \et 1 = L_0 \triangleleft L_1 \triangleleft \ldots \triangleleft L_{n-1} \triangleleft L_n = L
+	\]
+	Alors il existe une suite de composition
+	\[
+	1 = G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_{n+m -1} \triangleleft G_{n+m} = G
+	\]
+	avec $G_i \simeq K_i$ pour $i \leqslant m$ et $G_i \simeq \pi^{-1}(L_{i-m})$ pour $i > m$.
+\end{proposition}
+
+\prf{En premier lieu, il est claire que les $m$ première inclusions sont bien des sous-groupes normaux, dont le quotient est isomorphe avec ceux de la suite de composition de $K$.
+	
+Pour les $n$ suivantes, on sait qu'il existe la correspondance exacte
+\[
+\Big\{ K \leqslant H \leqslant G \Big\} \leftrightarrow \Big\{ \bar H \leqslant L \Big\}
+\]
+explicitement donné par $H = \pi^{-1} (\bar H)$. De là, on sait aussi que tout sous-groupe normale $\bar H \trianglelefteq \bar H'$ est en correspondance avec un sous-groupe normal $H \trianglelefteq H'$ de sorte que
+\[
+H' /H \simeq  \bar H'/ \bar H
+\]
+ce qui montre bien que les $n$ inclusions sont des sous-groupes normaux, et donc le quotient est isomorphe à ceux de la suite de composition de $L$.
+}
+
+\begin{theoreme}
+	Pour tout groupe $G$, deux suites de compositions
+	\[
+	1 = G_0 \trianglelefteq G_1 \trianglelefteq \ldots \trianglelefteq G_{k-1} \trianglelefteq G_k = G \et 1 = G_0' \trianglelefteq G_1' \trianglelefteq \ldots \trianglelefteq G_{n-1}' \trianglelefteq G_n' = G
+	\]
+	sont \textbf{équivalente}, c'est-à-dire que les quotients
+	\[
+	\Big\{ G_1/G_0, \ldots, G_k/G_{k-1}\} \et 	\Big\{ G_1'/G_0', \ldots, G_n'/G_{n-1}'\}
+	\]
+	sont les mêmes à permutation et isomorphismes près. En particulier $k = n$. Les classes d'isomorphismes en questions sont appelé les \textbf{facteurs de composition} de $G$.
+\end{theoreme}
+
+\prf{On raisonne par récurrence sur $\min(k,n)$. Dans le cas où ce nombre est $1$; c'est trivial, car c'est un groupe simple ne peux pas avoir de suite de composition de longueur $\geqslant 2$. 
+	
+Ainsi on considère le cas où $\min(k,n) \geqslant 2$. Sans perte de généralité, on peut supposer que $G_{k-1} \neq G_{n-1}'$. Comme ils sont tout deux normal en $G$, on a que
+\[
+P := G_{k-1} G_{n-1}' \et H:= G_{k-1} G_{n-1}'
+\]
+sont aussi normaux. Et donc par le deuxième théorème d'isomorphisme
+\[
+G_{k-1} /H \simeq P / G_{n-1}' \et G_{n-1}'/H \simeq P/G_{k-1}
+\]
+Mais, on sait que $P/ G_{n-1}'$ est un sous-groupe normal de $G/G_{n-1}'$. Ainsi par simplicité, on a nécessairement $P = G$. Ainsi on a
+\[
+G_{k-1} /H \simeq G / G_{n-1}' \et G_{n-1}'/G \simeq P/G_{k-1}
+\]
+La \autoref{prop: suite de composition d'un sous-groupe normal} assure que $H$ hérite d'une suite de composition de $G_{k-1}$ et $G_{n-1}'$, dont les longueurs sont $\leq k-1$ et $\leq n-1$ respectivement. Ainsi par hypothèse de récurrence, ces deux suites de compositions sont équivalentes, et on note leur longueur commune par $m < \min(k-1, l-1)$. On peut alors étendre les deux suites de compositions comme suit
+\[
+1 \triangleleft H_1' \triangleleft \ldots \triangleleft H_{m-1}' \triangleleft H \triangleleft G_{k-1} \triangleleft G \et 1 \triangleleft H_1'' \triangleleft \ldots \triangleleft H_{m-1}'' \triangleleft H \triangleleft G_{l-1} \triangleleft G
+\]
+Mais par les relations d'isomorphismes vues plus tôt, les suites de compositions sont alors équivalentes. De plus,l'hypothèse de récurrence pour soit $G_{k-1}$ ou $G_{n-1}'$ implique que la première suite de compositions est équivalentes à la premières parmi celle de base et que la deuxième est équivalente à la deuxième parmi celle de base. Ce qui conclut bien l'équivalence entre les deux suites de compositions initiales.
+}
