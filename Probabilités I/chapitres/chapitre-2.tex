@@ -126,11 +126,73 @@
 \end{lemme}
 
 \section{Indépendance et produit d'espace de probabilité}
-
+Si on considère des espaces de probabilités $(\Omega_i,\F_i, \P_i)$, et qu'on essaie de construire un \textbf{espace de probabilité produit} on a alors besoin d'un ensemble, d'une $\sigma$-algèbre et d'une mesure ;
+ \begin{enumerate}
+ 	\item (Ensemble) Il est naturel de définir $\Omega_\Pi$ comme l'ensemble de toute les suites $(\omega_i)_{i \in \N}$ tel que $\omega_i \in \Omega_i$ pour tout $i$.
+ 	
+ 	\item ($\sigma$-algèbre) On considère $\F_\Pi$ de sorte que tout événement $E \subset F$ puisse s'écrire comme 
+ 	\[
+ 	E = E_1 \times E_2 \times \ldots
+ 	\]
+ 	où $E_i \in \F_i$. De manière équivalente, $E$ peut s'exprimer sous la forme
+ 	\[
+ 	E = \{\omega \in \Omega_\Pi \mid \omega_i \in E_i, \forall i \in \N \}
+ 	\]
+ 	\item (Mesure de probabilité) Il suffit de définir
+ 	\[
+ 	\P(E) = \lim_{n \to \infty} \prod_{j=1}^n \P_j (E_j)
+ 	\]
+ 	Par contre cette mmusre
+ \end{enumerate}
 \begin{theoreme}
-	Soit $((\Omega_i,\F_i, \P_i))_{i \geqslant 1}$ une collection d'espace de probabilité. Alors il existe une unique mesure de probabilité $\P_\Pi$ sur $(\Omega_\Pi, \F_\Pi)$ de sorte que pour toute partie fini $J \subset \N$ et tout événement $E$ de la forme $E = \{ \omega \in \Omega_{\Pi} \mid w_i \in E_i, ~\forall i \in J\}$ pour $E_i \in \F_i$ on a
+	Soit $((\Omega_i,\F_i, \P_i))_{i \geqslant 1}$ une collection d'espace de probabilité. Alors il existe une unique mesure de probabilité $\P_\Pi$ sur $(\Omega_\Pi, \F_\Pi)$ de sorte que pour toute partie fini $J \subset \N$ et tout événement $E$ de la forme $E = \{ \omega \in \Omega_{\Pi} \mid \omega_i \in E_i, ~\forall i \in J\}$ pour $E_i \in \F_i$ on a
 	\[
 	\P_{\Pi}(E) =  \prod_{i \in J} \P_i(E_i)
 	\]
 	On appelle une telle mesure, la \textbf{mesure de produit} induit par la collection $((\Omega_i,\F_i, \P_i))_{i \geqslant 1 }$
 \end{theoreme}
+
+\prf{Ce théorème est admit, la preuve sera donné en 3ème année.}
+
+
+\begin{lemme} \label{lem: Existence de la mesure de probabilité produit}
+	Soit $((\Omega_i,\F_i, \P_i))_{i \geqslant 1}$ une collection d'espace de probabilité discret. Alors la mesure de probabilité produit $\P_\Pi$ sur $(\Omega_\Pi, \F_\Pi)$ existe et est unique.
+\end{lemme}
+
+\prf{cf séries}
+
+\subsection{Espace de probabilité d'une variable aléatoire indépendante}
+
+\begin{theoreme}
+	Si on considère une collection de variables aléatoires $(X_i)_{i \geqslant 1}$, alors on peut trouver un espace de probabilité commun $(\Omega, \F, \P)$ et une collection de variables aléatoires $(\tilde X_i)_{i \geqslant 1}$ défini sur $(\Omega, \F, \P)$ tel que
+	\begin{enumerate}
+		\item Pour tout $i \geqslant 1$, $\tilde X_i$ est de même loi que $X$,
+		
+		\item Les variables aléatoires $(\tilde X_i)_{i \geqslant 1}$ sont mutuellement indépendante.
+	\end{enumerate}
+\end{theoreme}
+
+\prf{On fait la preuve uniquement dans le cas d'espace de probabilité discret. Soit $((\Omega_i,\F_i, \P_i))_{i \geqslant 1}$ des espaces de probabilités discret et des variables aléatoires $X_i : \Omega_i \to \R$. Alors par le \autoref{lem: Existence de la mesure de probabilité produit}, on peut construire un espace de probabilité produit que l'on note $(\Omega_\Pi, \F_\Pi, \P_\Pi)$.
+	
+Désormais, on définit $\tilde X_i (\omega_1, \ldots, \omega_n) := X_i(\omega_i)$. Alors
+\[
+\P_{\tilde X_i}(E) = \P_\Pi(\Omega_1 \times \Omega_2 \times \ldots \times X_i^{-1}(E) \times \ldots  \times \Omega_n) = \P_{X_i}(E)
+\]
+Ainsi $\tilde X_i$ et $X_i$ sont de même loi.
+
+Finalement, on remarque que 
+\[
+\{\omega \in \Omega_\Pi \mid \tilde X_i(\omega) \in E_i\} = \{\Omega_1 \times \Omega_2 \times \ldots \times X_i^{-1}(E) \times \ldots  \times \Omega_n\}
+\]
+et donc
+\[
+\P_\Pi \Big(\bigcap_{i=1}^n \big\{ \tilde X_i \in E_i \big\}\Big) = \P_\Pi \Big( \prod_{i=1}^n X_i^{-1}(E_i) \Big)
+\]
+Par la définition de mesure de probabilité produit et, comme $\tilde X_i$ et $X_i$ sont de même loi on a bien
+\[
+\P_\Pi \Big(\bigcap_{i=1}^n \big\{ \tilde X_i \in E_i \big\}\Big) = \prod_{i=1}^n \P_\Pi\big(\{\tilde X_i \in E_i\}\big)
+\]
+d'où indépendance mutuelle.
+}
+
+\lecture{13 octobre}
