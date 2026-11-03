@@ -1,2 +1,136 @@
 \chapter{Probabilité conditionnelle et indépendance}
 \minisommaire
+
+\lecture{29 septembre}
+
+\section{Probabilité conditionnelle}
+
+\begin{definition}[Probabilité conditionnelle]
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et $E \in \F$ tel que $\P(E) > 0$. Alors pour tout $F \in \F$, on définit la \textbf{probabilité conditionnelle} de $F$ sachant $E$ comme,
+	\[
+	\P (F \mid E) := \frac{\P(F \cap E)}{\P(E)}
+	\]
+\end{definition}
+
+\begin{lemme}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et $E \in \F$ tel que $\P(E) > 0$. Alors $\P(\bullet \mid E)$ définit une mesure de probabilité sur $(\Omega, \F)$, appelé la \textbf{mesure de probabilité conditionnelle} sachant $E$.
+\end{lemme}
+
+\prf{En premier lieu, on remarque que $\P$ est bien définit pour tout $F \in \F$. Après cela, on a
+	\[
+	\P(\emptyset \mid E) = \frac{\P(\emptyset)}{\P(E)} = 0 \et \P(\Omega \mid E)= \frac{\P(E)}{\P(E)} = 1
+	\]
+	Et finalement, soit $F_1, F_2, \ldots \in \F$ deux à deux disjoints, alors $E \cap F_1, E \cap F_2, \ldots$ le sont aussi, et donc
+	\[
+	\P \Bigg( \bigcup_{i \geqslant 1} F_i \mid E \Bigg) = \frac{\P \Big( \bigcup_{i\geqslant 1} F_i \cap E\Big) }{\P(E)} = \frac{ \P\Big(\bigcup_{i\geqslant 1} (F_i \cap E)\Big)}{\P(E)} = \sum_{i \geqslant 1} \frac{\P(F_i \cap E)}{\P(E)} = \sum_{i \geqslant 1} \P(F_i \mid E)
+	\]
+	et donc l'additivité suit.
+}
+
+\subsection{Règle de Baye}
+
+\begin{proposition}
+	Soit $(\Omega, \F, \P)$ espace de probabilité et $E, F$ de probabilité positive stricte. Alors
+	\[
+	\P(E \mid F) = \frac{\P(F \mid E) \P(E)}{\P(F)}
+	\]
+\end{proposition}
+
+\prf{On remarque que la règle de Bayes peut se réécrire comme
+	\[
+	\P(F) \P(E \mid F) = \P(E) \P(F \mid E)
+	\]
+	ce qui est évident vrai, puisque par la définition de la probabilité conditionnelle on a
+	\[
+	\P(E) \P(F \mid E) = \P(F \cap E) = \P(E \cap F) = \P(F) \P(E \mid F)
+	\]
+	et donc la règle de Bayes suit.
+}
+
+\subsection{Loi de probabilité totale}
+
+\begin{proposition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité. De plus soit $(E_i)_{i \in I}$ une collection d'événements deux à deux disjoints et de probabilité positive stricte telle que $\Omega = \bigcup_{i \in I} E_i$, alors pour tout $F \in \F$ on a
+	\[
+	\P(F) = \sum_{i \in I} \P(F \mid E_i) \P(E_i).
+	\]
+\end{proposition}
+
+\prf{On a naturellement $\P(F) = \P(F \cap \Omega) = \P \big(F \cap \big( \bigcup_{i \in I} E_i \big) \big)$. Mais comme les $E_i$ sont disjoints, alors $F \cap E_i$ le sont aussi, et donc on a
+	\[
+	\P(F) = \P \Big( \bigcup_{i \in I} (F \cap E_i)\Big) = \sum_{i \in I} \P(F \cap E_i)
+	\]
+	mais comme, par définition des probabilité conditionnelle, on a $\P(F \cap E_i) = \P(F \mid E_i) \P(E_i)$ alors la proposition suit.
+}
+
+\section{Indépendances des événements}
+\begin{definition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité. On dit que deux événements $E$ et $F$ sont \textbf{indépendants} si
+	\[
+	\P(E \cap F) = \P(E) \P(F)
+	\]
+\end{definition}
+
+\begin{remarque}
+	On remarque facilement que si $\P(E) > 0$, alors on retrouve la notion intuitive d'indépendance, c'est-à-dire
+	\[
+	\P(F \mid E) = \P(F)
+	\]
+\end{remarque}
+
+\begin{definition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et soit $(E_i)_{i \in I}$ une collection d'événement. Alors on dira que les événement $(E_i)_{i \in I}$ sont \textbf{mutuellement indépendants} si pour toute partie finie $I_1 \subset I$ on a
+	\[
+	\P\Big( \bigcap_{i \in I_1} E_i\Big) = \prod_{i \in I_1} \P(E_i)
+	\]
+	Ce qui est un notion beaucoup plus forte que l'indépendance deux à deux.
+\end{definition}
+
+\begin{definition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et, soit $(E_i)_{i \in I}$ et $(F_j)_{j \in J}$. Alors on dira que les deux collections sont indépendantes si,
+	\[
+	\forall i \in J, \forall j \in J, \quad \P(E_i \cap F_j) = \P(E_i) \P(F_j)
+	\]
+\end{definition}
+
+\begin{lemme}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité alors
+	\begin{enumerate}
+		\item Si $E$ est un événement tel que $\P(E) = 1$, alors il est indépendant de tout autre événement $F \in \F$,
+		
+		\item Si $E$ et $F$ sont indépendants, alors $E^c$ et $F$ le sont. En particulier, tout événement avec $\P(E) = 0$ est indépendant de tout autre événement.
+		
+		\item Finalement, si $E$ est indépendant avec lui, alors $\P(E) \in \{0,1\}$
+	\end{enumerate}
+\end{lemme}
+
+\section{Indépendances des variables aléatoires}
+\lecture{6 octobre}
+
+\begin{definition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et soit $(X_i)_{i \in I}$ une famille de variable aléatoire. Alors on dira que cette famille est \textbf{mutuellement indépendante} si pour toute partie finie $J \subset I$ et toute collection d'intervalle $(]a_j, b_j[)_{j \in J}$ on a
+	\[
+	\P \Big( \bigcap_{j \in J} \big\{X_j \in ]a_j, b_j[ \big\}\Big) = \prod_{j \in J} \P \big(X_j \in ]a_j, b_j[\big)
+	\]
+	De manière équivalente on a que $(X_i)_{i \in I}$ est mutuellement indépendante si pour tout $m \geqslant 2$ et $a_j \in \R$ on a
+	\[
+	\P \Big( \bigcap_{1 \leqslant j \leqslant m} \big\{X_j \leqslant a_j \big\}\Big) = \prod_{1 \leqslant j \leqslant m} \P \big(X_j  \leqslant a_j\big)
+	\]
+\end{definition}
+
+\begin{lemme}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité discret et $X_1, \ldots X_n$ des variables aléatoires. Alors $X_1, \ldots X_n$ sont mutuellement indépendant si et seulement si pour tout $s_1, \ldots, s_n \in \R$ on a
+	\[
+	\P \Big(\bigcap_{i=1}^n \big\{ X_i = s_i \big\} \Big) = \prod_{i=1}^n \P(X_i = s_i)
+	\]
+\end{lemme}
+
+\section{Indépendance et produit d'espace de probabilité}
+
+\begin{theoreme}
+	Soit $((\Omega_i,\F_i, \P_i))_{i \geqslant 1}$ une collection d'espace de probabilité. Alors il existe une unique mesure de probabilité $\P_\Pi$ sur $(\Omega_\Pi, \F_\Pi)$ de sorte que pour toute partie fini $J \subset \N$ et tout événement $E$ de la forme $E = \{ \omega \in \Omega_{\Pi} \mid w_i \in E_i, ~\forall i \in J\}$ pour $E_i \in \F_i$ on a
+	\[
+	\P_{\Pi}(E) =  \prod_{i \in J} \P_i(E_i)
+	\]
+	On appelle une telle mesure, la \textbf{mesure de produit} induit par la collection $((\Omega_i,\F_i, \P_i))_{i \geqslant 1 }$
+\end{theoreme}
