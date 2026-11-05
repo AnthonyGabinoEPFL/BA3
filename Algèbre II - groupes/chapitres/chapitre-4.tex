@@ -1,4 +1,4 @@
-\chapter{Groupes solvables}
+\chapter{Groupes résoluble}
 \minisommaire
 \lecture{28 octobre}
 
@@ -106,7 +106,7 @@
 	\]
 }
 
-\begin{proposition}
+\begin{proposition} \label{prop : suite de composition d'un quotient}
 	Si un groupe $G$ possède une suite de composition, alors pour tout $H \trianglelefteq G$, avec le groupe quotient correspondant $\bar G = G/H$, on peut former
 	\[
 	1 = \bar G_0 \trianglelefteq \bar G_1 \trianglelefteq \ldots \trianglelefteq \bar G_{k-1} \trianglelefteq \bar G_k = \bar G
@@ -146,7 +146,7 @@
 	Dans les deux cas, après une suppressions des répétitions, les quotients restants sont simples.
 }
 
-\begin{proposition}
+\begin{proposition} \label{prop: suite de composition d'une suite exacte courte}
 	Si on suppose qu'on a une suite exacte courte
 	\[
 	1 \to K \to G \overset\pi\to L \to 1
@@ -175,7 +175,7 @@ H' /H \simeq  \bar H'/ \bar H
 ce qui montre bien que les $n$ inclusions sont des sous-groupes normaux, et donc le quotient est isomorphe à ceux de la suite de composition de $L$.
 }
 
-\begin{theoreme}
+\begin{theoreme} \label{thm: équivalence des suites de compositions}
 	Pour tout groupe $G$, deux suites de compositions
 	\[
 	1 = G_0 \trianglelefteq G_1 \trianglelefteq \ldots \trianglelefteq G_{k-1} \trianglelefteq G_k = G \et 1 = G_0' \trianglelefteq G_1' \trianglelefteq \ldots \trianglelefteq G_{n-1}' \trianglelefteq G_n' = G
@@ -206,4 +206,127 @@ La \autoref{prop: suite de composition d'un sous-groupe normal} assure que $H$ h
 1 \triangleleft H_1' \triangleleft \ldots \triangleleft H_{m-1}' \triangleleft H \triangleleft G_{k-1} \triangleleft G \et 1 \triangleleft H_1'' \triangleleft \ldots \triangleleft H_{m-1}'' \triangleleft H \triangleleft G_{l-1} \triangleleft G
 \]
 Mais par les relations d'isomorphismes vues plus tôt, les suites de compositions sont alors équivalentes. De plus,l'hypothèse de récurrence pour soit $G_{k-1}$ ou $G_{n-1}'$ implique que la première suite de compositions est équivalentes à la premières parmi celle de base et que la deuxième est équivalente à la deuxième parmi celle de base. Ce qui conclut bien l'équivalence entre les deux suites de compositions initiales.
+}
+
+
+\section{Groupe résoluble}
+\lecture{4 novembre}
+
+\begin{definition}
+	Un groupe $G$ est dit \textbf{résoluble} s'il possède une suite sous-normale
+	\[
+	1 = G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_{k-1} \triangleleft G_k = G
+	\]
+	tel que $G_i/G_{i-1}$ soit abélien, pour tout $i$.
+\end{definition}
+
+\begin{proposition}
+	Le groupe symétrique $\S_n$ n'est pas résoluble pour $n \geqslant 5$.
+\end{proposition}
+
+\prf{Supposons que $G = \S_n$ admet une suite sous-normale avec des quotients abéliens. Puisque $\S_n$ est fini, il en va de même pour les groupes quotients $G_i/G_{i-1}$. Supposons qu'il existe $i$ tel que $G_i/G_{i-1}$ se sont pas isomorphe à $\zn p$ pour un nombre premier, alors on pourrait trouver un sous-groupe propre $1 \triangleleft \bar H \triangleleft G_i/G_{i-1}$. Et donc par le théorème de correspondance, il existerait un sous-groupe
+	\[
+	G_{i-1} \triangleleft H \triangleleft G_i
+	\]
+	ce qui contredirai la maximalité de la suite sous-normale. On conclut alors que $\S_n$ admet une suite de composition dont les facteurs sont $\zn p$ pour divers $p$ premiers. Cependant cela contredirait le \autoref{thm: équivalence des suites de compositions} et fait que $\S_n$ admette la suite de composition
+	\[
+	1 \triangleleft A_n \triangleleft S_n
+	\]
+	Car $A_n$ est simple pour $n \geqslant 5$.
+}
+
+\begin{proposition}
+	Soit $G$ un groupe résoluble, alors tout sous-groupe $H \leqslant G$ est résoluble. Il en va de même pour tout quotient $G/H$. Finalement si on a la suite exacte courte de groupe
+	\[
+	1 \to K \to G \overset\pi\to L \to 1
+	\]
+	avec $K$ et $L$ résolubles. Alors $G$ l'est aussi.	
+\end{proposition}
+
+\prf{Analogue au preuve des \autoref{prop: suite de composition d'un sous-groupe normal}, \autoref{prop : suite de composition d'un quotient} et \autoref{prop: suite de composition d'une suite exacte courte}.
+}
+
+\begin{definition}
+	Étant donné des sous-ensembles $X, Y \subset G$, on définit le sous-groupe $[X, Y] \leqslant G$ engendré par
+	\[
+	\big\{ xy x^{-1} y^{-1} \mid x \in X, ~ y \in Y\}
+	\]
+	Ainsi on défini le \textbf{sous-groupe dérivé} de $G$ par
+	\[
+	[G, G]
+	\]
+\end{definition}
+
+\begin{proposition} \label{prop: groupe quotient par le sous-groupe dérvée}
+	Pour tout groupe $G$, le sous-groupe $[G,G]$ est un sous-groupe normal de $G$ et 
+	\[
+	G/[G,G]
+	\]
+	est abélien. De plus si $H \trianglelefteq G$ à la propriété que $G/H$ est abélien, alors $[G, G] \subset H$. Entre d'autre le sous-groupe dérivé est la plus petit groupe normale dont le quotient est abélien.
+\end{proposition}
+
+\prf{Soit $aba^{-1} b^{-1} \in [G,G]$ et $g \in G$ on a
+	\[
+	g aba^{-1} b^{-1} g^{-1} = (ga^{-1})(gbg^{-1}) (ga^{-1})^{-1}(gbg^{-1})^{-1} \in [G, G]
+	\]
+	on a donc bien la normalité de $[G, G]$. Le quotient est clairement abélien puisque
+	\[
+	[a][b][a^{-1}] [b^{-1}] = [aba^{-1}b^{-1}] = e \in G/[G,G] \implies [a][b] = [b][a]
+	\]
+	Plus généralement, pour tout sous-groupe normale $H \trianglelefteq G$ tel que $G/H$ est abélien on a
+	\[
+	[aba^{-1} b^{-1}] = [a][b][a^{-1}][b^{-1}] = e \in G/H \implies ab a^{-1} b^{-1} \in H
+	\]
+	pour tout $a,b \in G$, ce qui montre bien que $[G, G] \subset H$.
+}
+
+\begin{theoreme} \label{thm: classification des groupes resoluble par la suite dérivée}
+	Un groupe est résoluble si et seulement si sa suite dérivée devient éventuellement triviale, c'est-à-dire si la suite définie comme
+	\[
+	\ldots \trianglelefteq G^{(2)} \trianglelefteq G^{(1)} \trianglelefteq G^{(0)} = G
+	\]
+	où $G^{(i)} = [G^{(i-1)},G^{(i-1)} ]$ devient constante $1$ à partir d'un certain rang.
+\end{theoreme}
+
+\prf{\begin{enumerate}
+		\item[$"\implies"$ :] La \autoref{prop: groupe quotient par le sous-groupe dérvée} garantit qu'elle fournit précisément le type de suite sous-normale avec un quotient abéliens, qui caractérises les groupes résolubles.
+		
+		\item[$"\impliedby"$ :] Soit $G$ un groupe résoluble de suite 
+		\[
+		1 = G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_{k-1} \triangleleft G_k = G
+		\]
+		alors la \autoref{prop: groupe quotient par le sous-groupe dérvée} assure que
+		\[
+		G^{(1)} \subset G_{k-1}
+		\]
+		Prendre les sous-groupes dérivés dans l'inclusion ci-dessus implique que
+		\[
+		G^(2) \subset [G^{(1)},G^{(1)}] \subset G_{k-2}
+		\]
+		où la seconde inclusion découle également du fait que $G_{k-1}/G_{k-2}$ est abélien. En répétant cet argument $k-2$ fois de plus, cela implique que
+		\[
+		G^{(k)} \subset G_0 = 1
+		\]
+		ce qui signifie que la suite dérivée devient éventuellement triviale à partir d'un certain rang.
+	\end{enumerate}
+}
+
+
+\begin{definition}
+	Un groupe $G$ est dit \textbf{nilpotent} si la suite de sous-groupe définie par $G^{(0)} = G$ et
+	\[
+	G^{\{i\}} = [G^{\{i-1\}}, G]
+	\]
+	devient constante $1$ à partir d'un certain rang.
+\end{definition}
+
+\begin{proposition}
+	Tout groupe nilpotent est résoluble.
+\end{proposition}
+
+\prf{Soit $G$ un groupe nilpotent, alors par récurrence on vérifie facilement que $G^{(i)} \subset G^{\{i\}}$ pour tout $i$. Par conséquent la suite
+	\[
+	\ldots \trianglelefteq G^{\{2\}} \trianglelefteq G^{\{1\}} \trianglelefteq G^{\{0\}} = G
+	\]
+	se termine et donc il en va de même pour la suite dérivée et donc par le \autoref{thm: classification des groupes resoluble par la suite dérivée}, on conclut bien que $G$ est résoluble.
 }
