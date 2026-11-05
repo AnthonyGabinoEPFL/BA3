@@ -1,4 +1,97 @@
-\chapter{semaine 7}
+\chapter{Variable et vecteurs aléatoires}
 \minisommaire
 
+\lecture{27 octobre}
+
+\section{Fonction de répartition (CDF) d'un variable aléatoire}
+\begin{definition}
+	On dit qu'un fonction $f : \R \to [0,1]$ est un \textbf{fonction de répartition (CDF)} si elle satisfait les conditions suivantes
+	\begin{enumerate}
+		\item $F$ est croissante
+		\item $F(x) \underset{x \to -\infty}{\to} 0$ et $F(x) \underset{x \to \infty}{\to} 1$
+		\item $F$ est continue à droite en tout point.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	Soit $(\Omega, \F, \P)$ un espace de probabilité et soit $X$ un variable aléatoire, alors la fonction
+	\[
+	F_X(x) := \P_X(]-\infty,x])
+	\]
+	est un fonction de répartition (CDF).
+\end{proposition}
+
+\prf{On pose $F_X(x) = \P(X \in ]-\infty, x])$. Alors comme $]-\infty, x] \subset ]-\infty, y]$ pour tout $x \leqslant y$, alors basiquement la $F_X$ est croissante puisque on sait que 
+	\[
+	A_1 \subset A_2 \implies \P(A_1) \leqslant \P(A_2)
+	\]
+	Au niveau de la continuité, soit $(x_n)_{n \geqslant 1}$ une suite dans $[x, \infty[$ convergente vers $x$. Alors on pose
+	\[
+	A_n = \bigcap_{1 \leqslant k \leqslant n} ]-\infty, x_k]
+	\]
+	On naturellement $\bigcap_{n \geqslant 1} A_n = ]-\infty, x]$. Par continuité de $\P$, on a
+	\[
+	\P_X(A_n) \to \P_X(]-\infty, x])
+	\]
+	mais comme $x_n \to x$, alors pour $n$ assez grand on a 
+	\[
+	F_X(x) \leqslant F_X(x_n) \leqslant \P_X(A_{m_m})
+	\]
+	et donc par le théorème des gendarmes on conclut bien que
+	\[
+	F_X(x_n) \to F_X(x)
+	\]
+	d'où la continuité.
+}
+
+
+\begin{theoreme}
+	Toute fonction de répartition $F$ donne lieu à une \emph{unique} loi de variable aléatoire $X$ de sorte que
+	\[
+	F_X(x) = \P_X(]-\infty, x])
+	\]
+	En d'autres termes les CDF sont en correspondances avec les mesures de probabilités $\P$ sur $(\R, \F_B)$.
+\end{theoreme}
+
+\prf{On admet le cas générale, on va juste faire une esquisse de comment un peut construire une variable aléatoire $X$ en utilisant l'intervalle $[0,1]$ muni de la mesure uniforme. Dans ce but, pour $F$ une CDF, on définit $X_F : [0,1] \to \R$ comme
+	\[
+	X_F(y) := \inf\{ x \in \R \mid F(x) > y\}
+	\]
+	Alors $X_F$ est clairement croissante et donc mesurable. Et donc $X_F$ est une variable aléatoire. Mais
+	\[
+	\P_U(\{y \mid X_F(y) < x \}) = \P_u(\{y \mid \inf\{\mid z \in \R \mid F(z) > y\} \leqslant x \})) = \P_U(]0,F(X)]) = F(x)
+	\]
+	et donc $F$ est bien une fonction de répartition induit par la variable aléatoire $X_F$. 
+}
+
+\begin{lemme}
+	Soit $X$ une variable aléatoire sur un espace de probabilité $(\Omega, \F, \P)$ et $F_X$ la CDF induite, alors pour tout $x < y\in \R$,
+	\begin{enumerate}
+		\item $\P(X < x) = F_X(x^-)$
+		\item $\P(X > x) = 1 - F_X(x)$
+		\item $\P(X \in ]x,y[) = F_X(y^-) - F_X(x)$
+		\item $\P(X = x) = F_X(x) - F_X(x^-)$
+	\end{enumerate}	
+\end{lemme}
+
+\begin{definition}
+	Un variable aléatoire est dite \textbf{discrète} si sa CDF $F_X$ est constante par morceaux avec un nombre au plus dénombrable de saut. Est dite \textbf{continue} si sa CDF $F_X$ est continue.
+\end{definition}
+
+\begin{proposition}
+	Soit $X$ une variable aléatoire, alors
+	\begin{enumerate}
+		\item $X$ est discrète si et seulement si il existe un ensemble dénombrable $S \subset \Rn$ tel que
+		\[
+		\P(X \in S) = \P_X(S) = 1
+		\]
+		\item $X$ est continue si et seulement si pour tout $y \in \R$,
+		\[
+		\P(X = y) = \P_X(\{y\}) = 0
+		\]
+	\end{enumerate}
+\end{proposition}
+
 \lecture{3 novembre}
+\section{Exemples de variable aléatoire discrète}
+
