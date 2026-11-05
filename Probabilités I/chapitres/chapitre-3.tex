@@ -95,3 +95,71 @@
 \lecture{3 novembre}
 \section{Exemples de variable aléatoire discrète}
 
+\begin{exemple} Les exemples les plus importantes sont
+	\begin{enumerate}
+		\item Soit $p \in [0,1]$. Une variable aléatoire $X : \Omega \to \{0,1\}$ suit la \textbf{loi de Bernoulli de paramètre} $p$, notée $X \sim \B (p)$ si,
+		\[
+		\P(X = 1) = p \et \P(X = 0) = 1 -p
+		\]
+		
+		\item Soit $S$ un ensemble fini de cardinal $n$. Une variable aléatoire $X : \Omega \to S$ suit une \textbf{loi uniforme} sur $S$, notée $X \sim \mathcal U(S)$ si
+		\[
+		\forall x \in S, \quad \P(X = x) = \frac1n
+		\]
+		\item Soit $n \in \mathbb{N}^*$ et $p \in [0, 1]$. Une variable aléatoire
+		$X : \Omega \to \llbracket 0, n \rrbracket$ suit la \textbf{loi binomiale}
+		de paramètres $n$ et $p$, notée $X \sim \mathcal{B}(n, p)$, si
+		\[
+		\forall k \in \llbracket 0, n \rrbracket, \quad
+		\mathbb{P}(X = k) = \binom{n}{k}\, p^k (1-p)^{n-k}.
+		\]
+		\item Soit $p \in \, ]0, 1]$. Une variable aléatoire $X : \Omega \to \mathbb{N}^*$
+		suit la \textbf{loi géométrique} de paramètre $p$, notée
+		$X \sim \mathcal{G}(p)$, si
+		\[
+		\forall k \in \mathbb{N}^*, \quad
+		\mathbb{P}(X = k) = (1-p)^{k-1}\, p.
+		\]
+		\begin{lemme}
+			On dit qu'un variable aléatoire	$X$ prenant des valeurs dans $\N$ est \textbf{sans mémoire} si pour tout $k,l \in \N$,
+			\[
+			\P(X > k + l \mid X > k) = \P(X > l)
+			\]
+			Toute variable aléatoire géométrique est sans mémoire, et dans les faits ce sont les seuls exemples de variables aléatoires prenant des valeurs dans $\N$ sans mémoire.
+		\end{lemme}
+		\item Soit $\lambda > 0$. Une variable aléatoire $X : \Omega \to \mathbb{N}$
+		suit la \textbf{loi de Poisson} de paramètre $\lambda$, notée
+		$X \sim \mathcal{P}(\lambda)$, si
+		\[
+		\forall k \in \mathbb{N}, \quad
+		\mathbb{P}(X = k) = e^{-\lambda}\, \frac{\lambda^k}{k!}.
+		\]
+		\begin{lemme}
+			Si on considère la distribution binomial $\B(n, \lambda/n))$. Alors 
+			\[
+			\B(n, \lambda/n) \underset{n \to \infty}{\longrightarrow} \mathcal P(\lambda)
+			\]
+			Dans le sens où pour tout $k \in \N$, on a
+			\[
+			\P(\B(n, \lambda/n) = k) \to e^{-\lambda}\, \frac{\lambda^k}{k!}
+			\]
+		\end{lemme}
+		
+		\prf{Par définition, pour $n \in \N$ et $k \in \N$, on a
+			\[
+			\P(\B(n, \lambda/n) = k) = \binom{n}{k} \frac{\lambda^k}{n^k} \left(1 - \lambda\right)^{n-k} \to e^{-\lambda} \frac{\lambda^k}{k!}
+			\]
+		}
+		
+		\begin{lemme}
+			Soit $X_1 \sim \mathcal P(\lambda)$ et $X_2 \simeq \mathcal P(\lambda_2)$ alors
+			\[
+			X_1 + X_2 \sim \mathcal P(\lambda_1 + \lambda_2)
+			\]
+		\end{lemme}
+	\end{enumerate}
+	
+\end{exemple}
+
+
+
