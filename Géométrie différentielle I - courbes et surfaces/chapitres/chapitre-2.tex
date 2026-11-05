@@ -124,3 +124,32 @@
 
 
 
+
+
+\section{5 novembre}
+\lecture{5 novembre}
+
+\begin{theoreme}[Des 4 sommets] \label{thm: théorème des 4 sommets}
+	Toutes courbes fermées simples de classe $C^2$ dans le plan orienté possède au moins quatre sommets.
+\end{theoreme}
+
+\prf{
+	On peut exclure le cas du cercle, puisque que chaque point en un sommet. On peut donc supposer que la courbe n'est pas un cercle. De plus comme puisque la courbure est invariant par reparamétrisation directe, on peut aussi supposer que la courbe est paramétrisée naturellement. Soit $\gamma : [a, b] \to \R^2$ de classe $C^2$ une paramétrisée naturelle. Soit $C$ le plus petit cercle contenant la courbe, on va appeler $R$ le rayon de celui-ci. 
+	
+	On note qu'il y a au moins deux points d'intersection entre $C$ est la courbe. On va distinguer deux cas : 
+	\begin{enumerate}
+		\item (Deux points d'intersection) On nomme $p_1$ et $p_2$ les deux points d'intersection, nécessairement situé diamétralement opposé. Par le lemme $1$, 
+		\[
+		\kappa_\gamma \geqslant \frac1R
+		\]
+		entre $p_1$ et $p_2$. Par le lemme $2$, il existe $p_3$ sur la courbe entre $p_1$ et $p_2$, et $p_4$ sur la courbe entre $p_2$ et $p_3$ tel que $\kappa_\gamma < \frac1R$ entre $p_3$ et $p_2$. Par conséquent, $\kappa_\gamma$ admet un minimum local entre $p_1$ et $p_2$, de même entre $p_2$ et $p_1$. Il va de même que $\kappa_\gamma$ admet un maximum local entre $p_3$ et $p_4$ et un autre entre $p_4$ et $p_3$. On a donc bien quatre sommets.
+		
+		\item (Plus de deux points d'intersection) Il existe d'office $3$ points d'intersection, que l'on va noté $p_1, p_2$ et $p_3$ tels que l'arc de cercle $p_1$ à $p_2$ est contenu dans un demi cercle fermé et aussi l'arc de cercle de $p_2$ à $p_3$ est contenu dans un demi cercle fermé et finalement
+		\[
+		\gamma_{\mid_{]p_1, p_2[}} \cap C = \emptyset \et \gamma_{\mid_{]p_2, p_3[}} \cap C = \emptyset
+		\]
+		Par le lemme 1., la courbe orienté $\kappa_\gamma$ est plus grande que $\frac1R$ entre $p_3$ et $p_2$. Par le lemme 2. il existe $q_1$ sur la courbe entre $p_1$ et $p_2$ et $q_2$ sur la coure entre $p_2$ et $p_3$ tels que $\kappa_\gamma < \frac1R¨$ entre $q_1$ et $q_2$. Et donc par le même argument que dans le point 1., on a bien $4$ sommet.
+	\end{enumerate}
+	
+}
+

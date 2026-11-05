@@ -1,0 +1,40 @@
+\chapter{Calcul différentiel et sous-variétés différentiables de $\Rn$}
+
+\section{Rappels de calcul différentiel}
+
+\subsection{Théorème d'inversion local}
+
+\begin{definition}
+	Soit $U$ et $V$ deux ouverts non-vide de $\Rn$. Un \textbf{difféomorphisme} de classe $C^k$ de $U$ dans $V$ est une application bijective
+	\[
+	f : U \to V
+	\]
+	telle que $f$ et $f^{-1}$ sont de classe $C^k$. Si $k=0$, on dira plutôt que $f$ est un homéomorphisme. Soit $p \in U$, on dira que $f$ est un \textbf{difféomorphisme local} de classe $C^k$ s'il existe un ouvert $U' \subset U$ contenant $p$ tel que $V' = f(U')$ est ouvert et
+	\[
+	f_{\mid_{U'}} : U' \to V'
+	\]
+	est un difféomorphisme de classe $C^k$ de $U'$ dans $V'$. On dit que $f$ est un difféomorphisme locale si c'est un difféomorphisme local de classe $C^k$ pour tout point de $U$. 
+\end{definition}
+
+\begin{remarque}
+	Si $f : U \to V$ est un difféomorphisme de classe $C^k$, alors $f = (f_1, \ldots, f_n)$ est appelé un système de \textbf{coordonnées curvilignes}.
+\end{remarque}
+
+\begin{theoreme}[Inversion locale]
+	Soit $U \subset \Rn$ un ouvert et $f \in C^k(U, \Rn)$. Alors $f$ est un difféomorphisme locale de classe $C^k$ en $p \in U$ si et seulement si
+	\[
+	\det f'(p) \neq 0
+	\]
+\end{theoreme}
+
+\subsection{Théorème du rang constant}
+
+\begin{definition}
+	Soit un $U$ ouvert non-vide de $\Rn$. Le rang d'un application $f \in C^k(U, \R^m)$ est l'application
+	\[
+	\begin{array}{cccc}
+		\rang_f : & U & \to & \N \\
+					& p & \mapsto & \rang f'(p)
+	\end{array}
+	\]
+\end{definition}
