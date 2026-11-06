@@ -122,11 +122,217 @@
 
 \section{Longueur et abscisse curviligne}
 
+\begin{definition}
+	La \textbf{longueur} d'un arc de courbe $\gamma : [a,b] \to \Rn$ de classe $C^1$ par morceaux est l'intégrale de sa vitesse
+	\[
+	l(\gamma) = \int_a^b V_\gamma(t) \, \mathrm dt
+	\]
+	où $V_\gamma(t) = \norme{\dot \gamma(t)}$.
+\end{definition}
+
+\begin{proposition}
+	Si $g : \Rn \to \Rn$ est une similitude de rapport $\gamma > 0$ et $\gamma : [a,b] \to \Rn$ est un arc de courbe de classe $C^1$, alors $\tilde \gamma : = g \circ \gamma : [a,b] \to \Rn$ est aussi de classe $C^1$ et
+	\[
+	l(\tilde \gamma) = \lambda l(\gamma)
+	\]
+	En particulier la longueur d'une courbe est invariant par isométrie.
+\end{proposition}
+
+\prf{On que tout similitude $g$ est de la forme $g(x) = \lambda Ax + b$ où $A$ est une matrice orthogonale. On a donc $\tilde \gamma(u) = \lambda A \gamma(u) + b$ et, par la \nameref{lem: Règle de Leibnitz},
+	\[
+	\dot{\tilde \gamma}(u) = \lambda \dot A \gamma(u) + \lambda A \dot \gamma(u) + \dot b = \lambda A \dot \gamma(u)
+	\]
+	puique $A$ et $b$ sont des constantes. Par orthogonalité de $A$ on a
+	\[
+	V_{\tilde \gamma}(u) = \norme{\dot{\tilde \gamma}(u)} = \norme{\lambda A \dot \gamma(u)} = \lambda \norme{\dot \gamma(u)} = \lambda V_\gamma(u)
+	\]
+	et donc
+	\[
+	l(\tilde \gamma) = \int_a^b V_{\tilde \gamma}(u) \, \mathrm du = \int_a^b V_\gamma(u) \, \mathrm du = \lambda l(\gamma)
+	\]
+}
+\begin{proposition}[additivité de la longueur]
+	Soit $\gamma : [a,b] \to \Rn$ une courbe de classe $C^1$ et $c \in [a,b]$. On note $\alpha := \gamma_{\mid_{[a,c]}} : [a,c] \to \Rn$ et $\beta : \gamma_{\mid_{[c,b]}} : [c,b] \to \Rn$ les restrictions de $\gamma$ aux intervalles $[a,c]$ et $[c,b]$. Alors
+	\[
+	l(\gamma) = l (\alpha) + l(\beta)
+	\]
+\end{proposition}
+
+\prf{On a par définition
+	\begin{align*}
+	l(\gamma) = \int_a^b V_\gamma(u) \, \mathrm du &= \int_a^c V_\gamma(u) \, \mathrm du + \int_c^b V_\gamma(u) \, \mathrm du  \\ &= \int_a^c V_\alpha(u) \, \mathrm du + \int_c^b V_\beta(u) \, \mathrm du = l(\alpha) + l(\beta)
+	\end{align*}
+	d'où le résultat.
+}
+
+\begin{proposition}
+	Pour tout arc de courbe $\gamma : [a,b] \to \Rn$ de classe $C^1$ on a 
+	\[
+	d(\gamma(a), \gamma(b)) \leqslant l(\gamma).
+	\]
+	Autrement dit le plus court chemin reliant deux points est toujours le segment reliant les deux points.
+\end{proposition}
+
+\prf{Quitte à composer $\gamma$ par des isométrie, on peut supposer que $\gamma(a) = 0$ et $\gamma(b) = c e_1$. On écrit alors $\gamma(t)$ dans un système orthonormé. Alors
+	\begin{align*}
+		l(\gamma) = \int_a^b \norme{\dot \gamma(t)} \, \mathrm dt &= \int_a^b \Bigg(\sum_{i=1}^n \dot \gamma_i^2(t) \Bigg)^\frac12 \mathrm dt \\ & \geqslant \int_a^b |\dot \gamma_1(t)| \, \mathrm dt = \int_a^b \dot \gamma_1(t) \, \mathrm dt = \gamma_1(b) - \gamma_1(a) = d(\gamma(a), \gamma(b))
+	\end{align*}
+}
+	
+\begin{definition}
+	Soit $\gamma : I \to \Rn$ une courbe paramétrée de classe $C^1$ et $u_0 \in I$ une valeur du paramètre. L'\textbf{abscisse curviligne} sur $\gamma$ correspondant au \textbf{point initial} $p_0 = \gamma(u_0)$	est la fonction $s_\alpha : I \to \Rn$ définie par
+	\[
+	S_\alpha(u) = \int_{u_0}^u V_\alpha(t) \, \mathrm dt
+	\]
+\end{definition}
 
 
+\section{Changement de paramétrisation d'une courbe}
+\begin{definition}
+	Soit $\gamma : I \to \Rn$ une courbe paramétrée. On dit qu'une courbe $\alpha : J \to \Rn$ est une \textbf{reparamétrisation directe (resp. indirecte)} de $\gamma$ s'il existe un difféomorphisme de classe $C^1$
+	\[
+	h : I \to J
+	\]
+	avec $h' > 0$ (resp. $h' < 0$) de sorte que $\gamma = \alpha \circ h$.
+\end{definition}
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		I & J \\
+		& {\mathbb R^n}
+		\arrow["h", from=1-1, to=1-2]
+		\arrow["\gamma"', from=1-1, to=2-2]
+		\arrow["\alpha", from=1-2, to=2-2]
+	\end{tikzcd}
+\end{figure}
+
+\subsection{Quantités géométriques et quantités cinématiques}
+\begin{definition}
+	Une quantité ou une notion attaché à une courbe est dite \textbf{géométrique} si elle est invariante par reparamétrisation, et elle est dite \textbf{cinématique} dans le cas contraire.
+\end{definition}
+
+\begin{lemme} \label{lem: vecteur tangent est invariant par reparamétrisation}
+	Le vecteur tangent $\bm T_\gamma(t)$ est une quantité géométrique.
+\end{lemme}
+
+\prf{Soit $\alpha : J \to \Rn$ une reparamétrisation directe de la courbe $\gamma$. Il existe alors une fonction $h  : I \to J$ telle que $h' > 0$ et $\gamma = \alpha \circ h$. On sait que $V_\gamma(t) = V_\alpha(h(t)) h'(t)$, par conséquent
+	\[
+	\bm T_\gamma(t) = \frac1{V_\gamma(t)}\dt{\gamma(t)} = \frac1{V_\gamma(t)} \dt{\alpha(h(t))} =\frac{h'(t)}{V_\gamma(t)} \d{\alpha(u)} = \frac1{V_\alpha(u)} \d{\alpha(u)} =\bm T_\alpha(u)
+	\]
+}
+
+\begin{proposition}
+	Soient $\gamma : I \to \Rn$ une courbe de classe $C^1$, alors la longueur de la courbe est une quantité géométrique.
+\end{proposition}
+
+\prf{Soit $\alpha : J \to \Rn$ une reparamétrisation directe de la courbe $\gamma$. Alors en utilisant la formule de changement de variable dans les intégrales, on a
+	\[
+	l(\alpha) =\int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha(u) \dt u \, \mathrm dt = \int_a^b V_\gamma(t) \, \mathrm dt = l(\gamma)
+	\]
+De même dans le cas où $\alpha : J \to \Rn$ est une reparamétrisation indirecte de la courbe $\gamma$,
+\[
+l(\alpha) = \int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha \dt u \, \mathrm dt = - \int_b^aV_\gamma(t) \, \mathrm dt = \int_a^b V_\gamma(t) \, \mathrm dt = l(\gamma)
+\]
+}
 
 
-\section{5 novembre}
+\section{Paramétrisation naturelle d'une courbe naturelle}
+
+\begin{theoreme} \label{thm: paramétrisation naturelle d'une courbe régulière}
+	Soit $\gamma : I \to \Rn$ une courbe régulière de classe $C^1$ et $t_0 \in I$ une valeur de paramètre. Alors il existe une unique reparamétrisation direct $h : I \to J$, telle que $0 \in J$, $h(t_0) = 0$ et $\alpha := \gamma \circ h^{-1} : J \to \Rn$ est de vitesse 1, c'est-à-dire
+	\[
+	V_\alpha(s) = 1
+	\]
+	pour tout $s \in J$.
+\end{theoreme}
+
+\prf{
+	On commence par l'unicité, on sait que
+	\[
+	V_\gamma(t) = h'(t) V_\alpha(s)
+	\]
+	Comme $V_\alpha(s) = 1$ et $h' > 0$, on a donc $h'(t) = V_\gamma(t)$ et comme $h(t_0) = 0$, on doit avoir
+	\[
+	s = h(t) = \int_{t_0}^t V_\gamma(\tau) \, \mathrm d \tau
+	\]
+	Ainsi la fonction $h$ coïncide avec l'abscisse curviligne $s(t)$. On définit dont naturellement $h$ par
+	\[
+	h(t) = s(t) = \int_{t_0}^t V_\gamma(\tau) \, \mathrm d \tau
+	\]
+	et l'intervalle $J = h(I)$. Alors on remarque que $h(t_0) = 0$ et $h'(t) = V_\gamma(t)$. Et donc en posant $\alpha := \gamma \circ h^{-1} : J \to \Rn$, on a bien
+	\[
+	V_\alpha(s)  = V_\gamma(t) \frac{1}{h'(t)} = 1
+	\]
+}
+
+\begin{definition}
+	On dit qu'une courbe régulière est \textbf{paramétrée naturellement} si $V_\gamma = 1$. Or le \autoref{thm: paramétrisation naturelle d'une courbe régulière} nous dit que tout courbe régulière de classe $C^1$ peut être reparamétrée naturellement.
+\end{definition}
+
+\section{Courbure d'une courbe de $\Rn$}
+
+\begin{definition}
+	Le \textbf{vecteur de courbure} d'une courbe régulière $\gamma : I \to \Rn$ de classe $C^2$ est le champ de vecteur le long de cette courbe défini par
+	\[
+	\bm K_\gamma(t) := \frac1{V_\gamma(t)} \dt{} \bm T_\alpha(t)
+	\]
+	A partir de là, on définit la \textbf{courbure} de la courbe $\gamma$ comme
+	\[
+	\kappa_\gamma(u) := \norme{\bm K_\gamma (u)}
+	\]
+\end{definition}
+
+\begin{proposition}
+	Le vecteur de courbure $\bm K_\gamma(t)$ et la courbure $\kappa_\gamma(t) = \norme{\bm K_\gamma(t)}$ sont des quantités géométriques.
+\end{proposition}
+
+\prf{Cela découle naturellement du fait que le vecteur tangent $\bm T_\gamma(t)$ soit une quantité géométrique par le \autoref{lem: vecteur tangent est invariant par reparamétrisation}.
+}
+
+
+\begin{lemme} \label{lem: le vecteur accéleration selon la courbure}
+	Le vecteur accélération d'une courbe régulière $\gamma : I \to \Rn$ vérifie
+	\[
+	\ddot \gamma(t) = V_\gamma^2(t) \bm K_\gamma(t) + \dot V_\gamma(t) \bm T_\gamma(t)
+	\]
+\end{lemme}
+
+\prf{On sait que $\dot \gamma(t) = V_\gamma(t) \bm T_\gamma(t)$ et donc
+	\[
+	\ddot \gamma(t) = \d{} (V_\gamma(t) \bm T_\gamma(t)) = V_\gamma(t) \dot{\bm T}_\gamma(t) + \dot V_\gamma(t)\bm T_\gamma(t) = V_\gamma^2(t) \bm K_\gamma(t) + \dot V_\gamma(t) \bm T_\gamma(t)
+	\]
+}
+
+\begin{theoreme} \label{thm: vecteur de courbure d'une courbe régulière}
+	Si $\gamma$ est paramétrée naturellement, alors
+	\[
+	\ddot \gamma(t) = \bm K_\gamma(t)
+	\]
+\end{theoreme}
+
+\prf{Puisque $V_\gamma(t) = 1$ pour tout $t$, alors $\dot V_\gamma(t) = 0$ pour tout $t$, et donc par le \autoref{lem: le vecteur accéleration selon la courbure} on a bien
+	\[
+	\ddot \gamma (t) = \bm K_\gamma(t)
+	\]
+	d'où le théorème.
+}
+
+\begin{corollaire}
+	Une courbe $\gamma : [a,b] \to \Rn$ est de courbure nulle si et seulement si c'est une droite ou un segment de droite.
+\end{corollaire}
+
+\prf{Par le \autoref{thm: paramétrisation naturelle d'une courbe régulière}, on peut supposer que $\gamma$ est paramétrisée naturellement, et donc le \autoref{thm: vecteur de courbure d'une courbe régulière} on a $\ddot \gamma(s) = \bm K_\gamma(s)$ et comme
+	\[
+	\kappa_\gamma(s) = \norme{\bm K_\gamma(s)} = 0
+	\]
+	on a donc $\ddot \gamma (s) = \bm 0$. Le vecteur $\bm v = \dot \gamma$ est donc constant, ainsi en intégrant on obtient
+	\[
+	\gamma(s) = \gamma(0) + s \bm v
+	\]
+	d'où le résultat.
+}
+
+
 \lecture{5 novembre}
 
 \begin{theoreme}[Des 4 sommets] \label{thm: théorème des 4 sommets}
@@ -152,4 +358,5 @@
 	\end{enumerate}
 	
 }
+
 
