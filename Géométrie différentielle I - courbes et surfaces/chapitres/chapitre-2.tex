@@ -274,7 +274,7 @@ l(\alpha) = \int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha \dt u \
 \begin{definition}
 	Le \textbf{vecteur de courbure} d'une courbe régulière $\gamma : I \to \Rn$ de classe $C^2$ est le champ de vecteur le long de cette courbe défini par
 	\[
-	\bm K_\gamma(t) := \frac1{V_\gamma(t)} \dt{} \bm T_\alpha(t)
+	\bm K_\gamma(t) := \frac1{V_\gamma(t)} \dot{\bm T}_\alpha(t)
 	\]
 	A partir de là, on définit la \textbf{courbure} de la courbe $\gamma$ comme
 	\[
@@ -317,6 +317,7 @@ l(\alpha) = \int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha \dt u \
 	d'où le théorème.
 }
 
+
 \begin{corollaire}
 	Une courbe $\gamma : [a,b] \to \Rn$ est de courbure nulle si et seulement si c'est une droite ou un segment de droite.
 \end{corollaire}
@@ -332,12 +333,88 @@ l(\alpha) = \int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha \dt u \
 	d'où le résultat.
 }
 
+\begin{lemme}
+	Le vecteur ed courbure d'une courbe de classe $C^2$	en un point est un multiple du vecteur normal principal en ce point ; 
+	\[
+	\bm K_\gamma(u) = \kappa_\gamma(u) \bm N_\gamma(u)
+	\]
+\end{lemme}
+
+
+\begin{theoreme}
+	La courbure d'une courbe de classe $C^2$ est la variation angulaire de la direction cette courbe par rapport au paramètre naturel.
+\end{theoreme}
+
+\prf{Soit $\gamma : I \to \Rn$ une courbe de classe $C^2$ paramétrée naturellement et notons 
+	\[
+	\varphi(s_0, s) := \angle(\bm T(s_0), \bm T(s))
+	\]
+	l'angle entre $\bm T(s_0)$ et $\bm T(s)$. Comme $\norme{\bm T(s_0)} = \norme{\bm T(s)} =1$, alors
+	\[
+	\norme{\bm T(s_0) - \bm T(s)} = 2 \sin \Big(\frac{\varphi(s_0, s)}2\Big)
+	\]
+	Et donc 
+	\begin{align*}
+	\lim_{s \to s_0^+} \frac{\varphi(s_0, s)}{s - s_0} &= \Bigg(\lim_{s \to s_0^+} \frac{\varphi(s_0,s)}{2 \sin\big(\frac{\varphi(s_0, s)}2 \big)} \Bigg) \cdot  \Bigg( \lim_{s \to s_0^+} \frac{2 \sin \big(\frac{\varphi(s_0, s)}2 \big)}{s - s_0}\Bigg)  \\&= \lim_{s \to s_0^+} \norme{\frac{\bm T(s_0) - \bm T(s)}{s -s_0}} = \norme{\dot{\bm T}(s_0)}
+	\end{align*}
+
+}
+
+\section{Contact entre deux courbes}
+
+\begin{definition}
+	On dit que deux courbes de classe $C^k$
+	\[
+	\gamma_1, \gamma_2 : I \to \Rn
+	\]
+	ayant le même paramètre $t \in I$ ont un \textbf{contact d'ordre} $k$ en $t_0$ si $\gamma_1(t_0) = \gamma_2(t_0)$ et si leurs dérivées en $t_0$ coïncident jusqu'à l'ordre $k$ ; 
+	\[
+	\frac{\mathrm d^i \gamma_1}{\mathrm d t^i} (t_0) = \frac{\mathrm d^i \gamma_2}{\mathrm d t^i} (t_0)
+	\]
+	pour $i = 1,2, \ldots, k$.
+\end{definition}
+
+
+\begin{proposition}\label{prop: condition suffisante de point de contact d'ordre 2}
+	Deux courbes $\gamma_1, \gamma_2 : I \to \Rn$ de classe $C^2$ ont un contact d'ordre $2$ en $t_0$ si et seulement si
+	\[
+	\gamma_1(t_0) = \gamma_2(t_0), \quad \dot \gamma_1(t_0) = \dot \gamma_2(t_0), \quad \dot V_{\gamma_1}(t_0) = \dot V_{\gamma_2}(t_0) \et \bm K_{\gamma_1}(t_0) = \bm K_{\gamma_2}(t_0)
+	\]
+\end{proposition}
+
+\prf{C'est une conséquence directe du \autoref{lem: le vecteur accéleration selon la courbure}.}
+
+\begin{theoreme}
+	Soit $\gamma : I \to \R^2$ une courbe de classe $C^2$ qui est birégulière en $t_0 \in I$. Alors il existe un cercle $c : I \to \R^2$ ayant un contact d'ordre $2$ avec $\gamma$ en $t_0$. Ce cercle est unique, son rayon est l'inverse de $|\kappa_\gamma(t_0)|$ et son centre est donné par
+	\[
+	p = \gamma(t_0) + \frac1{\kappa_\gamma^2(t_0)} \bm K_\gamma(t_0)
+	\]
+	Ce cercle s'appelle le \textbf{cercle osculateur} ou le \textbf{cercle de courbure} à $\gamma$ en $t_0$ et, son centre est naturellement appelé le \textbf{centre de courbure} et son rayon est le \textbf{rayon de courbure} de $\gamma$ en $t_0$.
+\end{theoreme}
+
+\prf{Supposons que la courbe est paramétrée naturellement et notons $s$ le paramètre naturel. On considère également que le point considérer correspond à la valeur $s = 0$ du paramètre.
+	
+On pose $\rho = \frac1{\kappa_\gamma(0)}$, $\bm T := \bm T_\gamma(0) = \dot \gamma(0)$ et $\bm N := \rho \bm K_\gamma(0)$, puis posons
+\[
+p := \gamma(0) + \rho \bm N
+\]
+et considérons le cercle de centre $p$ et de rayon $\rho$ qu'on paramétrise par
+\[
+c(s) = p - \rho \cos \left(\frac{s}\rho \right)\bm N + \rho \sin \left(\frac{s}\rho \right) \bm T
+\]
+De plus il est claire que $\gamma(0) = c(0)$ et que $\dot c(0) = \bm T = \dot \gamma(0)$. On sait d'autre part que la courbure du cercle de rayon $\rho$ est constante et égale à $\frac1\rho = \kappa_\gamma(0)$. Et donc par la \autoref{prop: condition suffisante de point de contact d'ordre 2} on conclut bien que le cercle $c$ et la courbe $\gamma$ ont un contact d'ordre $2$ en $s=0$.
+}
 
 \lecture{5 novembre}
+
+
+
 
 \begin{theoreme}[Des 4 sommets] \label{thm: théorème des 4 sommets}
 	Toutes courbes fermées simples de classe $C^2$ dans le plan orienté possède au moins quatre sommets.
 \end{theoreme}
+
+
 
 \prf{
 	On peut exclure le cas du cercle, puisque que chaque point en un sommet. On peut donc supposer que la courbe n'est pas un cercle. De plus comme puisque la courbure est invariant par reparamétrisation directe, on peut aussi supposer que la courbe est paramétrisée naturellement. Soit $\gamma : [a, b] \to \R^2$ de classe $C^2$ une paramétrisée naturelle. Soit $C$ le plus petit cercle contenant la courbe, on va appeler $R$ le rayon de celui-ci. 
