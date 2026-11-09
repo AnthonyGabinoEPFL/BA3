@@ -376,7 +376,7 @@ Tout comme la continuité standard, il est possible d'énoncer une version local
 }
 
 \subsection{Caractérisation de la continuité par les sous-bases}
-\begin{lemme}
+\begin{lemme} \label{lem: Caractérisation de la continuité par les sous-bases}
 	Soient $(X, \T)$ et $(X', \T')$ des espaces topologiques. Soit $\mathcal S'$ une sous-bases de $\T'$. Alors une application $f : X \to X'$ est continue par rapport à $\T$ et $\T'$ si et seulement si $f^{-1}(S') \in \T$ pour tout $S' \in \mathcal S'$.
 \end{lemme}
 
@@ -703,7 +703,7 @@ ce qui montre bien que $f$ est continue.
 \end{definition}
 
 
-\begin{lemme}
+\begin{lemme} \label{lem: Sous base du l'espace produit}
 	Soient $(X_1, \T_1)$ et $(X_2, \T_2)$ des espaces topologiques. Alors $\T_1 * \T_2$ est la topologie engendré par la sous-base
 	\[
 	\mathcal S_* = \{ U_1 \times X_2 \mid U_1 \in \T_1\} \cup \{X_1 \times U_2 \mid U_2 \in \T_2\}
@@ -793,15 +793,113 @@ ce qui montre bien que $f$ est continue.
 	\end{enumerate}
 \end{theoreme}
 
-\prf{Supposons que $\T =\T_1 * \T_2$, alors par définition même de la topologie produit, la condition (1.) est vérifiée. Pour la (2.) supposons que $h : (Y, \T') \to (X_1 \times X_2, \T_1*\T_2)$ est continue, alors $\pr_i \circ h$ est continue car composée de fonctions continues. Réciproquement supposons que 
-	\[
-	\pr_i \circ h : (Y, \T') \to (X_i, \T_i)
-	\]
-	est continues $\forall i =1,2$. Alors pour $\forall U_i \in \T_i$
-	\[
-	(\pr_i \circ h)^{-1} (U_i) \in \T_i
-	\]
-	Or $(\pr_i \circ h)^{-1} (U_i) = h^{-1}(\pr_i^{-1}(U_i)) = h^{-1}(U_1 \times X_2)$ ou $h^{-1}(X_1 \times U_2)$. Ainsi la pré-image par de tout élément de la sous-base $\mathcal S_*$ de $\T_1 * \T_2$ est dans $\T'$, ce qui suffit.
+\prf{
+Supposons que la topologie $\T$ sur $X_1 \times X_2$ est $\T = \T_1 * \T_2$ et montrons que les deux critères sont vérifiés.
+		\begin{enumerate}
+			\item[1.] Les projections $\pr_i$ sont continues par définition de la topologie produit $\T_1 * \T_2$.
+			
+			\item [2.] Soient $(Y, \T')$ un espace topologique et 
+			\[
+			h : Y \to X_1 \times X_2
+			\]
+			une application.
+			\begin{enumerate}
+				\item["$\implies$" :] Si l'application
+				\[
+				h : (Y, \T') \to (X_1 \times X_2, \T_1 * \T_2)
+				\]
+				est continue. Alors $\pr_i \circ h$ est aussi continue puisque c'est une composée d'applications continues.
+				
+				\item["$\impliedby$" :] Supposons que les applications
+				\[
+				\pr_i \circ h : (Y, \T') \to (X_i, \T_i)
+				\]
+				soit continues. On considère la sous-base $\mathcal S_*$ de $\T_1 * \T_2$ du \autoref{lem: Sous base du l'espace produit}. Or on sait que
+				\[
+				\pr^{-1}(U_1) = U_1 \times X_2 \et \pr_2^{-1}(U_2) = X_1 \times U_1
+				\]
+				Ainsi pour $U_1 \subset X_1$
+				\[
+				h^{-1}(U_1 \times X_2) = h^{-1}(\pr_1^{-1}(U_1)) = (\pr_1 \circ h)^{-1} (U_1) \in \T'
+				\]
+				par continuité de $\pr_1 \circ h$. De même
+				\[
+				h^{-1}(X_1 \times U_2) = h^{-1}(\pr^{-1}_2(U_2)) = (\pr_2 \circ h)^{-1} (U_2) \in \T'
+				\]
+				par continuité de $\pr_2 \circ h$. Ainsi
+				\[
+				\forall S \in \mathcal S_*, \quad h^{-1}(S) \in \T'
+				\]
+				Et donc par le \autoref{lem: Caractérisation de la continuité par les sous-bases} on conclut bien que $h$ est continue.
+			\end{enumerate}
+		\end{enumerate}
 }
 
 \section{Produits cartésiens quelconques}
+
+
+\begin{definition}
+	Soient $X_1,\ldots, X_n$ des ensembles. On pose le \textbf{produit cartésien} 
+	\[
+	\Pi (X_1, \ldots, X_n) = \Big\{ f : \{1, \ldots, n\} \to \bigcup_{i=1}^n X_i \mid f(i) \in X_i \Big\}
+	\]
+	et les \textbf{évaluations}
+	\[
+	\begin{array}{cccc}
+		\ev_i : &\Pi (X_1, \ldots, X_n) & \to & X_i \\
+				& f & \mapsto & f(i)
+	\end{array}
+	\]
+\end{definition}
+
+
+\begin{lemme}
+	Il existe une bijection
+	\[
+	\varphi : X_1 \times \ldots \times X_n \to \Pi(X_1, \ldots, X_n)
+	\]
+	telle que $\ev_i \circ \varphi = \pr_i$ pour tout $i \in \entiers$.
+\end{lemme}
+En d'autre terme on a le diagramme commutatif suivant ; 
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		{X_1 \times \ldots \times X_n} && {\Pi(X_1, \ldots, X_n)} \\
+		& {X_i}
+		\arrow["\varphi", from=1-1, to=1-3]
+		\arrow["{\mathrm{pr}_i}"', from=1-1, to=2-2]
+		\arrow["{\mathrm{ev}_i}", from=1-3, to=2-2]
+	\end{tikzcd}
+\end{figure}
+
+\prf{Comme on veut que $\ev_i \circ \varphi = \pr_i$, on doit définit l'application $\varphi$ telle que pour tout $(x_1, \ldots, x_n) \in X_1 \times \ldots \times X_n$ on ait
+	\[
+	\ev_i \circ \varphi (x_1, \ldots, x_n) = \pr_i(x_1, \ldots, x_n) = x_i
+	\]
+	Donc on a nécessairement
+	\[
+	\begin{array}{cccc}
+		\varphi(x_1, \ldots, x_n) :  & \entiers & \to & \bigcup_{i=1}^n X_i  \\ & j & \mapsto & x_j
+	\end{array}
+	\] 
+	Pour voir que c'est une bijection, on observe que l'application
+	\[
+	\begin{array}{cccc} \psi :& \Pi(X_1, \ldots, X_n) & \to & X_1 \times \ldots X_n \\ & f & \mapsto & (f(1), \ldots, f(n)) \end{array}
+	\]
+	est un inverse de $\varphi$.
+}
+
+\begin{definition}
+	Soit $\mathcal X = \{X_i \mid i \in I\}$ une collection d'ensemble. Alors le \textbf{produit cartésien} de la collection $\mathcal X$ est
+	\[
+	\prod_{i \in I} X_i = \Big\{f : I \to \bigcup_{i \in I}X_i ~\big | ~f(i) \in X_i \Big\}
+	\]
+	Et les \textbf{projections} sont
+	\[
+	\begin{array}{cccc}
+		\pr_i : & \prod_{j=1} X_j & \to & X_i \\
+				&	f & \mapsto & f(i)
+	\end{array}
+	\]
+	pour tout $i \in I$.
+\end{definition}
