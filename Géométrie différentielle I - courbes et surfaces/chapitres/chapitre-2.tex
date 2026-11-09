@@ -110,7 +110,7 @@
 	Il suffit de diviser cette identité par $\varepsilon$ et faire tendre $\varepsilon$ vers $0$ pour obtenir le lemme. Les autres formules sont analogue.
 }
 
-\begin{corollaire}
+\begin{corollaire} \label{cor: invariance permuatation de la dérivée à signe près}
 	Si $\bm W_1$ et $\bm W_2$ sont deux champs de vecteurs de classe $C^1$ le long de $\gamma$ tel que $\bm W_1 \cdot \bm W_2$ est constant, alors on a
 	\[
 	\bm W_1 \cdot \dot{\bm W}_2 = - \dot{\bm W}_1 \cdot \bm W_2
@@ -333,7 +333,7 @@ l(\alpha) = \int_{a'}^{b'} V_\alpha(u) \, \mathrm du = \int_a^b V_\alpha \dt u \
 	d'où le résultat.
 }
 
-\begin{lemme}
+\begin{lemme} \label{lem: le vecteur de courbure est colinéaire au vecteur normal}
 	Le vecteur ed courbure d'une courbe de classe $C^2$	en un point est un multiple du vecteur normal principal en ce point ; 
 	\[
 	\bm K_\gamma(u) = \kappa_\gamma(u) \bm N_\gamma(u)
@@ -405,11 +405,179 @@ c(s) = p - \rho \cos \left(\frac{s}\rho \right)\bm N + \rho \sin \left(\frac{s}\
 De plus il est claire que $\gamma(0) = c(0)$ et que $\dot c(0) = \bm T = \dot \gamma(0)$. On sait d'autre part que la courbure du cercle de rayon $\rho$ est constante et égale à $\frac1\rho = \kappa_\gamma(0)$. Et donc par la \autoref{prop: condition suffisante de point de contact d'ordre 2} on conclut bien que le cercle $c$ et la courbe $\gamma$ ont un contact d'ordre $2$ en $s=0$.
 }
 
+
+\section{Le repère de Frenet d'une courbe dans $\R^3$}
+
+\begin{definition}
+	Soit $\gamma : I \to \R^3$ de classe $C^2$, alors on définit le \textbf{vecteur binormal} de $\gamma$ comme le produit vectoriel unitaire tangent et du vecteur normal principal ;
+	\[
+	\bm B_\gamma(u) = \bm T_\gamma(u) \times \bm N_\gamma(u)
+	\]
+	Ainsi le \textbf{repère de Frenet} de $\gamma$ en $u$ est le repère défini par les trois champs de vecteurs
+	\[
+	\{\bm T_\gamma(u), \bm N_\gamma(u), \bm B_\gamma(u)\}
+	\]
+\end{definition}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{"images/repère de Frenet.png"}
+	\caption{Illustration du repère de Frenet (volé dans le poly)}
+\end{figure}
+
+\begin{lemme}
+	Le vecteur binormal à la courbe $\gamma$ peut s'écrire 
+	\[
+	\bm B_\gamma(u) = \frac{\dot \gamma(u) \times \ddot \gamma(u)}{\norme{\dot \gamma(u) \times \ddot \gamma(u)}}
+	\]
+\end{lemme}
+
+\prf{On a 
+	\[
+	\dot \gamma (\ddot \gamma - \langle \ddot \gamma, \bm T \rangle \, \bm T ) = \dot \gamma \times \ddot \gamma
+	\]
+	Et donc
+	\[
+	\bm B = \bm T \times \bm N = \frac{\dot \gamma}{V_\gamma} \times \frac{\ddot \gamma - \langle \ddot \gamma, \bm T \rangle \, \bm T }{\norme{\ddot \gamma - \langle \ddot \gamma, \bm T \rangle \, \bm T }} = \frac{\dot \gamma \times \ddot \gamma}{V_\gamma\norme{\ddot \gamma - \langle \ddot \gamma, \bm T \rangle \, \bm T } } = \frac{\dot \gamma \times \ddot \gamma}{\norme{\dot \gamma \times \ddot \gamma}}
+	\]
+}
+
+\begin{definition}
+	On dit qu'une courbe $\gamma : I \to \R^3$ est \textbf{régulière au sens de Frenet} si elle est de classe $C^2$, et que le vecteur principal est un champ $u \mapsto \bm N_\gamma(u)$ de classe $C^1$. On peut alors définir la \textbf{torsion} d'une courbe $\gamma : I \to \R^3$ régulière au sens de Frenet comme étant la fonction $\tau: I \to \R$ définie par
+	\[
+	\tau(u) := \frac{\langle \dot{\bm N}(u), \bm B(u) \rangle}{V_\gamma(u)}
+	\]
+\end{definition}
+
+\begin{theoreme}[formule de Serret-Frenet] \label{thm: formules de Serret-Frenet}
+	Soit $\gamma : I \to \R^3$ une courbe régulière au sens de Frenet. Alors le repère de Frenet est de classe $C^1$ et ses dérivées sont données par les formules
+	\[
+	\frac1{V_\gamma} \dot{\bm T} =\kappa \bm N, \quad \frac1{V_\gamma}\dot{\bm N} = -\kappa \bm T + \tau \bm B \et\frac1{V_\gamma} \dot{\bm B} = -\tau \bm N
+	\]
+\end{theoreme}
+
+\prf{Le vecteur $\bm T$ et $\bm N$ sont de classe $C^1$ par hypothèse, et donc il en va de même pour le vecteur binormal car $\bm B = \bm T \times \bm N$. Donc le repère de Frenet est bien de classe $C^1$.
+	
+	La première équation est une conséquence directe des égalités
+	\[
+	\dot{\bm T} = V_\gamma \bm K = V_\gamma \kappa \bm N
+	\]
+	dû au \autoref{lem: le vecteur de courbure est colinéaire au vecteur normal}. Pour la deuxième égalité, on remarque d'abord que
+	\[
+	\dot{\bm N} = \langle \dot{\bm N}, \bm T \rangle \bm T + \langle \dot{\bm N}, \bm N \rangle \bm N + \langle \dot{\bm N}, \bm B \rangle \bm B
+	\]
+	car le repère de Frenet est orthonormé. D'autre part, on a $\langle \dot{\bm N}, \bm N \rangle = 0$ et par le \autoref{cor: invariance permuatation de la dérivée à signe près}
+	\[
+	\langle \dot{\bm N}, \bm  \rangle \bm T = -\langle \bm N, \dot{\bm T} \rangle \bm T = - V_\gamma \kappa \bm T
+	\]
+	Et donc
+	\[
+	\dot{\bm N} = - V_\gamma \kappa \bm T + V_\gamma \tau \bm B
+	\]
+	car $\langle \dot{\bm N}, \bm B \rangle = V_\gamma \tau$ par définition de la torsion. Et finalement pour le troisième formules, on remarque que 
+	\[
+	\dot{\bm B} = \langle \dot{\bm B}, \bm T \rangle \bm T + \langle \dot{\bm B}, \bm N \rangle \bm N + \langle \dot{\bm B}, \bm B \rangle \bm B
+	\]
+	Or $\langle \dot{\bm B}, \bm B \rangle = 0$ car $\norme{\bm B}$ est constante et 
+	\[
+	\langle \dot{\bm B}, \bm T \rangle = - \langle \bm B, \dot{\bm T} \rangle = - V_\gamma \kappa \langle \bm B, \bm N \rangle = 0
+	\]
+	et donc
+	\[
+	\dot{\bm B} = \langle \dot{\bm B}, \bm N \rangle \bm N = - \langle \bm B, \dot{\bm N} \rangle \bm N = - V_\gamma \tau \bm N
+	\]
+	Le théorème est donc démontrer.
+}
+
+\begin{proposition}
+	Une courbe $\gamma : I \to \R^3$ régulière au sens de Frenet est située dans un plan si et seulement si sa torsion est identiquement nulle.
+\end{proposition}
+
+\prf{Supposons que la courbe $\gamma$ soit située dans un plan $\Pi \subset \R^3$, alors le vecteur binormal est constant. Et donc la troisième formules du \autoref{thm: formules de Serret-Frenet} on a bien $\tau_\gamma = 0$.
+	
+Réciproquement, supposons que $\tau = 0$. Alors la troisième formule du \autoref{thm: formules de Serret-Frenet}, implique que le vecteur binormal est constant. On note ce vecteur par $\bm B$ et on pose
+\[
+h(u) = \langle \gamma(u) - \gamma(u_0), \bm B \rangle
+\]
+or on remarque que
+\[
+\d h = \langle \dot \gamma(u), \bm B \rangle = V_\gamma \langle \bm T(u), \bm B \rangle = 0
+\]
+Par conséquent $h$ est constant, et comme $h(u_0) = 0$, la fonction $h$ est identiquement nulle, ce qui montre que la courbe $\gamma$ est contenu dans le plan d'équation
+\[
+\langle \bm x - \gamma(u_0), \bm B \rangle = 0
+\]
+qui n'est rien d'autre que le plan orthogonal à $\bm B$	passant par $\gamma(u_0)$.
+}
+
+\subsection{Variation augulaire du plan osculateur}
+
+\begin{proposition}
+	La torsion du courbe régulière au sens de Frenet mesure la variation de son plan osculateur.
+\end{proposition}
+
+\prf{Soit $\gamma : I \to \R^3$ une courbe au sens de Frenet, qu'on suppose paramétrée naturellement. On note $\theta(s_0, s)$ l'angle entres les plans osculateurs à $\gamma$ en $s_0$ et en $s$, on remarque alors que
+	\[
+	\theta(s_0, s) = \angle (\bm B(s_), \bm B(s))
+	\]
+	car le vecteur normal au plan osculateur en un point de $\gamma$ est le vecteur binormal de celui-ci. Et donc
+	\[
+	|\tau(s_0)| = \norme{\dot{\bm B}(s_0)} = \lim_{s \to s_0^+} \frac{\theta(s_0, s)}{s - s_0} = \dot \theta(s_0)
+	\]
+	d'où la proposition.
+}
+
+\subsection{Courbe de pente constante}
+
+\begin{definition}
+	On dit qu'une courbe $\gamma : I \to \R^3$ de classe $C^1$ est de \textbf{pente constante} si elle est régulière et son vecteur tangent fait un angle constant avec une direction fixe. Une telle courbe s'appelle aussi un \textbf{hélice généralisée}.
+\end{definition}
+
+\begin{theoreme}
+	Une courbe $\gamma : I \to \R^3$ régulière au sens de Frenet est de pente constante si et seulement si le rapport
+	\[
+	\frac{\tau_\gamma(u)}{\kappa_\gamma(u)}
+	\]
+	est constant.
+\end{theoreme}
+
+
+\prf{On peut supposer sans perte de généralité que $\gamma$	est paramétrée naturellement. Supposons qu'il existe un vecteur non-nul $\bm A \in \R^3$ tel que le produit scalaire $\langle \bm T_\gamma(s), \bm A \rangle = a$ est constant. Ainsi en dérivant et par le première équation des \nameref{thm: formules de Serret-Frenet}, on a
+	\[
+	0 = \langle \dot{\bm T}(s), \bm A \rangle = \kappa_\gamma(s) \langle \bm N(s), \bm A \rangle
+	\]
+	or on a supposé que la courbe était birégulière, et donc sa courbure est non nulle, ainsi $\langle \bm N(s), \bm A \rangle = 0$ pour tout $s$. Or par la troisième équation des \nameref{thm: formules de Serret-Frenet} on a
+	\[
+	\frac{\mathrm d}{\mathrm ds}\langle \bm B(s), A \rangle = \langle \dot{\bm B}(s), A \rangle = - \tau_\gamma(s) \langle \bm N(s), \bm A \rangle = 0
+	\]
+	Donc $b = \langle \bm B(s), \bm A \rangle$ est également constant. Et finalement la deuxième équation des \nameref{thm: formules de Serret-Frenet} nous dit que
+	\[
+	0 = \frac{\mathrm d}{\mathrm ds} \langle \bm N(s), \bm A \rangle = \langle \dot{\bm N}(s), \bm A \rangle = -\kappa_\gamma(s) \langle \bm T(s), A \rangle + \tau_\gamma(s)\langle \bm B(s), \bm A \rangle
+	\]
+	et donc
+	\[
+	\frac{\tau_\gamma(u)}{\kappa_\gamma(u)} = \frac{\langle \bm T(s), \bm A \rangle}{\langle \bm B(s), \bm A \rangle} =\frac{a}{b}
+	\]
+	Réciproquement, supposons que $\lambda := \frac{\tau_\gamma(u)}{\kappa_\gamma(u)}$ est constant, on considère le champ de vecteurs
+	\[
+	A(s) := \lambda \bm T(s) + \bm B(s)
+	\]
+	Il est claire que l'angle entre $\bm T$ et $\bm A$ est constant car $\langle \bm A, \bm T \rangle = \lambda$. De plus
+	\[
+	\frac{\mathrm d}{\mathrm ds} \bm A(s) =\lambda \dot{\bm T} + \dot{\bm B} = \lambda\kappa_\gamma(s) \bm N - \tau_\gamma(s)\bm N = 0
+	\]
+	Et donc le théorème suit.
+}
+
+
+
+
+
+
+
+
+
 \lecture{5 novembre}
-
-
-
-
 \begin{theoreme}[Des 4 sommets] \label{thm: théorème des 4 sommets}
 	Toutes courbes fermées simples de classe $C^2$ dans le plan orienté possède au moins quatre sommets.
 \end{theoreme}
