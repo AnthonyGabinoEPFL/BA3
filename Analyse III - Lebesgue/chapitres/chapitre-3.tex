@@ -216,7 +216,7 @@ et donc ça entraîne bien
 }
 
 \lecture{9 novembre}
-\begin{theoreme}[Convergence bornée]
+\begin{theoreme}[Convergence bornée] \label{thm: Convergece bornée}
 	Soit $\{f_k\}_{k \geqslant 1}$ une suite de fonctions mesurables et uniformément bornées, et tous de support dans $E \subset \Rn$, où $m(E) < \infty$. Supposons qe $f_k \ktoinfty f$ p.p où $f$ est bornée et de support de mesure finie. Alors $f$ est mesurable et 
 	\[
 	\lim_{k \to \infty} \int_{\Rn} f_k  \, \mathrm dx = \int_{\Rn} f \, \mathrm dx
@@ -281,6 +281,70 @@ et donc ça entraîne bien
 		\begin{align*}
 			\int_{\Rn} a f(x) \, \mathrm dx &= \sup_{0 \leqslant g \leqslant af}\int_{\Rn} g(x) \, \mathrm dx = \sup_{0 \leqslant ag \leqslant af}\int_{\Rn} ag(x) \, \mathrm dx \\ &= a \sup_{0 \leqslant g \leqslant f}\int_{\Rn} g(x) \, \mathrm dx = a \int_{\Rn} f(x) \, \mathrm dx
 		\end{align*}
-		Il reste donc à montrer l'additivité ; soit $f,g : \Rn \to [0, \infty]$ mesurables. 
+		Il reste donc à montrer l'additivité ; soit $f,g : \Rn \to [0, \infty]$ mesurables. Or par définition
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx = \sup_{0 \leqslant \varphi \leqslant f} \int_{\Rn} \varphi(x) \, \mathrm dx \et \int_{\Rn} g(x) \, \mathrm dx = \sup_{0 \leqslant \psi \leqslant g} \int_{\Rn} \psi(x) \, \mathrm dx
+		\]
+		Ainsi soit $0 \leqslant \varphi \leqslant f$ et $0 \leqslant \psi \leqslant g$, alors $0 \leqslant \varphi + \psi \leqslant f + g$ et donc
+		\[
+		\int_{\Rn} \varphi(x) \, \mathrm dx + \int_{\Rn} \psi(x) \, \mathrm dx \leqslant \int_{\Rn} (f+g) \, \mathrm dx
+		\]
+		et donc par passage au suprémum
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx + \int_{\Rn} g(x) \, \mathrm dx \leqslant \int_{\Rn} (f+g)(x) \, \mathrm dx
+		\]
+		Inversement, soit $0 \leqslant \zeta \leqslant f+ g$. On construit $\varphi$ et $\psi$ tel que $\varphi + \psi = \zeta$ et, $0\leqslant \varphi \leqslant f$ et $0 \leqslant \psi \leqslant g$. Il alors que
+		\[
+		\int_{\Rn}\zeta(x) \, \mathrm dx = \int_{\Rn} \varphi(x) \, \mathrm dx + \int_{\Rn} \psi(x) \, \mathrm dx \leqslant \int_{\Rn} f(x) \, \mathrm dx + \int_{\Rn} g(x) \, \mathrm dx
+		\]
+		et donc par passage au suprémum,
+		\[
+		\int_{\Rn} (f+g)(x) \, \mathrm dx \leqslant \int_{\Rn} f(x) \, \mathrm dx + \int_{\Rn} g(x) \, \mathrm dx
+		\]
+		Et donc par double inégalité le propriété suit.
+		
+		\item[5.] Supposons que $f : \Rn \to [0, \infty]$ soit intégrale. On note $E := \{x \in \Rn \mid f(x) = \infty\}$ et supposons que $m(E) > 0$. En posant $E_k = E \cap B(0, k)$ alors par convergence de $E_k$ on peut choisir $k_* \geqslant 1$ tel que $0 < m(E_{k_+}) < \infty$. On poser donc
+		\[
+		\varphi_k := k \chi_{E_{k_+}}, \quad k \geqslant 1
+		\]
+		et donc
+		\[
+		\int_{\Rn} f(x) \, \mathrm dx \geqslant \int_{\Rn} \varphi_k(x) \, \mathrm dx = km(E) \ktoinfty \infty
+		\]
 	\end{enumerate}
 }
+
+\subsection{Théorème de convergence pour l'intégrale de Riemann au cadre des fonctions non-négative}
+
+\begin{theoreme}[Lemme de Fatou] \label{thm: Lemme de Fatou}
+	Soit $\{f_k\}_{k \geqslant 1}$ une suite de fonctions non-négative et mesurables sur $\Rn$ tel que $f_k \ktoinfty f$, alors on a
+	\[
+	\int_{\Rn} f(x) \, \mathrm dx \leqslant \liminf_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx 
+	\]
+\end{theoreme}
+
+\prf{Soit $g$ une fonction non-négative, bornée, de support de mesure fini, et $0 \leqslant g \leqslant f$. Alors on pose
+	\[
+	\varphi_k = := \min\{g, f_k\}
+	\]
+	qui sont bornées, de support de mesure finie, et avec $\varphi_k \leqslant f_k$. Il suit alors que
+	\[
+	\int_{\Rn} \varphi_k(x) \, \mathrm dx \leqslant \int_{\Rn} f_k(x) \, \mathrm dx 
+	\]
+	Or par hypothèse de convergence $\varphi_k \ktoinfty g$ parce que $g \leqslant f$, et les fonctions $\varphi_k$ sont bornées. Ainsi par le \autoref{thm: Convergece bornée} on a
+	\[
+	\lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx = \int_{\Rn} g(x) \, \mathrm dx
+	\]
+	Et donc 
+	\[
+	\int_{\Rn} g(x) \, \mathrm dx = \lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx = \liminf_{k \to \infty} \int_{\Rn} \varphi_k(x) \, \mathrm dx \leqslant \liminf_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx 
+	\]
+	Finalement, par passage au suprémum le théorème suit.
+}
+
+\begin{theoreme}[Convergence monotone] \label{thm: Convergence monotone}
+	Soit $\{f_k\}_{k \geqslant 1}$ une suite croissante de fonctions mesurables et non-négative	telle que $f_k \ktoinfty f$, alors on a
+	\[
+	\lim_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx = \int_{\Rn} f(x) \, \mathrm dx
+	\]
+\end{theoreme}
