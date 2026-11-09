@@ -724,21 +724,21 @@ ce qui montre bien que $f$ est continue.
 	\[
 	\pr_1^{-1} (U_1) = U_1 \times X_2 \et \pr_2^{-1}(U_2) = X_1 \times U_2
 	\]
-	Donc $\mathcal S_* \subset \T$. En particulier $\mathcal S_* \subset \T_1 * \T_2$, d'où $\T_{S_*} \subset \T_1 * \T_2$. De plus comme les $\pr_i$ sont continues par rapport à $\T_{S_*}$ et $\T_1 * \T_2$, alors par minimalité de $\T_1 * \T_2$ on a nécessairement
+	Donc $\mathcal S_* \subset \T$. En particulier $\mathcal S_* \subset \T_1 * \T_2$, d'où $\T_{\mathcal S_*} \subset \T_1 * \T_2$. De plus comme les $\pr_i$ sont continues par rapport à $\T_{\mathcal S_*}$ et $\T_1 * \T_2$, alors par minimalité de $\T_1 * \T_2$ on a nécessairement
 	\[
-	\T_1 * \T_2 \subset \T_{S_*}
+	\T_1 * \T_2 \subset \T_{\mathcal S_*}
 	\]
-	D'où $\T_{S_*} = \T_1 * \T_2$.
+	D'où $\T_{\mathcal S_*} = \T_1 * \T_2$.
 }
 
-\begin{corollaire}
+\begin{proposition}
 	Soient $(X_1, \T_1)$ et $(X_2, \T_2)$ des espaces topologiques. Alors une base de $\T_1 * \T_*$ est donné par
 	\[
 	\mathcal B_* = \{U_1 \times U_2 \mid U_1 \in \T_1, \, U_2 \in \T_2\}
 	\]
-\end{corollaire}
+\end{proposition}
 
-\prf{Comme on connait une sous-base $\bm S_*$ de la topologie produit $\T_1*\T_2$, alors pour obtenir une base il suffit de prendre toutes intersections de tous ces éléments. Ainsi soit
+\prf{Comme on connait une sous-base $\mathcal S_*$ de la topologie produit $\T_1*\T_2$, alors pour obtenir une base il suffit de prendre toutes intersections de tous ces éléments. Ainsi soit
 	\[
 	U_1 \times X_2, U_2 \times X_2, \ldots U_k \times X_2 \et X_1 \times V_1, X_1 \times V_2, \ldots , X_1 \times V_l
 	\]
@@ -756,5 +756,52 @@ ce qui montre bien que $f$ est continue.
 	\[
 	(U \times X_2) \cap (X_1 \times V) = U \times V
 	\]
-	Ainsi tout produit $U \times V$ appartient à la base $\mathcal B_*$ engendrée par la sous-base $\mathcal S_3$. Et donc le corollaire suit.
+	Ainsi tout produit $U \times V$ appartient à la base $\mathcal B_*$ engendrée par la sous-base $\mathcal S_*$. Et donc le corollaire suit.
 }
+
+\begin{corollaire}
+	Soient $\mathcal B_1$ et $\mathcal B_2$ des bases de $\T_1$ et $\T_2$ respectivement. Alors
+	\[
+	\mathcal B_\star = \{ B_1 \times B_2 \mid B_i \in \mathcal B_i, \, \forall i =1,2\}
+	\]
+	est une base de $\T_1 * \T_2$.
+\end{corollaire}
+
+\prf{On remarque d'abord que $\mathcal B_\star$ définit bien une base de topologie. Il reste donc à montrer que $\T_{\mathcal B_\star} = \T_{\mathcal B_*}$. Premièrement on a
+	\begin{align*}
+	\mathcal B_\star = \{ B_1 \times B_2 \mid B_i \in \mathcal B_i, \, \forall i =1,2\}  \subset \{U_1 \times U_2 \mid U_i \in \T_i, \, \forall i =1,2	\} = \mathcal B_*
+	\end{align*}
+	Ce qui implique que $\T_{\mathcal B_\star} \subset \T_{\mathcal B_*}$. 
+	
+	Réciproquement, soient $U \in \T_1$ et $V \in \T_2$ et considérons $(x_1, x_2) \in U \times V$. Comme $\mathcal B_1$ et $\mathcal B_2$ sont des bases
+}
+
+
+\begin{theoreme}
+	Soient $(X_1,\T_1)$ et $(X_2, \T_2)$ des espaces topologiques. Soit encore $\T$ une topologie sur $X_1 \times X_2$. Alors $\T = \T_1 * \T_2$ si et seulement si
+	\begin{enumerate}
+		\item Les projections
+		\[
+		\pr_i : (X_1 \times X_2, \T) \to (X_i, \T)
+		\]
+		sont continues $\forall i =1,2$ ; et
+		\item Pour tout espace topologique $(Y, \T')$ et pour tout $h : Y \to X_1 \times X_2$ est continue si et seulement si les applications
+		\[
+		\pr_i \circ h : (Y, \T') \to (X_i, \T_i)
+		\]
+		sont continues $\forall i =1,2$.
+	\end{enumerate}
+\end{theoreme}
+
+\prf{Supposons que $\T =\T_1 * \T_2$, alors par définition même de la topologie produit, la condition (1.) est vérifiée. Pour la (2.) supposons que $h : (Y, \T') \to (X_1 \times X_2, \T_1*\T_2)$ est continue, alors $\pr_i \circ h$ est continue car composée de fonctions continues. Réciproquement supposons que 
+	\[
+	\pr_i \circ h : (Y, \T') \to (X_i, \T_i)
+	\]
+	est continues $\forall i =1,2$. Alors pour $\forall U_i \in \T_i$
+	\[
+	(\pr_i \circ h)^{-1} (U_i) \in \T_i
+	\]
+	Or $(\pr_i \circ h)^{-1} (U_i) = h^{-1}(\pr_i^{-1}(U_i)) = h^{-1}(U_1 \times X_2)$ ou $h^{-1}(X_1 \times U_2)$. Ainsi la pré-image par de tout élément de la sous-base $\mathcal S_*$ de $\T_1 * \T_2$ est dans $\T'$, ce qui suffit.
+}
+
+\section{Produits cartésiens quelconques}
