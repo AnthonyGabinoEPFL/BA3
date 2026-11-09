@@ -223,7 +223,7 @@ et donc ça entraîne bien
 	\]	
 \end{theoreme}
 
-\prf{On utilise la \autoref{prop: Egorov} pour réduire à la convergence uniforme. Soit $\varepsilon > 0$ donné, par la \autoref{prop: Egorov} on choisit $A_\varepsilon \subset E$ tel que
+\prf{On utilise \nameref{prop: Egorov} pour réduire à la convergence uniforme. Soit $\varepsilon > 0$ donné, par la \autoref{prop: Egorov} on choisit $A_\varepsilon \subset E$ tel que
 	\[
 	{f_k}_{\mid_{A_\varepsilon}} \overset{unif}{\ktoinfty} {f}_{\mid_{A_\varepsilon}}
 	\]
@@ -341,10 +341,25 @@ et donc ça entraîne bien
 	\]
 	Finalement, par passage au suprémum le théorème suit.
 }
+\begin{lemme} \label{lem: Convergence d'une suite bornée par f}
+	Soit $0 \leqslant f_k \leqslant f$, une suite de fonction mesurables sur $\Rn$ tel que $f_k \ktoinfty f$, alors on a
+	\[
+	\lim_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx = \int_{\Rn} f(x) \, \mathrm dx
+	\]
+\end{lemme}
 
+\prf{Par le \nameref{thm: Lemme de Fatou} et la monotonie de l'intégrale de Lebesgue on a 
+	\[
+	\int_{\Rn} f(x) \, \mathrm dx \leqslant \liminf_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx \et \limsup_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx \leqslant \int_{\Rn} f(x) \, \mathrm dx
+	\]
+	Donc le lemme suit.
+}
 \begin{theoreme}[Convergence monotone] \label{thm: Convergence monotone}
 	Soit $\{f_k\}_{k \geqslant 1}$ une suite croissante de fonctions mesurables et non-négative	telle que $f_k \ktoinfty f$, alors on a
 	\[
 	\lim_{k \to \infty} \int_{\Rn} f_k(x) \, \mathrm dx = \int_{\Rn} f(x) \, \mathrm dx
 	\]
 \end{theoreme}
+
+\prf{Cas particulier du \autoref{lem: Convergence d'une suite bornée par f}.
+}
