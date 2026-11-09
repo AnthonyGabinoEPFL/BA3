@@ -36,15 +36,14 @@
 \usepackage{etoc}
 \usepackage{siunitx}
 \usepackage{centernot}
+\usepackage{titletoc}
 
 \tcbuselibrary{skins, breakable,theorems}
 
 %Définition des couleurs
-\definecolor{creme}{RGB}{248, 247, 233}
 \definecolor{DAcolor}{RGB}{0,0,102}
 \definecolor{AntiDAcolor}{RGB}{250,150,0}
 
-%\pagecolor{creme}   % fond jaune très pâle
 
 %===================================
 %	Implémentation des lectures
@@ -91,7 +90,6 @@
 
 
 
-\setcounter{secnumdepth}{3}
 \numberwithin{equation}{section}
 
 
@@ -112,7 +110,7 @@
 {\qed}
 
 
-%==================
+%=====================================
 %	Mise en page et structure
 %=====================================
 \pagestyle{fancy}
@@ -136,7 +134,6 @@
 %configuration de la numérotaion des équations
 \numberwithin{equation}{section}
 
-%\setlist[description]{font=\normalfont}
 
 %configuration des sections et sous-sections
 \titleformat{\section}[block]   % format "block"
@@ -152,6 +149,10 @@
 {\bfseries\Huge}
 [\vspace{0.5em}\hrule height 1pt]
 
+\titlespacing*{\chapter}
+{0pt}   % retrait gauche
+{-20pt} % espace AVANT le titre (c'est ce qu'on veut réduire)
+{40pt}  % espace APRÈS le titre
 
 
 \titleformat{\subsection}[block]
@@ -159,3 +160,6 @@
 {\thesubsection}
 {1em}
 {}
+
+%profodeur de la table des matières
+\setcounter{tocdepth}{1}
