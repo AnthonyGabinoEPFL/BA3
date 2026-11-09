@@ -568,14 +568,335 @@ qui n'est rien d'autre que le plan orthogonal à $\bm B$	passant par $\gamma(u_0
 	Et donc le théorème suit.
 }
 
+\subsection{Le théorème fondamental de la théorie des courbes de $\R^3$}
+
+\begin{theoreme}
+	Soient $\kappa, \tau : I \to \R$ deux fonctions continues. Si $\kappa > 0$ pour tout $s \in I$ alors il existe une courbe $\gamma : I \to \R^3$, régulière au sens de Frenet, paramétrée naturellement et telle que
+	\[
+	\kappa_\gamma(s) = \kappa(s) \et \tau_\gamma(s) = \tau(s)
+	\]
+	pour tout $s$. Cette courbe est unique à déplacement près.
+\end{theoreme}
+
+\prf{On commence par montrer l'unicité. Supposons que $\gamma_1, \gamma_2 : I \to \R^3$ soient deux courbes régulières au sens de Frenet, paramétrés naturellement et donc la courbure et la torsion valent respectivement $\kappa(s)$ et $\tau(s)$. On note $\{ \bm T_1(s), \bm N_1(s), \bm B_1(s)\}$ et $\{ \bm T_2(s), \bm N_2(s), \bm B_2(s)\}$ leurs repère de Frenet respectifs.
+	
+Sans perte de généralité, on peut supposer que l'intervalle $I$ contient $0$ et quitte à composer l'une ou l'autre courbes par un déplacement, on peut supposer que $\gamma_1(0) = \gamma_2(0) = 0$ et qu'en $s = 0$ les deux repères de Frenet coïncident avec la base canonique $\{e_1, e_2, e_3\}$ de $\R^3$. On note alors $\bm F_i(s) \in SO(3)$ la matrice orthogonal dont les colonnes sont les composantes des vecteurs $\bm T_1(s), \bm N_i(s), \bm B_i(s)$ pour $i=1,2$. Les \nameref{thm: formules de Serret-Frenet} s'écrivent alors
+\[
+\frac{\mathrm d}{\mathrm ds} \bm F_i(s) =\bm F_i(s) \Omega(s), \quad \text{où} \quad \Omega = \begin{pmatrix} 0 & - \kappa(s) & 0 \\ \kappa(s) & 0 & - \tau(s) \\ 0 & \tau(s) & 0 \end{pmatrix}
+\]
+On a alors
+\begin{align*}
+	\frac{\mathrm d}{\mathrm ds} (\bm F_1 \bm F_2^{-1}) &=  \frac{\mathrm d}{\mathrm ds} (\bm F_1 \bm F_2^\top) = \dot{\bm F_1} \bm F_2^\top + \bm F_1 \dot{\bm F}^\top_2 \\ &= (\bm F_1 \Omega) \bm F_2^\top + \bm F_1(\bm F_2 \Omega)^\top = \bm F_1 \Omega \bm F_2^\top + \bm F_1 \Omega^\top \bm F_2^\top = 0
+\end{align*}
+puisque $\Omega$ est antisymétrique. Par conséquent la matrice $\bm F_1 \bm F_2^{-1}$ est constante. Mais on a supposé que $\bm F_1(0) = \bm F_2(0) = \bm I_3$. Donc $\bm F_1(s) \bm F_2(s)^{-1} = \bm I_3$ pour tout $s$, c'est-à-dire $\bm F_1(s) = \bm F_2(s)$. En particulier $\bm T_1(s) = \bm T_2(s)$ pour tout $s$ et donc
+\[
+\gamma(s) = \int_0^s \bm T_1(u) \, \mathrm du = \int_0^s \bm T_2(u) \, \mathrm du = \gamma_2(s)
+\]
+
+Il reste à montrer l'existence. Pour cela on se donne deux fonctions $\kappa, \tau : I \to \R$ et on considère le problème de Cauchy linéaire
+\begin{equation} \label{eq: équation différentielle de Frenet}
+	\frac{\mathrm d}{\mathrm ds} \bm F_i(s) =\bm F_i(s) \Omega(s), \quad \bm F(0) = \bm I_3
+\end{equation}
+où $\Omega(s)$ est la matrice définie plus haut. Le théorème de Cauchy-Lipschitz global nous dit qu'il existe une solution globale $\bm F: I \to \mathrm M_3(\R)$ de classe $C^1$ de ce problème. Or on remarque que
+\[
+\frac{\mathrm d}{\mathrm ds} = \bm F \bm F^\top = \dot{\bm F} \bm F^\top + \bm F \dot{\bm F}^\top = \bm F \Omega \bm F^\top + \bm F \Omega^\top \bm F^\top = \bm F(\Omega + \Omega^\top) \bm F^\top = 0
+\]
+puisque $\Omega$ est antisymétrique. Or $\bm F(0) \bm F^\top(0) = \bm I_3$ et donc $\bm F(s) \bm F^\top(s) = \bm I_3$ pour tout $s \in I$, ce qui signifie que $\bm F(s) \in SO(3)$.
+
+On note respectivement $\bm T(s), \bm N(s), \bm B(s)$ les trois colonnes de $\bm F(s)$ et on définit $\gamma : I \to \R^3$ par
+\[
+\gamma(s) = \int_0^s \bm T(u) \, \mathrm du
+\]
+Alors $\gamma$ est clairement une courbe de classe $C^2$ car $s \mapsto \bm T(s)$ est de classe $C^1$. De plus cette courbe est paramétrée naturellement puisque $\dot \gamma(s) = \bm T(s)$ est un vecteur unitaire. L'équation différentielle \eqref{eq: équation différentielle de Frenet} est équivalente aux \nameref{thm: formules de Serret-Frenet}. Cela implique que $s \mapsto \bm N(s)$ est aussi de classe $C^1$ et, que la courbure et la torsion sont données par les fonction $\kappa$ et $\tau$, ce qui complète la démonstration.
+}
+
+\section{Courbe dans un plan orienté}
+\begin{definition}
+	\begin{enumerate}
+		\item Le \textbf{repère de Frenet orienté} d'une courbe régulière $\gamma : I \to \R^2$ de classe $C^2$ dans le plan orienté est le repère mobile d'origine $\gamma(u)$ qui est formé par les deux vecteurs
+		\[
+		\bm T_\gamma(u) = \frac{\dot \gamma(u)}{\norme{\dot \gamma(u)}} \et \bm N_\gamma^{\ori}(u) = \bm J \cdot \bm T_\gamma(u)
+		\]
+		où $\bm J$ désigne la matrice de rotation d'un quart de tour.
+		\item La \textbf{courbure orienté} de $\gamma$ en $u$ est définie par
+		\[
+		\kappa_\gamma^{\ori} (u)= \frac{1}{V_\gamma(u)} \langle \dot{\bm T}_\gamma(u), \bm N_\gamma^{\ori}(u) \rangle.
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{remarque}
+	Le repère $\{\bm T_\gamma(u), \bm N_\gamma^{\ori}(u)\}$ est un repère orthonormé direct. La courbure non orientée de $\gamma$ est égale à la valeur absolue de $\kappa_\gamma^{\ori}(u)$. La courbure orientée peut aussi s'écrire comme
+	\[
+	\kappa_\gamma^{\ori}(u) = \frac{\bm T_\gamma(u) \land \dot{\bm T}_\gamma(u)}{V_\gamma(u)}
+	\]
+	Finalement, si la courbe $\gamma$ est birégulière, alors
+	\[
+	\kappa_\gamma^{\ori}(u) \bm N_\gamma^{\ori}(u) = \kappa_\gamma(u) \bm N_\gamma(u) = \bm K_\gamma(u)
+	\]
+	Cette égalité vient du fait que si on change l'orientation du plan, alors $\kappa_\gamma^{\ori}(u)$ et $\bm N_\gamma^{\ori}(u)$ changent tous les deux de signes.
+\end{remarque}
+
+\begin{proposition}
+	Les \nameref{thm: formules de Serret-Frenet} pour une courbe plane de classe $C^2$ s'écrivent
+	\[
+	\frac1{V_\gamma} \dot{\bm T} = \kappa_\gamma^{\ori} \bm N_\gamma^{\ori} \et \frac{1}{V_\gamma} \dot{\bm N}_\gamma^{\ori} = - \kappa_\gamma^{\ori} \bm T_\gamma
+	\]
+\end{proposition}
+
+\prf{On a d'une part
+	\[
+	\dot{\bm T} = \langle \dot{\bm T}, \bm T \rangle \bm T + \langle \dot{\bm T}, \bm N_\gamma^{\ori} \rangle \bm N_\gamma^{\ori} = \langle \dot{\bm T}, \bm N_\gamma^{\ori} \rangle \bm N_\gamma^{\ori} = V_\gamma \kappa_\gamma^{\ori} \bm N_\gamma^{\ori}
+	\]
+	par définition de la courbure orientée. D'autre part
+	\[
+	\dot{\bm N}_\gamma^{\ori} = \langle \dot{\bm N}_\gamma^{\ori}, \bm T \rangle \bm T  + \langle \dot{\bm N}_\gamma^{\ori}, \bm N_\gamma^{\ori} \rangle \bm N_\gamma^{\ori} = \langle \dot{\bm N}_\gamma^{\ori}, \bm T \rangle \bm T = - \langle \dot{\bm T}, \bm N_\gamma^{\ori} \rangle \bm T = - V_\gamma \kappa_\gamma^{\ori} \bm T
+	\]
+}
+
+\begin{proposition}
+	La courbure orienté d'une courbe plane $\gamma : I \to \R^2$ de classe $C^2$ est donnée par
+	\[
+	\kappa_\gamma^{\ori}(u) = \frac{\dot \gamma(u) \land \ddot \gamma(u)}{V_\gamma^3(u)}
+	\]
+\end{proposition}
+
+\prf{On a
+	\[
+	\dot \gamma \land \ddot \gamma = (V_\gamma \bm T) \land (\dot V_\gamma \bm T + V_\gamma^2 \kappa_\gamma^{\ori} \bm N_\gamma^{\ori}) = V_\gamma^3 \kappa_\gamma^{\ori}
+	\]
+	car $\bm T \land \bm T = 0$ et $\bm T\land \bm N = 1$.
+}
+
+\begin{definition}
+	On dit qu'un arc de courbe $\gamma : ]a,b[ \to \R^2$ est \textbf{convexe} si la courbure orientée $\kappa_\gamma^{\ori}$ est positive sur cet arc. L'arc est \textbf{concave} si la courbure orientée est négative. Un \text{point d'inflexion} est un point séparant un arc convexe d'un arc concave, et donc en particulier la courbure est nulle en un point d'inflexion.
+	
+	On dit qu'un arc est une \textbf{spirale} si la courbure est strictement monotone sur cet arc. Un point de la courbe est un \textbf{sommet} si c'est un maximum local ou minimum local de la courbure.
+\end{definition}
+
+\subsection{La fonction angulaire}
+
+\begin{definition}
+	Soit $\gamma : I \to \R^2$ une courbe régulière de classe $C^1$. La \textbf{fonction angulaire} de la courbe $\gamma$ de point initial $p = \gamma(u_0)$ est la fonction	$\varphi : I \to \R$ telle que
+	\begin{enumerate}
+		\item $\varphi(u_0)$ est l'angle orienté entre $\dot \gamma(u)$ et le vecteur $\bm e_1$,
+		\item $\varphi$ est continue,
+		\item L'angle orienté entre $\dot \gamma(u)$ et $\bm e_1$ est égale à $\varphi(u) \mod{2\pi}$ pour tout $u \in I$.
+	\end{enumerate}
+\end{definition}
+
+\begin{lemme} \label{lem: repère de Frenet exprimé via la fontion angulaire}
+	Le repère de Frenet orienté orienté d'une courbe régulière $\gamma : I \to \R^2$ de classe $C^2$ peut s'écrire
+	\[
+	\bm T_\gamma(u) = (\cos(\varphi(u)), \sin(\varphi(u))) \et \bm N_\gamma(u)^{\ori} = (- \sin(\varphi(u)), \cos(\varphi(u)))
+	\]
+	où $\varphi : [a,b] \to \R$ est la fonction angulaire de $\gamma$.
+\end{lemme}
+
+\prf{La formule pour $\bm T$ est évidente, puisque $\varphi \mod 2 \pi$ mesure l'angle du vecteur $\bm T$ avec $\bm e_1$. La formule pour $\bm N$ se déduit alors de la définition $\bm N = \bm J \cdot \bm T$.
+}
+
+\begin{theoreme}
+	La courbure orientée d'une courbe $\gamma : I \to \R^2$ de classe $C^2$ vérifie
+	\[
+	\kappa_\gamma^{\ori}(u) = \frac{1}{V_\gamma (u)} \dot \varphi (u)
+	\]
+\end{theoreme}
+
+\prf{Par le \autoref{lem: repère de Frenet exprimé via la fontion angulaire}, on a
+	\[
+	\dot{\bm T} = (- \sin(\varphi(u)), \cos(\varphi(u))) \dot \varphi(u) = \bm N_\gamma^{\ori} \dot \varphi(u)
+	\]
+	Et donc
+	\[
+	\kappa_\gamma^{\ori}(u) = \frac{1}{V_\gamma(u)} \langle \dot{\bm T}_\gamma(u), \bm N_\gamma^{\ori}(u) \rangle = \frac{1}{V_\gamma(u)} \langle \dot \varphi(u) \bm N_\gamma^{\ori}, \bm N_\gamma^{\ori} \rangle = \frac{1}{V_\gamma} \dot \varphi(u)
+	\]
+}
+
+\begin{remarque}
+	Lorsque la courbe est paramétrée naturellement, on a $\kappa_\gamma^{\ori}(s) = \dot \varphi(s)$. On écrit souvent cette relation sous la forme différentielle
+	\[
+	\mathrm d \varphi = \kappa_\gamma^{\ori} \mathrm ds
+	\]
+\end{remarque}
+
+\begin{theoreme}
+	Toute fonction continue $\kappa : I \to \R$ est la courbure orientée d'une courbe plane de classe $C^2$ paramétrée naturellement. Cette courbe est unique à déplacement près.
+\end{theoreme}
+
+\prf{On commence par montrer l'unicité. Supposons que $\gamma : I \to \R^2$ soit une courbe de classe $C^2$ paramétrée naturellement donc la courbure orientée est $\kappa(s)$. Le vecteur tangent est donné par
+	\[
+	\bm T_\gamma(s) = \dot\gamma(s) = (\dot x(s), \dot y(s)) = (\cos(\varphi(s)),\sin(\varphi(s)))
+	\]
+	où $\varphi : I \to \R$ est la fonction angulaire. Les trois fonctions $(x(s), y(s), \varphi(s))$ forment alors une solution du système d'équations différentielles
+	\[
+	\dot x = \cos(\varphi), \quad \dot y = \sin(\varphi) \et \dot \varphi = \kappa(s)
+	\]
+	La courbe $\gamma$ est donc déterminée à partir de la fonction $\kappa(s)$ en résolvant ces équations. Pour résoudre ce système, on calcule $\varphi$ par intégration : 
+	\[
+	\varphi(s) = \varphi_0 + \int_0^s \kappa(\sigma) \, \mathrm d\sigma
+	\]
+	Et donc
+	\[
+	x(s) = x_0 + \int_0^s\cos(\varphi(\sigma)) \, \mathrm d \sigma \et y(s) = y_0 + \int_0^s \sin(\varphi(\sigma)) \, \mathrm d\sigma
+	\]
+	En changeant les valeurs de $x_0$ et $y_0$, on modifie la courbe par translation, si l'on change $\varphi_0$, alors la courbe $\gamma$ subit une rotation. L'argument montre à la fois l'existence et l'unicité de la courbe $\gamma$ à un déplacement près.
+}
+
+\begin{remarque}
+	La relation $\kappa_\gamma^{\ori} = \kappa(s)$ entre l'abscisse curviligne et la courbure orientée s'appelle l'\textbf{équation intrinsèque} de la courbe. Elle contient la même information que le diagramme de courbure.
+\end{remarque}
+
+\section{Le théorème des quatres sommets}
+
+\begin{definition}
+	On dit que $\gamma : [a,b] \to \R^n$ est une \textbf{courbe fermée de classe} $C^m$ si $\gamma(a) = \gamma(b)$ et
+	\[
+	\gamma^{(k)} (a) =  \gamma^{(k)}(b)
+	\]
+	pour tout $ 1 \leqslant k \leqslant m$.
+\end{definition}
+
+\begin{lemme}
+	Soit $R>0$ et $\gamma_R : \R \to \R^2$ une paramétrisation, parcourue dans le
+	sens trigonométrique, du cercle de rayon $R$. Soit $\sigma : I \to \R^2$ une
+	courbe régulière de classe $C^2$ et $t_0 \in I$ tels que
+	\[
+	\sigma(t_0) = p = \gamma_R(t_0) \et \bm T_\sigma(p) = \bm T_{\gamma_R}(p).
+	\]
+	On suppose de plus que $\sigma$ est contenue, au voisinage de $t_0$, dans le
+	disque fermé $D_R$ de bord $\gamma_R$. Alors
+	\[
+	\kappa_\sigma(p) \;\geqslant\; \frac{1}{R} \;=\; \kappa_{\gamma_R}(p),
+	\]
+	où $\kappa$ désigne la courbure signée.
+\end{lemme}
+
+\prf{Pour le graphe d'une fonction $f$ de classe $C^2$
+	parcouru dans le sens des $x$ croissants, elle vaut
+	\[
+	\kappa(x)=\frac{f''(x)}{\bigl(1+f'(x)^2\bigr)^{3/2}}.
+	\]
+	
+	La courbure signée est invariante par les isométries directes
+	(translations et rotations) du plan, ainsi que par reparamétrisation
+	préservant l'orientation. On peut donc supposer que $p=(0,0)$ et que
+	$\bm T_\sigma(p)=\bm T_{\gamma_R}(p)=(1,0)$. Comme $\gamma_R$ est parcouru dans
+	le sens trigonométrique, le centre du cercle se trouve du côté de
+	$\bm N=(0,1)$ : c'est le point $(0,R)$. Ainsi
+	\[
+	D_R=\{(x,y)\in\R^2 : x^2+(y-R)^2\leqslant R^2\}.
+	\]
+	
+
+	Pour $|x|<R$ et $y$ proche de $0$, on a
+	\[
+	(x,y)\in D_R \iff y \geqslant f_1(x), \qquad
+	f_1(x) := R-\sqrt{R^2-x^2}.
+	\]
+	La fonction $f_1$ est de classe $C^\infty$ sur $]-R,R[$ et vérifie
+	\[
+	f_1(0)=0,\qquad f_1'(0)=0,\qquad f_1''(0)=\frac1R,
+	\]
+	donc $\kappa_{\gamma_R}(p)=f_1''(0)=\dfrac1R$.
+	
+	Écrivons $\sigma(t)=(x(t),y(t))$. Comme $\bm T_\sigma(p)=(1,0)$, on a
+	$x'(t_0)=\|\sigma'(t_0)\|>0$. Par le théorème d'inversion locale, $x$ est un
+	$C^2$-difféomorphisme d'un voisinage de $t_0$ sur un intervalle ouvert
+	$J\ni 0$, et $\sigma$ coïncide près de $p$ avec le graphe de
+	$f_2 := y\circ x^{-1}\in C^2(J)$. On a
+	\[
+	f_2(0)=0,\qquad f_2'(0)=\frac{y'(t_0)}{x'(t_0)}=0,
+	\]
+	et donc
+	\[
+	\kappa_\sigma(p)=f_2''(0).
+	\]
+	Comme $\sigma\subset D_R$ près de $p$, l'étape 2 donne $f_2(x)\geqslant f_1(x)$
+	pour $x$ proche de $0$. Posons $h:=f_2-f_1$, de classe $C^2$ au voisinage de
+	$0$. Alors
+	\[
+	h\geqslant 0,\qquad h(0)=0,\qquad h'(0)=0.
+	\]
+	Si l'on avait $h''(0)<0$, la formule de Taylor--Young
+	$h(x)=\tfrac12 h''(0)x^2+o(x^2)$ donnerait $h(x)<0$ pour $x\neq 0$ petit, ce
+	qui est absurde. Donc $h''(0)\geqslant 0$, c'est-à-dire
+	\[
+	\kappa_\sigma(p)=f_2''(0)\;\geqslant\; f_1''(0)=\frac1R=\kappa_{\gamma_R}(p).
+	\]
+}
 
 
+\begin{lemme}
+	Soit $R>0$ et $\gamma_R$ une paramétrisation, parcourue dans le sens
+	trigonométrique, du cercle de rayon $R$. Soit $\sigma : I \to \R^2$ une courbe
+	régulière de classe $C^2$, parcourue dans le sens trigonométrique, et soient
+	$t_1<t_2$ dans $I$ tels que
+	\[
+	\sigma(t_1)=p_1=\gamma_R(t_1), \quad \sigma(t_2)=p_2=\gamma_R(t_2),
+	\qquad
+	\bm T_\sigma(p_i)=\bm T_{\gamma_R}(p_i)\quad (i=1,2).
+	\]
+	Soit $\theta\in\,]0,\pi]$ l'angle de l'arc de $\gamma_R$ allant de $p_1$ à
+	$p_2$ dans le sens trigonométrique. On suppose que :
+	\begin{itemize}
+		\item l'angle total dont tourne $\bm T_\sigma$ entre $t_1$ et $t_2$ vaut
+		exactement $\theta$ ;
+		\item $\sigma_{|[t_1,t_2]}$ n'est pas entièrement contenue dans $\gamma_R$.
+	\end{itemize}
+	Alors il existe $p_3\in\sigma(]t_1,t_2[)$ tel que
+	\[
+	\kappa_\sigma(p_3)<\frac1R,
+	\]
+	où $\kappa$ désigne la courbure orientée.
+\end{lemme}
 
-
-
-
-
-
+\prf{On raisonne par l'absurde : supposons que $\kappa_\sigma\geqslant \frac1R$ en
+	tout point de $\sigma([t_1,t_2])$. Notons $e(u)=(\cos u,\sin u)$.
+	
+	Quitte à reparamétrer par la longueur d'arc, on écrit
+	$\bm T_\sigma = e(\varphi)$ avec $\varphi$ de classe $C^1$ (relèvement de
+	l'angle, possible car $\bm T_\sigma$ est $C^1$), et
+	$\varphi'=\kappa_\sigma\geqslant \frac1R>0$. Ainsi $\varphi$ est strictement
+	croissante. Notons $\varphi_0=\varphi(t_1)$ ; par hypothèse
+	$\varphi(t_2)=\varphi_0+\theta$. Comme $\varphi$ est un $C^1$-difféomorphisme
+	de $[t_1,t_2]$ sur $[\varphi_0,\varphi_0+\theta]$, on peut reparamétrer
+	$\sigma$ par $u=\varphi-\varphi_0\in[0,\theta]$. Le rayon de courbure
+	$\rho(u)=1/\kappa_\sigma$ est alors continu et vérifie $0<\rho\leqslant R$, et
+	puisque $\frac{ds}{du}=\rho(u)$,
+	\[
+	\sigma(u)=p_1+\int_0^u \rho(v)\,e(\varphi_0+v)\,dv .
+	\]
+	
+	Comme $\bm T_{\gamma_R}(p_1)=\bm T_\sigma(p_1)=e(\varphi_0)$ et que $\gamma_R$
+	est parcouru dans le sens trigonométrique, l'arc de cercle de $p_1$ à $p_2$ est
+	paramétré par
+	\[
+	\gamma(u)=p_1+\int_0^u R\,e(\varphi_0+v)\,dv,\qquad u\in[0,\theta],
+	\]
+	et $\gamma(\theta)=p_2$.
+	
+	Comme $\sigma(\theta)=p_2=\gamma(\theta)$, on obtient
+	\[
+	\int_0^\theta \bigl(R-\rho(u)\bigr)\,e(\varphi_0+u)\,du=0.
+	\]
+	On projette sur le vecteur unitaire $e\!\left(\varphi_0+\frac\theta2\right)$ :
+	\[
+	\int_0^\theta \bigl(R-\rho(u)\bigr)\cos\!\Bigl(u-\frac\theta2\Bigr)\,du=0.
+	\]
+	
+	Pour $u\in\,]0,\theta[$, on a $|u-\frac\theta2|<\frac\theta2\leqslant\frac\pi2$,
+	donc $\cos(u-\frac\theta2)>0$. La fonction
+	$u\mapsto (R-\rho(u))\cos(u-\frac\theta2)$ est continue et positive ou nulle,
+	d'intégrale nulle : elle est donc identiquement nulle. Ainsi $\rho\equiv R$ sur
+	$]0,\theta[$, puis sur $[0,\theta]$ par continuité. Alors $\sigma(u)=\gamma(u)$
+	pour tout $u$, c'est-à-dire que $\sigma_{|[t_1,t_2]}$ est contenue dans
+	$\gamma_R$, ce qui contredit l'hypothèse. Il existe donc un point $p_3$ de
+	$\sigma([t_1,t_2])$ où $\kappa_\sigma(p_3)<\frac1R$. Ce point n'est pas une
+	extrémité, car $\kappa_\sigma(p_i)\geqslant\frac1R$ en $p_1,p_2$ d'après le
+	lemme 2.50, et la conclusion de ce lemme joue le rôle de $p_3$ dans
+	$\sigma(]t_1,t_2[)$ par continuité de $\kappa_\sigma$.
+}
 \lecture{5 novembre}
 \begin{theoreme}[Des 4 sommets] \label{thm: théorème des 4 sommets}
 	Toutes courbes fermées simples de classe $C^2$ dans le plan orienté possède au moins quatre sommets.
@@ -600,7 +921,8 @@ qui n'est rien d'autre que le plan orthogonal à $\bm B$	passant par $\gamma(u_0
 		\]
 		Par le lemme 1., la courbe orienté $\kappa_\gamma$ est plus grande que $\frac1R$ entre $p_3$ et $p_2$. Par le lemme 2. il existe $q_1$ sur la courbe entre $p_1$ et $p_2$ et $q_2$ sur la coure entre $p_2$ et $p_3$ tels que $\kappa_\gamma < \frac1R¨$ entre $q_1$ et $q_2$. Et donc par le même argument que dans le point 1., on a bien $4$ sommet.
 	\end{enumerate}
-	
 }
+
+
 
 

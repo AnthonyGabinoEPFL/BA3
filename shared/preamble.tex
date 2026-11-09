@@ -37,6 +37,8 @@
 \usepackage{siunitx}
 \usepackage{centernot}
 \usepackage{titletoc}
+\usepackage{etoolbox,needspace}
+\AtBeginEnvironment{lemme}{\Needspace{8\baselineskip}}
 
 \tcbuselibrary{skins, breakable,theorems}
 
@@ -102,6 +104,8 @@
 }
 
 
+
+
 \makesavenoteenv{proposition}
 
 %redéfinition de l'environnement "proof"
@@ -130,6 +134,7 @@
 
 %configuration de l'indentation des listes
 \setlist{leftmargin=1.5\leftmargini}
+\setlist[enumerate,1]{before=\leavevmode}
 
 %configuration de la numérotaion des équations
 \numberwithin{equation}{section}
