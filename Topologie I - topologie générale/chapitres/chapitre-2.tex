@@ -654,6 +654,16 @@ ce qui montre bien que $f$ est continue.
 	\]
 \end{definition}
 
+\begin{proposition}
+	Soient 
+	\[
+	f_1 : Y \to X_1 \et f_2 : Y \to X_2
+	\]
+	des applications. Alors il existe une unique application continue $f = (f_1, f_2) : Y \to X_1 \times X_2$ telle que
+	\[
+	\pr_1 \circ (f_1, f_2) = f_1 \et \pr_2 \circ (f_1, f_2) = f_2
+	\]
+\end{proposition}
 \begin{figure}[H]
 	\centering
 	\begin{tikzcd}
@@ -667,3 +677,84 @@ ce qui montre bien que $f$ est continue.
 		\arrow["{\mathrm{pr}_2}"', from=2-3, to=3-4]
 	\end{tikzcd}
 \end{figure}
+
+\begin{proposition}
+	Soient $A_1, B_1 \subset X_1$ et $A_2, B_2 \subset X_2$. Alors on a 
+	\begin{enumerate}
+		\item $(A_1 \times A_2) \cap (B_1 \times B_2) = (A_1 \cap B_1) \times (A_2 \cap B_2)$;
+		
+		\item $(A_1 \times A_2) \cup (B_1 \times B_2) \subset (A_1 \cap B_1) \times (A_2 \cap B_2)$;
+		
+		\item Si $A_1 \subset X_1$ et $A_2 \subset X_2$ alors
+		\[
+		\pr_1^{-1} (A_1) = A_1 \times X_2 \et \pr_2^{-1} (A_2) = X_1 \times A_2.
+		\]
+	\end{enumerate}
+\end{proposition}
+
+\section{Produit finis d'espaces topologiques}
+
+\begin{definition}
+	Soient $(X_1, \T_1)$ et $(X_2, \T_2)$ des espaces topologiques. La \textbf{topologie produit} sur $X_1 \times X_2$ est la plus petite topologie $\T$ telle que les projections
+	\[
+	\pr_i : (X_1 \times X_2, \T) \to (X_i, \T_i)
+	\]
+	soient continues, $\forall i = 1,2$. Et on la note $\T_1 * \T_2$.
+\end{definition}
+
+
+\begin{lemme}
+	Soient $(X_1, \T_1)$ et $(X_2, \T_2)$ des espaces topologiques. Alors $\T_1 * \T_2$ est la topologie engendré par la sous-base
+	\[
+	\mathcal S_* = \{ U_1 \times X_2 \mid U_1 \in \T_1\} \cup \{X_1 \times U_2 \mid U_2 \in \T_2\}
+	\]
+\end{lemme}
+
+\prf{Puisque $X_i \in \T_i$ pour $i=1,2$, alors $X_1 \times X_2 \in \mathcal S_*$, ainsi on a bien une sous-base.
+	
+	De plus on sait que les projections 
+	\[
+	\pr_i : (X_1 \times X_2, \T) \to (X_i, \T_i)
+	\]
+	sont continues si et seulement si
+	\[
+	\forall U_i \in \T_i, \quad \pr_i^{-1}(U_i) \in \T
+	\]
+	Or
+	\[
+	\pr_1^{-1} (U_1) = U_1 \times X_2 \et \pr_2^{-1}(U_2) = X_1 \times U_2
+	\]
+	Donc $\mathcal S_* \subset \T$. En particulier $\mathcal S_* \subset \T_1 * \T_2$, d'où $\T_{S_*} \subset \T_1 * \T_2$. De plus comme les $\pr_i$ sont continues par rapport à $\T_{S_*}$ et $\T_1 * \T_2$, alors par minimalité de $\T_1 * \T_2$ on a nécessairement
+	\[
+	\T_1 * \T_2 \subset \T_{S_*}
+	\]
+	D'où $\T_{S_*} = \T_1 * \T_2$.
+}
+
+\begin{corollaire}
+	Soient $(X_1, \T_1)$ et $(X_2, \T_2)$ des espaces topologiques. Alors une base de $\T_1 * \T_*$ est donné par
+	\[
+	\mathcal B_* = \{U_1 \times U_2 \mid U_1 \in \T_1, \, U_2 \in \T_2\}
+	\]
+\end{corollaire}
+
+\prf{Comme on connait une sous-base $\bm S_*$ de la topologie produit $\T_1*\T_2$, alors pour obtenir une base il suffit de prendre toutes intersections de tous ces éléments. Ainsi soit
+	\[
+	U_1 \times X_2, U_2 \times X_2, \ldots U_k \times X_2 \et X_1 \times V_1, X_1 \times V_2, \ldots , X_1 \times V_l
+	\]
+	où $U_i \in \T_1$ et $V_j \in \T_2$. Comme
+	\begin{align*}
+		\bigcap_{i=1}^{k} (U_i \times X_2) \cap \bigcap_{j=1}^{\ell} (X_1 \times V_j)
+		&= \left( \left( \bigcap_{i=1}^{k} U_i \right) \times X_2 \right) \cap \left( X_1 \times \left( \bigcap_{j=1}^{\ell} V_j \right) \right) \\
+		&= \left( \bigcap_{i=1}^{k} U_i \right) \times \left( \bigcap_{j=1}^{\ell} V_j \right)
+	\end{align*}
+	on en déduit que tout élément de la base $\mathcal B_*$ engendrée par la sous-base $\mathcal S_*$ est de la forme
+	\[
+	U \times V \quad \text{où} \quad U \in \T_1, \, V \in \T_2
+	\]
+	Par ailleurs pour $U \in \T_1$ et $V \in \T_2$, on a
+	\[
+	(U \times X_2) \cap (X_1 \times V) = U \times V
+	\]
+	Ainsi tout produit $U \times V$ appartient à la base $\mathcal B_*$ engendrée par la sous-base $\mathcal S_3$. Et donc le corollaire suit.
+}
