@@ -214,3 +214,73 @@ et donc ça entraîne bien
 \int_{\Rn} f(x) \, \mathrm dx = 0
 \]
 }
+
+\lecture{9 novembre}
+\begin{theoreme}[Convergence bornée]
+	Soit $\{f_k\}_{k \geqslant 1}$ une suite de fonctions mesurables et uniformément bornées, et tous de support dans $E \subset \Rn$, où $m(E) < \infty$. Supposons qe $f_k \ktoinfty f$ p.p où $f$ est bornée et de support de mesure finie. Alors $f$ est mesurable et 
+	\[
+	\lim_{k \to \infty} \int_{\Rn} f_k  \, \mathrm dx = \int_{\Rn} f \, \mathrm dx
+	\]	
+\end{theoreme}
+
+\prf{On utilise la \autoref{prop: Egorov} pour réduire à la convergence uniforme. Soit $\varepsilon > 0$ donné, par la \autoref{prop: Egorov} on choisit $A_\varepsilon \subset E$ tel que
+	\[
+	{f_k}_{\mid_{A_\varepsilon}} \overset{unif}{\ktoinfty} {f}_{\mid_{A_\varepsilon}}
+	\]
+	et $m(E \backslash A_\varepsilon) < \varepsilon$. Soit $N_\varepsilon \in \N$ tel que
+	\[
+	\forall k \geqslant N_\varepsilon, \quad \left|{f_k}_{\mid_{A_\varepsilon}} - {f}_{\mid_{A_\varepsilon}}\right| < \varepsilon
+	\]
+	On conclut alors que
+	\[
+	\int_{\Rn} \left| f_k -f \right| \, \mathrm dx \leqslant 	\int_{A_\varepsilon} \left| f_k -f \right| \, \mathrm dx + \int_{E \backslash A_{\varepsilon}} \left| f_k - f\right| \, \mathrm dx \leqslant \varepsilon(m(E) + M + \tilde M)
+	\]
+	Et donc par l'arbitrarité de $\varepsilon > 0$, la conclusion suit.
+}
+
+\section{Intégrale de Lebesgue pour les fonctions générales}
+
+\subsection{Intégrale de Lebesgue pour des fonctions non-négatives}
+\begin{definition}
+	Soit $f : \Rn \to [0, \infty]$ une fonction mesurable et non-négative. On pose
+	\[
+	\int_{\Rn} f(x)  \, \mathrm dx = \sup_{0 \leqslant g \leqslant f}\int_{\Rn} g(x) \, \mathrm dx \in \overline \R_+
+	\]
+	où le suprémum est sur toutes les fonctions $0 \leqslant g \leqslant f$ bornée et mesurables, et de support avec mesure finie. Si on dira que $f$ est \textbf{intégrale au sens de Lebesgue} pour vu que
+	\[
+	\int_{\Rn} f \, \mathrm dx < \infty
+	\]
+\end{definition}
+
+\begin{proposition}
+	On a les propriétés suivantes ; 
+	\begin{enumerate}
+		\item Si $a, b \geqslant 0$ et $f,g : \Rn \to [0, \infty]$ sont mesurables. Alors
+		\[
+		\int_{\Rn} a f + b g \, \mathrm dx = a \int_{\Rn} f \, \mathrm dx + b \int_{\Rn} g \, \mathrm dx
+		\]
+		\item  Si $E, F \subset \Rn$ sont mesurables, disjoints, et que l'on pose $\int_E f \, \mathrm dx = \int_{\Rn} \chi_X f \, \mathrm dx$, alors on a
+		\[
+		\int_E f \, \mathrm dx + \int_F f \, \mathrm dx = \int_{E \cup F} f \, \mathrm dx.
+		\]
+		\item Si $0 \leqslant f_1 \leqslant f_2$ sont mesurables, alors
+		\[
+		\int_{\Rn} f_1 \, \mathrm dx \leqslant \int_{\Rn} f_2 \, \mathrm dx
+		\]
+		\item Si $f= 0$ p.p, alors
+		\[
+		\int_{\Rn} f \, \mathrm dx = 0
+		\]
+		\item Si $f \geqslant 0$ est intégrale, on a que $f(x) \in [0,\infty[$ p.p
+	\end{enumerate}
+\end{proposition}
+
+\prf{Dans l'ordre on a
+	\begin{enumerate}
+		\item Pour commencer, soit $a \geqslant 0$, alors
+		\begin{align*}
+			\int_{\Rn} a f(x) \, \mathrm dx &= \sup_{0 \leqslant g \leqslant af}\int_{\Rn} g(x) \, \mathrm dx = \sup_{0 \leqslant ag \leqslant af}\int_{\Rn} ag(x) \, \mathrm dx \\ &= a \sup_{0 \leqslant g \leqslant f}\int_{\Rn} g(x) \, \mathrm dx = a \int_{\Rn} f(x) \, \mathrm dx
+		\end{align*}
+		Il reste donc à montrer l'additivité ; soit $f,g : \Rn \to [0, \infty]$ mesurables. 
+	\end{enumerate}
+}
