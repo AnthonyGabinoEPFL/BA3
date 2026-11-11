@@ -1,0 +1,143 @@
+\chapter{Groupe de Sylow}
+\lecture{11 novembre}
+
+\begin{definition}
+	Un groupe fini est un \textbf{$p$-groupe} si tous ces éléments sont d'ordre $p^n$ pour un certain $n \in \N$.
+\end{definition}
+
+\begin{theoreme}
+	Un groupe $G$ est un $p$-groupe si et seulement si 
+	\[
+	|G| = p^N
+	\]
+\end{theoreme}
+
+\prf{Supposons que $|G| = p^N$, alors on par le théorème de Lagrange, on sait que l'ordre de $g \in G$ divise $|G|$, et donc comme $p$ est premier, elle nécessairement $\ord g = p^n$.
+
+Réciproquement
+
+}
+
+\begin{theoreme}[Premier théorème de Sylow]
+	Soit $G$ un groupe fini	d'ordre
+	\[
+	|G| = p^n r
+	\]
+	pour un certain nombre premier $p$ et, $p$ et $r$ premier entre eux. Alors $G$ possède un sous-groupe d'ordre $p^n$. On appelle ce sous-groupe le \textbf{$p$-sous-groupe de Sylow}.
+\end{theoreme}
+
+\prf{On suppose que $n > 0$, on procède par récurrence sur $|G|$. On a alors deux possibilité
+	\begin{enumerate}
+		\item Il existe $H < G$ tel que $p \nmid [G : H]$
+		
+		\item Pour tout $H < G, \quad p \mid [G:H]$
+	\end{enumerate}
+	Si on se place dans le premier cas, alors $|H| = p^n r'$ où $r' \mid r$, et donc par l'hypothèse de récurrence, $H$ a un sous-groupe d'ordre $p^n$, qui est donc le sous-groupe de $G$ que l'on cherche.
+	
+	Dans le deuxième cas, on sait que pour tout action $G \curvearrowright X$, on a
+	\[
+	|G| = \sum_{G \cdot x} \frac{|G|}{| G \cdot x|}
+	\]
+	et en particulier, on prend l'action de conjugaison et donc
+	\[
+	|G| = \sum_{G \cdot g} [G : C_G(g)]
+	\]
+	Or le membre de gauche est un multiple de $p$, donc il en va de même pour tout les termes de droite pour lequel $C_G(g) \neq G$. Par conséquent on en conclut que le nombre de classe de conjugaison pour les $C_g(g) = G$ est un multiple de $p$. Or on sait que
+	\[
+	C_G(g) = G \iff g \in Z(G)
+	\]
+	et donc $p \mid |Z(g)$. Or $Z(G)$ est un groupe abélien, et donc il existe $g \in Z(G)$ d'ordre $p$. Par conséquent, le sous-groupe $H :=\langle g \rangle$ est d'ordre $p$ est est normal car $g \in Z(G)$. De plus le groupe quotient
+	\[
+	\bar G := G/H
+	\]
+	est d'ordre $p^{n-1} r$. Par l'hypothèse de récurrence, $\bar G$ possède un sous-groupe $\bar K$ d'ordre $p^{n-1}$. Et donc par le théorème de correspondance, ce sous-groupe $\bar K$ correspond à un sous-groue $K \leqslant G$ d'ordre $p^n$, ce qui conclut.
+}
+
+
+\begin{theoreme}[Deuxième théorème de Sylow] \label{thm: Deuxième théorème de Sylow}
+	Tous les $p$-sous-groupe de Sylow d'un groupe $G$ sont conjugués les uns aux autres
+\end{theoreme}
+
+\prf{On considère deux $p$-sous-groupes de Sylow $P$ et $P'$, et considérons l'action à gauche de $P$ sur $G/P'$
+\[
+P \curvearrowright G/P'
+\]
+alors par le théorème de l'orbite-stabilisateur nons donne que
+\[
+r = |G/P'| = \sum_{P \cdot hP'} \frac{|P|}{|\stab_P(x)|}
+\]
+Comme l'ordre de $P$ est une puissance de $p$, alors toutes les orbites dans le membre de droite pour lesquelle $\stab_P(hP') \neq P$ seront un multiple de $p$. Mais comme $r$ est premier avec $p$, alors il y a aura nécessairement une orbite dont le stabilisateur est tout entier $P$. Ce qui signifie
+\[
+\exists hP', \quad \stab_P(hP') = P \iff \forall g \in P, \quad g \cdot hP' = hP' \iff \forall g \in P, \quad h^{-1} g h \in P'
+\]
+Et donc $P \subset h P h^{-1}$, mais comme $|P| = |P'|$ alors $P = h P' h^{-1}$, comme requis.
+}
+\begin{corollaire}
+	On en déduit que si $P \trianglelefteq G$ est un $p$-sous-groupe de Sylow normal, alors il est nécessairement unique.
+\end{corollaire}
+
+\begin{theoreme}[Troisième de théorème de Sylow]
+	Le nombre $n_p$ de $p$-sous-groupe de Sylow d'un groupe $G$ possède les propriétés suivantes
+	\begin{enumerate}
+		\item $n_p = [G : N_G(P)]$, où $P$ est un $p$-sous-groupe de Sylow fixé,
+		
+		\item $n_p \mid r$,
+		
+		\item $n_p = 1 \mod p$.
+	\end{enumerate}
+\end{theoreme}
+
+\prf{Par le \nameref{thm: Deuxième théorème de Sylow}, la conjugaison induit une action
+	\[
+	G \curvearrowright \{ P_1, \ldots, P_{n_p}\}
+	\]
+	On remarque alors que cette action est transitive. Et donc le \nameref{thm: théorème de l'orbite-stabilisateur} nous donne
+	\[
+	n_p = \frac{|G|}{\stab_G(P)} = [G : \stab_G(p)]
+	\]
+	or 
+	\[
+	\stab_G(P) = \{ g \in G \mid g \cdot P = P\} = \{ g \in G \mid gPg^{-1} P\} = N_G(P)
+	\]
+	et donc $n_p = [G, N_G(P)]$. Puisque $P \leqslant N_G(P) \leqslant G$, alors
+	\[
+	r = \frac{|G|}{|P|} = \underbrace{\frac{|G|}{|N_G(P)}}_{n_p} \cdot \frac{|N_G(P)|}{|P|}
+	\]
+	ainsi $n_p \mid r$.
+	
+	Finalement, on fixe un $p$-sous-groupe de Sylow $P$ et on considère la restriction de conjugaison
+	\[
+	P \curvearrowright \{P_1, \ldots, P_{n_p}\}
+	\]
+	cependant cette action n'est plus nécessairement transitive. Par le \nameref{thm: théorème de l'orbite-stabilisateur} on peut écrire
+	\[
+	n_p = \sum_{P \cdot P'} [P : \stab_P(P')] = 1 + \ldots + 1 + \text{multiple de $p$}
+	\]	
+	Il reste donc à caractériser les $P'$ tel que $\stab_P(P') = P$, ce qui veut dire 
+	\[
+	\forall g \in P, \quad gP'g{-1} = P' \iff \forall g \in P, \quad g \in N_G(P')
+	\]
+	et donc $P \leqslant N_G(P')$, or $N_G(P')$ est d'ordre $p^n r'$, alors $P$ est un sous-groupe de Sylow de $N_G(P')$ mais il en va de même pour $P'$, or $P'$ est normal dans $N_G(P')$ et donc par le \nameref{thm: Deuxième théorème de Sylow} on conclut que $P = P'$. On a donc bien
+	\[
+	n_p = 1 + \text{mutiple de $p$}
+	\]
+}
+
+\begin{lemme}
+	Soit $H \trianglelefteq G$ un sous-groupe normal d'un groupe fini $G$. Alors pour tout $p$-sous-groupe de Sylow $P$ de $G$ alors
+	\[
+	P \cap H
+	\]
+	est un $p$-sous-groupe de Sylow de $H$.
+\end{lemme}
+
+\prf{Le deuxième théorème d'isomorphisme implique que
+	\[
+	\frac{|H|}{|H \cap P|} = \frac{|HP|}{|P|}
+	\]
+	et donc
+	\[
+	[HP : P] = [H : H \cap P]
+	\]
+	Comme $HP$ est un sous-groupe de $G$, le nombre de gauche divise $[G:P]$, qui est premier avec $p$ par définition de $P$. Par conséquent, le nombre de droite sera également premier avec $p$. Ce qui garanti que l'ordre de $H \cap P$ est la puissance maximal de $p$ qui divise $|H|$.
+}
