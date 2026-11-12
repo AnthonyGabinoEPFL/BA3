@@ -1,40 +1,40 @@
 \chapter{Calcul différentiel et sous-variétés différentiables de $\Rn$}
 
-\section{Rappels de calcul différentiel}
+\section{Sous-variétés de $\Rn$}
 
-\subsection{Théorème d'inversion local}
-
-\begin{definition}
-	Soit $U$ et $V$ deux ouverts non-vide de $\Rn$. Un \textbf{difféomorphisme} de classe $C^k$ de $U$ dans $V$ est une application bijective
+\begin{definition}[Sous-variété] \label{def: Sous-variété}
+	Un sous-ensemble $M \subset \Rn$ est une \textbf{sous-variété} de dimension $m \leqslant n$ et de classe $C^k$ si pour tout $p \in M$, il existe un ouvert $U \in \Rn$ qui contient $p$ et un difféomorphisme $\phi: U \to V$ de classe $C^k$ tel que
 	\[
-	f : U \to V
+	\phi(U \cap M) = V \cap E
 	\]
-	telle que $f$ et $f^{-1}$ sont de classe $C^k$. Si $k=0$, on dira plutôt que $f$ est un homéomorphisme. Soit $p \in U$, on dira que $f$ est un \textbf{difféomorphisme local} de classe $C^k$ s'il existe un ouvert $U' \subset U$ contenant $p$ tel que $V' = f(U')$ est ouvert et
-	\[
-	f_{\mid_{U'}} : U' \to V'
-	\]
-	est un difféomorphisme de classe $C^k$ de $U'$ dans $V'$. On dit que $f$ est un difféomorphisme locale si c'est un difféomorphisme local de classe $C^k$ pour tout point de $U$. 
+	où $E \subset \Rn$ est un sous-espace affine de dimension $m$. On dira que $(n-m)$ est la \textbf{codimension} de $M$.
 \end{definition}
 
 \begin{remarque}
-	Si $f : U \to V$ est un difféomorphisme de classe $C^k$, alors $f = (f_1, \ldots, f_n)$ est appelé un système de \textbf{coordonnées curvilignes}.
+	Sans perte de généralité, quitte à composer le difféomorphisme $\phi$ avec une application affine, on peut supposer $E$ est une sous-espace vectoriel. De plus on peut aussi supposer que $E$ est de la forme
+	\[
+	E = \{ x \in \Rn \mid x_{m+1} = \ldots = x_n = 0\}
+	\]
+	Et donc la pratique, vérifier qu'un sous-ensemble $M$ est un sous-variété de dimension $m$ revient à montrer que pour tout $p \in M$, il existe un \emph{système coordonnées curvilignes} $y_1, \ldots, y_n$ dans un voisinage $U \subset \Rn$ de $p$ tel que
+	\[
+	\phi(U \cap M) = \{y \in V \mid y_{m+1} = \ldots = y_n = 0\}
+	\]
+	où $\phi$ désigne le difféomorphisme qui représente le changement de coordonnées.
 \end{remarque}
 
-\begin{theoreme}[Inversion locale]
-	Soit $U \subset \Rn$ un ouvert et $f \in C^k(U, \Rn)$. Alors $f$ est un difféomorphisme locale de classe $C^k$ en $p \in U$ si et seulement si
-	\[
-	\det f'(p) \neq 0
-	\]
+\begin{theoreme}
+	Soit $f : U  \subset \R^m \to \Rn$ une application de classe $C^k$ et de rang constant $r$. Alors on a
+	\begin{enumerate}
+		\item Pour tout $q \in \Rn$, la préimage
+		\[
+		f^{-1} (q) \subset U
+		\]
+		est une sous-variété de codimension $r$ dans $\Rm$
+		
+		\item Pour tout $p \in U$, il existe un voisinage $V_p \subset U$ tel que l'image
+		\[
+		f(V_p) \subset \Rn
+		\]
+		est une sous-variété de dimension $r$.
+	\end{enumerate}
 \end{theoreme}
-
-\subsection{Théorème du rang constant}
-
-\begin{definition}
-	Soit un $U$ ouvert non-vide de $\Rn$. Le rang d'un application $f \in C^k(U, \R^m)$ est l'application
-	\[
-	\begin{array}{cccc}
-		\rang_f : & U & \to & \N \\
-					& p & \mapsto & \rang f'(p)
-	\end{array}
-	\]
-\end{definition}
