@@ -1,5 +1,98 @@
 \chapter{Calcul différentiel et sous-variétés différentiables de $\Rn$}
+\lecture{12 novembre}
 
+\section{Rappels du calcul différentiel}
+\subsection{Le théorème du rang constant}
+\begin{definition}
+	Le \textbf{rang} d'une application $f : U \subset \R^m \to \Rn$ de classe $C^1$ est la fonction
+	\[
+	\begin{array}{cccc}
+		\rang_f : & U & \to & \N \\ & p & \mapsto & \rang(Df(p))
+	\end{array}
+	\]
+\end{definition}
+
+\begin{remarque}
+	On dit que $f$ est de rang \textbf{maximal} en $p$ si $\rang_f(p) = \min\{m,n\}$. Et on dira que $f$ est une \textbf{immersion} (resp. \textbf{submersion}) si $Df(p)$ est injective (resp. surjective) pour tout $p \in U$ 
+\end{remarque}
+
+\begin{theoreme}
+	Soit $f : U \subset \Rm \to \Rn$ une application de classe $C^k$ et de rang constant $= r$. Pour tout point $p \in U$ il existe un voisinage $V$ de $p$ et $W$ de $q = f(p)$ ainsi que des difféomorphismes de classe $C^k$
+	\[
+	\Phi : V \to V' \subset \Rm \et \Psi : W \to W' \subset \Rn
+	\]
+	tels que
+	\begin{enumerate}
+		\item $V \subset U$ et $f(U) \subset W$,
+		\item $\Phi(p) = 0$ et $\Psi(q) = 0$,
+		\item L'application $F := \Psi \circ f \circ \Phi^{-1} : V' \to V$ s'écrit
+		\[
+		F(x_1, \ldots, x_n) = (x_1, \ldots, x_r, 0, \ldots, 0).
+		\]
+	\end{enumerate}
+	On note en particulier que $F$ est linéaire.
+\end{theoreme}
+On a alors le diagramme suivant ;
+\begin{figure}[H]
+	\centering
+	\begin{tikzcd}
+		V & W \\
+		{V'} & {W'}
+		\arrow["f", from=1-1, to=1-2]
+		\arrow["\Phi"', from=1-1, to=2-1]
+		\arrow["\Psi", from=1-2, to=2-2]
+		\arrow["F", from=2-1, to=2-2]
+	\end{tikzcd}
+\end{figure}
+
+\prf{On peut supposer que, quitte à faire des translations, que $p = 0$ et $q = f(p) = 0$. De même quitte à des changements de base de $\Rm$ et $\Rn$, on peut aussi supposer que $Df(0)$ prenne la forme normale canonique,
+	\[
+	Df(0) = \begin{pmatrix}
+		\bm I_r & 0 \\ 0 & 0 
+	\end{pmatrix}
+	\]
+	On définit l'application $\Phi : U \to \Rm$ 
+	\[
+	\Phi(x_1, \ldots, x_m) = (f_1(x), \ldots, f_r(x), x_{r+1}, \ldots, x_m)
+	\]
+	alors on observe que
+	\[
+	D\phi(0) = \Big(\frac{\partial \Phi_i}{\partial x_j}(0)\Big) = \begin{pmatrix}
+		\bm I_r & 0 \\ 0 & \mathrm{m-r} 
+	\end{pmatrix}
+	= \bm I_m
+	\]
+	Et donc par le théorème d'inversion local, on sait que $\Phi$ est un difféomorphisme local de classe $C^k$ d'un voisinage $V \subset \Rm$ de $0$ sur un autre voisinage $V' \subset \Rm$ de $0$. 
+	On considère désormais l'application $f \circ \Phi^{-1} : V' \to \Rn$ qui s'écrit
+	\[
+	f \circ \Phi (x_1, \ldots, x_m) = (x_1, \ldots, x_r, f_{r+1} \circ \Phi^{-1}(x), \ldots, f_n \circ \Phi^{-1}(x))
+	\]
+	et dont la matrice jacobienne en $x$ est de la forme
+	\[
+	D(x) = \begin{pmatrix}
+		\bm I_r & 0 \\ * & \Delta(x) 
+	\end{pmatrix}
+	\]
+	or on sait que cette matrice est de rang $r$ puisque $f$ l'est. Par conséquent $\Delta(x)$ est la matrice nulle pour tout $x \in V'$.  Ainsi $f \circ \Phi^{-1}$ de dépend que des variables $x_1, \ldots, x_r$, on peut donc écrire
+	\[
+	f \circ \Phi^{-1}(x_1, \ldots, x_m) = (x_1, \ldots, x_r, h(x_1, \ldots, x_r))
+	\]
+	On définit alors l'application $\Psi: f(U) \to \Rn$ par
+	\[
+	\Psi(y) = (y_1, \ldots, y_r, y_{r+1} - h_{r+1}(y_1, \ldots, y_r), \ldots, y_n - h_n(y_1, \ldots, y_r))
+	\]
+	dont la matrice jacobienne est 
+	\[
+	D\Phi(0) = \begin{pmatrix}
+		\bm I_r & 0 \\ * & \bm I_{n-1}
+	\end{pmatrix}
+	\]
+	Cette matrice étant inversible, alors $\Psi$ définit un difféomorphisme locale de classe $C^k$ d'un voisinage $W \subset \Rn$ de $0$ vers un voisinage $W' \subset \Rn$ de $0$. Or on vérifie facilement que $F := \Psi \circ f \circ \Phi^{-1}: V' \to W'$ est donné par
+	\[
+	F(x_1, \ldots, x_n) = (x_1, \ldots, x_r, 0, \ldots, 0)
+	\]
+	Et donc le théorème suit.
+}
 \section{Sous-variétés de $\Rn$}
 
 \begin{definition}[Sous-variété] \label{def: Sous-variété}

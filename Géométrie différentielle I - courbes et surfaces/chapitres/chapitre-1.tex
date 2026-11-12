@@ -250,4 +250,40 @@ et il s'agit bien d'une rotation autour de l'axe $\R \bm a$.
 
 \section{Géométrie vectorielle dans le plan euclidien orienté $\E^2$}
 
+\begin{definition}
+	On note $\bm J : \E^2 \to \E^2$ l'application linéaire dont la matrice associé dans la base canonique est
+	\[
+	\bm J = \begin{pmatrix}
+		0 & -1 \\ 1 & 0
+	\end{pmatrix}
+	\]
+\end{definition}
+
+\begin{remarque}
+	On remarque que $\bm J$ est caractérisé par les propriétés géométriques suivantes
+	\begin{enumerate}
+		\item $\norme{\bm J \bm v} = \norme{v}$,
+		\item $\bm J \bm v \perp \bm v$,
+		\item Si $\bm v \neq \bm 0$, alors $\{\bm v, \bm J \bm v\}$ est une base d'orientation positive.s
+	\end{enumerate}
+\end{remarque}
+
+\begin{definition}
+	On définit le \textbf{produit extérieur} de deux vecteur $\bm a, \bm b \in \E^2$ comme étant le scalaire $\bm a \land \bm b \in \R$ défini par
+	\[
+	\bm a \land \bm b = \langle \bm J(\bm a), \bm b \rangle = -\langle \bm a, \bm J (\bm b) \rangle
+	\]
+\end{definition}
+
+\begin{proposition}
+	Le produit extérieur vérifie les propriétés suivantes :
+	\begin{enumerate}
+		\item $\cdot \land \cdot$ est bilinéaire et antisymétrique,
+		\item $\bm a \land \bm b = 0$ si et seulement $\bm a$ et $\bm b$ sont colinéaires,
+		\item $|\bm a \land \bm b | = \aire\mathcal P(\bm a, \bm b)$,
+		\item $|\bm a \land \bm b | \leqslant \norme{\bm a} \norme{\bm b}$ avec égalité si et seulement si $\bm a \perp \bm b$,
+		\item $\bm a \land \bm b$ si et seulement si $\{\bm a, \bm b\}$ est une base directe de $\E^2$.
+	\end{enumerate}
+\end{proposition}
+
 
