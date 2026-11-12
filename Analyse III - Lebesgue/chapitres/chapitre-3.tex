@@ -162,7 +162,7 @@ et donc par arbitrarité de $\varepsilon$ on conclut.
 \end{proposition}
 
 
-\begin{proposition}
+\begin{proposition} \label{prop: Propriétés de l'intégrale de Lebesgue pour des fonctions bornées}
 	On a $5$ propriétés de l'intégrale de Lebesgue ; 
 	\begin{enumerate}
 		\item (Linéarité) Si $f$ et $g$ sont deux fonctions mesurables, bornés et de support de mesure bornée sur $\Rn$, alors on a 
@@ -251,7 +251,7 @@ et donc ça entraîne bien
 	\]
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: propriétés de l'intégrale de Lebesgue pour des fonctions non-négative}
 	On a les propriétés suivantes ; 
 	\begin{enumerate}
 		\item Si $a, b \geqslant 0$ et $f,g : \Rn \to [0, \infty]$ sont mesurables. Alors
@@ -362,3 +362,277 @@ et donc ça entraîne bien
 
 \prf{Cas particulier du \autoref{lem: Convergence d'une suite bornée par f}.
 }
+
+\lecture{12 novembre}
+
+\subsection{Intégrale de Lebesgue au cas général}
+
+\begin{definition}
+	Soit $f : \Rn \to [-\infty, \infty]$ une fonction mesurable. Alors $f$ est dit \textbf{intégrable au sens de Lebesgue}, pourvu que $|f|$ est intégrable. Et on pose
+	\[
+	\int_{\Rn} f(x) \, \mathrm dx := \int_{\Rn} f_+(x) \, \mathrm dx - \int_{\Rn} f_-(x) \, \mathrm dx 
+	\]
+\end{definition}
+
+\begin{lemme}
+	Si $f = f_1 - f_2$ où les fonctions $f_{1,2}$ sont mesurables, non-négatives et intégrables, alors $f$ est intégrable, et on a
+	\[
+	\int_{\Rn} f(x) \, \mathrm dx = \int_{\Rn} f_1(x) \, \mathrm dx - \int_{\Rn} f_2(x) \, \mathrm dx 
+	\]
+\end{lemme}
+
+\prf{On commence par remarquer que $f$ est intégrable puisque $|f| \leqslant f_1 + f_2$. De suite on a que
+	\[
+	f = f_+ - f_- = f_1 - f_2
+	\]
+	on en déduit que $f_+ + f_2 = f_- + f_1$, ainsi par la \autoref{prop: propriétés de l'intégrale de Lebesgue pour des fonctions non-négative} on a
+	\[
+	\int_{\Rn} f_+ \, \mathrm dx + \int_{\Rn} f_2 \, \mathrm dx = \int_{\Rn} f_- \, \mathrm dx + \int_{\Rn} f_1 \, \mathrm dx 
+	\]
+	Ce qui entraine bien que
+	\[
+	\int_{\Rn} f_1(x) \, \mathrm dx - \int_{\Rn} f_2(x) \, \mathrm dx = \int_{\Rn} f_+(x) \, \mathrm dx - \int_{\Rn} f_-(x) \, \mathrm dx = \int_{\Rn} f(x) \, \mathrm dx	
+	\]
+}
+
+\begin{proposition}
+	Les fonctions intégrables au sens de Lebesgue forment un espace vectoriel sur $\R$. Et les propriétés 1. - 4. de la \autoref{prop: Propriétés de l'intégrale de Lebesgue pour des fonctions bornées} s'appliquent aux intégrales de fonctions générales.
+\end{proposition}
+
+\begin{theoreme}[Théorème de convergence dominée] \label{thm: Théorème de convegence dominée}
+	Soit $f_k : \Rn \to [-\infty, \infty]$ une suite de fonctions mesurables telle que $f_k \ktoinfty f$. S'il existe une fonction $g : \Rn \to [0, \infty]$ intégrable telle que
+	\[
+	\forall k \geqslant 1, \quad |f_k| \leqslant g
+	\]
+	Alors on a la convergence des intégrales
+	\[
+	\int_{\Rn} f_k (x) \, \mathrm dx \ktoinfty \int_{\Rn} f(x) \, \mathrm dx
+	\]
+\end{theoreme}
+
+\prf{Soit $\varepsilon > 0$. Pour tout $N \geqslant 1$, on définit
+	\[
+	E_N := \{ x \in \Rn \mid |x| < N \et g(x) \leqslant N\}
+	\]
+	Évidement les ensembles $E_N$ forment une suite croissante, et donc
+	\[
+	\chi_{E_N} g \to g
+	\]
+	est la limite d'une suite croissante de fonction. Ainsi par le \autoref{thm: Convergence monotone} on a que
+	\[
+	\lim_{N \to \infty} \int_{\Rn} \chi_{E_N} g \, \mathrm dx = \int_{\Rn} g \, \mathrm dx < \infty
+	\]
+	on en déduit que
+	\[
+	\lim_{N \to \infty} \int_{\Rn} \chi_{E_N^c} g \, \mathrm dx = 0
+	\]
+	et donc il existe $N_\varepsilon \in \N$ tel que
+	\[
+	\int_{\Rn}  \chi_{E_N^c} g \, \mathrm dx < \frac\varepsilon3, \quad \forall N \geqslant N_\varepsilon
+	\]
+	Et donc par hypothèse
+	\[
+	\int_{\Rn} \chi_{E_N^c} |f_k| \, \mathrm dx < \frac\varepsilon3 \et \int_{\Rn} \chi_{E_N^c} |f| \, \mathrm dx < \frac\varepsilon3
+	\]
+	où $N \geqslant N_\varepsilon$. Or le suite $\{\chi_{E_{N_\varepsilon}} f_k\}_{k \geqslant 1}$ est uniformément bornée et de support de mesure finie en $k \geqslant 1$, et donc par le \autoref{thm: Convergece bornée}, on a
+	\[
+	\lim_{k \to \infty} \int_{\Rn} \chi_{E_{N_\varepsilon}} |f_k - f | \, \mathrm dx = 0
+	\]
+	Il en suite que pour tout $k \geqslant K_\varepsilon$, on a
+	\[
+	\int_{\Rn} \chi_{\E_{N_\varepsilon}} |f_k - f |\, \mathrm dx < \frac\varepsilon3
+	\]
+	Ce qui nous donne finalement, pourvu que $k \geqslant K_\varepsilon$,
+	\begin{align*}
+	\int_{\Rn} |f_k - f| \, \mathrm dx &= \int_{\Rn} \chi_{E_{N_\varepsilon}} |f_k - f| \, \mathrm dx + \int_{\Rn} \chi_{E_{N_\varepsilon}^c} |f_k - f| \, \mathrm dx \\
+										& \leqslant \int_{\Rn} \chi_{E_{N_\varepsilon}} |f_k - f| \, \mathrm dx + \int_{\Rn} \chi_{E_{N_\varepsilon}^c} |f_k| \, \mathrm dx + \int_{\Rn} \chi_{E_{N_\varepsilon}^c} |f| \, \mathrm dx \\
+										& < \varepsilon
+	\end{align*}
+	et donc le théorème suit.
+}
+
+\section{l'espace $\L1$}
+
+\begin{definition}
+	On définit l'espace $\L1$ comme
+	\[
+	\L1 := \big\{ f : \Rn \to \C ~\big|~ \int_{\Rn} |f(x)| \,  \mathrm dx < \infty \big\}
+	\]
+\end{definition}
+
+\begin{proposition}
+	Soit $\L1$ la collection de classe d'équivalence de fonctions intégrales sur $\Rn$, où $f \sim g$ pourvu que 
+	\[
+	f (x) = g(x)
+	\]
+	presque partout. Alors $\L1$ est un espace vectoriel normé muni de la norme $\nl1{\cdot}$.
+\end{proposition}
+
+\prf{On remarque que si $f \sim f'$ et $g \sim g'$ alors
+	\[
+	f + g \sim f' + g'
+	\]
+	Ainsi si $[f]$ note la classe d'équivalence de $f$, on peut donc définir $[f] + [g] := [f + g]$, parce que le coté droit ne dépend pas de représentant $f,g$. En plus on peut poser
+	\[
+	\nl1{[f]} := \nl1f
+	\]
+	parce que le côté droit ne change pas si $f$ est remplacé par un autre représentant de la même classe d'équivalence. Et finalement on a bien
+	\[
+	\nl1{f + g} = \int_{\Rn} |f+g| \dx \leqslant \int_{\Rn} |f| \dx + \int_{\Rn} |g| \dx = \nl1f + \nl1g
+	\]
+	ainsi que
+	\[
+	\nl1f = \int_{\Rn} |f| \dx = 0
+	\]
+	si et seulement si $f = 0$ p.p. D'où la proposition.
+}
+
+
+\begin{theoreme}[Complétude]
+	L'espace $\L1$, muni de la norme $\nl1\cdot$ est complet, et donc forme un espace de Banach.
+\end{theoreme}
+
+\prf{Soit $\{f_k\}_{k \geqslant 1}$ une suite de Cauchy dans $\L1$. Il faut donc montrer qu'il existe $f \in \L1$ telle que
+	\[
+	\lim_{k \to \infty} \nl1{f_k-f} = 0
+	\]
+	Comme la suite des $f_k$ est de Cauchy, on peut extraire une suite-suite $\{f_{n_k}\}_{k \geqslant1}$ telle que
+	\[
+	\forall k \geqslant 1, \quad \nl1{f_{n_{k+1}} - f_{n_k}} < 2^{-k}
+	\]
+	On pose
+	\[
+	g_j := |f_{n_1}| + \sum_{l=1}^j |f_{n_{j+1}} - f_{n_l}|, \quad j \geqslant 1
+	\]
+	Il est claire que la suite $g_j$ est croissante, non-négative, et mesurable, et donc par le \autoref{thm: Convergence monotone}, on a
+	\[
+	\lim_{j \to \infty} \int_{\Rn} g_j(x) \dx = \int_{\Rn} g(x) \, \mathrm dx
+	\]
+	où $g := \lim_{j \to \infty} g_j$. Mais par définit de $g_j$ on a
+	\[
+	\int_{\Rn} g_j(x) \dx \leqslant \nl1{f_{n_1}} + \sum_{l=1}^j 2^{-l} < \nl1{f_{n_1}} + 1
+	\]
+	Ainsi la fonction $g = |f_{n_1}| + \sum_{l=1}^\infty |f_{n_{j+1}} - f_{n_l}|$ est intégrable. Alors par la \autoref{prop: propriétés de l'intégrale de Lebesgue pour des fonctions non-négative} on ne déduit que
+	\[
+	|f_{n_1}(x)| + \sum_{l=1}^\infty |f_{n_{j+1}}(x) - f_{n_l}(x)| < \infty
+	\]
+	presque partout. Pour un tel $x$ où on a convergence, la série
+	\[
+	f_{n_1}(x) + \sum_{l=1}^\infty f_{n_{l+1}}(x) - f_{n_l}(x) = \lim_{j \to \infty} \Big( f_{n_1}(x) + \sum_{l=1}^j f_{n_{l+1}}(x) - f_{n_l}(x)\Big) = \lim_{j \to \infty} f_{n_{j+1}}(x)
+	\]
+	converge aussi. Si on appelle $f$ cette limite, qui est donc mesurable, on a que
+	\[
+	\lim_{j \to \infty} \nl1{f - f_{n_{j+1}}} = 0
+	\]
+	par le \autoref{thm: Théorème de convegence dominée}, puisque
+	\[
+	\forall j \geqslant 1, \quad |f_{n_{j+1}}| \leqslant g
+	\]
+	et $g$ est intégrable. Finalement soit $\varepsilon > 0$, on choisit $N_\varepsilon \in \N$ assez grand tel que
+	\[
+	\forall p,q \geqslant N_\varepsilon, \quad \nl1{f_p - f_q} \frac\varepsilon2
+	\]
+	De plus par convergence de la suite $\{f_{n_j}\}$ vers $f$, il existe $k \geqslant N_\varepsilon$ et $n_{j_\varepsilon} > k$ tel que
+	\[
+	\nl1{f - f_{n_\varepsilon}} < \frac\varepsilon2
+	\]
+	Et donc on conclut que
+	\[
+	\nl1{f - f_k} \leqslant \nl1{f - f_{n_{j_{\varepsilon}}}} +\nl1{f_k -f_{n_{j_{\varepsilon}}}} < \varepsilon
+	\]
+	Ainsi le théorème suit.
+}
+
+\subsection{Sous-espace dense dans $\L1$}
+
+\begin{proposition}
+	Les espaces de fonctions suivants sont denses dans $\L1$ : 
+	\begin{enumerate}
+		\item Les fonctions simples,
+		\item Les combinaisons linéaires de fonctions caractéristiques de boîtes rectangulaires,
+		\item Les fonctions continues de support compacte, $C_c^0(\Rn)$.
+	\end{enumerate}
+\end{proposition}
+
+\prf{\begin{enumerate}
+		\item On traite que le cas de $f$ réel. De plus en utilisant la représentation $f = f_+ - f_1$, on est réduit au cas $f \geqslant 0$. D'après le \autoref{lem: suite de fonctions mesurables} il existe une suite croissante $\{\varphi_k\}_{k \geqslant 1}$ de fonctions simples non-négatives telle que
+		\[
+		\varphi \ktoinfty f
+		\]
+		et donc par le \autoref{thm: Convergence monotone} on en déduit que
+		\[
+		\nl1f = \int_{\Rn} f(x) \dx = \lim_{k \to \infty} \int_{\Rn} \varphi_k(x) \dx
+		\]
+		et comme $0 \leqslant \varphi_K \leqslant f$ ceci implique que
+		\[
+		\lim_{k \to \infty} \nl1{f - \varphi_k} = \lim_{k \to \infty} \int_{\Rn} f - \varphi_k \dx = \lim_{k \to \infty} \left( \int_{\Rn} f(x) \dx - \int_{\Rn} \varphi_k(x) \dx\right) = 0 
+		\]
+		
+		\item D'après le point 1., il suffit de montrer que tout fonction simples peut être approximée par des combinaisons linéaires de fonctions caractéristique de boîtes rectangulaires, et de suite que $\chi_E$ peut être approximé ainsi, où $E$ est mesurable et de mesure finie. Par définition de la mesure \autoref{def: Mesure de Lebesgue}, étant donné $\varepsilon > 0$, il existe une collection de cube $\{Q_j\}_{j \geqslant 1}$ telle que
+		\[
+		E \subset \bigcup_j Q_j \et \sum_j \Vol Q_j < m(E) + \frac\varepsilon4
+		\]
+		Soit $N \in \N$ tel que $\sum_{j \geqslant N+1} \Vol Q_j < \frac{\varepsilon}4$. On a alors que
+		\[
+		m \Bigg(\bigcup_{j=1}^N \backslash E\Bigg) < \frac\varepsilon4 \et m \Bigg( E \backslash \bigcup_{j=1}^N Q_j \Bigg) < \frac\varepsilon4
+		\]
+		ce qui implique que
+		\[
+		\nl1{\chi_E - \chi_{\bigcup_{j=1}^N Q_j}} < \frac\varepsilon2
+		\]
+		Or on peut écrire
+		\[
+		\bigcup_{j=1}^N Q_j = \bigcup_{l=1}^M R_l
+		\]
+		pour une collection $\{R_l\}_{l=1}^M$ de boîtes rectangulaires presque disjointes, et de la remplacer par des boîtes rectangulaires un peu plus petites et disjointes $\{ \tilde R_l\}_{l=1}^M$, de telle que manière que
+		\[
+		\nl1{\chi_{\bigcup_{j=1}^N Q_j} - \sum_{l=1}^M\chi_{\tilde R_l}} < \frac\varepsilon2
+		\]
+		Il suit que
+		\[
+		\nl1{\chi_E - \sum_{l=1}^M \chi_{\tilde R_l}} \leqslant \nl1{\chi_E - \chi_{\bigcup_{j=1}^N Q_j}} + \nl1{\chi_{\bigcup_{j=1}^N Q_j} - \sum_{l=1}^M\chi_{\tilde R_l}} < \varepsilon
+		\]
+		
+		\item D'après le point 2., il suffit d'approximer des fonctions caractéristiques de boîtes rectangulaires par des fonctions dans $C_c^0(\Rn)$. En dimension $1$, si $I = [a,b]$, étant donnée $\varepsilon > 0$, on peut approximer la fonction caractéristique $\chi_I$ par la fonction continue et de support compact
+		\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[scale=1.2]
+			
+			% Paramètres
+			\def\a{1.5}
+			\def\b{3.5}
+			\def\e{0.8}
+			
+			% Axes
+			\draw[-{Stealth}] (-0.3,0) -- (5.5,0) node[right] {$x$};
+			\draw[-{Stealth}] (0,-0.3) -- (0,1.5) node[above] {$\phi(x)$};
+			
+			% Graphe de phi
+			\draw[thick, blue]
+			(0,0) -- (\a-\e,0) -- (\a,1) -- (\b,1) -- (\b+\e,0) -- (5.3,0);
+			
+			% Pointillés verticaux
+			\draw[dashed, gray] (\a-\e,0) -- (\a-\e,-0.1);
+			\draw[dashed, gray] (\a,1) -- (\a,0);
+			\draw[dashed, gray] (\b,1) -- (\b,0);
+			
+			% Graduations sur l'axe x
+			\foreach \x/\lab in {\a-\e/{a-\varepsilon}, \a/a, \b/b, \b+\e/{b+\varepsilon}} {
+				\draw (\x,0.05) -- (\x,-0.05);
+				\node[below] at (\x,-0.05) {$\lab$};
+			}
+			
+			% Graduation sur l'axe y
+			\draw (0.05,1) -- (-0.05,1) node[left] {$1$};
+			
+		\end{tikzpicture}
+		\end{figure}
+		Dont on vérifie facilement que
+		\[
+		\nl1{\chi_I - \phi} = \varepsilon
+		\]
+		En dimension $n \geqslant 2$, on peut utiliser un produit de fonction comme $\phi$ par rapport à chaque coordonnée pour approximer $\chi_R$.
+	\end{enumerate}
+}
+
+\subsection{Applications; propriétés d'invariance et de continuité}
